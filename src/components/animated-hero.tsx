@@ -1,74 +1,52 @@
-"use client";
-
-import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+const workflowSteps = [
+  ['Eingang', 'E-Mail, Formular oder Datei'],
+  ['Verarbeitung', 'Regeln und Daten strukturieren'],
+  ['Bestehendes System', 'CRM, ERP oder SharePoint'],
+  ['Menschliche Freigabe', 'Prüfen, anpassen, entscheiden'],
+  ['Erledigte Aufgabe', 'Update, Dokument oder Nachricht']
+];
 
 export function AnimatedHero() {
-  const reduce = useReducedMotion();
-
-  const container = {
-    hidden: { opacity: 0, y: 8 },
-    show: { opacity: 1, y: 0, transition: { staggerChildren: 80 } }
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 8 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.36 } }
-  };
-
-  const animProps = reduce
-    ? { initial: false, animate: 'show' }
-    : { initial: 'hidden', animate: 'show', variants: container };
-
   return (
     <section className="hero" id="top">
       <div className="container hero-grid">
-        <motion.div {...animProps} className="" aria-hidden={false}>
-          <motion.p variants={item} className="kicker">MSB AI & Automation · Tübingen · Stuttgart · Neckar-Alb</motion.p>
-          <motion.h1 variants={item}>Wir automatisieren Prozesse, die Ihr Team jeden Tag Zeit kosten.</motion.h1>
-          <motion.p variants={item} className="lead" style={{ marginTop: '1.2rem' }}>
-            MSB AI & Automation analysiert wiederkehrende Abläufe, entwickelt pragmatische KI- und Automatisierungslösungen und begleitet Ihre Mitarbeitenden bei der erfolgreichen Einführung.
-          </motion.p>
-          <motion.p variants={item} className="trust-line" aria-label="Vertrauensmerkmale">
-            Prozessanalyse · Umsetzung · Schulung · Region Tübingen und Stuttgart
-          </motion.p>
-          <motion.div variants={item} className="actions">
-            <a className="cta" href="#angebote">Kostenlosen Automation Check anfragen</a>
-            <a className="cta-secondary" href="#warum-msb">Unsere Erfahrung ansehen</a>
-          </motion.div>
-          <motion.div variants={item} className="hero-badge-row" aria-label="Leistungsversprechen">
-            <span>1 Prozess</span>
-            <span>2–3 Ideen</span>
-            <span>ehrliche Einschätzung</span>
-          </motion.div>
-        </motion.div>
+        <div className="hero-copy">
+          <p className="eyebrow">KI- &amp; Prozessautomatisierung für KMU in der Region Tübingen–Stuttgart</p>
+          <h1>Wir automatisieren die Arbeit, die Ihr Team jeden Tag Zeit kostet.</h1>
+          <p className="hero-lead">
+            MSB analysiert wiederkehrende Abläufe, entwickelt pragmatische Automatisierungs- und KI-Lösungen und begleitet Ihre Mitarbeitenden bei der erfolgreichen Einführung.
+          </p>
+          <div className="hero-actions">
+            <a className="button button-primary" href="#kontakt">
+              Kostenlosen Automation Check anfragen
+            </a>
+            <a className="button button-secondary" href="#anwendungsfaelle">
+              Konkrete Anwendungsfälle ansehen
+            </a>
+          </div>
+          <p className="trust-line">Prozessanalyse · Pilotierung · Umsetzung · Schulung</p>
+        </div>
 
-        <motion.aside {...(reduce ? { initial: false, animate: 'show' } : { initial: 'hidden', animate: 'show', variants: container })} className="hero-panel hero-panel-large" aria-label="Vorher-Nachher Übersicht">
-          <motion.div variants={item} className="hero-panel-header">
-            <p className="kicker">Typische Ausgangslage</p>
-            <h2>Vorher / Nachher in einem Blick</h2>
-          </motion.div>
-          <motion.div variants={item} className="hero-comparison">
-            <div className="comparison-card comparison-before">
-              <h3>Vorher</h3>
-              <ul>
-                <li>E-Mails und Rückfragen laufen parallel.</li>
-                <li>Dokumente liegen verteilt in Ordnern und Systemen.</li>
-                <li>Onboarding und Bewerberkommunikation hängen an Einzelpersonen.</li>
-                <li>Wissen bleibt in Köpfen statt in einer Struktur.</li>
-              </ul>
-            </div>
-            <div className="comparison-card comparison-after">
-              <h3>Nachher</h3>
-              <ul>
-                <li>Anfragen werden strukturiert aufgenommen und beantwortet.</li>
-                <li>Wiederkehrende Schritte werden sauber vorbereitet oder ausgelöst.</li>
-                <li>Wissensbausteine und Checklisten unterstützen das Team im Alltag.</li>
-                <li>Menschen prüfen, steuern und entscheiden weiterhin selbst.</li>
-              </ul>
-            </div>
-          </motion.div>
-        </motion.aside>
+        <aside className="workflow-visual" aria-labelledby="workflow-title">
+          <div className="workflow-heading">
+            <p className="eyebrow eyebrow-light">Beispielhafter Ablauf</p>
+            <h2 id="workflow-title">Vom Eingang bis zur erledigten Aufgabe</h2>
+            <p>Die Automatisierung verbindet vorhandene Systeme. Sensible Schritte bleiben kontrollierbar.</p>
+          </div>
+          <ol className="workflow-list">
+            {workflowSteps.map(([title, description], index) => (
+              <li key={title} className="workflow-step">
+                <span className="workflow-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                <span className="workflow-detail">
+                  <strong>{title}</strong>
+                  <small>{description}</small>
+                </span>
+                <span className="workflow-check" aria-hidden="true">✓</span>
+              </li>
+            ))}
+          </ol>
+          <p className="workflow-note">Ihr Team behält Einblick, Freigabe und Entscheidungshoheit.</p>
+        </aside>
       </div>
     </section>
   );

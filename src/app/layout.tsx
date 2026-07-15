@@ -1,10 +1,21 @@
 import type { Metadata } from 'next';
+import { Poppins } from 'next/font/google';
 import './globals.css';
 
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  display: 'swap',
+  variable: '--font-poppins'
+});
+
 export const metadata: Metadata = {
-  title: 'MSB AI Consulting',
+  title: 'MSB AI & Automation | Prozessautomatisierung für KMU',
   description:
-    'MSB AI Consulting unterstützt KMU bei HR-Automation, Prozessklarheit und verantwortungsvollem KI-Einsatz.',
+    'MSB analysiert wiederkehrende Abläufe, entwickelt pragmatische KI- und Automatisierungslösungen und begleitet KMU in der Region Tübingen–Stuttgart bei der Einführung.',
+  icons: {
+    icon: '/msb-logo.webp'
+  },
   robots: {
     index: true,
     follow: true
@@ -17,10 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
+    <html lang="de" className={poppins.variable}>
       <body>{children}</body>
     </html>
   );

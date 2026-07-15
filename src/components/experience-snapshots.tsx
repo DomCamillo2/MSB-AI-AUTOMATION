@@ -1,5 +1,3 @@
-import React from 'react';
-
 type Snapshot = {
   title: string;
   context: string;
@@ -10,78 +8,76 @@ type Snapshot = {
 const snapshots: Snapshot[] = [
   {
     title: 'CRM- und Recruiting-Automatisierung',
-    context: 'Erfahrung aus Personalberatung und Energiewirtschaft',
+    context: 'Personalberatung und Energiewirtschaft',
     points: [
-      'Analyse wiederkehrender administrativer Abläufe',
-      'Entwicklung automatisierter Workflows',
-      'technische Konfiguration und Weiterentwicklung eines CRM-Systems',
-      'Verbesserung von Datenpflege und Datenqualität',
-      'Verbindung fachlicher HR-Anforderungen mit technischer Umsetzung'
+      'Wiederkehrende administrative Abläufe analysiert',
+      'CRM-Workflows technisch konfiguriert und weiterentwickelt',
+      'Fachliche HR-Anforderungen in umsetzbare Prozesse übersetzt'
     ],
-    transfer: 'Übertragbar auf Recruiting, Vertrieb, Kundenverwaltung und interne Administration.'
+    transfer: 'Relevant für Recruiting, Vertrieb und interne Administration.'
   },
   {
     title: 'Datenbasierte Prozessoptimierung',
-    context: 'Erfahrung aus Industrie und globalen Unternehmensprozessen',
+    context: 'Industrie und globale Unternehmensprozesse',
     points: [
-      'Analyse und Visualisierung von Prozess- und Marketing-KPIs',
-      'Entwicklung funktionsübergreifender Reports',
-      'statistische Bedarfsanalysen',
-      'Optimierung und Skalierung von Schulungs- und Learning-Prozessen',
-      'Arbeit mit Python, R, Excel und quantitativen Methoden'
+      'Prozess- und Marketing-KPIs analysiert und visualisiert',
+      'Funktionsübergreifende Reports entwickelt',
+      'Schulungs- und Learning-Prozesse datenbasiert verbessert'
     ],
-    transfer: 'Übertragbar auf Reporting, Controlling, Schulungen und operative Entscheidungsprozesse.'
+    transfer: 'Relevant für Reporting, Controlling und operative Entscheidungen.'
   },
   {
     title: 'Automatisierte Analysewerkzeuge',
-    context: 'Erfahrung aus Automotive und Organisationsentwicklung',
+    context: 'Automotive und Organisationsentwicklung',
     points: [
-      'Entwicklung eines Excel-basierten Analyse-Tools',
-      'Automatisierung einer Kompetenzmatrix',
-      'Unterstützung von Organisations- und Veränderungsprozessen',
-      'Strukturierung und Auswertung komplexer Unternehmensdaten',
-      'Durchführung und Begleitung von Workshops und Schulungen'
+      'Excel-basiertes Analysewerkzeug entwickelt',
+      'Kompetenzmatrizen strukturiert und automatisiert',
+      'Workshops und Veränderungsprozesse begleitet'
     ],
-    transfer: 'Übertragbar auf Kompetenzmanagement, Personalentwicklung und interne Planung.'
+    transfer: 'Relevant für Kompetenzmanagement und interne Planung.'
   },
   {
     title: 'Projektmanagement und Customer Experience',
-    context: 'Erfahrung aus Professional Services',
+    context: 'Professional Services und digitale Projekte',
     points: [
-      'Projektmanagement und strukturierte Projektkoordination',
-      'Customer-Experience- und Datenanalyse',
-      'Aufbereitung von Erkenntnissen für unterschiedliche Stakeholder',
-      'Verbindung von Analyse, Kommunikation und nutzerorientierter Gestaltung'
+      'Projekte und unterschiedliche Stakeholder koordiniert',
+      'Customer-Experience- und Prozessdaten ausgewertet',
+      'Erkenntnisse nutzerorientiert aufbereitet'
     ],
-    transfer: 'Übertragbar auf Kundenprozesse, Projektsteuerung und digitale Serviceangebote.'
+    transfer: 'Relevant für Kundenprozesse, Projektsteuerung und digitale Services.'
   }
 ];
 
 export function ExperienceSnapshots() {
   return (
-    <section className="section" aria-label="Experience Snapshots">
+    <section className="section experience-snapshots" aria-labelledby="snapshots-heading">
       <div className="container">
-        <div className="section-intro">
-          <p className="kicker">Erfahrung</p>
-          <h2>Erfahrung, die wir in Ihre Prozesse übertragen</h2>
+        <div className="section-heading heading-split">
+          <div>
+            <p className="eyebrow">Erfahrungsfelder</p>
+            <h2 id="snapshots-heading">Praxis, die sich auf Ihre Prozesse übertragen lässt</h2>
+          </div>
+          <p>
+            Diese Beispiele stammen aus beruflichen Tätigkeiten einzelner Teammitglieder. Sie sind keine MSB-Kundenprojekte.
+          </p>
         </div>
-        <div className="grid-2">
-          {snapshots.map((s) => (
-            <article key={s.title} className="prose-panel" style={{ marginBottom: '1rem' }}>
-              <p className="muted small" style={{ marginBottom: '0.5rem' }}>{s.context}</p>
-              <h3>{s.title}</h3>
-              <ul style={{ marginTop: '0.75rem' }}>
-                {s.points.map((p) => (
-                  <li key={p}>{p}</li>
-                ))}
+
+        <div className="snapshot-grid">
+          {snapshots.map((snapshot, index) => (
+            <article key={snapshot.title} className="snapshot-card">
+              <div className="snapshot-meta">
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <span>Berufserfahrung eines Teammitglieds</span>
+              </div>
+              <h3>{snapshot.title}</h3>
+              <p className="snapshot-context">Kontext: {snapshot.context}</p>
+              <ul className="plain-list">
+                {snapshot.points.map((point) => <li key={point}>{point}</li>)}
               </ul>
-              <p className="small" style={{ marginTop: '0.8rem', fontWeight: 600 }}>{s.transfer}</p>
+              <p className="snapshot-transfer">{snapshot.transfer}</p>
             </article>
           ))}
         </div>
-        <p className="small muted" style={{ marginTop: '0.85rem' }}>
-          Die dargestellten Erfahrungen stammen aus früheren oder aktuellen beruflichen Tätigkeiten einzelner Teammitglieder. Sie werden nicht als eigenständige MSB‑Kundenprojekte dargestellt.
-        </p>
       </div>
     </section>
   );

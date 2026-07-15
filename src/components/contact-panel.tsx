@@ -1,46 +1,42 @@
-"use client";
-
-import React from 'react';
 import { ContactForm } from '@/components/contact-form';
+
+const nextSteps = [
+  ['Kurze Rückmeldung', 'Wir melden uns persönlich und klären, ob der Prozess zum Automation Check passt.'],
+  ['30–45 Minuten Gespräch', 'Gemeinsam betrachten wir Ablauf, Systeme, Beteiligte und sensible Daten.'],
+  ['Konkrete Einordnung', 'Sie erhalten erste Ansatzpunkte zu Nutzen, Aufwand und einem sinnvollen nächsten Schritt.']
+];
 
 export function ContactPanel() {
   return (
-    <div className="contact-panel">
-      <div className="contact-box">
-        <div>
-          <p className="kicker">Kontakt</p>
-          <h2>Kostenlosen HR-Automation-Quick-Check anfragen</h2>
-          <p style={{ marginTop: '1rem' }}>30–45 Minuten · ein konkreter Prozess · 2–3 Quick Wins · ehrliche Einschätzung</p>
-        </div>
-        <div className="actions" style={{ marginTop: '0.5rem' }}>
-          <a className="cta" href="mailto:kontakt@msb-ai.de">E-Mail an kontakt@msb-ai.de</a>
-          <a className="cta-secondary" href="/impressum">Impressum</a>
-        </div>
-        <p className="notice">Bitte senden Sie uns über dieses Formular keine sensiblen personenbezogenen Daten, Bewerbungsunterlagen oder Mitarbeiterdaten.</p>
-        <div className="contact-grid">
-          <div className="section-card card-pad">
-            <h3>Direkter Kontakt</h3>
-            <p className="small muted" style={{ marginTop: '0.55rem' }}>
-              Für einen ersten Quick-Check reicht eine kurze Nachricht mit folgenden Punkten:
-            </p>
-            <ul className="contact-list">
-              <li>Welche Aufgabe kostet aktuell viel Zeit?</li>
-              <li>Welche Tools nutzen Sie schon?</li>
-              <li>Wie viele Personen arbeiten im Prozess?</li>
-              <li>Gibt es sensible Daten, die berücksichtigt werden müssen?</li>
-            </ul>
-            <p className="small muted" style={{ marginTop: '1rem' }}>
-              E-Mail für den Erstkontakt: <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a>
-            </p>
-          </div>
-          <div className="section-card card-pad">
-            <h3>Anfrageformular</h3>
-            <p style={{ marginTop: '0.75rem' }} className="small muted">Die Übertragung erfolgt per E-Mail. Es werden keine zusätzlichen Tracking- oder Formulardienste eingebunden.</p>
-            <div style={{ marginTop: '1rem' }}>
-              <ContactForm />
-            </div>
-          </div>
-        </div>
+    <div className="contact-layout">
+      <div className="contact-copy">
+        <p className="eyebrow eyebrow-light">Kostenloser Automation Check</p>
+        <h2 id="contact-panel-heading">Bringen Sie einen Prozess mit, der Ihr Team regelmäßig aufhält.</h2>
+        <p className="contact-lead">
+          Wir betrachten einen konkreten Ablauf und geben Ihnen eine ehrliche erste Einschätzung, wo Automatisierung sinnvoll ist und wo nicht.
+        </p>
+
+        <ol className="next-steps">
+          {nextSteps.map(([title, text], index) => (
+            <li key={title}>
+              <span>{index + 1}</span>
+              <div>
+                <strong>{title}</strong>
+                <p>{text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        <p className="direct-contact">
+          Lieber direkt schreiben? <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a>
+        </p>
+      </div>
+
+      <div className="form-surface">
+        <h3>Automation Check anfragen</h3>
+        <p>Vier Angaben genügen für den ersten Kontakt.</p>
+        <ContactForm />
       </div>
     </div>
   );

@@ -1,29 +1,23 @@
-import React from 'react';
+const companies = ['KPMG', 'Siemens', 'BMW Group', 'prognum Automotive', 'Callidus Energie'];
 
 export function ExperienceStrip() {
-  const companies = ['KPMG', 'Siemens', 'BMW Group', 'prognum Automotive', 'Callidus Energie'];
   return (
-    <section className="section-tight" aria-label="Erfahrung aus Unternehmenskontexten">
-      <div className="container">
-        <div className="section-intro">
-          <p className="kicker">Erfahrung</p>
-          <h2>Erfahrung aus realen Unternehmenskontexten</h2>
-          <p className="lead" style={{ marginTop: '0.6rem' }}>
-            Unser Team verbindet praktische Erfahrung aus Automotive, Industrie, Energie, Professional Services und datengetriebener Prozessoptimierung.
+    <section className="experience-band" aria-labelledby="experience-heading">
+      <div className="container experience-layout">
+        <div>
+          <p className="eyebrow">Berufliche Erfahrung</p>
+          <h2 id="experience-heading">Erfahrung aus realen Unternehmenskontexten</h2>
+        </div>
+        <div>
+          <div className="company-wordmarks" aria-label="Ausgewählte berufliche Stationen">
+            {companies.map((company) => (
+              <span key={company}>{company}</span>
+            ))}
+          </div>
+          <p className="experience-disclaimer">
+            Ausgewählte berufliche Stationen einzelner Teammitglieder. Die genannten Unternehmen sind keine Referenzkunden von MSB AI &amp; Automation.
           </p>
         </div>
-
-        <div className="prose-panel" style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
-          {companies.map((c) => (
-            <div key={c} className="callout" style={{ background: 'transparent', border: '1px solid rgba(0,0,0,0.06)', padding: '0.45rem 0.9rem' }}>
-              <span style={{ fontWeight: 700, color: 'var(--navy)' }}>{c}</span>
-            </div>
-          ))}
-        </div>
-
-        <p className="small muted" style={{ marginTop: '0.85rem' }}>
-          Die genannten Unternehmen sind ausgewählte berufliche Stationen einzelner Teammitglieder und keine Referenzkunden von MSB AI & Automation.
-        </p>
       </div>
     </section>
   );

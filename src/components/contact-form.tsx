@@ -4,14 +4,15 @@ import { useState, type FormEvent } from 'react';
 
 const recipient = 'kontakt@msb-ai.de';
 
-function buildMailtoUrl(name: string, company: string, email: string, message: string) {
-  const subject = 'Anfrage HR-Automation-Quick-Check';
+function buildMailtoUrl(name: string, company: string, email: string, process: string) {
+  const subject = 'Anfrage: Kostenloser Automation Check';
   const body = [
     `Name: ${name}`,
     `Unternehmen: ${company}`,
-    `E-Mail: ${email}`,
+    `Geschäftliche E-Mail: ${email}`,
     '',
-    message
+    'Aktuelles Prozessproblem:',
+    process
   ].join('\n');
 
   return `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -21,49 +22,91 @@ export function ContactForm() {
   const [name, setName] = useState('');
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [process, setProcess] = useState('');
   const [consent, setConsent] = useState(false);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    if (!consent) {
-      return;
-    }
-
-    window.location.href = buildMailtoUrl(name, company, email, message);
+    if (!consent) return;
+    window.location.href = buildMailtoUrl(name, company, email, process);
   }
 
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
-      <div className="contact-grid">
+      <div className="form-row">
         <div className="field">
           <label htmlFor="name">Name</label>
-          <input id="name" name="name" type="text" autoComplete="name" value={name} onChange={(event) => setName(event.target.value)} />
+          <input
+            id="name"
+            name="name"
+            type="text"
+            autoComplete="name"
+            required
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+          />
         </div>
         <div className="field">
           <label htmlFor="company">Unternehmen</label>
-          <input id="company" name="company" type="text" autoComplete="organization" value={company} onChange={(event) => setCompany(event.target.value)} />
+          <input
+            id="company"
+            name="company"
+            type="text"
+            autoComplete="organization"
+            required
+            value={company}
+            onChange={(event) => setCompany(event.target.value)}
+          />
         </div>
       </div>
+
       <div className="field">
-        <label htmlFor="email">E-Mail</label>
-        <input id="email" name="email" type="email" autoComplete="email" required value={email} onChange={(event) => setEmail(event.target.value)} />
+        <label htmlFor="email">Geschäftliche E-Mail</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          inputMode="email"
+          autoComplete="email"
+          required
+          aria-describedby="email-hint"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+        />
+        <small id="email-hint">Für Rückfragen und die Terminabstimmung.</small>
       </div>
+
       <div className="field">
-        <label htmlFor="message">Nachricht</label>
-        <textarea id="message" name="message" rows={6} value={message} onChange={(event) => setMessage(event.target.value)} />
+        <label htmlFor="process">Welcher Ablauf kostet aktuell Zeit?</label>
+        <textarea
+          id="process"
+          name="process"
+          rows={5}
+          required
+          aria-describedby="process-hint"
+          value={process}
+          onChange={(event) => setProcess(event.target.value)}
+        />
+        <small id="process-hint">Eine kurze Beschreibung reicht. Bitte keine sensiblen Personen- oder Bewerberdaten eintragen.</small>
       </div>
+
       <label className="checkbox" htmlFor="privacy">
-        <input id="privacy" name="privacy" type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} required />
-        <span>Ich habe die Datenschutzhinweise gelesen.</span>
+        <input
+          id="privacy"
+          name="privacy"
+          type="checkbox"
+          checked={consent}
+          onChange={(event) => setConsent(event.target.checked)}
+          required
+        />
+        <span>Ich stimme der Verarbeitung meiner Angaben zur Bearbeitung der Anfrage zu.</span>
       </label>
-      <p className="notice">
-        Bitte senden Sie uns über dieses Formular keine sensiblen personenbezogenen Daten, Bewerbungsunterlagen oder Mitarbeiterdaten.
-      </p>
-      <button className="cta" type="submit" disabled={!consent}>
-        Anfrage per E-Mail öffnen
+      <a className="privacy-link" href="/datenschutz">Datenschutzhinweise lesen</a>
+
+      <button className="button button-primary form-submit" type="submit" disabled={!consent}>
+        Automation Check anfragen
       </button>
+      <p className="form-note">Beim Absenden öffnet sich Ihr E-Mail-Programm mit den eingetragenen Angaben. Es wird kein externer Formulardienst verwendet.</p>
     </form>
   );
 }
