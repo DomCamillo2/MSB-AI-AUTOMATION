@@ -1,11 +1,12 @@
-import type { Metadata } from 'next';
 import ContactPanel from '@/components/contact-panel';
 import PageIntro from '@/components/page-intro';
+import { createPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: 'Automation Check',
-  description: 'Einen wiederkehrenden Prozess unverbindlich beschreiben und eine erste Einschätzung zu Nutzen, Aufwand und Risiken erhalten.'
-};
+  description: 'Einen wiederkehrenden Prozess unverbindlich beschreiben und eine erste Einschätzung zu Nutzen, Aufwand und Risiken erhalten.',
+  path: '/automation-check'
+});
 
 export default function AutomationCheckPage() {
   return (

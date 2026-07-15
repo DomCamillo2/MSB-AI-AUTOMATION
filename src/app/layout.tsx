@@ -3,6 +3,7 @@ import { Inter, Poppins } from 'next/font/google';
 import MotionProvider from '@/components/motion-provider';
 import SiteFooter from '@/components/site-footer';
 import SiteHeader from '@/components/site-header';
+import { defaultDescription, siteName, siteUrl } from '@/lib/seo';
 import './globals.css';
 
 const inter = Inter({
@@ -20,18 +21,26 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: 'MSB AI & Automation | Prozessautomatisierung für KMU',
-    template: '%s | MSB AI & Automation'
+    default: `${siteName} | Prozessautomatisierung für KMU`,
+    template: `%s | ${siteName}`
   },
-  description:
-    'Pragmatische KI- und Prozessautomatisierung für KMU: weniger manuelle Arbeit in Verwaltung, HR und Reporting, passend zu bestehenden Systemen.',
+  description: defaultDescription,
+  applicationName: siteName,
   icons: {
     icon: '/msb-logo.webp'
   },
   robots: {
     index: true,
-    follow: true
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1
+    }
   }
 };
 

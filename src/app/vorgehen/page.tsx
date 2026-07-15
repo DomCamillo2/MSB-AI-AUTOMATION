@@ -1,14 +1,15 @@
-import type { Metadata } from 'next';
 import Accordion from '@/components/accordion';
 import PageCta from '@/components/page-cta';
 import PageIntro from '@/components/page-intro';
 import ProcessFlow from '@/components/process-flow';
+import { createPageMetadata } from '@/lib/seo';
 import { engagementSteps, faqs, principles } from '@/lib/site-content';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: 'Vorgehen',
-  description: 'Vom Automation Check über einen abgegrenzten Pilot bis zur dokumentierten Übergabe in den Arbeitsalltag.'
-};
+  description: 'Vom Automation Check über einen abgegrenzten Pilot bis zur dokumentierten Übergabe in den Arbeitsalltag.',
+  path: '/vorgehen'
+});
 
 export default function VorgehenPage() {
   return (

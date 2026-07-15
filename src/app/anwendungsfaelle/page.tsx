@@ -1,12 +1,13 @@
-import type { Metadata } from 'next';
 import PageCta from '@/components/page-cta';
 import PageIntro from '@/components/page-intro';
 import UseCaseExplorer from '@/components/use-case-explorer';
+import { createPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: 'Anwendungsfälle',
-  description: 'Konkrete Einsatzfelder für Automatisierung in HR, Verwaltung, CRM, Reporting und internem Wissen.'
-};
+  description: 'Konkrete Einsatzfelder für Automatisierung in HR, Verwaltung, CRM, Reporting und internem Wissen.',
+  path: '/anwendungsfaelle'
+});
 
 const fitSignals = [
   ['Wiederholung', 'Der Ablauf tritt regelmäßig auf und folgt in weiten Teilen bekannten Schritten.'],

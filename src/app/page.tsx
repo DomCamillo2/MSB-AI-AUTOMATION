@@ -1,20 +1,23 @@
-import type { Metadata } from 'next';
 import AnimatedHero from '@/components/animated-hero';
 import ExperienceStrip from '@/components/experience-strip';
+import HomeStructuredData from '@/components/home-structured-data';
 import PageCta from '@/components/page-cta';
 import ProcessFlow from '@/components/process-flow';
 import TeamGrid from '@/components/team-grid';
 import { Reveal } from '@/components/reveal';
+import { createPageMetadata } from '@/lib/seo';
 import { engagementSteps, problems, services, useCases } from '@/lib/site-content';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: 'Prozessautomatisierung für KMU',
-  description: 'MSB analysiert wiederkehrende Abläufe, entwickelt pragmatische Automatisierungen und begleitet Teams bei der Einführung.'
-};
+  description: 'MSB analysiert wiederkehrende Abläufe, entwickelt pragmatische Automatisierungen und begleitet Teams bei der Einführung.',
+  path: '/'
+});
 
 export default function HomePage() {
   return (
     <main id="main-content">
+      <HomeStructuredData />
       <AnimatedHero />
       <ExperienceStrip />
 

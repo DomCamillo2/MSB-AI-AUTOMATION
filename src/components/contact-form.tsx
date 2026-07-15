@@ -23,11 +23,11 @@ export function ContactForm() {
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
   const [process, setProcess] = useState('');
-  const [consent, setConsent] = useState(false);
+  const [privacyAcknowledged, setPrivacyAcknowledged] = useState(false);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!consent) return;
+    if (!privacyAcknowledged) return;
     window.location.href = buildMailtoUrl(name, company, email, process);
   }
 
@@ -94,15 +94,15 @@ export function ContactForm() {
           id="privacy"
           name="privacy"
           type="checkbox"
-          checked={consent}
-          onChange={(event) => setConsent(event.target.checked)}
+          checked={privacyAcknowledged}
+          onChange={(event) => setPrivacyAcknowledged(event.target.checked)}
           required
         />
-        <span>Ich stimme der Verarbeitung meiner Angaben zur Bearbeitung der Anfrage zu.</span>
+        <span>Ich habe die Datenschutzerklärung zur Kenntnis genommen.</span>
       </label>
-      <a className="privacy-link" href="/datenschutz">Datenschutzhinweise lesen</a>
+      <a className="privacy-link" href="/datenschutz">Datenschutzerklärung lesen</a>
 
-      <button className="button button-primary form-submit" type="submit" disabled={!consent}>
+      <button className="button button-primary form-submit" type="submit" disabled={!privacyAcknowledged}>
         Prozess kostenlos prüfen lassen <span className="button-arrow" aria-hidden="true">→</span>
       </button>
       <p className="form-note">Beim Absenden öffnet sich Ihr E-Mail-Programm mit den eingetragenen Angaben. Es wird kein externer Formulardienst verwendet.</p>

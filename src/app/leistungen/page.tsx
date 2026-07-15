@@ -1,11 +1,12 @@
-import type { Metadata } from 'next';
 import { Reveal } from '@/components/reveal';
 import ServicesHeroVisual from '@/components/services-hero-visual';
+import { createPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: 'Leistungen',
-  description: 'Prozessanalyse, Workflow-Automatisierung sowie Einführung und Befähigung für klar abgegrenzte Abläufe.'
-};
+  description: 'Prozessanalyse, Workflow-Automatisierung sowie Einführung und Befähigung für klar abgegrenzte Abläufe.',
+  path: '/leistungen'
+});
 
 const serviceBlocks = [
   {

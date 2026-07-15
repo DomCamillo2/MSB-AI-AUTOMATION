@@ -2669,12 +2669,51 @@ textarea:focus {
   margin-top: 1rem;
 }
 
-.callout {
-  margin-bottom: 2rem;
-  padding: 0.9rem 1rem;
-  color: #3f5055;
-  background: var(--sage);
-  border-left: 3px solid var(--teal);
+.legal-header {
+  margin-bottom: 2.5rem;
+}
+
+.legal-header .eyebrow {
+  margin-bottom: 0.8rem;
+}
+
+.legal-intro {
+  max-width: 680px;
+  margin-top: 0.9rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.legal-document section + section {
+  margin-top: 2.5rem;
+}
+
+.legal-document address {
+  font-style: normal;
+}
+
+.legal-document ul {
+  display: grid;
+  gap: 0.55rem;
+  margin: 1rem 0 0;
+  padding-left: 1.3rem;
+}
+
+.legal-document a {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 0.18em;
+}
+
+.legal-document a:hover {
+  text-decoration-color: currentColor;
+}
+
+.legal-meta {
+  margin-top: 3rem;
+  color: var(--muted);
+  font-size: 0.88rem;
 }
 
 @media (max-width: 1180px) {

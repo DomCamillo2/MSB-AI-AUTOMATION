@@ -1,13 +1,14 @@
-import type { Metadata } from 'next';
 import ExperienceStrip from '@/components/experience-strip';
 import PageCta from '@/components/page-cta';
 import PageIntro from '@/components/page-intro';
 import TeamGrid from '@/components/team-grid';
+import { createPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: 'Über uns',
-  description: 'Das MSB-Team verbindet Prozessverständnis, Automatisierung, Datenanalyse, Projektmanagement und Nutzerakzeptanz.'
-};
+  description: 'Das MSB-Team verbindet Prozessverständnis, Automatisierung, Datenanalyse, Projektmanagement und Nutzerakzeptanz.',
+  path: '/ueber-uns'
+});
 
 const perspectives = [
   ['Prozessverständnis', 'Wir betrachten Aufgaben, Übergaben und Ausnahmen aus Sicht der Menschen, die täglich damit arbeiten.'],
