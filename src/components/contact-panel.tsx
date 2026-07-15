@@ -1,4 +1,5 @@
 import { ContactForm } from '@/components/contact-form';
+import ProcessFlow from '@/components/process-flow';
 
 const nextSteps = [
   ['Persönliche Rückmeldung', 'Wir prüfen, ob der Prozess für einen Automation Check geeignet ist.'],
@@ -16,17 +17,13 @@ export function ContactPanel() {
           Beschreiben Sie uns einen wiederkehrenden Ablauf. Sie erhalten eine ehrliche erste Einschätzung, ob eine Automatisierung sinnvoll ist.
         </p>
 
-        <ol className="next-steps">
-          {nextSteps.map(([title, text], index) => (
-            <li key={title}>
-              <span>{index + 1}</span>
-              <div>
-                <strong>{title}</strong>
-                <p>{text}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
+        <ProcessFlow
+          className="check-process"
+          ariaLabel="Ablauf des kostenlosen Automation Checks"
+          size="compact"
+          tone="dark"
+          steps={nextSteps.map(([title, description]) => ({ title, description }))}
+        />
 
         <p className="direct-contact">
           Direkt schreiben: <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a>

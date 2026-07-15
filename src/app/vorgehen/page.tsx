@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Accordion from '@/components/accordion';
 import PageCta from '@/components/page-cta';
 import PageIntro from '@/components/page-intro';
-import { Reveal } from '@/components/reveal';
+import ProcessFlow from '@/components/process-flow';
 import { engagementSteps, faqs, principles } from '@/lib/site-content';
 
 export const metadata: Metadata = {
@@ -26,21 +26,17 @@ export default function VorgehenPage() {
             <div><h2 id="process-detail-heading">Vom ersten Prozessbild zur Übergabe</h2></div>
             <p>Jede Phase liefert ein konkretes Ergebnis und eine bewusste Entscheidung über den nächsten Schritt.</p>
           </div>
-          <Reveal>
-            <ol className="engagement-grid">
-              {engagementSteps.map((step, index) => (
-                <li key={step.title} className="engagement-step">
-                  <div className="engagement-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</div>
-                  <h3>{index + 1}. {step.title}</h3>
-                  <p>{step.text}</p>
-                  <p className="step-deliverable"><span>Ergebnis</span><strong>{step.deliverable}</strong></p>
-                  <Accordion className="compact-accordion" label="Details anzeigen">
-                    <ul className="plain-list">{step.details.map((detail) => <li key={detail}>{detail}</li>)}</ul>
-                  </Accordion>
-                </li>
-              ))}
-            </ol>
-          </Reveal>
+          <ProcessFlow
+            className="engagement-process"
+            ariaLabel="Drei Schritte vom Automation Check bis zur Übergabe"
+            layout="horizontal"
+            steps={engagementSteps.map((step) => ({
+              title: step.title,
+              description: step.text,
+              outcome: step.deliverable,
+              details: step.details
+            }))}
+          />
         </div>
       </section>
 

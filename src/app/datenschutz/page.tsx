@@ -1,10 +1,10 @@
 export const metadata = {
-  title: 'Datenschutz | MSB AI Consulting'
+  title: 'Datenschutz'
 };
 
 export default function DatenschutzPage() {
   return (
-    <main className="page-shell">
+    <main id="main-content" className="page-shell">
       <div className="container prose-panel">
         <p className="callout">Hinweis: Diese Datenschutzhinweise müssen vor Veröffentlichung rechtlich geprüft und an den tatsächlichen technischen Betrieb angepasst werden.</p>
         <section>

@@ -1,10 +1,10 @@
 export const metadata = {
-  title: 'Impressum | MSB AI Consulting'
+  title: 'Impressum'
 };
 
 export default function ImpressumPage() {
   return (
-    <main className="page-shell">
+    <main id="main-content" className="page-shell">
       <div className="container prose-panel">
         <p className="callout">Hinweis: Diese Seite ist ein Platzhalter und muss vor Veröffentlichung rechtlich geprüft werden.</p>
         <section>

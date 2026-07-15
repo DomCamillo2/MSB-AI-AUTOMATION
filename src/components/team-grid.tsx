@@ -14,14 +14,17 @@ export function TeamGrid({ compact = false }: TeamGridProps) {
           <div className="team-portrait">
             {member.image ? (
               <Image
+                className={`team-portrait-image team-portrait-image-${member.initials.toLowerCase()}`}
                 src={member.image}
                 alt={member.imageAlt}
-                fill
-                sizes="(max-width: 760px) 100vw, (max-width: 980px) 50vw, 33vw"
+                width={900}
+                height={1125}
+                sizes="(max-width: 760px) calc(100vw - 32px), (max-width: 980px) 50vw, 33vw"
               />
             ) : (
               <div className="team-portrait-fallback" aria-label={`Kein Porträt hinterlegt für ${member.name}`}>
                 <span aria-hidden="true">{member.initials}</span>
+                <small>Porträt nicht hinterlegt</small>
               </div>
             )}
           </div>

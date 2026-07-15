@@ -31,7 +31,7 @@ export default function UeberUnsPage() {
         <div className="container">
           <div className="section-heading heading-split">
             <div><h2 id="team-detail-heading">Das Team hinter MSB</h2></div>
-            <p>Die Profile zeigen ausschließlich geschäftsrelevante Erfahrung. Für Luca liegt aktuell kein Bild im Projekt vor.</p>
+            <p>Unterschiedliche fachliche Schwerpunkte fließen in eine gemeinsame, pragmatische Projektarbeit ein.</p>
           </div>
           <TeamGrid />
         </div>

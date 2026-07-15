@@ -35,7 +35,7 @@ export function Reveal({ children, className }: RevealProps) {
       initial={false}
       animate={reducedMotion || visible ? 'visible' : 'hidden'}
       variants={{
-        hidden: { opacity: 0, y: reducedMotion ? 0 : motionTokens.distance.section },
+        hidden: { opacity: 1, y: reducedMotion ? 0 : motionTokens.distance.section },
         visible: {
           opacity: 1,
           y: 0,
@@ -75,7 +75,7 @@ export function RevealGroup({ children, className, stagger = 'tight' }: RevealGr
         <m.div
           className="reveal-item"
           variants={{
-            hidden: { opacity: 0, y: reducedMotion ? 0 : motionTokens.distance.small },
+            hidden: { opacity: 1, y: reducedMotion ? 0 : motionTokens.distance.small },
             visible: {
               opacity: 1,
               y: 0,

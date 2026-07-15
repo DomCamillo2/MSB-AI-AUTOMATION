@@ -3,6 +3,7 @@
 import { useState, type KeyboardEvent } from 'react';
 import { useReducedMotion } from 'motion/react';
 import * as m from 'motion/react-m';
+import ProcessFlow from '@/components/process-flow';
 import { motionTokens } from '@/lib/motion';
 import { useCases } from '@/lib/site-content';
 
@@ -66,14 +67,12 @@ export function UseCaseExplorer() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: motionTokens.duration.fast, ease: motionTokens.ease.standard }}
       >
-        <dl>
-          {activeUseCase.details.map(([title, description]) => (
-            <div key={title}>
-              <dt>{title}</dt>
-              <dd>{description}</dd>
-            </div>
-          ))}
-        </dl>
+        <ProcessFlow
+          ariaLabel={`Ablauf für ${activeUseCase.category}`}
+          layout="horizontal"
+          size="compact"
+          steps={activeUseCase.details.map(([title, description]) => ({ title, description }))}
+        />
       </m.div>
 
       <noscript>

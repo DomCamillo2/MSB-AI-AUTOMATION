@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import AnimatedHero from '@/components/animated-hero';
 import ExperienceStrip from '@/components/experience-strip';
 import PageCta from '@/components/page-cta';
+import ProcessFlow from '@/components/process-flow';
 import TeamGrid from '@/components/team-grid';
 import { Reveal } from '@/components/reveal';
 import { engagementSteps, problems, services, useCases } from '@/lib/site-content';
@@ -96,18 +97,16 @@ export default function HomePage() {
               <a className="text-link" href="/vorgehen">Vorgehen kennenlernen <span aria-hidden="true">→</span></a>
             </div>
           </div>
-          <Reveal>
-            <ol className="engagement-grid engagement-grid-preview">
-              {engagementSteps.map((step, index) => (
-                <li key={step.title} className="engagement-step">
-                  <div className="engagement-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</div>
-                  <h3>{index + 1}. {step.title}</h3>
-                  <p>{step.text}</p>
-                  <p className="step-deliverable"><span>Ergebnis</span><strong>{step.deliverable}</strong></p>
-                </li>
-              ))}
-            </ol>
-          </Reveal>
+          <ProcessFlow
+            className="engagement-process engagement-process-preview"
+            ariaLabel="Drei Schritte von der Prozessprüfung bis zur Übergabe"
+            layout="horizontal"
+            steps={engagementSteps.map((step) => ({
+              title: step.title,
+              description: step.text,
+              outcome: step.deliverable
+            }))}
+          />
         </div>
       </section>
 
