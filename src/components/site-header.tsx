@@ -1,34 +1,97 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
-
-const navigation = [
-  ['Leistungen', '#leistungen'],
-  ['Anwendungsfälle', '#anwendungsfaelle'],
-  ['Vorgehen', '#vorgehen'],
-  ['Über uns', '#ueber-uns']
-];
+import { usePathname } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
+import { navigation } from '@/lib/site-content';
 
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const pathname = usePathname();
+  const headerRef = useRef<HTMLElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const navigationRef = useRef<HTMLElement>(null);
 
-  function closeMenu() {
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 980px)');
+    const updateViewport = () => setIsMobile(mediaQuery.matches);
+
+    updateViewport();
+    mediaQuery.addEventListener('change', updateViewport);
+    return () => mediaQuery.removeEventListener('change', updateViewport);
+  }, []);
+
+  useEffect(() => {
+    const updateHeader = () => setScrolled(window.scrollY > 16);
+
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    return () => window.removeEventListener('scroll', updateHeader);
+  }, []);
+
+  useEffect(() => {
+    const navigationElement = navigationRef.current;
+    if (!navigationElement) return;
+
+    navigationElement.inert = isMobile && !menuOpen;
+    if (!isMobile || !menuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    navigationElement.querySelector<HTMLAnchorElement>('a')?.focus();
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setMenuOpen(false);
+        menuButtonRef.current?.focus();
+        return;
+      }
+
+      if (event.key !== 'Tab' || !headerRef.current) return;
+      const focusable = [...headerRef.current.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')]
+        .filter((element) => element.getClientRects().length > 0 && element.tabIndex !== -1);
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMobile, menuOpen]);
+
+  useEffect(() => {
+    if (!isMobile && menuOpen) setMenuOpen(false);
+  }, [isMobile, menuOpen]);
+
+  function handleNavigation() {
     setMenuOpen(false);
   }
 
   return (
-    <header className="site-header">
+    <header ref={headerRef} className={`site-header${scrolled ? ' is-scrolled' : ''}`}>
       <div className="container header-inner">
-        <a className="brand" href="#top" aria-label="MSB AI & Automation Startseite" onClick={closeMenu}>
+        <a className="brand" href="/" onClick={handleNavigation}>
           <Image
             className="brand-logo"
             src="/msb-logo.webp"
             alt=""
             width={512}
             height={512}
-            priority
-            sizes="56px"
+            loading="eager"
+            sizes="54px"
             aria-hidden="true"
           />
           <span className="brand-copy">
@@ -38,6 +101,7 @@ export function SiteHeader() {
         </a>
 
         <button
+          ref={menuButtonRef}
           className="menu-toggle"
           type="button"
           aria-expanded={menuOpen}
@@ -53,22 +117,40 @@ export function SiteHeader() {
         </button>
 
         <nav
+          ref={navigationRef}
           id="primary-navigation"
           className={`primary-nav${menuOpen ? ' is-open' : ''}`}
           aria-label="Hauptnavigation"
+          aria-hidden={isMobile && !menuOpen ? true : undefined}
         >
-          {navigation.map(([label, href]) => (
-            <a key={href} href={href} onClick={closeMenu}>
+          {navigation.map(({ label, href }) => (
+            <a
+              key={href}
+              className={pathname === href ? 'is-active' : undefined}
+              href={href}
+              aria-current={pathname === href ? 'page' : undefined}
+              tabIndex={isMobile && !menuOpen ? -1 : undefined}
+              onClick={handleNavigation}
+            >
               {label}
             </a>
           ))}
-          <a className="button button-primary mobile-nav-cta" href="#kontakt" onClick={closeMenu}>
-            Automation Check anfragen
+          <a
+            className="button button-primary mobile-nav-cta"
+            href="/automation-check"
+            tabIndex={isMobile && !menuOpen ? -1 : undefined}
+            onClick={handleNavigation}
+          >
+            Automation Check
           </a>
         </nav>
 
-        <a className="button button-primary header-cta" href="#kontakt">
-          Automation Check anfragen
+        <a
+          className={`button button-primary header-cta${pathname === '/automation-check' ? ' is-active' : ''}`}
+          href="/automation-check"
+          aria-current={pathname === '/automation-check' ? 'page' : undefined}
+        >
+          Automation Check
         </a>
       </div>
     </header>

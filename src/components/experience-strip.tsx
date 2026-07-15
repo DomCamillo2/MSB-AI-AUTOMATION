@@ -5,17 +5,15 @@ export function ExperienceStrip() {
     <section className="experience-band" aria-labelledby="experience-heading">
       <div className="container experience-layout">
         <div>
-          <p className="eyebrow">Berufliche Erfahrung</p>
-          <h2 id="experience-heading">Erfahrung aus realen Unternehmenskontexten</h2>
+          <h2 id="experience-heading" tabIndex={-1}>Erfahrung aus realen Unternehmenskontexten</h2>
+          <p className="experience-intro">Unser Team bringt praktische Erfahrung aus Automotive, Industrie, Energie und Professional Services mit.</p>
         </div>
         <div>
-          <div className="company-wordmarks" aria-label="Ausgewählte berufliche Stationen">
-            {companies.map((company) => (
-              <span key={company}>{company}</span>
-            ))}
+          <div className="company-wordmarks" aria-label="Berufliche Stationen einzelner Teammitglieder">
+            {companies.map((company) => <span key={company}>{company}</span>)}
           </div>
           <p className="experience-disclaimer">
-            Ausgewählte berufliche Stationen einzelner Teammitglieder. Die genannten Unternehmen sind keine Referenzkunden von MSB AI &amp; Automation.
+            Berufliche Stationen einzelner Teammitglieder. Die genannten Unternehmen sind keine Referenzkunden von MSB AI &amp; Automation.
           </p>
         </div>
       </div>

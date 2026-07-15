@@ -1,50 +1,20 @@
-type Snapshot = {
-  title: string;
-  context: string;
-  points: string[];
-  transfer: string;
-};
+import { RevealGroup } from '@/components/reveal';
 
-const snapshots: Snapshot[] = [
+const expertiseAreas = [
   {
-    title: 'CRM- und Recruiting-Automatisierung',
-    context: 'Personalberatung und Energiewirtschaft',
-    points: [
-      'Wiederkehrende administrative Abläufe analysiert',
-      'CRM-Workflows technisch konfiguriert und weiterentwickelt',
-      'Fachliche HR-Anforderungen in umsetzbare Prozesse übersetzt'
-    ],
-    transfer: 'Relevant für Recruiting, Vertrieb und interne Administration.'
+    title: 'Prozesse und Automatisierung',
+    text: 'Erfahrung mit CRM-Workflows, Recruiting-Prozessen, Datenpflege und wiederkehrenden administrativen Abläufen.',
+    contexts: 'Energie · Personalberatung · Automotive'
   },
   {
-    title: 'Datenbasierte Prozessoptimierung',
-    context: 'Industrie und globale Unternehmensprozesse',
-    points: [
-      'Prozess- und Marketing-KPIs analysiert und visualisiert',
-      'Funktionsübergreifende Reports entwickelt',
-      'Schulungs- und Learning-Prozesse datenbasiert verbessert'
-    ],
-    transfer: 'Relevant für Reporting, Controlling und operative Entscheidungen.'
+    title: 'Daten und Analyse',
+    text: 'Erfahrung mit KPI-Auswertung, Reporting, Python, R, Excel und datenbasierter Prozessoptimierung.',
+    contexts: 'Industrie · Organisationsentwicklung · Learning'
   },
   {
-    title: 'Automatisierte Analysewerkzeuge',
-    context: 'Automotive und Organisationsentwicklung',
-    points: [
-      'Excel-basiertes Analysewerkzeug entwickelt',
-      'Kompetenzmatrizen strukturiert und automatisiert',
-      'Workshops und Veränderungsprozesse begleitet'
-    ],
-    transfer: 'Relevant für Kompetenzmanagement und interne Planung.'
-  },
-  {
-    title: 'Projektmanagement und Customer Experience',
-    context: 'Professional Services und digitale Projekte',
-    points: [
-      'Projekte und unterschiedliche Stakeholder koordiniert',
-      'Customer-Experience- und Prozessdaten ausgewertet',
-      'Erkenntnisse nutzerorientiert aufbereitet'
-    ],
-    transfer: 'Relevant für Kundenprozesse, Projektsteuerung und digitale Services.'
+    title: 'Einführung und Nutzerakzeptanz',
+    text: 'Erfahrung mit Projektkoordination, Customer Experience, Schulungen und der Einführung neuer digitaler Abläufe.',
+    contexts: 'Professional Services · HR · interne Transformation'
   }
 ];
 
@@ -54,30 +24,20 @@ export function ExperienceSnapshots() {
       <div className="container">
         <div className="section-heading heading-split">
           <div>
-            <p className="eyebrow">Erfahrungsfelder</p>
-            <h2 id="snapshots-heading">Praxis, die sich auf Ihre Prozesse übertragen lässt</h2>
+            <h2 id="snapshots-heading" tabIndex={-1}>Erfahrung, die in Ihre Prozesse einfließt</h2>
           </div>
-          <p>
-            Diese Beispiele stammen aus beruflichen Tätigkeiten einzelner Teammitglieder. Sie sind keine MSB-Kundenprojekte.
-          </p>
+          <p>Die Beispiele stammen aus beruflichen Tätigkeiten unserer Teammitglieder und sind keine MSB-Kundenprojekte.</p>
         </div>
 
-        <div className="snapshot-grid">
-          {snapshots.map((snapshot, index) => (
-            <article key={snapshot.title} className="snapshot-card">
-              <div className="snapshot-meta">
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <span>Berufserfahrung eines Teammitglieds</span>
-              </div>
-              <h3>{snapshot.title}</h3>
-              <p className="snapshot-context">Kontext: {snapshot.context}</p>
-              <ul className="plain-list">
-                {snapshot.points.map((point) => <li key={point}>{point}</li>)}
-              </ul>
-              <p className="snapshot-transfer">{snapshot.transfer}</p>
+        <RevealGroup className="snapshot-grid">
+          {expertiseAreas.map((area) => (
+            <article key={area.title} className="snapshot-card">
+              <h3>{area.title}</h3>
+              <p>{area.text}</p>
+              <p className="snapshot-context">{area.contexts}</p>
             </article>
           ))}
-        </div>
+        </RevealGroup>
       </div>
     </section>
   );

@@ -1,9 +1,9 @@
 import { ContactForm } from '@/components/contact-form';
 
 const nextSteps = [
-  ['Kurze Rückmeldung', 'Wir melden uns persönlich und klären, ob der Prozess zum Automation Check passt.'],
-  ['30–45 Minuten Gespräch', 'Gemeinsam betrachten wir Ablauf, Systeme, Beteiligte und sensible Daten.'],
-  ['Konkrete Einordnung', 'Sie erhalten erste Ansatzpunkte zu Nutzen, Aufwand und einem sinnvollen nächsten Schritt.']
+  ['Persönliche Rückmeldung', 'Wir prüfen, ob der Prozess für einen Automation Check geeignet ist.'],
+  ['30–45 Minuten Gespräch', 'Wir betrachten Ablauf, Systeme, Beteiligte und relevante Daten.'],
+  ['Konkreter nächster Schritt', 'Sie erhalten eine erste Einschätzung zu Nutzen, Aufwand und Risiken.']
 ];
 
 export function ContactPanel() {
@@ -11,9 +11,9 @@ export function ContactPanel() {
     <div className="contact-layout">
       <div className="contact-copy">
         <p className="eyebrow eyebrow-light">Kostenloser Automation Check</p>
-        <h2 id="contact-panel-heading">Bringen Sie einen Prozess mit, der Ihr Team regelmäßig aufhält.</h2>
+        <h2 id="contact-panel-heading" tabIndex={-1}>Welcher Prozess kostet Ihr Team regelmäßig Zeit?</h2>
         <p className="contact-lead">
-          Wir betrachten einen konkreten Ablauf und geben Ihnen eine ehrliche erste Einschätzung, wo Automatisierung sinnvoll ist und wo nicht.
+          Beschreiben Sie uns einen wiederkehrenden Ablauf. Sie erhalten eine ehrliche erste Einschätzung, ob eine Automatisierung sinnvoll ist.
         </p>
 
         <ol className="next-steps">
@@ -29,13 +29,12 @@ export function ContactPanel() {
         </ol>
 
         <p className="direct-contact">
-          Lieber direkt schreiben? <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a>
+          Direkt schreiben: <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a>
         </p>
       </div>
 
       <div className="form-surface">
-        <h3>Automation Check anfragen</h3>
-        <p>Vier Angaben genügen für den ersten Kontakt.</p>
+        <h3>Prozess beschreiben</h3>
         <ContactForm />
       </div>
     </div>

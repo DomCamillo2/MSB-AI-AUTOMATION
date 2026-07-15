@@ -1,6 +1,16 @@
 import type { Metadata } from 'next';
-import { Poppins } from 'next/font/google';
+import { Inter, Poppins } from 'next/font/google';
+import MotionProvider from '@/components/motion-provider';
+import SiteFooter from '@/components/site-footer';
+import SiteHeader from '@/components/site-header';
 import './globals.css';
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-inter'
+});
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -10,9 +20,12 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'MSB AI & Automation | Prozessautomatisierung für KMU',
+  title: {
+    default: 'MSB AI & Automation | Prozessautomatisierung für KMU',
+    template: '%s | MSB AI & Automation'
+  },
   description:
-    'MSB analysiert wiederkehrende Abläufe, entwickelt pragmatische KI- und Automatisierungslösungen und begleitet KMU in der Region Tübingen–Stuttgart bei der Einführung.',
+    'Pragmatische KI- und Prozessautomatisierung für KMU: weniger manuelle Arbeit in Verwaltung, HR und Reporting, passend zu bestehenden Systemen.',
   icons: {
     icon: '/msb-logo.webp'
   },
@@ -28,8 +41,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" className={poppins.variable}>
-      <body>{children}</body>
+    <html lang="de" className={`${inter.variable} ${poppins.variable}`}>
+      <body>
+        <MotionProvider>
+          <a className="skip-link" href="#main-content">Zum Inhalt springen</a>
+          <SiteHeader />
+          {children}
+          <SiteFooter />
+        </MotionProvider>
+      </body>
     </html>
   );
 }

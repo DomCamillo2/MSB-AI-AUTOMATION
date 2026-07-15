@@ -1,95 +1,85 @@
+import Accordion from '@/components/accordion';
 import AnimatedHero from '@/components/animated-hero';
 import ContactPanel from '@/components/contact-panel';
 import ExperienceSnapshots from '@/components/experience-snapshots';
 import ExperienceStrip from '@/components/experience-strip';
 import SiteHeader from '@/components/site-header';
+import UseCaseExplorer from '@/components/use-case-explorer';
+import { Reveal, RevealGroup } from '@/components/reveal';
 
 const problems = [
   {
-    title: 'Informationen werden zwischen Systemen übertragen',
-    text: 'Daten aus E-Mails, Formularen oder Excel-Listen werden manuell in CRM, ERP oder Fachanwendungen eingetragen.'
+    title: 'Daten werden mehrfach übertragen',
+    text: 'Informationen aus E-Mails, Formularen und Excel-Listen werden manuell in andere Systeme eingetragen.'
   },
   {
-    title: 'Wiederkehrende Reports entstehen per Hand',
-    text: 'Zahlen werden regelmäßig zusammengesucht, geprüft, formatiert und an dieselben Empfänger verteilt.'
+    title: 'Reports entstehen immer wieder per Hand',
+    text: 'Dieselben Daten werden regelmäßig exportiert, geprüft, formatiert und verteilt.'
   },
   {
-    title: 'Wissen hängt an einzelnen Mitarbeitenden',
-    text: 'Abläufe, Sonderfälle und Antworten sind kaum dokumentiert und bei Abwesenheiten schwer zugänglich.'
-  },
-  {
-    title: 'Neue Tools werden eingeführt, aber nicht angenommen',
-    text: 'Technisch funktioniert die Lösung, doch Rollen, Freigaben, Schulung und Alltagstauglichkeit bleiben unklar.'
-  }
-];
-
-const useCases = [
-  {
-    category: 'HR und Recruiting',
-    problem: 'Bewerberinformationen, Termine und Statusmeldungen werden in E-Mail, Kalender und Recruiting-System parallel gepflegt.',
-    workflow: 'Eingehende Informationen werden strukturiert, dem Vorgang zugeordnet und als nächster Schritt im bestehenden System vorbereitet.',
-    control: 'HR prüft ausgehende Kommunikation und trifft alle personenbezogenen Entscheidungen selbst.',
-    benefit: 'Verlässlichere administrative Abläufe und weniger doppelte Datenpflege.'
-  },
-  {
-    category: 'Verwaltung und CRM',
-    problem: 'Anfragen und Stammdaten werden aus Formularen oder Postfächern manuell in CRM und Aufgabenlisten übertragen.',
-    workflow: 'Ein definierter Eingang legt Datensätze und Aufgaben an, prüft Pflichtangaben und informiert die zuständige Person.',
-    control: 'Verantwortliche bearbeiten Ausnahmen, korrigieren Daten und bestätigen sensible Änderungen.',
-    benefit: 'Weniger Medienbrüche und ein nachvollziehbarer Bearbeitungsstand.'
-  },
-  {
-    category: 'Reporting und Daten',
-    problem: 'Regelmäßige Berichte erfordern dieselben Exporte, Bereinigungen und Formatierungsschritte.',
-    workflow: 'Freigegebene Datenquellen werden zusammengeführt, nach festen Regeln geprüft und als Berichtsentwurf aufbereitet.',
-    control: 'Fachverantwortliche prüfen Quelle, Plausibilität und finale Freigabe.',
-    benefit: 'Konsistentere Reports und mehr Zeit für Einordnung statt Zusammenkopieren.'
-  },
-  {
-    category: 'Internes Wissen',
-    problem: 'Wiederkehrende Fragen werden jedes Mal neu beantwortet, weil Wissen in Köpfen, Ordnern und Chats verteilt ist.',
-    workflow: 'Freigegebene Dokumente werden strukturiert auffindbar gemacht und für nachvollziehbare Antwortentwürfe genutzt.',
-    control: 'Fachverantwortliche bestimmen die Quellen und prüfen kritische Antworten vor der Nutzung.',
-    benefit: 'Schnellerer Wissenszugang und ein verlässlicheres Onboarding.'
+    title: 'Wissen ist schwer zugänglich',
+    text: 'Wichtige Abläufe und Antworten liegen verteilt in Köpfen, Ordnern und Chats.'
   }
 ];
 
 const engagementSteps = [
   {
-    title: 'Automation Check',
-    text: 'Wir wählen einen wiederkehrenden Prozess und prüfen gemeinsam, ob und wie sich eine Automatisierung lohnt.',
-    deliverables: [
-      'Skizze des aktuellen Ablaufs und der beteiligten Systeme',
-      'Einordnung von Nutzen, Datenlage, Aufwand und Risiken',
-      'Empfehlung für einen klar abgegrenzten nächsten Schritt'
+    title: 'Prozess prüfen',
+    text: 'Im kostenlosen Automation Check betrachten wir einen wiederkehrenden Ablauf, die beteiligten Systeme und mögliche Risiken.',
+    deliverable: 'Erste Einschätzung und klarer nächster Schritt',
+    details: [
+      'Aktuellen Ablauf und beteiligte Systeme skizzieren',
+      'Datenlage, Zuständigkeiten und Risiken einordnen'
     ]
   },
   {
-    title: 'Pilotprojekt',
-    text: 'Wir setzen den kleinsten sinnvollen Workflow in einem kontrollierten Rahmen um und testen ihn mit den späteren Nutzenden.',
-    deliverables: [
-      'Abgestimmter Pilotumfang mit klaren Erfolgskriterien',
-      'Funktionsfähiger Workflow in einer Test- oder Pilotumgebung',
-      'Auswertung von Rückmeldungen, Ausnahmen und technischem Fit'
+    title: 'Pilot umsetzen',
+    text: 'Wir entwickeln einen abgegrenzten Workflow und testen ihn gemeinsam mit den späteren Nutzenden.',
+    deliverable: 'Funktionsfähiger Pilot mit klaren Erfolgskriterien',
+    details: [
+      'Pilotumfang und Erfolgskriterien abstimmen',
+      'Ausnahmen und Rückmeldungen nachvollziehbar erfassen'
     ]
   },
   {
-    title: 'Umsetzung und Befähigung',
-    text: 'Nach einem erfolgreichen Pilot integrieren wir den Ablauf sauber und machen Ihr Team handlungsfähig.',
-    deliverables: [
-      'Anbindung an die vereinbarte IT-Umgebung',
-      'Dokumentation von Workflow, Datenflüssen und Freigaben',
-      'Schulung, Übergabe und ein klarer Verbesserungsprozess'
+    title: 'In den Alltag integrieren',
+    text: 'Nach einem erfolgreichen Test dokumentieren wir den Ablauf, schulen das Team und übergeben die Lösung.',
+    deliverable: 'Dokumentation, Schulung und geregelte Übergabe',
+    details: [
+      'Datenflüsse, Rollen und Freigaben dokumentieren',
+      'Übergabe und weitere Verbesserungen gemeinsam festlegen'
     ]
   }
 ];
 
 const principles = [
-  ['Transparenz', 'Beteiligte Systeme und externe Services werden vor der Umsetzung offengelegt und gemeinsam bewertet.'],
-  ['Datenminimierung', 'Der Workflow verarbeitet nur Daten, die für den definierten Zweck tatsächlich erforderlich sind.'],
-  ['Menschliche Freigabe', 'Sensible Kommunikation und Entscheidungen bleiben bei den verantwortlichen Mitarbeitenden.'],
-  ['Dokumentation', 'Ablauf, Datenquellen, Rollen, Ausnahmen und Freigabepunkte werden nachvollziehbar festgehalten.'],
-  ['Technischer Fit', 'Die Lösung orientiert sich an der vorhandenen IT-Umgebung und vermeidet unnötige Systemwechsel.']
+  ['Transparenz', 'Sie wissen, welche Systeme und externen Dienste eingesetzt werden.'],
+  ['Datenminimierung', 'Der Workflow verarbeitet nur die erforderlichen Informationen.'],
+  ['Menschliche Freigabe', 'Sensible Kommunikation und Entscheidungen bleiben kontrollierbar.'],
+  ['Dokumentation', 'Abläufe, Rollen und Abhängigkeiten werden nachvollziehbar festgehalten.']
+];
+
+const faqs = [
+  {
+    question: 'Welche Daten benötigt eine Automatisierung?',
+    answer: 'Das hängt vom konkreten Ablauf ab; in der Projektklärung bestimmen wir, welche Informationen für den Zweck erforderlich sind und welche entfallen können.'
+  },
+  {
+    question: 'Wo werden Daten verarbeitet?',
+    answer: 'Speicherorte, Systeme und externe Dienste werden passend zur vorhandenen IT in der Projektklärung transparent festgelegt.'
+  },
+  {
+    question: 'Können bestehende Systeme angebunden werden?',
+    answer: 'Ob und wie eine Anbindung möglich ist, prüfen wir in der Projektklärung anhand vorhandener Schnittstellen, Zugänge und technischer Vorgaben.'
+  },
+  {
+    question: 'Welche Schritte bleiben unter menschlicher Kontrolle?',
+    answer: 'Die erforderlichen Prüf- und Freigabepunkte werden in der Projektklärung nach Prozess, Daten und Verantwortung festgelegt.'
+  },
+  {
+    question: 'Was passiert nach dem Pilotprojekt?',
+    answer: 'Nach dem Test bewerten wir die vereinbarten Kriterien und legen gemeinsam fest, ob der Ablauf angepasst, integriert oder beendet wird.'
+  }
 ];
 
 const team = [
@@ -97,24 +87,24 @@ const team = [
     initials: 'DS',
     name: 'Dominik Soballa',
     role: 'AI Adoption & Workflow Automation',
-    text: 'Verbindet Wirtschaftspsychologie, Kognitionswissenschaft und praktische Erfahrung in CRM-Implementierung, Workflow-Automatisierung und HR-Prozessen.',
-    context: 'Berufliche Kontexte: prognum Automotive, Callidus Energie und Academic Consulting Aschaffenburg',
+    text: 'Verbindet Wirtschaftspsychologie und Kognitionswissenschaft mit Erfahrung in CRM-Implementierung, Automatisierung und HR-Prozessen.',
+    context: 'prognum Automotive · Callidus Energie · Academic Consulting',
     linkedin: 'https://www.linkedin.com/in/dominik-v-soballa-87873125b'
   },
   {
     initials: 'LB',
     name: 'Luca Bouché',
     role: 'Data & Process Automation',
-    text: 'Verbindet psychologische Methodenkompetenz mit Python, R, quantitativer Analyse und praktischer Erfahrung in datenbasierter Prozessoptimierung.',
-    context: 'Berufliche Kontexte: Siemens und BMW Group',
+    text: 'Verbindet psychologische Methoden mit Python, R, Datenanalyse und praktischer Prozessoptimierung.',
+    context: 'Siemens · BMW Group',
     linkedin: 'https://www.linkedin.com/in/luca-bouche-215a1225a/'
   },
   {
     initials: 'EM',
     name: 'Erik Müller',
     role: 'Project Management & Customer Experience',
-    text: 'Verbindet Projektmanagement, Customer Experience, Datenanalyse und visuelle Kommunikation mit einem nutzerzentrierten Blick auf digitale Abläufe.',
-    context: 'Berufliche Kontexte: KPMG sowie Digital-, Marketing- und Designprojekte',
+    text: 'Verbindet Projektmanagement, Datenanalyse und Customer Experience mit nutzerorientierter digitaler Gestaltung.',
+    context: 'KPMG · Digital- und Designprojekte',
     linkedin: 'https://www.linkedin.com/in/erik-m%C3%BCller-11b186208/'
   }
 ];
@@ -131,23 +121,22 @@ export default function HomePage() {
         <section className="section problem-section" id="leistungen" aria-labelledby="problems-heading">
           <div className="container problem-layout">
             <div className="section-heading sticky-heading">
-              <p className="eyebrow">Ausgangslage</p>
-              <h2 id="problems-heading">Kommt Ihnen das bekannt vor?</h2>
-              <p>
-                Gute Automatisierung beginnt nicht mit einem Tool, sondern mit einem wiederkehrenden Problem, klaren Zuständigkeiten und einem realistischen Blick auf die vorhandenen Systeme.
-              </p>
+              <h2 id="problems-heading" tabIndex={-1}>Wo im Alltag Zeit verloren geht</h2>
+              <p>Wir beginnen nicht mit einem Tool, sondern mit einem konkreten wiederkehrenden Ablauf.</p>
             </div>
-            <ol className="problem-list">
-              {problems.map((problem, index) => (
+            <Reveal className="problem-list-reveal">
+              <ul className="problem-list">
+              {problems.map((problem) => (
                 <li key={problem.title}>
-                  <span className="list-number">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="problem-marker" aria-hidden="true" />
                   <div>
                     <h3>{problem.title}</h3>
                     <p>{problem.text}</p>
                   </div>
                 </li>
               ))}
-            </ol>
+              </ul>
+            </Reveal>
           </div>
         </section>
 
@@ -155,42 +144,11 @@ export default function HomePage() {
           <div className="container">
             <div className="section-heading heading-split">
               <div>
-                <p className="eyebrow">Anwendungsfälle</p>
-                <h2 id="use-cases-heading">Konkrete Abläufe statt abstrakter KI-Versprechen</h2>
+                <h2 id="use-cases-heading" tabIndex={-1}>Typische Prozesse, mit denen wir starten</h2>
               </div>
-              <p>
-                Jeder Workflow wird an Systeme, Daten und Verantwortlichkeiten im Unternehmen angepasst. Die Beispiele zeigen mögliche Startpunkte, keine fertigen Standardprodukte.
-              </p>
+              <p>Keine Standardsoftware, sondern klar abgegrenzte Abläufe in Ihrer bestehenden Umgebung.</p>
             </div>
-
-            <div className="use-case-list">
-              {useCases.map((useCase, index) => (
-                <article key={useCase.category} className="use-case-row">
-                  <div className="use-case-title">
-                    <span>{String(index + 1).padStart(2, '0')}</span>
-                    <h3>{useCase.category}</h3>
-                  </div>
-                  <dl>
-                    <div>
-                      <dt>Aktuelles Problem</dt>
-                      <dd>{useCase.problem}</dd>
-                    </div>
-                    <div>
-                      <dt>Möglicher Workflow</dt>
-                      <dd>{useCase.workflow}</dd>
-                    </div>
-                    <div>
-                      <dt>Menschliche Kontrolle</dt>
-                      <dd>{useCase.control}</dd>
-                    </div>
-                    <div>
-                      <dt>Betrieblicher Nutzen</dt>
-                      <dd>{useCase.benefit}</dd>
-                    </div>
-                  </dl>
-                </article>
-              ))}
-            </div>
+            <UseCaseExplorer />
           </div>
         </section>
 
@@ -200,53 +158,69 @@ export default function HomePage() {
           <div className="container">
             <div className="section-heading heading-split">
               <div>
-                <p className="eyebrow">Vorgehen</p>
-                <h2 id="engagement-heading">Klein starten. Im Alltag prüfen. Sauber übergeben.</h2>
+                <h2 id="engagement-heading" tabIndex={-1}>Klein starten. Wirkung prüfen. Sauber übergeben.</h2>
               </div>
-              <div className="approach-note">
-                <strong>Ein überschaubarer Prozess zuerst.</strong>
-                <p>MSB beginnt nicht mit einem großen Transformationsprojekt, sondern mit einem klaren Ablauf, dessen Nutzen und Grenzen sich gemeinsam prüfen lassen.</p>
-              </div>
+              <p>Sie müssen nicht sofort ein großes Transformationsprojekt beauftragen.</p>
             </div>
 
-            <ol className="engagement-grid">
+            <Reveal>
+              <ol className="engagement-grid">
               {engagementSteps.map((step, index) => (
                 <li key={step.title} className="engagement-step">
-                  <div className="engagement-number">{String(index + 1).padStart(2, '0')}</div>
-                  <h3>{step.title}</h3>
+                  <div className="engagement-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</div>
+                  <h3>{index + 1}. {step.title}</h3>
                   <p>{step.text}</p>
-                  <div className="deliverables">
-                    <strong>Konkrete Ergebnisse</strong>
+                  <p className="step-deliverable">
+                    <span>Ergebnis</span>
+                    <strong>{step.deliverable}</strong>
+                  </p>
+                  <Accordion className="compact-accordion" label="Details anzeigen">
                     <ul className="plain-list">
-                      {step.deliverables.map((deliverable) => <li key={deliverable}>{deliverable}</li>)}
+                      {step.details.map((detail) => <li key={detail}>{detail}</li>)}
                     </ul>
-                  </div>
+                  </Accordion>
                 </li>
               ))}
-            </ol>
+              </ol>
+            </Reveal>
           </div>
         </section>
 
         <section className="section responsible-section" id="verantwortung" aria-labelledby="responsible-heading">
-          <div className="container responsible-layout">
-            <div className="responsible-copy">
-              <p className="eyebrow eyebrow-light">Verantwortungsvolle Umsetzung</p>
-              <h2 id="responsible-heading">Automatisierung mit Kontrolle</h2>
-              <p>
-                Ein guter Workflow ist nicht nur technisch funktionsfähig. Er muss für die beteiligten Menschen nachvollziehbar sein, zur vorhandenen IT passen und mit vertretbarem Datenzugriff auskommen.
-              </p>
-              <p>
-                Wir versprechen keine pauschale Rechtskonformität oder Zertifizierung. Datenschutz, Mitbestimmung und rechtliche Anforderungen werden projektspezifisch mit den zuständigen Stellen Ihres Unternehmens geklärt.
-              </p>
+          <div className="container">
+            <div className="responsible-intro">
+              <h2 id="responsible-heading" tabIndex={-1}>Automatisierung mit Kontrolle</h2>
+              <p>Wir automatisieren Routine – nicht Verantwortung.</p>
             </div>
-            <dl className="principle-list">
-              {principles.map(([title, text], index) => (
+
+            <Reveal>
+              <dl className="principle-list">
+              {principles.map(([title, description]) => (
                 <div key={title}>
-                  <dt><span>{String(index + 1).padStart(2, '0')}</span>{title}</dt>
-                  <dd>{text}</dd>
+                  <dt>{title}</dt>
+                  <dd>{description}</dd>
                 </div>
               ))}
-            </dl>
+              </dl>
+            </Reveal>
+
+            <p className="technical-fit">Die Umsetzung orientiert sich an Ihrer bestehenden IT und vermeidet unnötige Systemwechsel.</p>
+            <p className="responsible-disclaimer">
+              Datenschutz und rechtliche Anforderungen werden projektspezifisch mit den zuständigen Stellen des Unternehmens geprüft. MSB ersetzt keine Rechts- oder Datenschutzberatung.
+            </p>
+
+            <div className="faq-block">
+              <div className="faq-heading">
+                <h3>Fragen</h3>
+              </div>
+              <div className="faq-list">
+                {faqs.map((faq) => (
+                  <Accordion key={faq.question} className="faq-item" label={faq.question}>
+                    <p>{faq.answer}</p>
+                  </Accordion>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
@@ -254,15 +228,12 @@ export default function HomePage() {
           <div className="container">
             <div className="section-heading heading-split">
               <div>
-                <p className="eyebrow">Über uns</p>
-                <h2 id="team-heading">Drei Fachperspektiven für einen funktionierenden Gesamtprozess</h2>
+                <h2 id="team-heading" tabIndex={-1}>Drei Perspektiven. Ein gemeinsamer Prozess.</h2>
               </div>
-              <p>
-                MSB verbindet Prozessverständnis, technische Umsetzung und Einführungskompetenz. Entscheidend ist nicht nur, ob ein Workflow läuft, sondern ob Ihr Team ihn versteht und sinnvoll nutzen kann.
-              </p>
+              <p>Wir verbinden Prozessverständnis, technische Umsetzung und Nutzerakzeptanz.</p>
             </div>
 
-            <div className="team-grid">
+            <RevealGroup className="team-grid">
               {team.map((member) => (
                 <article key={member.name} className="team-card">
                   <div className="team-header">
@@ -279,13 +250,13 @@ export default function HomePage() {
                   </a>
                 </article>
               ))}
-            </div>
+            </RevealGroup>
           </div>
         </section>
 
         <section className="contact-section" id="kontakt" aria-labelledby="contact-panel-heading">
           <div className="container">
-            <ContactPanel />
+            <Reveal><ContactPanel /></Reveal>
           </div>
         </section>
       </main>
@@ -294,7 +265,7 @@ export default function HomePage() {
         <div className="container footer-layout">
           <div>
             <strong className="footer-brand">MSB AI &amp; Automation</strong>
-            <p>Pragmatische KI- und Prozessautomatisierung für KMU in der Region Tübingen–Stuttgart.</p>
+            <p>Pragmatische Prozessautomatisierung für KMU in der Region Tübingen–Stuttgart.</p>
           </div>
           <nav className="footer-links" aria-label="Rechtliches und Kontakt">
             <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a>

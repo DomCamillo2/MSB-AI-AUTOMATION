@@ -11,7 +11,7 @@ function buildMailtoUrl(name: string, company: string, email: string, process: s
     `Unternehmen: ${company}`,
     `Geschäftliche E-Mail: ${email}`,
     '',
-    'Aktuelles Prozessproblem:',
+    'Prozessbeschreibung:',
     process
   ].join('\n');
 
@@ -69,25 +69,24 @@ export function ContactForm() {
           inputMode="email"
           autoComplete="email"
           required
-          aria-describedby="email-hint"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
-        <small id="email-hint">Für Rückfragen und die Terminabstimmung.</small>
       </div>
 
       <div className="field">
-        <label htmlFor="process">Welcher Ablauf kostet aktuell Zeit?</label>
+        <label htmlFor="process">Welcher Prozess kostet regelmäßig Zeit?</label>
         <textarea
           id="process"
           name="process"
           rows={5}
           required
           aria-describedby="process-hint"
+          placeholder="Zum Beispiel: Bewerberdaten aus E-Mails ins CRM übertragen."
           value={process}
           onChange={(event) => setProcess(event.target.value)}
         />
-        <small id="process-hint">Eine kurze Beschreibung reicht. Bitte keine sensiblen Personen- oder Bewerberdaten eintragen.</small>
+        <small id="process-hint">Bitte keine sensiblen Personen-, Kunden- oder Bewerberdaten eintragen.</small>
       </div>
 
       <label className="checkbox" htmlFor="privacy">
@@ -104,7 +103,7 @@ export function ContactForm() {
       <a className="privacy-link" href="/datenschutz">Datenschutzhinweise lesen</a>
 
       <button className="button button-primary form-submit" type="submit" disabled={!consent}>
-        Automation Check anfragen
+        Prozess kostenlos prüfen lassen <span className="button-arrow" aria-hidden="true">→</span>
       </button>
       <p className="form-note">Beim Absenden öffnet sich Ihr E-Mail-Programm mit den eingetragenen Angaben. Es wird kein externer Formulardienst verwendet.</p>
     </form>
