@@ -5,12 +5,12 @@ import * as m from 'motion/react-m';
 import { motionTokens } from '@/lib/motion';
 
 const workflowSteps = [
-  ['Eingang', 'E-Mail, Formular oder Datei'],
-  ['Strukturieren', 'Daten erkennen und zuordnen'],
-  ['System aktualisieren', 'CRM, ERP oder bestehendes Tool'],
-  ['Freigeben', 'Mensch prüft sensible Schritte'],
-  ['Erledigen', 'Aufgabe, Dokument oder Nachricht']
-];
+  ['Eingang', 'Neue Information kommt an', 'Trigger'],
+  ['Strukturieren', 'Daten erkennen und zuordnen', 'Regeln + KI'],
+  ['System aktualisieren', 'Bestehende Werkzeuge anbinden', 'CRM · ERP'],
+  ['Freigeben', 'Sensible Schritte kontrollieren', 'Mensch'],
+  ['Erledigen', 'Aufgabe oder Dokument ausgeben', 'Ergebnis']
+] as const;
 
 const sequenceStart = 0.18;
 const stepInterval = 0.34;
@@ -21,16 +21,22 @@ export function WorkflowAnimation() {
   return (
     <aside className="workflow-visual" aria-labelledby="workflow-title">
       <h2 id="workflow-title" className="visually-hidden">Beispielhafter Automationsablauf</h2>
-      <div className="workflow-track">
-        <div className="workflow-line workflow-line-horizontal" aria-hidden="true">
-          <m.span
-            className="workflow-line-fill"
-            initial={reducedMotion ? false : { scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1.7, delay: sequenceStart, ease: motionTokens.ease.standard }}
-          />
+      <div className="workflow-visual-head">
+        <div>
+          <span className="workflow-kicker">Beispielprozess</span>
+          <strong>Ein kontrollierter Ablauf</strong>
         </div>
-        <div className="workflow-line workflow-line-vertical" aria-hidden="true">
+        <span className="workflow-live-state"><span aria-hidden="true" /> Einmaliger Durchlauf</span>
+      </div>
+
+      <div className="workflow-inputs" aria-label="Mögliche Eingänge">
+        <span>E-Mail</span>
+        <span>Formular</span>
+        <span>Datei</span>
+      </div>
+
+      <div className="workflow-track">
+        <div className="workflow-line" aria-hidden="true">
           <m.span
             className="workflow-line-fill"
             initial={reducedMotion ? false : { scaleY: 0 }}
@@ -40,7 +46,7 @@ export function WorkflowAnimation() {
         </div>
 
         <ol className="workflow-list">
-          {workflowSteps.map(([title, description], index) => {
+          {workflowSteps.map(([title, description, system], index) => {
             const delay = sequenceStart + index * stepInterval;
 
             return (
@@ -87,6 +93,7 @@ export function WorkflowAnimation() {
                   <strong>{title}</strong>
                   <small>{description}</small>
                 </span>
+                <span className="workflow-system">{system}</span>
               </m.li>
             );
           })}

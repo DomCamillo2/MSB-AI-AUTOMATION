@@ -11,11 +11,11 @@ export function AnimatedHero() {
             Wir automatisieren wiederkehrende Abläufe in Verwaltung, HR und Reporting – passend zu Ihren Systemen und mit klarer menschlicher Kontrolle.
           </p>
           <div className="hero-actions">
-            <a className="button button-primary" href="#kontakt">
+            <a className="button button-primary" href="/automation-check">
               Prozess kostenlos prüfen lassen <span className="button-arrow" aria-hidden="true">→</span>
             </a>
-            <a className="button button-secondary" href="#anwendungsfaelle">
-              Anwendungsfälle ansehen <span className="button-arrow" aria-hidden="true">↓</span>
+            <a className="button button-secondary" href="/anwendungsfaelle">
+              Anwendungsfälle ansehen <span className="button-arrow" aria-hidden="true">→</span>
             </a>
           </div>
           <div className="hero-meta">
