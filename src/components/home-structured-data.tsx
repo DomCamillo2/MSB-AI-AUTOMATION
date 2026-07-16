@@ -21,7 +21,7 @@ const structuredData = {
       name: siteName,
       alternateName: 'MSB AI Consulting',
       url: siteUrl,
-      logo: `${siteUrl}/msb-logo.webp`,
+      logo: `${siteUrl}/msb-logo-lockup.png`,
       email: 'kontakt@msb-ai.de',
       description: defaultDescription
     }

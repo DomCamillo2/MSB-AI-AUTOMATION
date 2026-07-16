@@ -83,21 +83,17 @@ export function SiteHeader() {
   return (
     <header ref={headerRef} className={`site-header${scrolled ? ' is-scrolled' : ''}`}>
       <div className="container header-inner">
-        <a className="brand" href="/" onClick={handleNavigation}>
+        <a className="brand" href="/" aria-label="MSB AI & Automation Startseite" onClick={handleNavigation}>
           <Image
             className="brand-logo"
-            src="/msb-logo.webp"
+            src="/msb-wordmark.png"
             alt=""
-            width={512}
-            height={512}
+            width={1813}
+            height={545}
             loading="eager"
-            sizes="54px"
+            sizes="(max-width: 480px) 96px, (max-width: 980px) 108px, 128px"
             aria-hidden="true"
           />
-          <span className="brand-copy">
-            <strong>MSB</strong>
-            <small>AI &amp; Automation</small>
-          </span>
         </a>
 
         <button

@@ -29,9 +29,9 @@ export function createPageMetadata({ title, description, path }: PageMetadataOpt
       description,
       images: [
         {
-          url: '/msb-logo.webp',
-          width: 512,
-          height: 512,
+          url: '/msb-logo-lockup.png',
+          width: 1813,
+          height: 793,
           alt: 'MSB AI & Automation'
         }
       ]
@@ -40,7 +40,7 @@ export function createPageMetadata({ title, description, path }: PageMetadataOpt
       card: 'summary',
       title: socialTitle,
       description,
-      images: ['/msb-logo.webp']
+      images: ['/msb-logo-lockup.png']
     }
   };
 }

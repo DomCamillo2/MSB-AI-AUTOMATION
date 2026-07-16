@@ -264,7 +264,6 @@ textarea:focus-visible,
   min-height: 52px;
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
   color: var(--navy);
   transition: opacity var(--motion-micro) ease;
 }
@@ -275,9 +274,9 @@ textarea:focus-visible,
 }
 
 .brand-logo {
-  width: 54px;
-  height: 54px;
-  flex: 0 0 54px;
+  width: 128px;
+  height: auto;
+  flex: 0 0 auto;
   object-fit: contain;
 }
 
@@ -2786,13 +2785,12 @@ textarea:focus {
 
   .brand {
     min-height: 44px;
-    gap: 0.6rem;
   }
 
   .brand-logo {
-    width: 40px;
-    height: 40px;
-    flex-basis: 40px;
+    width: 108px;
+    height: auto;
+    flex-basis: auto;
   }
 
   .brand-copy strong {
@@ -3292,9 +3290,9 @@ textarea:focus {
   }
 
   .brand-logo {
-    width: 36px;
-    height: 36px;
-    flex-basis: 36px;
+    width: 96px;
+    height: auto;
+    flex-basis: auto;
   }
 
   .brand-copy strong {
