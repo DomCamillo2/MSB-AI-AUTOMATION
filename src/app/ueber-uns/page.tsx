@@ -23,16 +23,19 @@ export default function UeberUnsPage() {
         eyebrow="Über uns"
         title="Drei Perspektiven. Ein gemeinsamer Prozess."
         lead="MSB verbindet psychologisches Prozessverständnis, technische Umsetzung und nutzerorientierte Einführung."
-        aside="Die genannten Unternehmenskontexte sind berufliche Stationen einzelner Teammitglieder und keine Referenzkunden von MSB."
+        aside="Unser gemeinsamer Maßstab: Lösungen müssen fachlich nachvollziehbar, technisch umsetzbar und im Arbeitsalltag nutzbar sein."
       />
 
       <ExperienceStrip />
 
       <section className="section team-section" aria-labelledby="team-detail-heading">
         <div className="container">
-          <div className="section-heading heading-split">
-            <div><h2 id="team-detail-heading">Das Team hinter MSB</h2></div>
-            <p>Unterschiedliche fachliche Schwerpunkte fließen in eine gemeinsame, pragmatische Projektarbeit ein.</p>
+          <div className="section-heading heading-split about-team-heading">
+            <div>
+              <p className="eyebrow">Team</p>
+              <h2 id="team-detail-heading">Das Team hinter MSB</h2>
+            </div>
+            <p>Drei fachliche Schwerpunkte greifen ineinander: Prozessverständnis, technische Umsetzung und nutzerorientierte Einführung.</p>
           </div>
           <TeamGrid />
         </div>
@@ -40,9 +43,10 @@ export default function UeberUnsPage() {
 
       <section className="section collaboration-section" aria-labelledby="collaboration-heading">
         <div className="container editorial-split">
-          <div className="section-heading sticky-heading">
+          <div className="section-heading sticky-heading collaboration-heading">
             <p className="eyebrow">Zusammenarbeit</p>
             <h2 id="collaboration-heading">Technik und Arbeitsalltag zusammen denken</h2>
+            <p>Wir bringen fachliche, technische und menschliche Anforderungen früh im Projekt zusammen.</p>
           </div>
           <dl className="editorial-list">
             {perspectives.map(([title, text]) => <div key={title}><dt>{title}</dt><dd>{text}</dd></div>)}

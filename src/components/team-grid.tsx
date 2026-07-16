@@ -17,14 +17,12 @@ export function TeamGrid({ compact = false }: TeamGridProps) {
                 className={`team-portrait-image team-portrait-image-${member.initials.toLowerCase()}`}
                 src={member.image}
                 alt={member.imageAlt}
-                width={900}
-                height={1125}
+                fill
                 sizes="(max-width: 760px) calc(100vw - 32px), (max-width: 980px) 50vw, 33vw"
               />
             ) : (
-              <div className="team-portrait-fallback" aria-label={`Kein Porträt hinterlegt für ${member.name}`}>
+              <div className="team-portrait-fallback" aria-hidden="true">
                 <span aria-hidden="true">{member.initials}</span>
-                <small>Porträt nicht hinterlegt</small>
               </div>
             )}
           </div>
@@ -33,7 +31,13 @@ export function TeamGrid({ compact = false }: TeamGridProps) {
             <p className="team-role">{member.role}</p>
             <p>{member.text}</p>
             <p className="team-context">{member.context}</p>
-            <a className="profile-link" href={member.linkedin} target="_blank" rel="noreferrer">
+            <a
+              className="profile-link"
+              href={member.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`LinkedIn-Profil von ${member.name} in einem neuen Tab öffnen`}
+            >
               LinkedIn-Profil <span aria-hidden="true">↗</span>
             </a>
           </div>
