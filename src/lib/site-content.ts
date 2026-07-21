@@ -95,10 +95,16 @@ export const engagementSteps = [
     details: ['Pilotumfang und Erfolgskriterien abstimmen', 'Ausnahmen und Rückmeldungen nachvollziehbar erfassen']
   },
   {
-    title: 'In den Alltag integrieren',
-    text: 'Nach einem erfolgreichen Test dokumentieren wir den Ablauf, schulen das Team und übergeben die Lösung.',
-    deliverable: 'Dokumentation, Schulung und geregelte Übergabe',
-    details: ['Datenflüsse, Rollen und Freigaben dokumentieren', 'Übergabe und weitere Verbesserungen gemeinsam festlegen']
+    title: 'In Systeme integrieren',
+    text: 'Nach einem erfolgreichen Test binden wir den Workflow kontrolliert an die abgestimmten Systeme und Freigaben an.',
+    deliverable: 'Abgestimmte Integration mit dokumentierten Datenflüssen',
+    details: ['Schnittstellen, Rollen und Freigaben dokumentieren', 'Ausnahmen und Verantwortlichkeiten für den Betrieb festlegen']
+  },
+  {
+    title: 'Schulen und übergeben',
+    text: 'Wir erklären den Ablauf, schulen die beteiligten Personen und übergeben die Lösung geregelt in den Arbeitsalltag.',
+    deliverable: 'Schulung, Dokumentation und geregelte Übergabe',
+    details: ['Beteiligte Personen in der sicheren Nutzung schulen', 'Übergabe und weitere Verbesserungen gemeinsam festlegen']
   }
 ] as const;
 

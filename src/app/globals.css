@@ -120,7 +120,7 @@ p {
 }
 
 .container {
-  width: min(1240px, calc(100% - 48px));
+  width: min(1240px, calc(100% - 96px));
   margin-inline: auto;
 }
 
@@ -356,9 +356,9 @@ textarea:focus-visible,
 
 .hero-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.08fr) minmax(420px, 0.92fr);
   align-items: center;
-  gap: clamp(3rem, 5vw, 5.5rem);
+  gap: clamp(3rem, 4vw, 4.5rem);
 }
 
 .hero-copy {
@@ -2651,6 +2651,34 @@ textarea:focus {
   font-size: 0.8rem;
 }
 
+.privacy-field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.form-error {
+  color: #9f2f2f;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+input[aria-invalid='true'],
+textarea[aria-invalid='true'] {
+  background: #fffafa;
+  border-color: #a53a3a;
+}
+
+.form-status {
+  padding: 0.75rem 0.9rem;
+  color: var(--navy);
+  background: rgba(8, 119, 123, 0.07);
+  border: 1px solid rgba(8, 119, 123, 0.24);
+  border-radius: var(--radius-control);
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
 .site-footer {
   padding: 2.2rem 0 max(2.2rem, calc(1.2rem + env(safe-area-inset-bottom)));
   color: var(--white);
@@ -2770,6 +2798,10 @@ textarea:focus {
 }
 
 @media (max-width: 1180px) {
+  .container {
+    width: min(1240px, calc(100% - 64px));
+  }
+
   h1 {
     font-size: 3.45rem;
   }
@@ -2791,6 +2823,16 @@ textarea:focus {
   }
 }
 
+@media (min-width: 1081px) and (max-width: 1512px) {
+  .hero {
+    padding: 3.5rem 0 3rem;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(3rem, 4vw, 3.55rem);
+  }
+}
+
 @media (max-width: 1080px) {
   .hero-grid {
     grid-template-columns: 1fr;
@@ -2802,7 +2844,7 @@ textarea:focus {
   }
 
   .workflow-visual {
-    width: 100%;
+    display: none;
   }
 
   .services-hero-grid,
@@ -3482,7 +3524,7 @@ textarea:focus {
 
 @media (max-width: 480px) {
   .container {
-    width: min(100% - 24px, 1240px);
+    width: min(100% - 32px, 1240px);
   }
 
   .experience-layout h2 {
@@ -3491,7 +3533,7 @@ textarea:focus {
   }
 
   .site-header .container {
-    width: min(100% - 20px, 1240px);
+    width: min(100% - 32px, 1240px);
   }
 
   .header-inner {
