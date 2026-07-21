@@ -28,7 +28,11 @@ export function ExperienceStrip() {
           <p className="experience-intro">Unser Team bringt praktische Erfahrung aus Automotive, Industrie, Energie und Professional Services mit.</p>
         </div>
         <div className="experience-context-column">
-          <ul className="experience-contexts" aria-label="Ausgewählte berufliche Kontexte einzelner Teammitglieder">
+          <ul
+            className="experience-contexts"
+            aria-label="Ausgewählte berufliche Kontexte einzelner Teammitglieder"
+            tabIndex={0}
+          >
             {experienceContexts.map((context, index) => (
               <li key={context.organizations}>
                 <span>{String(index + 1).padStart(2, '0')} · {context.area}</span>

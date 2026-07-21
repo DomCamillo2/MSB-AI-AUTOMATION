@@ -33,7 +33,7 @@ export function WorkflowAnimation() {
         tone="dark"
         steps={workflowSteps.map(([title, description, meta]) => ({ title, description, meta }))}
       />
-      <p className="workflow-note">Routine läuft automatisch. Entscheidungen bleiben bei Ihrem Team.</p>
+      <p className="workflow-note">Automation arbeitet vor. Ihr Team entscheidet.</p>
     </aside>
   );
 }

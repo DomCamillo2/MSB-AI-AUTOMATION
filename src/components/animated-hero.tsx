@@ -8,14 +8,14 @@ import { motionTokens } from '@/lib/motion';
 const heroSequence = {
   visible: {
     transition: {
-      delayChildren: 0.04,
-      staggerChildren: 0.07
+      delayChildren: 0.06,
+      staggerChildren: 0.06
     }
   }
 };
 
 const heroItem = {
-  hidden: { opacity: 0, y: motionTokens.distance.section },
+  hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
     y: 0,
@@ -26,7 +26,7 @@ const heroItem = {
   }
 };
 
-const mobileProcessSteps = ['Eingang', 'Automatisieren', 'Freigabe'] as const;
+const mobileProcessSteps = ['Eingang', 'Automation', 'Mensch prüft'] as const;
 
 export function AnimatedHero() {
   const reducedMotion = useReducedMotion();
@@ -35,36 +35,43 @@ export function AnimatedHero() {
   return (
     <section className="hero" id="top">
       <div className="container hero-grid">
-        <m.div className="hero-copy" initial={initial} animate="visible" variants={heroSequence}>
-          <m.p className="eyebrow" variants={heroItem}>KI- &amp; Prozessautomatisierung für KMU</m.p>
-          <m.h1 id="hero-heading" tabIndex={-1} variants={heroItem}>
-            Weniger manuelle Arbeit. Mehr Zeit fürs Kerngeschäft.
-          </m.h1>
-          <m.p className="hero-lead" variants={heroItem}>
-            Wir automatisieren wiederkehrende Abläufe in Verwaltung, HR und Reporting – passend zu Ihren Systemen und mit klarer menschlicher Kontrolle.
-          </m.p>
-          <m.div className="hero-actions" variants={heroItem}>
-            <a className="button button-primary" href="/automation-check">
-              Prozess kostenlos prüfen lassen <span className="button-arrow" aria-hidden="true">→</span>
-            </a>
-            <a className="button button-secondary" href="/anwendungsfaelle">
-              Anwendungsfälle ansehen <span className="button-arrow" aria-hidden="true">→</span>
-            </a>
-          </m.div>
-          <m.div className="hero-meta" variants={heroItem}>
-            <p className="trust-line">Analyse · Pilot · Umsetzung · Schulung</p>
-            <p className="regional-line">Region Tübingen–Stuttgart</p>
-          </m.div>
+        <div className="hero-copy">
+          <h1 className="hero-slogan" id="hero-heading" tabIndex={-1}>
+            <span>Automation mit</span>
+            <span className="hero-slogan__human">Menschenverstand.</span>
+          </h1>
 
-          <m.ol className="hero-mobile-process" aria-label="Ein typischer kontrollierter Ablauf" variants={heroItem}>
-            {mobileProcessSteps.map((step, index) => (
-              <li key={step}>
-                <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                <strong>{step}</strong>
-              </li>
-            ))}
-          </m.ol>
-        </m.div>
+          <m.div className="hero-supporting" initial={initial} animate="visible" variants={heroSequence}>
+            <m.p className="hero-promise" variants={heroItem}>
+              <span>Weniger manuelle Arbeit.</span>{' '}
+              <span>Mehr Zeit fürs Kerngeschäft.</span>
+            </m.p>
+            <m.p className="hero-lead" variants={heroItem}>
+              Wir automatisieren wiederkehrende Abläufe in Verwaltung, HR und Reporting – passend zu Ihren Systemen und mit klarer menschlicher Kontrolle.
+            </m.p>
+            <m.div className="hero-actions" variants={heroItem}>
+              <a className="button button-primary" href="/automation-check">
+                Prozess kostenlos prüfen lassen <span className="button-arrow" aria-hidden="true">→</span>
+              </a>
+              <a className="button button-secondary" href="/anwendungsfaelle">
+                Anwendungsfälle ansehen <span className="button-arrow" aria-hidden="true">→</span>
+              </a>
+            </m.div>
+            <m.div className="hero-meta" variants={heroItem}>
+              <p className="trust-line">KI- &amp; Prozessautomatisierung für KMU</p>
+              <p className="regional-line">Region Tübingen–Stuttgart</p>
+            </m.div>
+
+            <m.ol className="hero-mobile-process" aria-label="Ein typischer kontrollierter Ablauf" variants={heroItem}>
+              {mobileProcessSteps.map((step, index) => (
+                <li key={step}>
+                  <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                  <strong>{step}</strong>
+                </li>
+              ))}
+            </m.ol>
+          </m.div>
+        </div>
 
         <m.div
           className="hero-workflow-shell"

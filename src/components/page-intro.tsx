@@ -3,11 +3,12 @@ type PageIntroProps = {
   title: string;
   lead: string;
   aside?: string;
+  compact?: boolean;
 };
 
-export function PageIntro({ eyebrow, title, lead, aside }: PageIntroProps) {
+export function PageIntro({ eyebrow, title, lead, aside, compact = false }: PageIntroProps) {
   return (
-    <section className="page-intro">
+    <section className={`page-intro${compact ? ' page-intro--compact' : ''}`}>
       <div className="container page-intro-grid">
         <div>
           <p className="eyebrow">{eyebrow}</p>
