@@ -37,7 +37,7 @@ export function AnimatedHero() {
       <div className="container hero-grid">
         <div className="hero-copy">
           <h1 className="hero-slogan" id="hero-heading" tabIndex={-1}>
-            <span>Automation mit</span>
+            <span>Automation mit</span>{' '}
             <span className="hero-slogan__human">Menschenverstand.</span>
           </h1>
 
