@@ -1,3 +1,5 @@
+import { Reveal } from '@/components/reveal';
+
 type PageCtaProps = {
   title?: string;
   text?: string;
@@ -9,7 +11,7 @@ export function PageCta({
 }: PageCtaProps) {
   return (
     <section className="page-cta-band" aria-labelledby="page-cta-heading">
-      <div className="container page-cta-layout">
+      <Reveal className="container page-cta-layout">
         <div>
           <p className="eyebrow eyebrow-light">Nächster Schritt</p>
           <h2 id="page-cta-heading">{title}</h2>
@@ -18,7 +20,7 @@ export function PageCta({
         <a className="button button-light" href="/automation-check">
           Prozess kostenlos prüfen lassen <span className="button-arrow" aria-hidden="true">→</span>
         </a>
-      </div>
+      </Reveal>
     </section>
   );
 }
