@@ -38,8 +38,12 @@ export function SiteHeader() {
     navigationElement.inert = isMobile && !menuOpen;
     if (!isMobile || !menuOpen) return;
 
+    const pageRegions = [...document.querySelectorAll<HTMLElement>('main, footer')];
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    pageRegions.forEach((region) => {
+      region.inert = true;
+    });
     navigationElement.querySelector<HTMLAnchorElement>('a')?.focus();
 
     function handleKeyDown(event: KeyboardEvent) {
@@ -68,6 +72,9 @@ export function SiteHeader() {
     document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.body.style.overflow = previousOverflow;
+      pageRegions.forEach((region) => {
+        region.inert = false;
+      });
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isMobile, menuOpen]);
@@ -81,7 +88,7 @@ export function SiteHeader() {
   }
 
   return (
-    <header ref={headerRef} className={`site-header${scrolled ? ' is-scrolled' : ''}`}>
+    <header ref={headerRef} className={`site-header${scrolled ? ' is-scrolled' : ''}${menuOpen ? ' menu-open' : ''}`}>
       <div className="container header-inner">
         <a className="brand" href="/" aria-label="MSB AI & Automation Startseite" onClick={handleNavigation}>
           <Image
@@ -132,12 +139,20 @@ export function SiteHeader() {
             </a>
           ))}
           <a
+            className="mobile-nav-contact"
+            href="mailto:kontakt@msb-ai.de"
+            tabIndex={isMobile && !menuOpen ? -1 : undefined}
+            onClick={handleNavigation}
+          >
+            Kontakt
+          </a>
+          <a
             className="button button-primary mobile-nav-cta"
             href="/automation-check"
             tabIndex={isMobile && !menuOpen ? -1 : undefined}
             onClick={handleNavigation}
           >
-            Automation Check
+            Prozess kostenlos prüfen lassen
           </a>
         </nav>
 
@@ -146,7 +161,7 @@ export function SiteHeader() {
           href="/automation-check"
           aria-current={pathname === '/automation-check' ? 'page' : undefined}
         >
-          Automation Check
+          Prozess kostenlos prüfen lassen
         </a>
       </div>
     </header>

@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState, type CSSProperties } from 'react';
-import { useReducedMotion } from 'motion/react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { useInView, useReducedMotion } from 'motion/react';
 import * as m from 'motion/react-m';
 import Accordion from '@/components/accordion';
 import { motionTokens } from '@/lib/motion';
@@ -37,6 +37,8 @@ export function ProcessFlow({
   tone = 'light'
 }: ProcessFlowProps) {
   const reducedMotion = useReducedMotion();
+  const flowRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(flowRef, { amount: 0.18, once: true });
   const [activeStep, setActiveStep] = useState(-1);
   const stepCount = steps.length;
 
@@ -46,6 +48,8 @@ export function ProcessFlow({
       return;
     }
 
+    if (!inView) return;
+
     setActiveStep(0);
     const timers = Array.from({ length: Math.max(stepCount - 1, 0) }, (_, index) =>
       window.setTimeout(() => setActiveStep(index + 1), (index + 1) * stepInterval)
@@ -53,7 +57,7 @@ export function ProcessFlow({
     timers.push(window.setTimeout(() => setActiveStep(stepCount), stepCount * stepInterval + settleDelay));
 
     return () => timers.forEach((timer) => window.clearTimeout(timer));
-  }, [reducedMotion, stepCount]);
+  }, [inView, reducedMotion, stepCount]);
 
   const progressDuration = reducedMotion ? 0 : Math.min(0.82, 0.38 + stepCount * 0.08);
   const classes = [
@@ -66,12 +70,12 @@ export function ProcessFlow({
   const style = { '--process-count': stepCount } as CSSProperties;
 
   return (
-    <div className={classes} style={style}>
+    <div ref={flowRef} className={classes} style={style}>
       <span className="process-flow__rail process-flow__rail--vertical" aria-hidden="true">
         <m.span
           className="process-flow__progress"
-          initial={reducedMotion ? false : { scaleY: 0 }}
-          animate={{ scaleY: 1 }}
+          initial={false}
+          animate={{ scaleY: reducedMotion || inView ? 1 : 0 }}
           transition={{ duration: progressDuration, ease: motionTokens.ease.standard }}
         />
       </span>
@@ -79,8 +83,8 @@ export function ProcessFlow({
         <span className="process-flow__rail process-flow__rail--horizontal" aria-hidden="true">
           <m.span
             className="process-flow__progress"
-            initial={reducedMotion ? false : { scaleX: 0 }}
-            animate={{ scaleX: 1 }}
+            initial={false}
+            animate={{ scaleX: reducedMotion || inView ? 1 : 0 }}
             transition={{ duration: progressDuration, ease: motionTokens.ease.standard }}
           />
         </span>
@@ -95,8 +99,12 @@ export function ProcessFlow({
               key={`${index}-${step.title}`}
               className={`process-flow__step is-${state}`}
               data-state={state}
-              initial={reducedMotion ? false : { opacity: 0.72, y: motionTokens.distance.small }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={false}
+              animate={
+                reducedMotion || inView
+                  ? { opacity: 1, y: 0 }
+                  : { opacity: 1, y: motionTokens.distance.small }
+              }
               transition={{
                 duration: motionTokens.duration.normal,
                 delay: reducedMotion ? 0 : index * (stepInterval / 1000),

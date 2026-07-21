@@ -16,7 +16,7 @@ export function PageCta({
           <p>{text}</p>
         </div>
         <a className="button button-light" href="/automation-check">
-          Automation Check anfragen <span className="button-arrow" aria-hidden="true">→</span>
+          Prozess kostenlos prüfen lassen <span className="button-arrow" aria-hidden="true">→</span>
         </a>
       </div>
     </section>
