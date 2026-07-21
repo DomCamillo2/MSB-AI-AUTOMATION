@@ -11,10 +11,10 @@ export function ContactPanel() {
   return (
     <div className="contact-layout">
       <div className="contact-copy">
-        <p className="eyebrow eyebrow-light">Kostenloser Automation Check</p>
-        <h2 id="contact-panel-heading" tabIndex={-1}>Welcher Prozess kostet Ihr Team regelmäßig Zeit?</h2>
+        <p className="eyebrow eyebrow-light">So geht es weiter</p>
+        <h2 id="contact-panel-heading" tabIndex={-1}>In drei Schritten zur ersten Einschätzung</h2>
         <p className="contact-lead">
-          Beschreiben Sie uns einen wiederkehrenden Ablauf. Sie erhalten eine ehrliche erste Einschätzung, ob eine Automatisierung sinnvoll ist.
+          Sie beschreiben den Ablauf – wir ordnen Nutzen, Aufwand und Risiken ehrlich ein.
         </p>
 
         <ProcessFlow
