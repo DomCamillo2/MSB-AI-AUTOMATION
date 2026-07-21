@@ -98,7 +98,7 @@ export function SiteHeader() {
             width={1813}
             height={545}
             loading="eager"
-            sizes="(max-width: 480px) 92px, (max-width: 1080px) 96px, 128px"
+            sizes="(max-width: 480px) 96px, (max-width: 1080px) 100px, 124px"
             aria-hidden="true"
           />
         </a>

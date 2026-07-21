@@ -1,3 +1,5 @@
+import { Reveal } from '@/components/reveal';
+
 const experienceContexts = [
   {
     area: 'Professional Services',
@@ -19,16 +21,17 @@ const experienceContexts = [
 export function ExperienceStrip() {
   return (
     <section className="experience-band" aria-labelledby="experience-heading">
-      <div className="container experience-layout">
+      <Reveal className="container experience-layout">
         <div>
+          <p className="eyebrow">Praxiserfahrung</p>
           <h2 id="experience-heading" tabIndex={-1}>Erfahrung aus realen Unternehmens&shy;kontexten</h2>
           <p className="experience-intro">Unser Team bringt praktische Erfahrung aus Automotive, Industrie, Energie und Professional Services mit.</p>
         </div>
-        <div>
+        <div className="experience-context-column">
           <ul className="experience-contexts" aria-label="Ausgewählte berufliche Kontexte einzelner Teammitglieder">
-            {experienceContexts.map((context) => (
+            {experienceContexts.map((context, index) => (
               <li key={context.organizations}>
-                <span>{context.area}</span>
+                <span>{String(index + 1).padStart(2, '0')} · {context.area}</span>
                 <strong>{context.organizations}</strong>
                 <p>{context.experience}</p>
               </li>
@@ -38,7 +41,7 @@ export function ExperienceStrip() {
             Ausgewählte berufliche Kontexte einzelner Teammitglieder. Die genannten Unternehmen sind keine Referenzkunden von MSB AI &amp; Automation.
           </p>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

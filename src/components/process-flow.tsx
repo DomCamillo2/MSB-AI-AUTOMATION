@@ -24,8 +24,8 @@ type ProcessFlowProps = {
   tone?: 'light' | 'dark';
 };
 
-const stepInterval = 110;
-const settleDelay = 220;
+const stepInterval = 240;
+const settleDelay = 260;
 
 export function ProcessFlow({
   steps,
@@ -59,7 +59,7 @@ export function ProcessFlow({
     return () => timers.forEach((timer) => window.clearTimeout(timer));
   }, [inView, reducedMotion, stepCount]);
 
-  const progressDuration = reducedMotion ? 0 : Math.min(0.82, 0.38 + stepCount * 0.08);
+  const progressDuration = reducedMotion ? 0 : Math.min(1.4, 0.55 + stepCount * 0.16);
   const classes = [
     'process-flow',
     `process-flow--${layout}`,
@@ -103,7 +103,7 @@ export function ProcessFlow({
               animate={
                 reducedMotion || inView
                   ? { opacity: 1, y: 0 }
-                  : { opacity: 1, y: motionTokens.distance.small }
+                  : { opacity: 0, y: motionTokens.distance.small }
               }
               transition={{
                 duration: motionTokens.duration.normal,
