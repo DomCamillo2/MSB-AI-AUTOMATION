@@ -15,7 +15,7 @@ export function SiteHeader() {
   const navigationRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 980px)');
+    const mediaQuery = window.matchMedia('(max-width: 1080px)');
     const updateViewport = () => setIsMobile(mediaQuery.matches);
 
     updateViewport();
@@ -98,7 +98,7 @@ export function SiteHeader() {
             width={1813}
             height={545}
             loading="eager"
-            sizes="(max-width: 480px) 96px, (max-width: 980px) 108px, 128px"
+            sizes="(max-width: 480px) 92px, (max-width: 1080px) 96px, 128px"
             aria-hidden="true"
           />
         </a>
