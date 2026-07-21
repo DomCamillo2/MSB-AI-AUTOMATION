@@ -1,13 +1,39 @@
+import { navigation } from '@/lib/site-content';
+
 export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="container footer-layout">
-        <div>
+        <div className="footer-intro">
           <strong className="footer-brand">MSB AI &amp; Automation</strong>
-          <p>Pragmatische Prozessautomatisierung für KMU in der Region Tübingen–Stuttgart.</p>
+          <p>Pragmatische Prozessautomatisierung für KMU – verständlich, kontrollierbar und passend zu Ihrer bestehenden IT.</p>
+          <span className="footer-region">Tübingen · Stuttgart · Süddeutschland</span>
         </div>
-        <nav className="footer-links" aria-label="Rechtliches und Kontakt">
-          <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a>
+
+        <nav className="footer-navigation" aria-label="Seitennavigation im Footer">
+          <span className="footer-label">Navigation</span>
+          {navigation.map(({ label, href }) => (
+            <a key={href} href={href}>
+              {label}
+            </a>
+          ))}
+        </nav>
+
+        <div className="footer-contact">
+          <span className="footer-label">Erster Schritt</span>
+          <strong>Welcher Prozess kostet Sie regelmäßig Zeit?</strong>
+          <a className="footer-email" href="mailto:kontakt@msb-ai.de">
+            kontakt@msb-ai.de
+          </a>
+          <a className="button footer-cta" href="/automation-check">
+            Prozess kostenlos prüfen lassen <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div className="container footer-meta">
+        <p>MSB AI &amp; Automation</p>
+        <nav className="footer-links" aria-label="Rechtliches">
           <a href="/impressum">Impressum</a>
           <a href="/datenschutz">Datenschutz</a>
         </nav>

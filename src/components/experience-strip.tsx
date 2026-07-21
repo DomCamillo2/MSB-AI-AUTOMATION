@@ -1,4 +1,20 @@
-const companies = ['KPMG', 'Siemens', 'BMW Group', 'prognum Automotive', 'Callidus Energie'];
+const experienceContexts = [
+  {
+    area: 'Professional Services',
+    organizations: 'KPMG',
+    experience: 'Projektmanagement, Customer Experience und Datenanalyse'
+  },
+  {
+    area: 'Industrie & Automotive',
+    organizations: 'Siemens · BMW Group',
+    experience: 'Datenanalyse, Prozessoptimierung und praktische Umsetzung'
+  },
+  {
+    area: 'Automotive & Energie',
+    organizations: 'prognum Automotive · Callidus Energie',
+    experience: 'CRM-Implementierung, Workflow-Automatisierung und HR-Prozesse'
+  }
+] as const;
 
 export function ExperienceStrip() {
   return (
@@ -9,11 +25,17 @@ export function ExperienceStrip() {
           <p className="experience-intro">Unser Team bringt praktische Erfahrung aus Automotive, Industrie, Energie und Professional Services mit.</p>
         </div>
         <div>
-          <div className="company-wordmarks" aria-label="Berufliche Stationen einzelner Teammitglieder">
-            {companies.map((company) => <span key={company}>{company}</span>)}
-          </div>
+          <ul className="experience-contexts" aria-label="Ausgewählte berufliche Kontexte einzelner Teammitglieder">
+            {experienceContexts.map((context) => (
+              <li key={context.organizations}>
+                <span>{context.area}</span>
+                <strong>{context.organizations}</strong>
+                <p>{context.experience}</p>
+              </li>
+            ))}
+          </ul>
           <p className="experience-disclaimer">
-            Berufliche Stationen einzelner Teammitglieder. Die genannten Unternehmen sind keine Referenzkunden von MSB AI &amp; Automation.
+            Ausgewählte berufliche Kontexte einzelner Teammitglieder. Die genannten Unternehmen sind keine Referenzkunden von MSB AI &amp; Automation.
           </p>
         </div>
       </div>

@@ -29,7 +29,7 @@ export default function VorgehenPage() {
           </div>
           <ProcessFlow
             className="engagement-process"
-            ariaLabel="Drei Schritte vom Automation Check bis zur Übergabe"
+            ariaLabel="Vier Schritte vom Automation Check bis zur Übergabe"
             layout="horizontal"
             steps={engagementSteps.map((step) => ({
               title: step.title,

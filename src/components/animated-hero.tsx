@@ -6,7 +6,9 @@ export function AnimatedHero() {
       <div className="container hero-grid">
         <div className="hero-copy">
           <p className="eyebrow">KI- &amp; Prozessautomatisierung für KMU</p>
-          <h1 id="hero-heading" tabIndex={-1}>Weniger manuelle Arbeit. Mehr Zeit fürs Kerngeschäft.</h1>
+          <h1 id="hero-heading" tabIndex={-1}>
+            Weniger manuelle Arbeit. Mehr Zeit fürs Kerngeschäft.
+          </h1>
           <p className="hero-lead">
             Wir automatisieren wiederkehrende Abläufe in Verwaltung, HR und Reporting – passend zu Ihren Systemen und mit klarer menschlicher Kontrolle.
           </p>

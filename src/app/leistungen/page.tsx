@@ -71,9 +71,9 @@ function IntegrationVisual() {
       <span className="integration-arrow" aria-hidden="true">↓</span>
       <strong>Automatisierung</strong>
       <span className="integration-arrow" aria-hidden="true">↓</span>
-      <div className="integration-systems"><span>CRM</span><span>ERP</span><span>bestehendes Tool</span></div>
-      <span className="integration-arrow" aria-hidden="true">↓</span>
       <div className="integration-approval"><span aria-hidden="true">✓</span> Menschliche Freigabe</div>
+      <span className="integration-arrow" aria-hidden="true">↓</span>
+      <div className="integration-systems"><span>CRM</span><span>ERP</span><span>bestehendes Tool</span></div>
     </div>
   );
 }

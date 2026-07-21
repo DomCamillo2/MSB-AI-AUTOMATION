@@ -102,7 +102,7 @@ export default function HomePage() {
           </div>
           <ProcessFlow
             className="engagement-process engagement-process-preview"
-            ariaLabel="Drei Schritte von der Prozessprüfung bis zur Übergabe"
+            ariaLabel="Vier Schritte von der Prozessprüfung bis zur Übergabe"
             layout="horizontal"
             steps={engagementSteps.map((step) => ({
               title: step.title,

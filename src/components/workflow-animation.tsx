@@ -3,8 +3,8 @@ import ProcessFlow from '@/components/process-flow';
 const workflowSteps = [
   ['Eingang', 'Neue Information kommt an', 'Trigger'],
   ['Strukturieren', 'Daten erkennen und zuordnen', 'Regeln + KI'],
-  ['System aktualisieren', 'Bestehende Werkzeuge anbinden', 'CRM · ERP'],
   ['Freigeben', 'Sensible Schritte kontrollieren', 'Mensch'],
+  ['System aktualisieren', 'Bestehende Werkzeuge anbinden', 'CRM · ERP'],
   ['Erledigen', 'Aufgabe oder Dokument ausgeben', 'Ergebnis']
 ] as const;
 
