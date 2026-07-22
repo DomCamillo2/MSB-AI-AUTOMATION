@@ -57,12 +57,12 @@ export function ServicesHeroVisual() {
   return (
     <aside className={styles.heroModel} aria-labelledby="services-model-title">
       <div className={styles.heroTopbar}>
-        <span className={styles.heroBrand}>MSB Leistungsmodell</span>
-        <span className={styles.heroState}><i aria-hidden="true" /> Human in the Loop</span>
+        <span className={styles.heroBrand}>Leistungsmodell</span>
+        <span className={styles.heroState}>01 — 03</span>
       </div>
 
       <h2 className={styles.heroTitle} id="services-model-title">
-        Drei Bausteine. Ein nachvollziehbarer Weg in den Arbeitsalltag.
+        Analyse, technische Umsetzung und Einführung.
       </h2>
 
       <div className={styles.heroStages}>
@@ -79,7 +79,7 @@ export function ServicesHeroVisual() {
       </div>
 
       <p className={styles.heroFooter}>
-        <span aria-hidden="true">↗</span>
+        <span aria-hidden="true">—</span>
         Analyse, Technik und Einführung greifen kontrolliert ineinander.
       </p>
     </aside>
