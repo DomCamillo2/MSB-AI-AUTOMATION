@@ -3,7 +3,8 @@ import { createPageMetadata } from '@/lib/seo';
 export const metadata = createPageMetadata({
   title: 'Impressum',
   description: 'Anbieterkennzeichnung und Kontaktangaben von MSB AI Consulting gemäß § 5 DDG.',
-  path: '/impressum'
+  path: '/impressum',
+  index: false
 });
 
 export default function ImpressumPage() {

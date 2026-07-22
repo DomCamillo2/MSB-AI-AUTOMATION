@@ -7,7 +7,9 @@ export function SiteFooter() {
         <div className="footer-intro">
           <strong className="footer-brand">MSB AI &amp; Automation</strong>
           <p>Pragmatische Prozessautomatisierung für KMU – verständlich, kontrollierbar und passend zu Ihrer bestehenden IT.</p>
-          <span className="footer-region">Tübingen · Stuttgart · Süddeutschland</span>
+          <a className="footer-region" href="/ki-prozessautomatisierung-tuebingen-stuttgart">
+            Tübingen · Reutlingen · Stuttgart
+          </a>
         </div>
 
         <nav className="footer-navigation" aria-label="Seitennavigation im Footer">
@@ -34,6 +36,7 @@ export function SiteFooter() {
       <div className="container footer-meta">
         <p>MSB AI &amp; Automation</p>
         <nav className="footer-links" aria-label="Rechtliches">
+          <a href="/kontakt">Kontakt</a>
           <a href="/impressum">Impressum</a>
           <a href="/datenschutz">Datenschutz</a>
         </nav>

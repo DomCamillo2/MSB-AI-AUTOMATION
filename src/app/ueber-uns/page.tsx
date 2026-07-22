@@ -5,8 +5,8 @@ import TeamGrid from '@/components/team-grid';
 import { createPageMetadata } from '@/lib/seo';
 
 export const metadata = createPageMetadata({
-  title: 'Über uns',
-  description: 'Das MSB-Team verbindet Prozessverständnis, Automatisierung, Datenanalyse, Projektmanagement und Nutzerakzeptanz.',
+  title: 'Team für Automatisierung aus Tübingen',
+  description: 'Das MSB-Team aus Tübingen verbindet Prozessverständnis, technische Automatisierung, Datenanalyse und nutzerorientierte Einführung.',
   path: '/ueber-uns'
 });
 

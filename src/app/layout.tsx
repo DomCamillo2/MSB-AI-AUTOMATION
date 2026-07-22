@@ -28,6 +28,14 @@ export const metadata: Metadata = {
   },
   description: defaultDescription,
   applicationName: siteName,
+  creator: siteName,
+  publisher: siteName,
+  category: 'Business process automation',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false
+  },
   icons: {
     icon: '/msb-logo.webp'
   },

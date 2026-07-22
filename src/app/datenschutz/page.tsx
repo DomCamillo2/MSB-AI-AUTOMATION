@@ -3,7 +3,8 @@ import { createPageMetadata } from '@/lib/seo';
 export const metadata = createPageMetadata({
   title: 'Datenschutz',
   description: 'Informationen zur Verarbeitung personenbezogener Daten beim Besuch der Website und bei Kontaktanfragen an MSB AI Consulting.',
-  path: '/datenschutz'
+  path: '/datenschutz',
+  index: false
 });
 
 export default function DatenschutzPage() {
@@ -31,28 +32,21 @@ export default function DatenschutzPage() {
         <section aria-labelledby="hosting-heading">
           <h2 id="hosting-heading">2. Hosting und Server-Protokolle</h2>
           <p>
-            Diese Website wird bei der IONOS SE, Elgendorfer Straße 57, 56410 Montabaur, Deutschland, gehostet. Beim Aufruf der Website verarbeitet IONOS technisch erforderliche Zugriffsdaten. Dazu können die zuvor besuchte Seite, die angeforderte Seite oder Datei, Browsertyp und Browserversion, Betriebssystem, Gerätetyp, Zeitpunkt des Zugriffs sowie eine anonymisierte IP-Adresse gehören.
+            Diese Website wird über Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA, bereitgestellt. Die bei IONOS registrierte Domain wird mit dem Vercel-Projekt verbunden; IONOS hostet die Website nicht.
           </p>
           <p>
-            Die Verarbeitung dient der sicheren, stabilen und fehlerfreien Bereitstellung der Website. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt im sicheren und zuverlässigen Betrieb unseres Internetauftritts. IONOS gibt für Webhosting-Produkte eine Speicherdauer der Besuchsdaten von acht Wochen an. Nach Angaben von IONOS werden diese Daten nicht an Dritte weitergegeben und nicht in Staaten außerhalb der Europäischen Union übermittelt.
+            Beim Aufruf verarbeitet Vercel technisch erforderliche Verbindungs- und Protokolldaten. Dazu können insbesondere IP-Adresse, Zeitpunkt und Dauer der Anfrage, aufgerufene Adresse, Referrer, Browser- und Geräteinformationen sowie Status- und Fehlerdaten gehören. Die Verarbeitung dient der Auslieferung der Website, der Erkennung von Angriffen und Missbrauch sowie dem sicheren technischen Betrieb.
           </p>
           <p>
-            Weitere Informationen: <a href="https://www.ionos.de/hilfe/datenschutz/datenverarbeitung-durch-ihr-ionos-produktes/datenverarbeitung-durch-webhosting-produkte/" rel="noreferrer">Datenverarbeitung durch IONOS Webhosting</a>.
-          </p>
-        </section>
-
-        <section aria-labelledby="analytics-heading">
-          <h2 id="analytics-heading">3. IONOS WebAnalytics</h2>
-          <p>
-            IONOS WebAnalytics wertet Aufrufe dieser Website statistisch aus und unterstützt die technische Optimierung. Die Ermittlung erfolgt nach Angaben von IONOS über Logdateien oder einen Zählpixel. Dabei werden keine Cookies eingesetzt. Die beim Seitenabruf übermittelte IP-Adresse wird unmittelbar anonymisiert und anschließend ohne Personenbezug verarbeitet. Es werden keine individuellen Nutzungsprofile für Werbung erstellt.
+            Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt in der sicheren, schnellen und zuverlässigen Bereitstellung der Website. Vercel kann Daten in den USA und weiteren Ländern verarbeiten und nennt dafür unter anderem das EU-U.S. Data Privacy Framework und Standardvertragsklauseln als Transfermechanismen.
           </p>
           <p>
-            Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt in der statistischen Auswertung und technischen Verbesserung der Website. Weitere Informationen: <a href="https://www.ionos.de/hilfe/datenschutz/datenverarbeitung-durch-ihr-ionos-produktes/webanalytics/" rel="noreferrer">Datenverarbeitung durch IONOS WebAnalytics</a>.
+            Weitere Informationen: <a href="https://vercel.com/legal/privacy-notice" rel="noreferrer">Datenschutzhinweise von Vercel</a> und <a href="https://vercel.com/legal/dpa" rel="noreferrer">Data Processing Addendum von Vercel</a>.
           </p>
         </section>
 
         <section aria-labelledby="contact-data-heading">
-          <h2 id="contact-data-heading">4. Kontakt per E-Mail und Automation Check</h2>
+          <h2 id="contact-data-heading">3. Kontakt per E-Mail und Automation Check</h2>
           <p>
             Das Formular für den Automation Check übermittelt keine Angaben an diese Website und speichert sie nicht auf dem Webserver. Beim Betätigen der Schaltfläche wird lediglich ein vorausgefüllter E-Mail-Entwurf im auf Ihrem Gerät eingerichteten E-Mail-Programm geöffnet. Daten werden erst versendet, wenn Sie die E-Mail dort selbst absenden.
           </p>
@@ -65,35 +59,35 @@ export default function DatenschutzPage() {
         </section>
 
         <section aria-labelledby="external-links-heading">
-          <h2 id="external-links-heading">5. Externe Links</h2>
+          <h2 id="external-links-heading">4. Externe Links</h2>
           <p>
             Die Teamprofile enthalten reine Links zu LinkedIn. Es werden keine Inhalte von LinkedIn in diese Website eingebettet und beim bloßen Seitenaufruf keine Verbindung zu LinkedIn hergestellt. Erst wenn Sie einen Link auswählen, rufen Sie die externe Website auf. Für die dortige Verarbeitung ist der jeweilige Anbieter verantwortlich. Weitere Informationen finden Sie in der <a href="https://www.linkedin.com/legal/privacy-policy" rel="noreferrer">Datenschutzerklärung von LinkedIn</a>.
           </p>
         </section>
 
         <section aria-labelledby="fonts-heading">
-          <h2 id="fonts-heading">6. Schriftarten</h2>
+          <h2 id="fonts-heading">5. Schriftarten</h2>
           <p>
             Die auf dieser Website verwendeten Schriftarten werden lokal von unserem Hosting-System ausgeliefert. Beim Seitenaufruf wird deshalb keine Verbindung zu Google Fonts hergestellt.
           </p>
         </section>
 
         <section aria-labelledby="cookies-heading">
-          <h2 id="cookies-heading">7. Cookies und lokale Speicherung</h2>
+          <h2 id="cookies-heading">6. Cookies, Analyse und lokale Speicherung</h2>
           <p>
-            Diese Website setzt selbst keine Analyse- oder Marketing-Cookies ein und speichert keine Kennungen im lokalen Speicher Ihres Browsers. IONOS WebAnalytics verwendet nach Angaben des Anbieters ebenfalls keine Cookies. Eine Cookie-Einwilligung wird daher derzeit nicht abgefragt.
+            Diese Website setzt selbst keine Analyse- oder Marketing-Cookies ein und verwendet keine externen Analyse- oder Werbedienste. Es werden keine Kennungen zu Analyse- oder Marketingzwecken im lokalen Speicher Ihres Browsers abgelegt. Eine Einwilligung für solche Technologien wird daher derzeit nicht abgefragt. Die technisch erforderliche Verarbeitung von Verbindungsdaten durch Vercel ist im Abschnitt „Hosting und Server-Protokolle“ beschrieben.
           </p>
         </section>
 
         <section aria-labelledby="retention-heading">
-          <h2 id="retention-heading">8. Speicherdauer</h2>
+          <h2 id="retention-heading">7. Speicherdauer</h2>
           <p>
-            Kontaktanfragen werden gelöscht, sobald ihre Bearbeitung abgeschlossen ist und keine vertraglichen oder gesetzlichen Gründe für eine weitere Aufbewahrung bestehen. Entsteht aus der Anfrage eine Geschäftsbeziehung, können geschäftliche Unterlagen entsprechend den handels- und steuerrechtlichen Aufbewahrungsfristen gespeichert werden. Für die von IONOS verarbeiteten Webhosting-Besuchsdaten gilt die oben genannte Dauer von acht Wochen.
+            Kontaktanfragen werden gelöscht, sobald ihre Bearbeitung abgeschlossen ist und keine vertraglichen oder gesetzlichen Gründe für eine weitere Aufbewahrung bestehen. Entsteht aus der Anfrage eine Geschäftsbeziehung, können geschäftliche Unterlagen entsprechend den handels- und steuerrechtlichen Aufbewahrungsfristen gespeichert werden. Technische Protokolldaten werden durch Vercel entsprechend den jeweiligen Vertrags-, Sicherheits- und Aufbewahrungsvorgaben verarbeitet.
           </p>
         </section>
 
         <section aria-labelledby="rights-heading">
-          <h2 id="rights-heading">9. Ihre Rechte</h2>
+          <h2 id="rights-heading">8. Ihre Rechte</h2>
           <p>Sie haben im Rahmen der gesetzlichen Voraussetzungen insbesondere folgende Rechte:</p>
           <ul>
             <li>Auskunft über Ihre verarbeiteten personenbezogenen Daten nach Art. 15 DSGVO,</li>
@@ -109,7 +103,7 @@ export default function DatenschutzPage() {
         </section>
 
         <section aria-labelledby="complaint-heading">
-          <h2 id="complaint-heading">10. Beschwerderecht</h2>
+          <h2 id="complaint-heading">9. Beschwerderecht</h2>
           <p>
             Sie können sich nach Art. 77 DSGVO bei einer Datenschutz-Aufsichtsbehörde beschweren. Für Baden-Württemberg ist der <a href="https://www.baden-wuerttemberg.datenschutz.de/beschwerde/" rel="noreferrer">Landesbeauftragte für den Datenschutz und die Informationsfreiheit Baden-Württemberg</a> zuständig.
           </p>

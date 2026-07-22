@@ -1,13 +1,38 @@
 import { Reveal } from '@/components/reveal';
 import { EnablementVisual, IntegrationVisual, ProcessVisual } from '@/components/service-detail-visuals';
 import ServicesHeroVisual from '@/components/services-hero-visual';
-import { createPageMetadata } from '@/lib/seo';
+import StructuredData from '@/components/structured-data';
+import { createPageMetadata, siteUrl } from '@/lib/seo';
 
 export const metadata = createPageMetadata({
-  title: 'Leistungen',
-  description: 'Wir klären Ihren Ist-Prozess, bauen einen begrenzten Automatisierungspiloten und übergeben ihn dokumentiert an Ihr Team.',
+  title: 'KI- & Prozessautomatisierung für KMU',
+  description: 'Prozessanalyse, Automatisierungspilot und kontrollierte Einführung: MSB entwickelt verlässliche Workflows für bestehende Systeme.',
   path: '/leistungen'
 });
+
+const serviceStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${siteUrl}/leistungen#service`,
+  name: 'KI- und Prozessautomatisierung für KMU',
+  serviceType: 'Analyse, Entwicklung und Einführung von Geschäftsprozessautomatisierung',
+  url: `${siteUrl}/leistungen`,
+  provider: { '@id': `${siteUrl}/#organization` },
+  areaServed: ['Tübingen', 'Reutlingen', 'Stuttgart', 'Baden-Württemberg'],
+  audience: {
+    '@type': 'BusinessAudience',
+    audienceType: 'Kleine und mittlere Unternehmen'
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Leistungsbausteine',
+    itemListElement: [
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Prozessanalyse' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Automatisierungspilot' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Integration und Übergabe' } }
+    ]
+  }
+};
 
 const serviceBlocks = [
   {
@@ -70,12 +95,13 @@ function ServiceVisual({ type }: { type: (typeof serviceBlocks)[number]['visual'
 export default function LeistungenPage() {
   return (
     <main id="main-content">
+      <StructuredData data={serviceStructuredData} />
       <section className="services-hero">
         <div className="container services-hero-grid">
           <div className="services-hero-copy">
             <p className="eyebrow">Leistungen</p>
-            <h1><span>Vom wiederkehrenden Ablauf</span>{' '}<span>zum verlässlichen Workflow.</span></h1>
-            <p>Wir klären den Ist-Prozess, bauen einen begrenzten Piloten und übergeben ihn mit dokumentierten Prüf- und Eingriffspunkten an Ihr Team.</p>
+            <h1><span>Prozessautomatisierung,</span>{' '}<span>die im Alltag funktioniert.</span></h1>
+            <p>Wir klären den Ist-Prozess, wählen bewusst zwischen Regeln und KI, bauen einen begrenzten Piloten und übergeben ihn mit dokumentierten Prüf- und Eingriffspunkten an Ihr Team.</p>
           </div>
           <ServicesHeroVisual />
         </div>

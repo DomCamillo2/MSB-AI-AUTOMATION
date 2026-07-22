@@ -1,16 +1,16 @@
 import AnimatedHero from '@/components/animated-hero';
 import ExperienceStrip from '@/components/experience-strip';
-import HomeStructuredData from '@/components/home-structured-data';
 import PageCta from '@/components/page-cta';
 import ProcessFlow from '@/components/process-flow';
+import SiteStructuredData from '@/components/site-structured-data';
 import TeamGrid from '@/components/team-grid';
 import { Reveal, RevealGroup } from '@/components/reveal';
 import { createPageMetadata } from '@/lib/seo';
 import { problems, services, useCases } from '@/lib/site-content';
 
 export const metadata = createPageMetadata({
-  title: 'Prozessautomatisierung für KMU',
-  description: 'MSB analysiert wiederkehrende Abläufe, entwickelt pragmatische Automatisierungen und begleitet Teams bei der Einführung.',
+  title: 'Prozessautomatisierung für KMU in Tübingen & Stuttgart',
+  description: 'MSB automatisiert wiederkehrende Abläufe in Verwaltung, HR und Reporting – pragmatisch, kontrolliert und passend zur bestehenden IT.',
   path: '/'
 });
 
@@ -40,7 +40,7 @@ const homeWorkplan = [
 export default function HomePage() {
   return (
     <main id="main-content">
-      <HomeStructuredData />
+      <SiteStructuredData />
       <AnimatedHero />
       <ExperienceStrip />
 

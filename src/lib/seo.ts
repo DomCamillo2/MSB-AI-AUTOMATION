@@ -1,17 +1,18 @@
 import type { Metadata } from 'next';
 
 export const siteName = 'MSB AI & Automation';
-export const siteUrl = 'https://msb-ai.de';
+export const siteUrl = 'https://www.msb-ai.de';
 export const defaultDescription =
-  'Pragmatische KI- und Prozessautomatisierung für KMU: weniger manuelle Arbeit in Verwaltung, HR und Reporting, passend zu bestehenden Systemen.';
+  'Kontrollierte KI- und Prozessautomatisierung für KMU in der Region Tübingen–Stuttgart – passend zu bestehenden Systemen und Arbeitsabläufen.';
 
 type PageMetadataOptions = {
   title: string;
   description: string;
   path: `/${string}` | '/';
+  index?: boolean;
 };
 
-export function createPageMetadata({ title, description, path }: PageMetadataOptions): Metadata {
+export function createPageMetadata({ title, description, path, index = true }: PageMetadataOptions): Metadata {
   const socialTitle = `${title} | ${siteName}`;
 
   return {
@@ -29,18 +30,22 @@ export function createPageMetadata({ title, description, path }: PageMetadataOpt
       description,
       images: [
         {
-          url: '/msb-logo-lockup.png',
-          width: 1813,
-          height: 793,
-          alt: 'MSB AI & Automation'
+          url: '/opengraph-image',
+          width: 1200,
+          height: 630,
+          alt: 'MSB AI & Automation – Automatisierung mit Menschenverstand'
         }
       ]
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title: socialTitle,
       description,
-      images: ['/msb-logo-lockup.png']
+      images: ['/opengraph-image']
+    },
+    robots: {
+      index,
+      follow: true
     }
   };
 }
