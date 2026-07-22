@@ -1,136 +1,116 @@
 import styles from './service-visuals.module.css';
 
-type IconName = 'inbox' | 'map' | 'check' | 'target' | 'engine';
-
-function DiagramIcon({ name }: { name: IconName }) {
-  if (name === 'inbox') {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M5 5h14v12H5zM5 13h4l1.5 2h3L15 13h4" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    );
-  }
-
-  if (name === 'map') {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="6" cy="7" r="2.2" fill="none" stroke="currentColor" strokeWidth="1.7" />
-        <circle cx="18" cy="7" r="2.2" fill="none" stroke="currentColor" strokeWidth="1.7" />
-        <circle cx="12" cy="17" r="2.2" fill="none" stroke="currentColor" strokeWidth="1.7" />
-        <path d="M8.2 7h7.6M7.4 8.7l3.4 6.3M16.6 8.7 13.2 15" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-      </svg>
-    );
-  }
-
-  if (name === 'check') {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 3.5 19 6v5.3c0 4.2-2.8 7.5-7 9.2-4.2-1.7-7-5-7-9.2V6z" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
-        <path d="m8.5 12 2.2 2.2 4.8-5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    );
-  }
-
-  if (name === 'target') {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" strokeWidth="1.7" />
-        <circle cx="12" cy="12" r="3.3" fill="none" stroke="currentColor" strokeWidth="1.7" />
-        <path d="m14.4 9.6 4.1-4.1M18.5 5.5v3M18.5 5.5h-3" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 7h5l2 3h9M4 17h5l2-3h9" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="4" cy="7" r="1.6" fill="currentColor" />
-      <circle cx="4" cy="17" r="1.6" fill="currentColor" />
-      <circle cx="20" cy="10" r="1.6" fill="currentColor" />
-      <circle cx="20" cy="14" r="1.6" fill="currentColor" />
-    </svg>
-  );
+function Arrow() {
+  return <span className={styles.routeArrow} aria-hidden="true">→</span>;
 }
 
 export function ProcessVisual() {
-  const stages = [
-    ['inbox', 'Eingang'],
-    ['map', 'Ablauf'],
-    ['check', 'Prüfung'],
-    ['target', 'Potenzial']
-  ] as const;
+  const columns = ['Eingang', 'Prüfung', 'Entscheidung', 'Ergebnis'] as const;
 
   return (
-    <div className={styles.visualFrame} role="img" aria-label="Prozess-Scan vom Eingang über Ablauf und Prüfung bis zum Automatisierungspotenzial">
+    <div
+      className={styles.visualFrame}
+      role="img"
+      aria-label="Beispiel eines Ist-Prozesses mit getrennten Spuren für menschliche Arbeit und Systemschritte sowie einem dokumentierten Ausnahmefall"
+    >
       <div className={styles.visualTopbar}>
-        <span className={styles.visualKicker}>Prozessanalyse</span>
-        <span className={styles.visualState}>Ablauf sichtbar</span>
+        <span className={styles.visualKicker}>Ist-Prozess</span>
+        <span className={styles.visualState}>Rollen · Systeme · Ausnahmen</span>
       </div>
 
-      <div className={styles.processTrack}>
-        {stages.map(([icon, label]) => (
-          <div className={styles.processNode} key={label}>
-            <span className={styles.nodeIcon}><DiagramIcon name={icon} /></span>
-            <strong>{label}</strong>
+      <div className={styles.processMap}>
+        <div className={styles.processHeader}>
+          <span aria-hidden="true" />
+          {columns.map((column) => <strong key={column}>{column}</strong>)}
+        </div>
+
+        <div className={styles.processLane}>
+          <strong className={styles.laneLabel}>Mensch</strong>
+          <div className={styles.laneCells}>
+            <span className={styles.mapNode}>Anfrage sichten</span>
+            <Arrow />
+            <span className={styles.mapNode}>Angaben prüfen</span>
+            <Arrow />
+            <span className={styles.mapDecision}>vollständig?</span>
+            <Arrow />
+            <span className={styles.mapNode}>Freigeben</span>
           </div>
-        ))}
-      </div>
+        </div>
 
-      <div className={styles.processDimensions}>
-        {['Systeme', 'Rollen', 'Daten', 'Freigaben'].map((dimension) => (
-          <span className={styles.dimension} key={dimension}>{dimension}</span>
-        ))}
-      </div>
+        <div className={styles.processLane}>
+          <strong className={styles.laneLabel}>System</strong>
+          <div className={styles.laneCells}>
+            <span className={styles.mapEmpty}>—</span>
+            <Arrow />
+            <span className={styles.mapNode}>Daten abgleichen</span>
+            <Arrow />
+            <span className={styles.mapNode}>Vorgang anlegen</span>
+            <Arrow />
+            <span className={styles.mapNode}>Status schreiben</span>
+          </div>
+        </div>
 
-      <div className={styles.insight}>
-        <span aria-hidden="true">✓</span>
-        <div>
-          <strong>Klares Prozessbild</strong>
-          <small>Ansatzpunkte, Abhängigkeiten und Risiken werden sichtbar.</small>
+        <div className={styles.exceptionNote}>
+          <strong>Ausnahme</strong>
+          <span>Pflichtangabe fehlt → Rückfrage statt automatischer Weiterverarbeitung</span>
         </div>
       </div>
+
+      <p className={styles.diagramCaption}>
+        Erst wenn Normalfall und Ausnahmen sichtbar sind, lässt sich sinnvoll über Automatisierung entscheiden.
+      </p>
     </div>
   );
 }
 
 export function IntegrationVisual() {
   return (
-    <div className={styles.visualFrame} role="img" aria-label="Datenfluss aus E-Mail und Formular über eine Automatisierung mit menschlicher Freigabe in bestehende Systeme">
+    <div
+      className={styles.visualFrame}
+      role="img"
+      aria-label="Pilotablauf mit Eingang, Regelprüfung und getrennten Wegen für Normalfall und menschlich zu prüfende Ausnahme"
+    >
       <div className={styles.visualTopbar}>
-        <span className={styles.visualKicker}>Technischer Ablauf</span>
-        <span className={styles.visualState}>Mensch prüft</span>
+        <span className={styles.visualKicker}>Pilot</span>
+        <span className={styles.visualState}>Normalfall und Ausnahme testen</span>
       </div>
 
-      <div className={styles.integrationGrid}>
-        <div className={styles.sourceStack}>
-          <div className={styles.dataNode}>E-Mail</div>
-          <div className={styles.dataNode}>Formular</div>
+      <div className={styles.pilotFlow}>
+        <div className={styles.pilotStage}>
+          <span className={styles.stageNumber}>01</span>
+          <strong>Eingang</strong>
+          <small>E-Mail oder Formular</small>
         </div>
 
-        <span className={styles.flowRail} aria-hidden="true" />
+        <span className={styles.signalRoute} aria-hidden="true"><i /></span>
 
-        <div className={styles.engine}>
-          <span className={styles.engineIcon}><DiagramIcon name="engine" /></span>
-          <strong>Automatisierung</strong>
-          <small>Regeln · Ausnahmen · Protokoll</small>
+        <div className={styles.pilotStage}>
+          <span className={styles.stageNumber}>02</span>
+          <strong>Regelprüfung</strong>
+          <small>Pflichtfelder · Zuordnung · Dublette</small>
         </div>
 
-        <span className={styles.flowRail} aria-hidden="true" />
+        <div className={styles.branchLabel}>Regel erfüllt?</div>
 
-        <div className={styles.systemStack}>
-          <div className={styles.dataNode}>CRM</div>
-          <div className={styles.dataNode}>ERP</div>
-          <div className={styles.dataNode}>DMS</div>
+        <div className={styles.branchGrid}>
+          <div className={styles.branchCard}>
+            <span>Normalfall</span>
+            <strong>Datensatz anlegen</strong>
+            <small>Vorgang wird protokolliert</small>
+          </div>
+          <div className={styles.branchCard}>
+            <span>Ausnahme</span>
+            <strong>Mensch prüft</strong>
+            <small>Grund und Entscheidung bleiben sichtbar</small>
+          </div>
         </div>
       </div>
 
-      <div className={styles.approval}>
-        <span className={styles.approvalIcon} aria-hidden="true">✓</span>
-        <div>
-          <strong>Menschlicher Kontrollpunkt</strong>
-          <small>Sensible Fälle und Ausnahmen bleiben bewusst prüfbar.</small>
-        </div>
-        <span className={styles.approvalState}>Freigabe</span>
+      <div className={styles.testCriteria}>
+        <strong>Im Pilot messen</strong>
+        <span>Bearbeitungszeit</span>
+        <span>Fehler</span>
+        <span>manuelle Eingriffe</span>
       </div>
     </div>
   );
@@ -138,29 +118,44 @@ export function IntegrationVisual() {
 
 export function EnablementVisual() {
   const steps = [
-    ['01', 'Testen', styles.stepOne],
-    ['02', 'Rückmeldung', styles.stepTwo],
-    ['03', 'Anpassen', styles.stepThree],
-    ['04', 'Übergeben', styles.stepFour]
+    ['01', 'Testfälle', 'MSB + Fachteam'],
+    ['02', 'Schulung', 'spätere Anwender'],
+    ['03', 'Go-live', 'Prozessverantwortliche'],
+    ['04', 'Nachsteuerung', 'benannter Betrieb']
   ] as const;
 
   return (
-    <div className={styles.visualFrame} role="img" aria-label="Einführungskreislauf aus Testen, Rückmeldung, Anpassen und Übergeben mit dem Team im Mittelpunkt">
+    <div
+      className={styles.visualFrame}
+      role="img"
+      aria-label="Übergabeplan von Testfällen über Schulung und Go-live bis zur Nachsteuerung mit benannten Verantwortlichen"
+    >
       <div className={styles.visualTopbar}>
-        <span className={styles.visualKicker}>Einführung</span>
-        <span className={styles.visualState}>Feedback wirkt</span>
+        <span className={styles.visualKicker}>Übergabeplan</span>
+        <span className={styles.visualState}>Verantwortung vor dem Start klären</span>
       </div>
 
-      <div className={styles.cycleCanvas}>
-        <span className={styles.cycleRing} aria-hidden="true" />
-        <div className={styles.cycleCenter}><strong>Team<br />befähigt</strong></div>
-        {steps.map(([number, label, position]) => (
-          <div className={`${styles.cycleStep} ${position}`} key={number}>
-            <span className={styles.cycleNumber}>{number}</span>
-            <strong>{label}</strong>
-          </div>
+      <ol className={styles.handoverTrack}>
+        {steps.map(([number, title, owner]) => (
+          <li key={number}>
+            <span className={styles.handoverNumber}>{number}</span>
+            <div>
+              <strong>{title}</strong>
+              <small>{owner}</small>
+            </div>
+          </li>
         ))}
+      </ol>
+
+      <div className={styles.responsibilityGrid}>
+        <div><span>Prüft</span><strong>Fachverantwortliche</strong></div>
+        <div><span>Greift ein</span><strong>benannte Rolle</strong></div>
+        <div><span>Gibt Änderungen frei</span><strong>Prozessverantwortung</strong></div>
       </div>
+
+      <p className={styles.diagramCaption}>
+        Die Technik geht erst live, wenn Prüfung, Eingriff und Änderung geregelt sind.
+      </p>
     </div>
   );
 }
