@@ -109,9 +109,15 @@ export function SiteHeader() {
     >
       <div className={styles.rail}>
         <div className={styles.inner}>
-          <svg className={styles.dock} viewBox="0 0 208 94" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M0 0H208V70H181C169 70 163 73 158 82L154 88C150 92 143 94 132 94H76C65 94 58 92 54 88L50 82C45 73 39 70 27 70H0Z" />
-            <path d="M0 69.5H27C39 69.5 45 73 50 82L54 88C58 92 65 93.5 76 93.5H132C143 93.5 150 92 154 88L158 82C163 73 169 69.5 181 69.5H208" />
+          <svg
+            className={styles.dock}
+            viewBox="0 0 208 30"
+            preserveAspectRatio="none"
+            shapeRendering="geometricPrecision"
+            aria-hidden="true"
+          >
+            <path d="M0 0H27C40 0 48 4 54 15L58 21C62 27 70 29 82 29H126C138 29 146 27 150 21L154 15C160 4 168 0 181 0H208V0H0Z" />
+            <path d="M0 .65H27C40 .65 48 4 54 15L58 21C62 27 70 29 82 29H126C138 29 146 27 150 21L154 15C160 4 168 .65 181 .65H208" />
           </svg>
 
           <button
