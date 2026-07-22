@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useRef, useState, type FormEvent } from 'react';
+import { trackAnalyticsEvent } from '@/lib/analytics';
 
 const recipient = 'kontakt@msb-ai.de';
 type FormField = 'name' | 'company' | 'email' | 'process' | 'privacy';
@@ -30,6 +31,16 @@ export function ContactForm() {
   const [privacyAcknowledged, setPrivacyAcknowledged] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState('');
+  const startedRef = useRef(false);
+
+  function trackStart() {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    trackAnalyticsEvent('automation_check_start', {
+      cta_location: 'automation_check_form',
+      page_type: 'automation_check'
+    });
+  }
 
   function clearFeedback(field: FormField) {
     setErrors((current) => ({ ...current, [field]: undefined }));
@@ -59,11 +70,15 @@ export function ContactForm() {
 
     setErrors({});
     setStatus('Ihr E-Mail-Programm wird geöffnet. Prüfen und senden Sie die vorbereitete Nachricht dort ab.');
+    trackAnalyticsEvent('email_click', {
+      cta_location: 'automation_check_form',
+      page_type: 'automation_check'
+    });
     window.location.href = buildMailtoUrl(name, company, email, process);
   }
 
   return (
-    <form className="contact-form" noValidate onSubmit={handleSubmit}>
+    <form className="contact-form" noValidate onSubmit={handleSubmit} onInputCapture={trackStart}>
       <div className="form-row">
         <div className="field">
           <label htmlFor="name">Name</label>

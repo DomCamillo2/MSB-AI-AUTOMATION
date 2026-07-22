@@ -1,0 +1,277 @@
+.banner {
+  width: min(1160px, calc(100% - 32px));
+  position: fixed;
+  z-index: 100;
+  right: 0;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  left: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 2rem;
+  margin-inline: auto;
+  padding: 1.35rem;
+  color: var(--white);
+  background: var(--navy);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(7, 27, 58, 0.28);
+}
+
+.bannerCopy {
+  min-width: 0;
+}
+
+.eyebrow {
+  margin: 0 0 0.3rem;
+  color: var(--teal-bright);
+  font-family: var(--font-poppins), Poppins, sans-serif;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.banner h2,
+.dialog h2 {
+  color: inherit;
+  font-size: 1.18rem;
+}
+
+.bannerCopy > p:last-child {
+  max-width: 760px;
+  margin-top: 0.35rem;
+  color: #c9d3da;
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.banner a,
+.dialog a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--teal-bright);
+  text-underline-offset: 3px;
+}
+
+.bannerActions,
+.dialogActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.banner button,
+.dialog button {
+  min-height: 44px;
+  padding: 0.66rem 0.9rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  cursor: pointer;
+  font-family: var(--font-poppins), Poppins, sans-serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.acceptButton {
+  color: var(--navy);
+  background: var(--teal-bright);
+}
+
+.necessaryButton {
+  color: var(--white);
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.settingsButton {
+  color: #d5dee4;
+  background: transparent;
+}
+
+.backdrop {
+  position: fixed;
+  z-index: 110;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  overflow-y: auto;
+  background: rgba(7, 27, 58, 0.62);
+  backdrop-filter: blur(5px);
+}
+
+.dialog {
+  width: min(620px, 100%);
+  max-height: calc(100dvh - 32px);
+  padding: clamp(1.25rem, 4vw, 2rem);
+  overflow-y: auto;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 24px 70px rgba(7, 27, 58, 0.3);
+}
+
+.dialogHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.dialog h2 {
+  color: var(--navy);
+  font-size: 1.55rem;
+}
+
+.closeButton {
+  width: 44px;
+  flex: 0 0 44px;
+  padding: 0 !important;
+  color: var(--navy);
+  background: transparent;
+  border-color: var(--border) !important;
+  font-size: 1.4rem !important;
+}
+
+.dialogIntro,
+.privacyNote {
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+.dialogIntro {
+  margin-top: 0.75rem;
+}
+
+.category {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+label.category {
+  cursor: pointer;
+}
+
+.category > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.category strong {
+  color: var(--navy);
+  font-family: var(--font-poppins), Poppins, sans-serif;
+  font-size: 0.92rem;
+}
+
+.category span {
+  color: var(--teal);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.category p {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.category input {
+  width: 42px;
+  height: 24px;
+  position: relative;
+  flex: 0 0 42px;
+  margin: 0;
+  appearance: none;
+  background: #cad2d2;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.category input::after {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  background: var(--white);
+  border-radius: 50%;
+  content: '';
+  transition: transform var(--motion-fast) var(--ease-standard);
+}
+
+.category input:checked {
+  background: var(--teal);
+}
+
+.category input:checked::after {
+  transform: translateX(18px);
+}
+
+.privacyNote {
+  margin-top: 1rem;
+}
+
+.dialogActions {
+  margin-top: 1.25rem;
+}
+
+.dialog .necessaryButton {
+  color: var(--navy);
+  border-color: #9daaa8 !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .acceptButton:hover {
+    background: #83dcda;
+  }
+
+  .necessaryButton:hover,
+  .settingsButton:hover,
+  .closeButton:hover {
+    border-color: var(--teal-bright) !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .banner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .banner {
+    width: calc(100% - 24px);
+    bottom: max(12px, env(safe-area-inset-bottom));
+    padding: 1rem;
+  }
+
+  .bannerActions,
+  .dialogActions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .banner button,
+  .dialogActions button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category input::after {
+    transition: none;
+  }
+}

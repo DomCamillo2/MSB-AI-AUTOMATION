@@ -9,7 +9,7 @@ import { createPageMetadata } from '@/lib/seo';
 import { problems, services, useCases } from '@/lib/site-content';
 
 export const metadata = createPageMetadata({
-  title: 'Prozessautomatisierung für KMU in Tübingen & Stuttgart',
+  title: 'KI- & Prozessautomatisierung für KMU',
   description: 'MSB automatisiert wiederkehrende Abläufe in Verwaltung, HR und Reporting – pragmatisch, kontrolliert und passend zur bestehenden IT.',
   path: '/'
 });

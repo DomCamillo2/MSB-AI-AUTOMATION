@@ -13,5 +13,7 @@ const routes = [
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  if (process.env.VERCEL_ENV === 'preview') return [];
+
   return routes.map((path) => ({ url: `${siteUrl}${path}` }));
 }

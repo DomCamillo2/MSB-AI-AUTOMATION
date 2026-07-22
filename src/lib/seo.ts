@@ -5,6 +5,8 @@ export const siteUrl = 'https://www.msb-ai.de';
 export const defaultDescription =
   'Kontrollierte KI- und Prozessautomatisierung für KMU in der Region Tübingen–Stuttgart – passend zu bestehenden Systemen und Arbeitsabläufen.';
 
+const allowIndexing = process.env.VERCEL_ENV !== 'preview';
+
 type PageMetadataOptions = {
   title: string;
   description: string;
@@ -16,7 +18,7 @@ export function createPageMetadata({ title, description, path, index = true }: P
   const socialTitle = `${title} | ${siteName}`;
 
   return {
-    title,
+    title: path === '/' ? { absolute: socialTitle } : title,
     description,
     alternates: {
       canonical: path
@@ -44,8 +46,8 @@ export function createPageMetadata({ title, description, path, index = true }: P
       images: ['/opengraph-image']
     },
     robots: {
-      index,
-      follow: true
+      index: index && allowIndexing,
+      follow: allowIndexing
     }
   };
 }
