@@ -106,9 +106,16 @@ export async function POST(request: Request) {
   const startedAt = typeof payload.startedAt === 'number' ? payload.startedAt : 0;
   const completionTime = Date.now() - startedAt;
 
-  // Bots receive the same success response without triggering an email.
-  if (honeypot || !startedAt || completionTime < 2_500 || completionTime > 24 * 60 * 60 * 1000) {
+  // A filled honeypot is ignored without revealing the spam check.
+  if (honeypot) {
     return NextResponse.json({ message: 'Vielen Dank. Ihre Anfrage wurde übermittelt.' });
+  }
+
+  if (!startedAt || completionTime < 1_200) {
+    return NextResponse.json(
+      { message: 'Bitte warten Sie einen Moment und senden Sie das Formular erneut.' },
+      { status: 400 }
+    );
   }
 
   const name = textValue(payload.name, 120);
