@@ -1,4 +1,5 @@
 import { Reveal } from '@/components/reveal';
+import { EnablementVisual, IntegrationVisual, ProcessVisual } from '@/components/service-detail-visuals';
 import ServicesHeroVisual from '@/components/services-hero-visual';
 import { createPageMetadata } from '@/lib/seo';
 
@@ -47,49 +48,6 @@ const boundaries = [
   ['Keine unnötigen Systemwechsel', 'Wir prüfen zuerst, was sich mit Ihrer bestehenden IT umsetzen lässt.'],
   ['Keine Lösung ohne Übergabe', 'Dokumentation und Befähigung gehören zur Umsetzung.']
 ] as const;
-
-function ProcessVisual() {
-  return (
-    <div className="service-visual service-process-map" aria-label="Vereinfachtes Prozessbild von Eingang bis Ergebnis">
-      <div className="process-map-flow">
-        {['Eingang', 'Bearbeitung', 'Prüfung', 'Ergebnis'].map((step, index) => (
-          <div key={step}><span>{step}</span>{index < 3 ? <i aria-hidden="true">→</i> : null}</div>
-        ))}
-      </div>
-      <div className="service-visual-tags" aria-label="Betrachtete Prozessdimensionen">
-        {['Systeme', 'Rollen', 'Daten', 'Freigaben'].map((tag) => <span key={tag}>{tag}</span>)}
-      </div>
-      <p>Der bestehende Ablauf wird gemeinsam nachvollziehbar gemacht.</p>
-    </div>
-  );
-}
-
-function IntegrationVisual() {
-  return (
-    <div className="service-visual service-integration" aria-label="Vereinfachte Integration in bestehende Systeme">
-      <div className="integration-sources"><span>E-Mail</span><span>Formular</span></div>
-      <span className="integration-arrow" aria-hidden="true">↓</span>
-      <strong>Automatisierung</strong>
-      <span className="integration-arrow" aria-hidden="true">↓</span>
-      <div className="integration-approval"><span aria-hidden="true">✓</span> Menschliche Freigabe</div>
-      <span className="integration-arrow" aria-hidden="true">↓</span>
-      <div className="integration-systems"><span>CRM</span><span>ERP</span><span>bestehendes Tool</span></div>
-    </div>
-  );
-}
-
-function EnablementVisual() {
-  return (
-    <div className="service-visual service-enablement" aria-label="Einführungskreislauf von Test bis Übergabe">
-      <div className="enablement-cycle">
-        {['Testen', 'Rückmeldung', 'Anpassen', 'Übergeben'].map((step, index) => (
-          <div key={step}><span>{String(index + 1).padStart(2, '0')}</span><strong>{step}</strong></div>
-        ))}
-      </div>
-      <div className="enablement-feedback"><span aria-hidden="true">✓</span><p><strong>Team-Feedback</strong> fließt vor der Übergabe in den Ablauf ein.</p></div>
-    </div>
-  );
-}
 
 function ServiceVisual({ type }: { type: (typeof serviceBlocks)[number]['visual'] }) {
   if (type === 'process') return <ProcessVisual />;
