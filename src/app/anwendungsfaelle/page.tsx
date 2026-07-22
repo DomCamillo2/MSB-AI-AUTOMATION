@@ -1,7 +1,9 @@
 import PageCta from '@/components/page-cta';
 import PageIntro from '@/components/page-intro';
 import UseCaseExplorer from '@/components/use-case-explorer';
+import { useCaseDetails } from '@/lib/service-detail-content';
 import { createPageMetadata } from '@/lib/seo';
+import styles from '@/components/service-detail-pages.module.css';
 
 export const metadata = createPageMetadata({
   title: 'Automatisierung für HR, CRM & Reporting',
@@ -45,6 +47,28 @@ export default function AnwendungsfaellePage() {
           <dl className="editorial-list">
             {fitSignals.map(([title, text]) => <div key={title}><dt>{title}</dt><dd>{text}</dd></div>)}
           </dl>
+        </div>
+      </section>
+
+      <section className={styles.sectionTint} aria-labelledby="deep-dive-heading">
+        <div className="container">
+          <div className={styles.sectionIntro}>
+            <div>
+              <p className="eyebrow">Vertiefungen</p>
+              <h2 id="deep-dive-heading">Sechs Abläufe im Detail</h2>
+            </div>
+            <p>Von der Ausgangslage bis zur technischen Einbindung: Jede Vertiefung zeigt, was der Workflow übernehmen kann und welche Verantwortung bewusst beim Menschen bleibt.</p>
+          </div>
+          <div className={styles.directory}>
+            {useCaseDetails.map((useCase, index) => (
+              <a className={styles.useCaseCard} href={`/anwendungsfaelle/${useCase.slug}`} key={useCase.slug}>
+                <small>{String(index + 1).padStart(2, '0')} · {useCase.categoryName}</small>
+                <h3>{useCase.metaTitle}</h3>
+                <p>{useCase.metaDescription}</p>
+                <span>Vertiefung ansehen →</span>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 

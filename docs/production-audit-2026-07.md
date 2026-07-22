@@ -11,7 +11,7 @@ Dieser Bericht beschreibt die technisch umgesetzte Konfiguration. Er ist keine R
 - `msb-ai-automation.vercel.app` und `msb-ai-consulting.vercel.app` leiten dauerhaft auf den Canonical-Host weiter; Vercel-Preview-Hosts bleiben davon unberührt.
 - Produktionsseiten sind indexierbar. Preview-Builds erhalten zusätzlich `X-Robots-Tag: noindex, nofollow`, ein `noindex`-Meta-Tag, eine komplett sperrende `robots.txt` und eine leere Sitemap.
 - Canonicals werden nie aus der jeweiligen Preview-URL gebildet.
-- Die Produktions-Sitemap enthält ausschließlich die acht indexierbaren Seiten und liegt unter `https://www.msb-ai.de/sitemap.xml`.
+- Die Produktions-Sitemap enthält ausschließlich die 20 indexierbaren Seiten und liegt unter `https://www.msb-ai.de/sitemap.xml`.
 - Unbekannte URLs liefern einen echten HTTP-404-Status; es gibt keinen pauschalen Homepage-Redirect.
 
 ### Search-Console-Aktionen
@@ -19,7 +19,7 @@ Dieser Bericht beschreibt die technisch umgesetzte Konfiguration. Er ist keine R
 1. In der Google Search Console die Domain Property `msb-ai.de` anlegen.
 2. Den von Google vorgegebenen DNS-TXT-Eintrag bei IONOS ergänzen. Bestehende MX-, SPF-, DKIM- und DMARC-Einträge weder verändern noch löschen.
 3. `https://www.msb-ai.de/sitemap.xml` einreichen. Die Apex-URL leitet auf diese kanonische URL weiter.
-4. Per URL-Prüfung mindestens `/`, `/leistungen`, `/anwendungsfaelle`, `/vorgehen`, `/ueber-uns`, `/automation-check`, `/kontakt` und `/ki-prozessautomatisierung-tuebingen-stuttgart` auf dem `www`-Host prüfen und Indexierung anstoßen.
+4. Per URL-Prüfung die zentralen Einstiege `/`, `/leistungen`, `/anwendungsfaelle`, `/vorgehen`, `/ueber-uns`, `/automation-check`, `/kontakt` und `/ki-prozessautomatisierung-tuebingen-stuttgart` sowie repräsentative Leistungs- und Anwendungsfallseiten auf dem `www`-Host prüfen und Indexierung anstoßen.
 5. Nach dem Deployment Abdeckung, Canonical-Auswahl und Core Web Vitals beobachten.
 
 ## B — SEO und Suchintention
@@ -35,7 +35,7 @@ Dieser Bericht beschreibt die technisch umgesetzte Konfiguration. Er ist keine R
 | `/kontakt` | Kontakt und Erstgespräch | Kontakt & Erstgespräch | Kontaktieren Sie MSB AI & Automation aus Tübingen oder beschreiben Sie einen wiederkehrenden Prozess für den kostenlosen Automation Check. | Sprechen wir über einen echten Prozess. | `https://www.msb-ai.de/kontakt` |
 | `/ki-prozessautomatisierung-tuebingen-stuttgart` | Regionale Prozessautomatisierung | Prozessautomatisierung in Tübingen & Stuttgart | MSB begleitet KMU in Tübingen, Reutlingen und Stuttgart bei Prozessanalyse, Automatisierungspiloten und kontrollierter Einführung. | Prozessautomatisierung für KMU in der Region. | `https://www.msb-ai.de/ki-prozessautomatisierung-tuebingen-stuttgart` |
 
-Alle Titles erhalten über die Metadata API den Markenzusatz `| MSB AI & Automation`. Jede indexierbare Seite besitzt eigene Open-Graph-Daten. Das generierte Standardbild ist 1200 × 630 Pixel. Zusätzliche dünne Keyword-, Städte- oder n8n-Seiten wurden bewusst nicht erzeugt. Neue Seiten sollten erst entstehen, wenn dafür eigenständige fachliche Substanz, Suchintention und Conversion-Nutzen vorliegen.
+Die sechs Leistungsbereiche und sechs detaillierten Anwendungsfälle besitzen jeweils eigene Titles, Beschreibungen, Canonicals und H1. Alle Titles erhalten über die Metadata API den Markenzusatz `| MSB AI & Automation`. Jede indexierbare Seite besitzt eigene Open-Graph-Daten. Das generierte Standardbild ist 1200 × 630 Pixel. Zusätzliche dünne Keyword-, Städte- oder n8n-Seiten wurden bewusst nicht erzeugt. Neue Seiten sollten erst entstehen, wenn dafür eigenständige fachliche Substanz, Suchintention und Conversion-Nutzen vorliegen.
 
 ## C — Strukturierte Daten
 
@@ -44,6 +44,8 @@ Alle Titles erhalten über die Metadata API den Markenzusatz `| MSB AI & Automat
 | `WebSite` | `/` | URL, Name, Sprache, Publisher | JSON parsebar, Build erfolgreich |
 | `Organization` + `ProfessionalService` | `/` | Name, Betreiber, URL, Logo, E-Mail, Beschreibung, Slogan, Anschrift, bediente Region | JSON parsebar, sichtbare Angaben abgeglichen |
 | `Service` | `/leistungen` | Leistung, Anbieter, Zielgruppe, Region, Angebotsbausteine | JSON parsebar, Build erfolgreich |
+| `Service` + `BreadcrumbList` | sechs Seiten unter `/leistungen/*` | Leistungsbereich, Anbieter, URL, Breadcrumbs | JSON parsebar, Build erfolgreich |
+| `Service` + `BreadcrumbList` | sechs Seiten unter `/anwendungsfaelle/*` | konkreter Anwendungsfall, Anbieter, URL, Breadcrumbs | JSON parsebar, Build erfolgreich |
 | `FAQPage` | `/vorgehen` | sichtbare Fragen und Antworten | JSON parsebar, Build erfolgreich |
 | `FAQPage` | `/automation-check` | sichtbare Fragen und Antworten | JSON parsebar, Build erfolgreich |
 
@@ -111,7 +113,7 @@ Vor Veröffentlichung juristisch klären: exakte Rechts-/Geschäftsbezeichnung d
 1. Search Console Domain Property `msb-ai.de` anlegen.
 2. Google-TXT-Verifikation ausschließlich ergänzend bei IONOS setzen; Mail-DNS unverändert lassen.
 3. `https://www.msb-ai.de/sitemap.xml` einreichen.
-4. Die acht Produktions-Canonicals per URL-Prüfung kontrollieren und Indexierung anstoßen.
+4. Die 20 Produktions-Canonicals stichprobenweise per URL-Prüfung kontrollieren und die wichtigsten Einstiegs- und Detailseiten zur Indexierung anstoßen.
 5. Die unter D genannten GA4-Datenschutz- und Enhanced-Measurement-Einstellungen durchführen und dokumentieren.
 6. Aktuell kein Key Event markieren; erst einen echten erfolgreichen Lead-Workflow implementieren, dann `generate_lead` als Key Event einrichten.
 7. In GA4 unter Produktverknüpfungen die bestätigte Search-Console-Property mit dem Webdatenstrom verbinden.
@@ -122,8 +124,8 @@ Vor Veröffentlichung juristisch klären: exakte Rechts-/Geschäftsbezeichnung d
 
 - ESLint: bestanden.
 - TypeScript/Next.js-Prüfung: bestanden.
-- Production-Build: bestanden; 19 statische Routen erzeugt.
-- Preview-Build: bestanden; 19 statische Routen erzeugt.
+- Production-Build: bestanden; 31 statische Routen erzeugt.
+- Preview-Build: Der Preview-Schutz bleibt unverändert; nach der Erweiterung erneut über die Vercel-Preview-Checks zu bestätigen.
 - HTML: ein H1 auf der Startseite, Canonical auf dem Production-Host, strukturierte Daten JSON-parsebar.
 - Sitemap/robots: Production freigegeben und vollständig; Preview gesperrt und Sitemap leer.
 - 404: echter HTTP-Status 404.
@@ -133,6 +135,7 @@ Vor Veröffentlichung juristisch klären: exakte Rechts-/Geschäftsbezeichnung d
 - Consent-Code: keine GA-Ladung bei fehlender oder negativer Einwilligung; Production-Gate, Widerruf und Cookie-Löschung implementiert.
 - Accessibility-Codeprüfung: Skip-Link, semantische Banner-/Dialogtitel, Fokusfalle, Escape, Fokus-Rückgabe, Inert-Hintergrund und mindestens 44-Pixel-Aktionen vorhanden.
 - Responsive-Codeprüfung: flüssige Größen, begrenzte Container, `min-width: 0`, mobile Einspaltenlayouts sowie Breakpoints für Header, Leistungen und Consent vorhanden.
+- Detailseiten-Crawl: 20 Sitemap-URLs und 36 interne Ziele geprüft; alle Seiten HTTP 200, genau ein H1, genau ein Canonical und keine fehlerhaften internen Links.
 - Performance: GA blockiert den Erst-Render nicht; Fonts sind lokal gebündelt; First Load JS laut Build je nach Seite etwa 103–129 kB.
 
 Noch manuell nach Deployment zu prüfen: visuelle Matrix bei 320, 375, 390, 430, 768, 1024 und den genannten Desktopgrößen; Tastatur-/Screenreader-Test im echten Browser; Consent-A/B/C/D und SPA-Einzel-Pageviews in DevTools, Google Tag Assistant und GA4 DebugView; Rich Results Test; Lighthouse/Core Web Vitals auf der Produktionsdomain.

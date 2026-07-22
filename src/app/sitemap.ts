@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { serviceCategories, useCaseDetails } from '@/lib/service-detail-content';
 import { siteUrl } from '@/lib/seo';
 
 const routes = [
@@ -15,5 +16,10 @@ const routes = [
 export default function sitemap(): MetadataRoute.Sitemap {
   if (process.env.VERCEL_ENV === 'preview') return [];
 
-  return routes.map((path) => ({ url: `${siteUrl}${path}` }));
+  const detailRoutes = [
+    ...serviceCategories.map(({ slug }) => `/leistungen/${slug}`),
+    ...useCaseDetails.map(({ slug }) => `/anwendungsfaelle/${slug}`)
+  ];
+
+  return [...routes, ...detailRoutes].map((path) => ({ url: `${siteUrl}${path}` }));
 }

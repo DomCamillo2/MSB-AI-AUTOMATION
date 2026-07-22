@@ -1,8 +1,9 @@
-import type { ReactNode } from 'react';
 import { Reveal } from '@/components/reveal';
+import ServiceIcon from '@/components/service-icon';
 import ServicesHeroVisual from '@/components/services-hero-visual';
 import StructuredData from '@/components/structured-data';
 import { createPageMetadata, siteUrl } from '@/lib/seo';
+import { serviceCategories } from '@/lib/service-detail-content';
 import styles from '@/components/service-visuals.module.css';
 
 export const metadata = createPageMetadata({
@@ -27,75 +28,18 @@ const serviceStructuredData = {
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'Leistungsbausteine für Prozessautomatisierung',
-    itemListElement: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Automation Check' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Automatisierungspilot' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Integration in bestehende Systeme' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Schulung, Dokumentation und Übergabe' } }
-    ]
+    name: 'Anwendungsfelder für Prozessautomatisierung',
+    itemListElement: serviceCategories.map((category) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: category.name,
+        description: category.cardTeaser,
+        url: `${siteUrl}/leistungen/${category.slug}`
+      }
+    }))
   }
 };
-
-type IconName = 'people' | 'database' | 'chart' | 'file' | 'mail' | 'book';
-
-function ServiceIcon({ name }: { name: IconName }) {
-  const paths: Record<IconName, ReactNode> = {
-    people: <><circle cx="9" cy="8" r="3" /><path d="M3.8 19c.4-4 2.1-6 5.2-6s4.8 2 5.2 6M16 7.5a2.5 2.5 0 0 1 0 5M16.5 13c2.3.4 3.5 2.1 3.8 5" /></>,
-    database: <><ellipse cx="12" cy="5.5" rx="7.5" ry="3" /><path d="M4.5 5.5v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6M4.5 11.5v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6" /></>,
-    chart: <><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" /><path d="m4 7 5-4 6 6 6-5" /></>,
-    file: <><path d="M6 2.5h8l4 4V22H6zM14 2.5v5h4M9 12h6M9 16h6" /></>,
-    mail: <><rect x="2.5" y="5" width="19" height="14" rx="1.5" /><path d="m3 7 9 7 9-7" /></>,
-    book: <><path d="M3.5 4.5h6A2.5 2.5 0 0 1 12 7v13a2.5 2.5 0 0 0-2.5-2.5h-6zM20.5 4.5h-6A2.5 2.5 0 0 0 12 7v13a2.5 2.5 0 0 1 2.5-2.5h6z" /></>
-  };
-
-  return <svg className={styles.serviceIcon} viewBox="0 0 24 24" aria-hidden="true">{paths[name]}</svg>;
-}
-
-const serviceAreas = [
-  {
-    icon: 'people',
-    title: 'HR & Recruiting',
-    problem: 'Bewerbungen und Unterlagen werden aus Postfächern in Listen oder Systeme übertragen.',
-    automation: 'Daten erfassen, Unterlagen prüfen, Status und Aufgaben vorbereiten.',
-    control: 'Auswahl, Kommunikation und sensible Entscheidungen bleiben beim HR-Team.'
-  },
-  {
-    icon: 'database',
-    title: 'Verwaltung & CRM',
-    problem: 'Anfragen, Stammdaten und Wiedervorlagen werden mehrfach von Hand gepflegt.',
-    automation: 'Anfragen zuordnen, Datensätze aktualisieren, Aufgaben und Follow-ups auslösen.',
-    control: 'Unsichere Zuordnungen und sensible Änderungen werden vorgelegt.'
-  },
-  {
-    icon: 'chart',
-    title: 'Reporting & Daten',
-    problem: 'Dieselben Exporte werden regelmäßig zusammengeführt, geprüft und formatiert.',
-    automation: 'Quellen verbinden, Kennzahlen berechnen, Auffälligkeiten markieren, Berichte vorbereiten.',
-    control: 'Fachverantwortliche prüfen Plausibilität und geben Ergebnisse frei.'
-  },
-  {
-    icon: 'file',
-    title: 'Dokumente',
-    problem: 'Dokumente werden geöffnet, gelesen, einsortiert und weitergeleitet.',
-    automation: 'Dokumente klassifizieren, Angaben extrahieren, prüfen und Freigaben starten.',
-    control: 'Unklare oder risikoreiche Fälle landen bei der zuständigen Person.'
-  },
-  {
-    icon: 'mail',
-    title: 'E-Mail & Kommunikation',
-    problem: 'Eingehende Nachrichten lösen wiederkehrende Such-, Zuordnungs- und Antwortarbeit aus.',
-    automation: 'Anliegen erkennen, Daten auslesen, Prozesse starten und Entwürfe vorbereiten.',
-    control: 'Antworten werden dort geprüft, wo Ton, Inhalt oder Verantwortung es verlangen.'
-  },
-  {
-    icon: 'book',
-    title: 'Internes Wissen',
-    problem: 'Antworten und Arbeitswissen liegen verteilt in Dokumenten, Ordnern und Köpfen.',
-    automation: 'Freigegebene Quellen strukturieren und passende Informationen auffindbar machen.',
-    control: 'Quellenumfang und kritische Antworten bleiben fachlich verantwortet.'
-  }
-] as const;
 
 const decisionModes = [
   {
@@ -218,25 +162,25 @@ export default function LeistungenPage() {
                 <p className="eyebrow">Konkrete Arbeitsfelder</p>
                 <h2 id="service-areas-heading">Wo Automatisierung im Alltag Zeit spart</h2>
               </div>
-              <p>Geeignet sind vor allem häufige, wiederkehrende Abläufe mit klaren Eingängen und Ergebnissen. Je Karte sehen Sie, was heute manuell ist, was der Workflow übernimmt und wo Menschen eingebunden bleiben.</p>
+              <p>Wählen Sie den Bereich, der Ihrem Arbeitsalltag am nächsten kommt. Auf der jeweiligen Seite zeigen wir typische Prozesse, Kontrollpunkte und sinnvolle Integrationen.</p>
             </div>
           </Reveal>
 
           <div className={styles.areaGrid}>
-            {serviceAreas.map((area, index) => (
-              <Reveal key={area.title}>
-                <article className={styles.areaCard}>
+            {serviceCategories.map((area) => (
+              <Reveal key={area.slug}>
+                <a className={styles.areaCard} href={`/leistungen/${area.slug}`} aria-label={`${area.name}: Möglichkeiten ansehen`}>
                   <div className={styles.areaCardHead}>
-                    <span className={styles.iconBox}><ServiceIcon name={area.icon} /></span>
-                    <span className={styles.cardIndex}>{String(index + 1).padStart(2, '0')}</span>
+                    <span className={styles.iconBox}><ServiceIcon className={styles.serviceIcon} name={area.icon} /></span>
+                    <span className={styles.cardIndex}>{area.number}</span>
                   </div>
-                  <h3>{area.title}</h3>
-                  <dl className={styles.cardDefinition}>
-                    <div><dt>Heute</dt><dd>{area.problem}</dd></div>
-                    <div><dt>Automatisiert</dt><dd>{area.automation}</dd></div>
-                    <div><dt>Mensch bleibt</dt><dd>{area.control}</dd></div>
-                  </dl>
-                </article>
+                  <h3>{area.name}</h3>
+                  <p className={styles.areaCardTeaser}>{area.cardTeaser}</p>
+                  <ul className={styles.areaTags} aria-label={`Beispiele für ${area.name}`}>
+                    {area.cardTags.map((tag) => <li key={tag}>{tag}</li>)}
+                  </ul>
+                  <span className={styles.areaCardAction}>Möglichkeiten ansehen <span aria-hidden="true">→</span></span>
+                </a>
               </Reveal>
             ))}
           </div>

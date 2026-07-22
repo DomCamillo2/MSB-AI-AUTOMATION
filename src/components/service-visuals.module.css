@@ -279,7 +279,7 @@
 
 .areaCard {
   height: 100%;
-  min-height: 410px;
+  min-height: 330px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -288,6 +288,8 @@
   background: var(--paper);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  color: inherit;
+  text-decoration: none;
   transition:
     transform var(--motion-standard) var(--ease-standard),
     border-color var(--motion-fast) ease,
@@ -331,36 +333,60 @@
 
 .areaCard h3 {
   margin-top: 1.15rem;
-  font-size: 1.25rem;
+  font-size: clamp(1.25rem, 1.8vw, 1.55rem);
 }
 
-.cardDefinition {
-  display: grid;
-  margin: 1.15rem 0 0;
+.areaCardTeaser {
+  max-width: 34ch;
+  margin: 0.8rem 0 0;
+  color: #56636a;
+  font-size: 0.92rem;
+  line-height: 1.65;
 }
 
-.cardDefinition > div {
-  display: grid;
-  grid-template-columns: 86px minmax(0, 1fr);
-  gap: 0.7rem;
-  padding: 0.78rem 0;
-  border-top: 1px solid var(--border);
+.areaTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 1.2rem 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-.cardDefinition dt {
+.areaTags li {
+  padding: 0.38rem 0.58rem;
   color: var(--teal);
+  background: rgba(8, 119, 123, 0.055);
+  border: 1px solid rgba(8, 119, 123, 0.18);
+  border-radius: 999px;
   font-family: var(--font-poppins), Poppins, sans-serif;
-  font-size: 0.64rem;
-  font-weight: 700;
-  letter-spacing: 0.035em;
-  text-transform: uppercase;
+  font-size: 0.66rem;
+  font-weight: 600;
 }
 
-.cardDefinition dd {
-  margin: 0;
-  color: #4e5a60;
-  font-size: 0.82rem;
-  line-height: 1.55;
+.areaCardAction {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 1.35rem;
+  color: var(--navy);
+  border-top: 1px solid var(--border);
+  font-family: var(--font-poppins), Poppins, sans-serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.areaCardAction span {
+  color: var(--teal);
+  font-size: 1rem;
+  transition: transform var(--motion-fast) ease;
+}
+
+.areaCard:focus-visible {
+  outline: 3px solid rgba(8, 119, 123, 0.3);
+  outline-offset: 3px;
 }
 
 .contextLink {
@@ -968,7 +994,16 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .areaCard:hover,
+  .areaCard:hover {
+    border-color: rgba(8, 119, 123, 0.48);
+    box-shadow: 0 16px 32px rgba(7, 27, 58, 0.07);
+    transform: translateY(-2px);
+  }
+
+  .areaCard:hover .areaCardAction span {
+    transform: translateX(3px);
+  }
+
   .deliveryGrid > li:hover {
     border-color: rgba(8, 119, 123, 0.48);
     box-shadow: 0 16px 32px rgba(7, 27, 58, 0.07);
@@ -1114,6 +1149,11 @@
     min-height: 0;
   }
 
+  .areaCard:active {
+    border-color: rgba(8, 119, 123, 0.48);
+    transform: scale(0.99);
+  }
+
   .deliveryGrid > li {
     min-height: 0;
   }
@@ -1224,11 +1264,6 @@
   .boundaryCard,
   .checkPanel {
     padding: 1.15rem;
-  }
-
-  .cardDefinition > div {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.25rem;
   }
 
   .exampleHead {
