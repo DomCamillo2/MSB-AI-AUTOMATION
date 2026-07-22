@@ -62,7 +62,14 @@ export function analyticsAllowed() {
 }
 
 export function trackAnalyticsEvent(
-  eventName: 'cta_click' | 'automation_check_start' | 'email_click' | 'phone_click',
+  eventName:
+    | 'cta_click'
+    | 'automation_check_start'
+    | 'automation_check_step'
+    | 'automation_check_complete'
+    | 'automation_check_contact_start'
+    | 'email_click'
+    | 'phone_click',
   parameters: Record<string, string>
 ) {
   if (!analyticsAllowed() || typeof window.gtag !== 'function') return;

@@ -55,7 +55,10 @@ export default function DatenschutzPage() {
         <section aria-labelledby="contact-data-heading">
           <h2 id="contact-data-heading">4. Kontakt und Automation Check</h2>
           <p>
-            Das Formular für den Automation Check übermittelt keine Angaben an diese Website und speichert sie nicht auf dem Webserver. Nach dem Absenden wird ein vorausgefüllter E-Mail-Entwurf in dem auf Ihrem Gerät eingerichteten E-Mail-Programm geöffnet. Daten werden erst übermittelt, wenn Sie die E-Mail dort selbst absenden.
+            Die Antworten im interaktiven Automation Check werden ausschließlich in Ihrem Browser ausgewertet. Während des Checks werden der aktuelle Schritt und Ihre Antworten im Sitzungsspeicher des Browsers unter dem Schlüssel <code>msb_automation_check_v1</code> zwischengespeichert, damit ein Neuladen oder Zurücknavigieren nicht zum Verlust des Fortschritts führt. Diese Daten werden nicht an unseren Webserver übertragen. Sie werden beim Start eines neuen Checks gelöscht und vom Browser üblicherweise spätestens beim Ende der Browsersitzung entfernt.
+          </p>
+          <p>
+            Erst nach der angezeigten Einschätzung können Sie freiwillig einen vorausgefüllten E-Mail-Entwurf öffnen. Der Entwurf enthält die strukturierten Antworten, einen optionalen Hinweis sowie die von Ihnen dafür angegebenen Kontaktdaten. Es findet keine automatische Übermittlung statt. Die Daten erreichen uns erst, wenn Sie den Entwurf in Ihrem E-Mail-Programm prüfen und selbst absenden.
           </p>
           <p>
             Bei einer Kontaktaufnahme verarbeiten wir insbesondere Name, Unternehmen, E-Mail-Adresse, Inhalt der Nachricht und weitere freiwillige Angaben, um Ihre Anfrage zu beantworten. Bezieht sich die Anfrage auf die Anbahnung oder Durchführung eines Vertrags, ist Art. 6 Abs. 1 lit. b DSGVO die Rechtsgrundlage. Bei allgemeinen geschäftlichen Anfragen erfolgt die Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Gesetzliche Aufbewahrungspflichten beruhen auf Art. 6 Abs. 1 lit. c DSGVO.
@@ -73,12 +76,15 @@ export default function DatenschutzPage() {
           <p>
             Rechtsgrundlage für diese notwendige Speicherung ist § 25 Abs. 2 Nr. 2 TDDDG. Sie können Ihre Auswahl jederzeit über „Cookie-Einstellungen“ im Footer ändern. Bei einem Widerruf werden von dieser Website auffindbare Google-Analytics-Cookies gelöscht und Analytics beim erneuten Laden nicht mehr eingebunden.
           </p>
+          <p>
+            Der Sitzungsspeicher des Automation Checks ist für die von Ihnen angeforderte interaktive Funktion erforderlich. Rechtsgrundlage für diesen technischen Zugriff ist ebenfalls § 25 Abs. 2 Nr. 2 TDDDG. Die darin enthaltenen Antworten werden nicht für Werbung oder Profilbildung genutzt.
+          </p>
         </section>
 
         <section id="google-analytics" aria-labelledby="analytics-heading">
           <h2 id="analytics-heading">6. Google Analytics 4</h2>
           <p>
-            Wenn Sie Statistik ausdrücklich erlauben, verwenden wir Google Analytics 4 mit der Mess-ID <code>G-P2P7JJ6QV2</code>. Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Google Analytics hilft uns zu verstehen, welche Seiten genutzt und welche ausgewählten Handlungen ausgeführt werden. Erfasst werden Seitenpfad ohne URL-Suchparameter, Seitentitel, technische Geräte- und Browserinformationen sowie die Ereignisse „CTA-Klick“, „Automation Check begonnen“ und „E-Mail-Klick“. Formularinhalte und andere frei eingegebene Angaben werden nicht an Google Analytics übermittelt.
+            Wenn Sie Statistik ausdrücklich erlauben, verwenden wir Google Analytics 4 mit der Mess-ID <code>G-P2P7JJ6QV2</code>. Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Google Analytics hilft uns zu verstehen, welche Seiten genutzt und welche ausgewählten Handlungen ausgeführt werden. Erfasst werden Seitenpfad ohne URL-Suchparameter, Seitentitel, technische Geräte- und Browserinformationen sowie die Ereignisse „CTA-Klick“, „Automation Check begonnen“, „Schritt aufgerufen“, „Check abgeschlossen“, „Kontaktbereich geöffnet“ und „E-Mail-Klick“. Bei Check-Ereignissen werden ausschließlich technische Bezeichner des Schritts beziehungsweise der Ergebniskategorie übertragen. Antworten, Auswahltexte, Notizen, E-Mail-Adressen und andere personenbezogene Angaben werden nicht an Google Analytics übermittelt.
           </p>
           <p>
             Google Analytics wird im Basic Consent Mode eingesetzt: Vor Ihrer Einwilligung wird das Google-Skript nicht geladen und es werden keine Analyseanfragen gesendet. Werbe-Speicherung, Werbedaten und personalisierte Werbung bleiben deaktiviert. Google Signals und Funktionen für personalisierte Werbung sind ebenfalls abgeschaltet.
