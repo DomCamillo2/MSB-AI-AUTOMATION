@@ -4,39 +4,52 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { navigation } from '@/lib/site-content';
+import styles from './site-header.module.css';
+
+function joinClasses(...classes: Array<string | false | undefined>) {
+  return classes.filter(Boolean).join(' ');
+}
+
+function ArrowIcon() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 17 17" aria-hidden="true">
+      <path d="M3.5 8.5h9M9 5l3.5 3.5L9 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
 
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [usesMenu, setUsesMenu] = useState(false);
   const pathname = usePathname();
   const headerRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const navigationRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 1279px)');
-    const updateViewport = () => setIsMobile(mediaQuery.matches);
+    const query = window.matchMedia('(max-width: 1279px)');
+    const update = () => setUsesMenu(query.matches);
 
-    updateViewport();
-    mediaQuery.addEventListener('change', updateViewport);
-    return () => mediaQuery.removeEventListener('change', updateViewport);
+    update();
+    query.addEventListener('change', update);
+    return () => query.removeEventListener('change', update);
   }, []);
 
   useEffect(() => {
-    const updateHeader = () => setScrolled(window.scrollY > 16);
+    const update = () => setScrolled(window.scrollY > 14);
 
-    updateHeader();
-    window.addEventListener('scroll', updateHeader, { passive: true });
-    return () => window.removeEventListener('scroll', updateHeader);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
   }, []);
 
   useEffect(() => {
-    const navigationElement = navigationRef.current;
-    if (!navigationElement) return;
+    const nav = navigationRef.current;
+    if (!nav) return;
 
-    navigationElement.inert = isMobile && !menuOpen;
-    if (!isMobile || !menuOpen) return;
+    nav.inert = usesMenu && !menuOpen;
+    if (!usesMenu || !menuOpen) return;
 
     const pageRegions = [...document.querySelectorAll<HTMLElement>('main, footer')];
     const previousOverflow = document.body.style.overflow;
@@ -44,7 +57,8 @@ export function SiteHeader() {
     pageRegions.forEach((region) => {
       region.inert = true;
     });
-    navigationElement.querySelector<HTMLAnchorElement>('a')?.focus();
+
+    nav.querySelector<HTMLAnchorElement>('a')?.focus();
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
@@ -55,6 +69,7 @@ export function SiteHeader() {
       }
 
       if (event.key !== 'Tab' || !headerRef.current) return;
+
       const focusable = [...headerRef.current.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')]
         .filter((element) => element.getClientRects().length > 0 && element.tabIndex !== -1);
       const first = focusable[0];
@@ -77,92 +92,115 @@ export function SiteHeader() {
       });
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isMobile, menuOpen]);
+  }, [menuOpen, usesMenu]);
 
   useEffect(() => {
-    if (!isMobile && menuOpen) setMenuOpen(false);
-  }, [isMobile, menuOpen]);
+    if (!usesMenu && menuOpen) setMenuOpen(false);
+  }, [menuOpen, usesMenu]);
 
-  function handleNavigation() {
+  function closeMenu() {
     setMenuOpen(false);
   }
 
   return (
-    <header ref={headerRef} className={`site-header${scrolled ? ' is-scrolled' : ''}${menuOpen ? ' menu-open' : ''}`}>
-      <div className="container header-inner">
-        <a className="brand" href="/" aria-label="MSB AI & Automation Startseite" onClick={handleNavigation}>
-          <Image
-            className="brand-logo"
-            src="/msb-wordmark.png"
-            alt=""
-            width={1813}
-            height={545}
-            loading="eager"
-            sizes="(max-width: 480px) 96px, (max-width: 1279px) 104px, 118px"
-            aria-hidden="true"
-          />
-        </a>
+    <header
+      ref={headerRef}
+      className={joinClasses(styles.header, scrolled && styles.scrolled, menuOpen && styles.menuOpen)}
+    >
+      <div className={styles.rail}>
+        <div className={styles.inner}>
+          <svg className={styles.dock} viewBox="0 0 208 94" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0 0H208V70H181C169 70 163 73 158 82L154 88C150 92 143 94 132 94H76C65 94 58 92 54 88L50 82C45 73 39 70 27 70H0Z" />
+            <path d="M0 69.5H27C39 69.5 45 73 50 82L54 88C58 92 65 93.5 76 93.5H132C143 93.5 150 92 154 88L158 82C163 73 169 69.5 181 69.5H208" />
+          </svg>
 
-        <button
-          ref={menuButtonRef}
-          className="menu-toggle"
-          type="button"
-          aria-expanded={menuOpen}
-          aria-controls="primary-navigation"
-          aria-label={menuOpen ? 'Navigation schließen' : 'Navigation öffnen'}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <span className="menu-icon" aria-hidden="true">
-            <span />
-            <span />
-            <span />
-          </span>
-        </button>
+          <button
+            ref={menuButtonRef}
+            className={styles.menuToggle}
+            type="button"
+            aria-expanded={menuOpen}
+            aria-controls="primary-navigation"
+            aria-label={menuOpen ? 'Navigation schließen' : 'Navigation öffnen'}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span className={styles.menuIcon} aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </span>
+          </button>
 
-        <nav
-          ref={navigationRef}
-          id="primary-navigation"
-          className={`primary-nav${menuOpen ? ' is-open' : ''}`}
-          aria-label="Hauptnavigation"
-          aria-hidden={isMobile && !menuOpen ? true : undefined}
-        >
-          {navigation.map(({ label, href }) => (
+          <a className={styles.brand} href="/" aria-label="MSB AI & Automation Startseite" onClick={closeMenu}>
+            <Image
+              className={styles.logo}
+              src="/msb-wordmark.png"
+              alt=""
+              width={1813}
+              height={545}
+              priority
+              sizes="(max-width: 767px) 100px, (max-width: 1279px) 106px, 118px"
+              aria-hidden="true"
+            />
+            <span className={styles.brandText} aria-hidden="true">
+              <strong>AI &amp; Automation</strong>
+              <small>mit Menschenverstand</small>
+            </span>
+          </a>
+
+          <nav
+            ref={navigationRef}
+            id="primary-navigation"
+            className={joinClasses(styles.nav, menuOpen && styles.navOpen)}
+            aria-label="Hauptnavigation"
+            aria-hidden={usesMenu && !menuOpen ? true : undefined}
+          >
+            {navigation.map(({ label, href }) => {
+              const active = pathname === href;
+              return (
+                <a
+                  key={href}
+                  className={joinClasses(styles.navLink, active && styles.activeLink)}
+                  href={href}
+                  aria-current={active ? 'page' : undefined}
+                  tabIndex={usesMenu && !menuOpen ? -1 : undefined}
+                  onClick={closeMenu}
+                >
+                  {label}
+                </a>
+              );
+            })}
             <a
-              key={href}
-              className={pathname === href ? 'is-active' : undefined}
-              href={href}
-              aria-current={pathname === href ? 'page' : undefined}
-              tabIndex={isMobile && !menuOpen ? -1 : undefined}
-              onClick={handleNavigation}
+              className={styles.menuContact}
+              href="mailto:kontakt@msb-ai.de"
+              tabIndex={usesMenu && !menuOpen ? -1 : undefined}
+              onClick={closeMenu}
             >
-              {label}
+              Kontakt
             </a>
-          ))}
-          <a
-            className="mobile-nav-contact"
-            href="mailto:kontakt@msb-ai.de"
-            tabIndex={isMobile && !menuOpen ? -1 : undefined}
-            onClick={handleNavigation}
-          >
-            Kontakt
-          </a>
-          <a
-            className="button button-primary mobile-nav-cta"
-            href="/automation-check"
-            tabIndex={isMobile && !menuOpen ? -1 : undefined}
-            onClick={handleNavigation}
-          >
-            Prozess kostenlos prüfen lassen
-          </a>
-        </nav>
+            <a
+              className={styles.menuCta}
+              href="/automation-check"
+              tabIndex={usesMenu && !menuOpen ? -1 : undefined}
+              onClick={closeMenu}
+            >
+              Prozess kostenlos prüfen lassen
+            </a>
+          </nav>
 
-        <a
-          className={`button button-primary header-cta${pathname === '/automation-check' ? ' is-active' : ''}`}
-          href="/automation-check"
-          aria-current={pathname === '/automation-check' ? 'page' : undefined}
-        >
-          Prozess kostenlos prüfen lassen
-        </a>
+          <div className={styles.actions}>
+            <a className={styles.contactLink} href="mailto:kontakt@msb-ai.de">
+              Kontakt
+            </a>
+            <a
+              className={styles.cta}
+              href="/automation-check"
+              aria-current={pathname === '/automation-check' ? 'page' : undefined}
+            >
+              Automation Check
+              <ArrowIcon />
+            </a>
+          </div>
+        </div>
       </div>
     </header>
   );
