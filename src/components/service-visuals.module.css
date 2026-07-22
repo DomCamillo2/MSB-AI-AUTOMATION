@@ -597,22 +597,22 @@
   transition: transform 240ms var(--ease-standard), border-color 220ms ease;
 }
 
-.cycleStep:nth-of-type(1) {
+.stepOne {
   top: 4%;
   left: 4%;
 }
 
-.cycleStep:nth-of-type(2) {
+.stepTwo {
   top: 4%;
   right: 4%;
 }
 
-.cycleStep:nth-of-type(3) {
+.stepThree {
   right: 4%;
   bottom: 4%;
 }
 
-.cycleStep:nth-of-type(4) {
+.stepFour {
   bottom: 4%;
   left: 4%;
 }
@@ -756,13 +756,13 @@
     min-width: 104px;
   }
 
-  .cycleStep:nth-of-type(1),
-  .cycleStep:nth-of-type(4) {
+  .stepOne,
+  .stepFour {
     left: 0;
   }
 
-  .cycleStep:nth-of-type(2),
-  .cycleStep:nth-of-type(3) {
+  .stepTwo,
+  .stepThree {
     right: 0;
   }
 }
