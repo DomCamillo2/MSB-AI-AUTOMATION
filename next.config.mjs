@@ -43,6 +43,12 @@ const nextConfig = {
         has: [{ type: 'host', value: 'msb-ai-automation.vercel.app' }],
         destination: 'https://www.msb-ai.de/:path*',
         permanent: true
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'msb-ai-consulting.vercel.app' }],
+        destination: 'https://www.msb-ai.de/:path*',
+        permanent: true
       }
     ];
   }

@@ -8,7 +8,7 @@ Dieser Bericht beschreibt die technisch umgesetzte Konfiguration. Er ist keine R
 
 - Kanonischer Ursprung: `https://www.msb-ai.de`. Der vom Auftrag bevorzugte Apex-Host `https://msb-ai.de` leitet in der bestehenden Vercel-Konfiguration bereits dauerhaft auf `www` weiter. Deshalb bleibt `www` der einheitliche Canonical, um keine Redirect-/Canonical-Kette in Gegenrichtung zu erzeugen.
 - HTTP sowie alternative öffentliche Hostvarianten leiten auf HTTPS und den Canonical-Host weiter.
-- `msb-ai-automation.vercel.app` leitet dauerhaft auf den Canonical-Host weiter; Vercel-Preview-Hosts bleiben davon unberührt.
+- `msb-ai-automation.vercel.app` und `msb-ai-consulting.vercel.app` leiten dauerhaft auf den Canonical-Host weiter; Vercel-Preview-Hosts bleiben davon unberührt.
 - Produktionsseiten sind indexierbar. Preview-Builds erhalten zusätzlich `X-Robots-Tag: noindex, nofollow`, ein `noindex`-Meta-Tag, eine komplett sperrende `robots.txt` und eine leere Sitemap.
 - Canonicals werden nie aus der jeweiligen Preview-URL gebildet.
 - Die Produktions-Sitemap enthält ausschließlich die acht indexierbaren Seiten und liegt unter `https://www.msb-ai.de/sitemap.xml`.
@@ -127,7 +127,7 @@ Vor Veröffentlichung juristisch klären: exakte Rechts-/Geschäftsbezeichnung d
 - HTML: ein H1 auf der Startseite, Canonical auf dem Production-Host, strukturierte Daten JSON-parsebar.
 - Sitemap/robots: Production freigegeben und vollständig; Preview gesperrt und Sitemap leer.
 - 404: echter HTTP-Status 404.
-- Redirects: Apex/HTTP/alter Vercel-Produktionshost im Live-Audit dauerhaft auf `https://www.msb-ai.de` geführt.
+- Redirects: Apex/HTTP/beide alten Vercel-Produktionshosts im Live-Audit dauerhaft auf `https://www.msb-ai.de` geführt.
 - Security: CSP, Referrer-Policy, `nosniff`, Frame-Schutz und Permissions-Policy per lokalem Production-HTTP-Test bestätigt; Preview zusätzlich mit `X-Robots-Tag`.
 - Initiales HTML: kein Google-Tag-Script und keine GA-Mess-ID enthalten.
 - Consent-Code: keine GA-Ladung bei fehlender oder negativer Einwilligung; Production-Gate, Widerruf und Cookie-Löschung implementiert.
