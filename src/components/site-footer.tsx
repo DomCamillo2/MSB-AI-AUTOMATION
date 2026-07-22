@@ -1,4 +1,5 @@
 import { navigation } from '@/lib/site-content';
+import ConsentSettingsButton from '@/components/consent-settings-button';
 
 export function SiteFooter() {
   return (
@@ -39,6 +40,7 @@ export function SiteFooter() {
           <a href="/kontakt">Kontakt</a>
           <a href="/impressum">Impressum</a>
           <a href="/datenschutz">Datenschutz</a>
+          <ConsentSettingsButton />
         </nav>
       </div>
     </footer>

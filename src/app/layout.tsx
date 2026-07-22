@@ -1,10 +1,15 @@
 import type { Metadata } from 'next';
 import { Inter, Poppins } from 'next/font/google';
+import AnalyticsInteractions from '@/components/analytics-interactions';
+import ConsentManager from '@/components/consent-manager';
 import MotionProvider from '@/components/motion-provider';
 import SiteFooter from '@/components/site-footer';
 import SiteHeader from '@/components/site-header';
 import { defaultDescription, siteName, siteUrl } from '@/lib/seo';
 import './globals.css';
+
+const allowIndexing = process.env.VERCEL_ENV !== 'preview';
+const analyticsEnabled = process.env.VERCEL_ENV === 'production';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -36,15 +41,12 @@ export const metadata: Metadata = {
     address: false,
     telephone: false
   },
-  icons: {
-    icon: '/msb-logo.webp'
-  },
   robots: {
-    index: true,
-    follow: true,
+    index: allowIndexing,
+    follow: allowIndexing,
     googleBot: {
-      index: true,
-      follow: true,
+      index: allowIndexing,
+      follow: allowIndexing,
       'max-image-preview': 'large',
       'max-snippet': -1,
       'max-video-preview': -1
@@ -65,6 +67,8 @@ export default function RootLayout({
           <SiteHeader />
           {children}
           <SiteFooter />
+          <AnalyticsInteractions />
+          <ConsentManager analyticsEnabled={analyticsEnabled} />
         </MotionProvider>
       </body>
     </html>

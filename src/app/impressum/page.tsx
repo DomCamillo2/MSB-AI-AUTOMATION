@@ -2,7 +2,7 @@ import { createPageMetadata } from '@/lib/seo';
 
 export const metadata = createPageMetadata({
   title: 'Impressum',
-  description: 'Anbieterkennzeichnung und Kontaktangaben von MSB AI Consulting gemäß § 5 DDG.',
+  description: 'Anbieterkennzeichnung und Kontaktangaben von MSB AI & Automation gemäß § 5 DDG.',
   path: '/impressum',
   index: false
 });
@@ -21,8 +21,7 @@ export default function ImpressumPage() {
           <h2 id="provider-heading">Diensteanbieter</h2>
           <address>
             Dominik Soballa<br />
-            MSB AI Consulting<br />
-            Inhaber: Dominik Soballa<br />
+            handelnd unter MSB AI &amp; Automation<br />
             Haußerstraße 150<br />
             72076 Tübingen<br />
             Deutschland
@@ -33,6 +32,8 @@ export default function ImpressumPage() {
           <h2 id="contact-heading">Kontakt</h2>
           <p>E-Mail: <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a></p>
         </section>
+
+        <p className="legal-meta">Stand: Juli 2026</p>
       </article>
     </main>
   );

@@ -8,7 +8,6 @@ const structuredData = {
       '@id': `${siteUrl}/#website`,
       url: siteUrl,
       name: siteName,
-      alternateName: 'MSB AI Consulting',
       description: defaultDescription,
       inLanguage: 'de-DE',
       publisher: { '@id': `${siteUrl}/#organization` }
@@ -17,7 +16,7 @@ const structuredData = {
       '@type': ['Organization', 'ProfessionalService'],
       '@id': `${siteUrl}/#organization`,
       name: siteName,
-      legalName: 'MSB AI Consulting',
+      legalName: 'Dominik Soballa',
       url: siteUrl,
       logo: `${siteUrl}/msb-logo-lockup.png`,
       email: 'kontakt@msb-ai.de',
