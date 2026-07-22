@@ -18,6 +18,28 @@ function ArrowIcon() {
   );
 }
 
+function AutomationCheckHeader() {
+  return (
+    <header className={styles.checkHeader}>
+      <div className={styles.checkHeaderInner}>
+        <a className={styles.checkBrand} href="/" aria-label="MSB AI & Automation Startseite">
+          <Image
+            className={styles.checkLogo}
+            src="/msb-wordmark.png"
+            alt="MSB"
+            width={1813}
+            height={545}
+            priority
+            sizes="100px"
+          />
+        </a>
+        <p><span aria-hidden="true">●</span> Interaktive Prozesseinschätzung</p>
+        <a className={styles.checkExit} href="/">Check verlassen <span aria-hidden="true">×</span></a>
+      </div>
+    </header>
+  );
+}
+
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -101,6 +123,8 @@ export function SiteHeader() {
   function closeMenu() {
     setMenuOpen(false);
   }
+
+  if (pathname === '/automation-check') return <AutomationCheckHeader />;
 
   return (
     <header

@@ -2819,6 +2819,25 @@ textarea[aria-invalid='true'] {
   border-top: 1px solid var(--border-dark);
 }
 
+.automation-check-footer {
+  padding: 0 max(0px, env(safe-area-inset-right)) max(0px, env(safe-area-inset-bottom)) max(0px, env(safe-area-inset-left));
+}
+
+.automation-check-footer .footer-meta {
+  min-height: 72px;
+  align-items: center;
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+@media print {
+  body > header,
+  body > footer {
+    display: none !important;
+  }
+}
+
 .footer-meta > p {
   color: #8fa1ae;
   font-size: 0.76rem;
