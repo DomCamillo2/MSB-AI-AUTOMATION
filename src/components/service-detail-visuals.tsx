@@ -63,8 +63,8 @@ export function ProcessVisual() {
   return (
     <div className={styles.visualFrame} role="img" aria-label="Prozess-Scan vom Eingang über Ablauf und Prüfung bis zum Automatisierungspotenzial">
       <div className={styles.visualTopbar}>
-        <span className={styles.visualKicker}>Prozess-Scan</span>
-        <span className={styles.visualState}><i aria-hidden="true" /> strukturiert</span>
+        <span className={styles.visualKicker}>Prozessanalyse</span>
+        <span className={styles.visualState}>Ablauf sichtbar</span>
       </div>
 
       <div className={styles.processTrack}>
@@ -97,14 +97,14 @@ export function IntegrationVisual() {
   return (
     <div className={styles.visualFrame} role="img" aria-label="Datenfluss aus E-Mail und Formular über eine Automatisierung mit menschlicher Freigabe in bestehende Systeme">
       <div className={styles.visualTopbar}>
-        <span className={styles.visualKicker}>Workflow-Architektur</span>
-        <span className={styles.visualState}><i aria-hidden="true" /> kontrolliert</span>
+        <span className={styles.visualKicker}>Technischer Ablauf</span>
+        <span className={styles.visualState}>Mensch prüft</span>
       </div>
 
       <div className={styles.integrationGrid}>
         <div className={styles.sourceStack}>
-          <div className={styles.dataNode}><span>EM</span>E-Mail</div>
-          <div className={styles.dataNode}><span>FO</span>Formular</div>
+          <div className={styles.dataNode}>E-Mail</div>
+          <div className={styles.dataNode}>Formular</div>
         </div>
 
         <span className={styles.flowRail} aria-hidden="true" />
@@ -118,9 +118,9 @@ export function IntegrationVisual() {
         <span className={styles.flowRail} aria-hidden="true" />
 
         <div className={styles.systemStack}>
-          <div className={styles.dataNode}><span>CR</span>CRM</div>
-          <div className={styles.dataNode}><span>ER</span>ERP</div>
-          <div className={styles.dataNode}><span>DM</span>DMS</div>
+          <div className={styles.dataNode}>CRM</div>
+          <div className={styles.dataNode}>ERP</div>
+          <div className={styles.dataNode}>DMS</div>
         </div>
       </div>
 
@@ -147,8 +147,8 @@ export function EnablementVisual() {
   return (
     <div className={styles.visualFrame} role="img" aria-label="Einführungskreislauf aus Testen, Rückmeldung, Anpassen und Übergeben mit dem Team im Mittelpunkt">
       <div className={styles.visualTopbar}>
-        <span className={styles.visualKicker}>Adoption Loop</span>
-        <span className={styles.visualState}><i aria-hidden="true" /> gemeinsam</span>
+        <span className={styles.visualKicker}>Einführung</span>
+        <span className={styles.visualState}>Feedback wirkt</span>
       </div>
 
       <div className={styles.cycleCanvas}>
