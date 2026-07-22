@@ -1,28 +1,71 @@
 .breadcrumb {
-  padding: 1.15rem 0 0;
+  padding: 1rem 0;
   background: var(--warm);
+  border-bottom: 1px solid rgba(7, 27, 58, 0.07);
 }
 
 .breadcrumb ol {
+  min-height: 52px;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 0;
-  padding: 0;
+  align-items: center;
+  gap: 0.15rem;
+  margin-inline: auto;
+  padding: 0.45rem 0.55rem;
   color: #657178;
   font-size: 0.74rem;
+  background: rgba(255, 255, 255, 0.54);
+  border: 1px solid rgba(7, 27, 58, 0.09);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(7, 27, 58, 0.035);
   list-style: none;
 }
 
+.breadcrumb li {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.35;
+}
+
 .breadcrumb li:not(:last-child)::after {
-  margin-left: 0.5rem;
-  color: #a5afb3;
-  content: '/';
+  margin-inline: 0.15rem;
+  color: #8fa0a4;
+  content: '›';
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 .breadcrumb a {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.6rem;
   color: inherit;
+  border-radius: 8px;
+  font-weight: 600;
   text-decoration: none;
+  transition: color 180ms ease, background-color 180ms ease;
+}
+
+.breadcrumb li[aria-current='page'] {
+  gap: 0.45rem;
+  padding: 0.45rem 0.65rem;
+  color: var(--navy);
+  background: rgba(8, 119, 123, 0.075);
+  border: 1px solid rgba(8, 119, 123, 0.15);
+  border-radius: 8px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.breadcrumb li[aria-current='page']::before {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 auto;
+  background: var(--teal);
+  border-radius: 50%;
+  content: '';
 }
 
 .detailHero {
@@ -526,6 +569,34 @@
 
   .breadcrumb a:hover {
     color: var(--teal);
+    background: rgba(8, 119, 123, 0.065);
+  }
+}
+
+@media (max-width: 560px) {
+  .breadcrumb {
+    padding: 0.7rem 0;
+  }
+
+  .breadcrumb ol {
+    min-height: 46px;
+    gap: 0.05rem;
+    padding: 0.35rem;
+    font-size: 0.68rem;
+  }
+
+  .breadcrumb a {
+    min-height: 36px;
+    padding-inline: 0.45rem;
+  }
+
+  .breadcrumb li:not(:last-child)::after {
+    margin-inline: 0.05rem;
+  }
+
+  .breadcrumb li[aria-current='page'] {
+    min-height: 36px;
+    padding: 0.4rem 0.5rem;
   }
 }
 
