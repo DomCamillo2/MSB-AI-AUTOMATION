@@ -6,13 +6,36 @@ import ProcessFlow from '@/components/process-flow';
 import TeamGrid from '@/components/team-grid';
 import { Reveal, RevealGroup } from '@/components/reveal';
 import { createPageMetadata } from '@/lib/seo';
-import { engagementSteps, problems, services, useCases } from '@/lib/site-content';
+import { problems, services, useCases } from '@/lib/site-content';
 
 export const metadata = createPageMetadata({
   title: 'Prozessautomatisierung für KMU',
   description: 'MSB analysiert wiederkehrende Abläufe, entwickelt pragmatische Automatisierungen und begleitet Teams bei der Einführung.',
   path: '/'
 });
+
+const homeWorkplan = [
+  {
+    title: 'Prozess prüfen',
+    description: 'Wir betrachten einen realen Ablauf mit den beteiligten Systemen, Daten und Ausnahmen.',
+    outcome: 'Entscheidung, ob sich ein Pilot lohnt'
+  },
+  {
+    title: 'Pilot testen',
+    description: 'Ein klar abgegrenzter Teil des Ablaufs läuft mit typischen Fällen und echten Ausnahmen.',
+    outcome: 'Messbare Ergebnisse und bekannte Grenzen'
+  },
+  {
+    title: 'Systeme anbinden',
+    description: 'Nur bestätigte Schritte werden mit den vorhandenen Systemen und Freigaben verbunden.',
+    outcome: 'Dokumentierte Schnittstellen und Prüfstellen'
+  },
+  {
+    title: 'Betrieb übergeben',
+    description: 'Wir bereiten das Team, die Kontrollen und die Verantwortlichen auf den laufenden Betrieb vor.',
+    outcome: 'Geschulter Betrieb mit klarer Zuständigkeit'
+  }
+] as const;
 
 export default function HomePage() {
   return (
@@ -96,22 +119,18 @@ export default function HomePage() {
           <Reveal className="section-heading heading-split">
             <div>
               <p className="eyebrow">Vorgehen</p>
-              <h2 id="engagement-heading">Klein starten. Wirkung prüfen. Sauber übergeben.</h2>
+              <h2 id="engagement-heading">Von der ersten Prüfung bis zur geregelten Übergabe.</h2>
             </div>
             <div className="section-heading-action">
-              <p>Wir starten mit einem klar abgegrenzten Ablauf. Erst wenn der Pilot im Alltag funktioniert, folgt die Integration.</p>
-              <a className="text-link" href="/vorgehen">Vorgehen kennenlernen <span aria-hidden="true">→</span></a>
+              <p>Wir beginnen mit einem konkreten Ablauf. Erst wenn der Pilot im Alltag funktioniert, binden wir Systeme an und bereiten die Übergabe vor.</p>
+              <a className="text-link" href="/vorgehen">Vorgehen im Detail <span aria-hidden="true">→</span></a>
             </div>
           </Reveal>
           <ProcessFlow
             className="engagement-process engagement-process-preview"
-            ariaLabel="Vier Schritte von der Prozessprüfung bis zur Übergabe"
+            ariaLabel="Arbeitsplan mit vier Phasen von der Prozessprüfung bis zur Übergabe"
             layout="horizontal"
-            steps={engagementSteps.map((step) => ({
-              title: step.title,
-              description: step.text,
-              outcome: step.deliverable
-            }))}
+            steps={homeWorkplan}
           />
         </div>
       </section>
