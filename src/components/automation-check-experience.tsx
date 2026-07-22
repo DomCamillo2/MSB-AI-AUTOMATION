@@ -473,31 +473,33 @@ export function AutomationCheckExperience() {
           <div className={`container ${styles.startGrid}`}>
             <div>
               <p className="eyebrow">Automation Check</p>
-              <h1 id="automation-check-heading">Wie viel Automatisierungspotenzial steckt in Ihrem Prozess?</h1>
+              <h1 id="automation-check-heading">Wie viel Automatisierungs&shy;potenzial steckt in Ihrem Prozess?</h1>
               <p className={styles.startLead}>Beantworten Sie einige kurze Fragen zu einem wiederkehrenden Ablauf und erhalten Sie direkt eine erste, nachvollziehbare Einschätzung.</p>
               <div className={styles.startActions}>
-                <button className="button button-primary" type="button" onClick={startCheck}>Automation Check starten <span className="button-arrow" aria-hidden="true">→</span></button>
-                <p>Für die erste Einschätzung sind keine Kontaktdaten erforderlich.</p>
+                <button className={styles.startButton} type="button" onClick={startCheck}>
+                  <span className={styles.startButtonCopy}>
+                    <strong>Automation Check starten</strong>
+                    <small>Direkt zur ersten Frage</small>
+                  </span>
+                  <span className={styles.startButtonArrow} aria-hidden="true">→</span>
+                </button>
+                <p className={styles.startAssurance}><span aria-hidden="true">✓</span> Keine technischen Vorkenntnisse erforderlich.</p>
               </div>
+              <ul className={styles.startFacts} aria-label="Rahmen des Automation Checks">
+                <li><strong>ca. 90 Sek.</strong><span>Kurz und fokussiert</span></li>
+                <li><strong>Ohne Anmeldung</strong><span>Keine Kontaktdaten</span></li>
+                <li><strong>Ergebnis direkt</strong><span>Erste Orientierung</span></li>
+              </ul>
             </div>
             <aside className={styles.startProductCard} aria-label="Informationen zum Automation Check">
-              <div className={styles.startCardTop}><span>MSB / PROCESS DIAGNOSTIC</span><span>V1</span></div>
+              <div className={styles.startCardTop}><span>MSB / PROZESS-CHECK</span><span>V1</span></div>
               <ol>
-                <li><span>01</span><strong>Prozess beschreiben</strong></li>
-                <li><span>02</span><strong>Potenzial einordnen</strong></li>
-                <li><span>03</span><strong>Ergebnis erhalten</strong></li>
+                <li><span>01</span><strong>Prozess einordnen</strong></li>
+                <li><span>02</span><strong>Potenzial bewerten</strong></li>
+                <li><span>03</span><strong>Ergebnis verstehen</strong></li>
               </ol>
               <p>Automatisierung mit Menschenverstand.</p>
             </aside>
-          </div>
-        </section>
-        <section className={styles.startTrust} aria-label="Rahmen des Automation Checks">
-          <div className="container">
-            <ul>
-              <li><strong>ca. 90 Sekunden</strong><span>Kurz und fokussiert</span></li>
-              <li><strong>Keine technischen Vorkenntnisse</strong><span>Fragen aus dem Arbeitsalltag</span></li>
-              <li><strong>Erste Einschätzung direkt</strong><span>Keine vollständige Prozessanalyse</span></li>
-            </ul>
           </div>
         </section>
       </main>

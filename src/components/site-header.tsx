@@ -34,7 +34,7 @@ function AutomationCheckHeader() {
           />
         </a>
         <p><span aria-hidden="true">●</span> Interaktive Prozesseinschätzung</p>
-        <a className={styles.checkExit} href="/">Check verlassen <span aria-hidden="true">×</span></a>
+        <a className={styles.checkExit} href="/">Zur Website <span aria-hidden="true">×</span></a>
       </div>
     </header>
   );

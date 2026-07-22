@@ -9,46 +9,151 @@
   min-height: min(720px, calc(100svh - 88px));
   display: grid;
   align-items: center;
-  padding: clamp(4.5rem, 8vw, 8rem) 0;
+  padding: clamp(3.5rem, 6vw, 6rem) 0;
   overflow: hidden;
 }
 
 .startGrid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.68fr);
+  grid-template-columns: minmax(0, 1.12fr) minmax(360px, 0.62fr);
   align-items: center;
-  gap: clamp(3rem, 9vw, 9rem);
+  gap: clamp(3rem, 6vw, 6rem);
 }
 
 .startGrid h1 {
-  max-width: 16ch;
+  max-width: 13.5ch;
   margin-top: 0.8rem;
-  font-size: clamp(3rem, 5.7vw, 5.8rem);
+  font-size: clamp(3rem, 4.7vw, 5.15rem);
+  hyphens: manual;
   letter-spacing: -0.05em;
-  line-height: 0.98;
+  line-height: 0.97;
+  overflow-wrap: normal;
 }
 
 .startLead {
   max-width: 64ch;
-  margin-top: 1.5rem;
+  margin-top: 1.3rem;
   color: #4d5a60;
   font-size: clamp(1.02rem, 1.4vw, 1.18rem);
   line-height: 1.72;
 }
 
 .startActions {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem 1.4rem;
-  margin-top: 2.2rem;
+  max-width: 480px;
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.8rem;
 }
 
-.startActions > p {
-  max-width: 32ch;
+.startButton {
+  width: 100%;
+  min-height: 78px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 48px;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1rem 0.85rem 1.3rem;
+  color: var(--white);
+  background: var(--navy);
+  border: 1px solid var(--navy);
+  border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(7, 27, 58, 0.16);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 180ms ease, box-shadow 220ms var(--ease-standard), transform 220ms var(--ease-standard);
+}
+
+.startButtonCopy {
+  min-width: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.startButtonCopy strong {
+  color: var(--white);
+  font-family: var(--font-poppins), Poppins, sans-serif;
+  font-size: clamp(1rem, 1.35vw, 1.15rem);
+  line-height: 1.3;
+}
+
+.startButtonCopy small {
+  color: #b9c8d2;
+  font-size: 0.72rem;
+}
+
+.startButtonArrow {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: var(--navy);
+  background: var(--teal-bright);
+  border-radius: 50%;
+  font-size: 1.2rem;
+  transition: transform 220ms var(--ease-standard);
+}
+
+.startAssurance {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   color: #647177;
-  font-size: 0.78rem;
-  line-height: 1.5;
+  font-size: 0.76rem;
+  line-height: 1.45;
+}
+
+.startAssurance span {
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  color: var(--white);
+  background: var(--teal);
+  border-radius: 50%;
+  font-size: 0.66rem;
+  font-weight: 800;
+}
+
+.startFacts {
+  max-width: 560px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1.6rem 0 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  list-style: none;
+}
+
+.startFacts li {
+  min-width: 0;
+  display: grid;
+  align-content: center;
+  padding: 0.85rem 0.8rem;
+  border-right: 1px solid var(--border);
+}
+
+.startFacts li:first-child {
+  padding-left: 0;
+}
+
+.startFacts li:last-child {
+  border-right: 0;
+}
+
+.startFacts strong {
+  color: var(--navy);
+  font-family: var(--font-poppins), Poppins, sans-serif;
+  font-size: 0.74rem;
+  line-height: 1.35;
+}
+
+.startFacts span {
+  margin-top: 0.15rem;
+  color: #738087;
+  font-size: 0.65rem;
+  line-height: 1.4;
 }
 
 .startProductCard {
@@ -104,9 +209,30 @@
 }
 
 .startProductCard li span {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
   color: var(--teal-bright);
+  border: 1px solid rgba(105, 208, 207, 0.28);
+  border-radius: 50%;
   font-size: 0.68rem;
   font-weight: 700;
+}
+
+.startProductCard li:first-child {
+  position: relative;
+  background: rgba(105, 208, 207, 0.075);
+}
+
+.startProductCard li:first-child::before {
+  width: 3px;
+  position: absolute;
+  top: 0.75rem;
+  bottom: 0.75rem;
+  left: -1.5rem;
+  background: var(--teal-bright);
+  content: '';
 }
 
 .startProductCard li strong {
@@ -127,44 +253,6 @@
   line-height: 1.35;
 }
 
-.startTrust {
-  background: var(--paper);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.startTrust ul {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.startTrust li {
-  min-height: 112px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1.25rem clamp(1rem, 3vw, 2rem);
-  border-left: 1px solid var(--border);
-}
-
-.startTrust li:last-child {
-  border-right: 1px solid var(--border);
-}
-
-.startTrust strong {
-  color: var(--navy);
-  font-family: var(--font-poppins), Poppins, sans-serif;
-  font-size: 0.82rem;
-}
-
-.startTrust span {
-  margin-top: 0.35rem;
-  color: #69757a;
-  font-size: 0.76rem;
-}
 
 .progress {
   padding: 1.5rem 0 0;
@@ -1050,6 +1138,18 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .startButton:hover,
+  .startButton:focus-visible {
+    background: var(--navy-soft);
+    box-shadow: 0 16px 34px rgba(7, 27, 58, 0.22);
+    transform: translateY(-2px);
+  }
+
+  .startButton:hover .startButtonArrow,
+  .startButton:focus-visible .startButtonArrow {
+    transform: translateX(3px);
+  }
+
   .areaChoice:hover,
   .choice:hover {
     border-color: rgba(8, 119, 123, 0.55);
@@ -1132,17 +1232,6 @@
   .startGrid h1 {
     max-width: 100%;
     font-size: clamp(2.45rem, 11.2vw, 3.65rem);
-  }
-
-  .startTrust ul {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .startTrust li,
-  .startTrust li:last-child {
-    min-height: 86px;
-    border-right: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
   }
 
   .phaseList {
@@ -1259,13 +1348,32 @@
 
 @media (max-width: 420px) {
   .startActions,
-  .startActions :global(.button) {
+  .startButton {
     width: 100%;
   }
 
-  .startActions :global(.button) {
-    padding-inline: 0.8rem;
-    white-space: normal;
+  .startButton {
+    min-height: 74px;
+    grid-template-columns: minmax(0, 1fr) 44px;
+    gap: 0.65rem;
+    padding: 0.75rem 0.75rem 0.75rem 1rem;
+  }
+
+  .startButtonArrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .startFacts li {
+    padding-inline: 0.45rem;
+  }
+
+  .startFacts strong {
+    font-size: 0.68rem;
+  }
+
+  .startFacts span {
+    font-size: 0.59rem;
   }
 
   .startProductCard {
@@ -1330,6 +1438,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .startButton,
+  .startButtonArrow,
   .questionContent,
   .processNode,
   .reasonCard {
