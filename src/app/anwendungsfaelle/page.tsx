@@ -4,8 +4,8 @@ import UseCaseExplorer from '@/components/use-case-explorer';
 import { createPageMetadata } from '@/lib/seo';
 
 export const metadata = createPageMetadata({
-  title: 'Anwendungsfälle',
-  description: 'Konkrete Einsatzfelder für Automatisierung in HR, Verwaltung, CRM, Reporting und internem Wissen.',
+  title: 'Automatisierung für HR, CRM & Reporting',
+  description: 'Konkrete Automatisierungsbeispiele für HR, Verwaltung, CRM, Reporting und internes Wissen – mit klaren menschlichen Prüfungen.',
   path: '/anwendungsfaelle'
 });
 

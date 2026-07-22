@@ -177,7 +177,7 @@ export function SiteHeader() {
             })}
             <a
               className={styles.menuContact}
-              href="mailto:kontakt@msb-ai.de"
+              href="/kontakt"
               tabIndex={usesMenu && !menuOpen ? -1 : undefined}
               onClick={closeMenu}
             >
@@ -194,7 +194,7 @@ export function SiteHeader() {
           </nav>
 
           <div className={styles.actions}>
-            <a className={styles.contactLink} href="mailto:kontakt@msb-ai.de">
+            <a className={styles.contactLink} href="/kontakt" aria-current={pathname === '/kontakt' ? 'page' : undefined}>
               Kontakt
             </a>
             <a

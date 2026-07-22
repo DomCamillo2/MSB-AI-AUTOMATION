@@ -2,18 +2,31 @@ import Accordion from '@/components/accordion';
 import PageCta from '@/components/page-cta';
 import PageIntro from '@/components/page-intro';
 import ProcessFlow from '@/components/process-flow';
-import { createPageMetadata } from '@/lib/seo';
+import StructuredData from '@/components/structured-data';
+import { createPageMetadata, siteUrl } from '@/lib/seo';
 import { engagementSteps, faqs, principles } from '@/lib/site-content';
 
 export const metadata = createPageMetadata({
-  title: 'Vorgehen',
-  description: 'Vom Automation Check über einen abgegrenzten Pilot bis zur dokumentierten Übergabe in den Arbeitsalltag.',
+  title: 'Automation Check, Pilot & Einführung',
+  description: 'So führt MSB Automatisierung ein: Prozess prüfen, begrenzten Pilot testen, Systeme kontrolliert anbinden und das Team befähigen.',
   path: '/vorgehen'
 });
+
+const faqStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${siteUrl}/vorgehen#faq`,
+  mainEntity: faqs.map(([question, answer]) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: { '@type': 'Answer', text: answer }
+  }))
+};
 
 export default function VorgehenPage() {
   return (
     <main id="main-content">
+      <StructuredData data={faqStructuredData} />
       <PageIntro
         eyebrow="Vorgehen"
         title="Klein starten. Wirkung prüfen. Sauber übergeben."
