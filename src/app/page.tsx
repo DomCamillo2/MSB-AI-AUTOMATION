@@ -99,7 +99,7 @@ export default function HomePage() {
               <h2 id="engagement-heading">Klein starten. Wirkung prüfen. Sauber übergeben.</h2>
             </div>
             <div className="section-heading-action">
-              <p>Sie müssen nicht sofort ein großes Transformationsprojekt beauftragen.</p>
+              <p>Wir starten mit einem klar abgegrenzten Ablauf. Erst wenn der Pilot im Alltag funktioniert, folgt die Integration.</p>
               <a className="text-link" href="/vorgehen">Vorgehen kennenlernen <span aria-hidden="true">→</span></a>
             </div>
           </Reveal>
