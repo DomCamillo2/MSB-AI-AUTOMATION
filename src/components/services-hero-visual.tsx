@@ -3,20 +3,20 @@ import styles from './service-visuals.module.css';
 const stages = [
   {
     number: '01',
-    title: 'Prozess verstehen',
-    meta: 'Systeme · Rollen · Daten · Risiken',
+    title: 'Ablauf klären',
+    meta: 'Ist-Prozess · Ausnahmen · Entscheidung',
     icon: 'analysis'
   },
   {
     number: '02',
-    title: 'Workflow entwickeln',
-    meta: 'Schnittstellen · Regeln · Ausnahmen · Pilot',
+    title: 'Pilot testen',
+    meta: 'Regeln · Testfälle · Messwerte',
     icon: 'workflow'
   },
   {
     number: '03',
-    title: 'Im Alltag verankern',
-    meta: 'Dokumentation · Schulung · Übergabe',
+    title: 'Betrieb übergeben',
+    meta: 'Dokumentation · Rollen · Änderungen',
     icon: 'adoption'
   }
 ] as const;
@@ -57,12 +57,12 @@ export function ServicesHeroVisual() {
   return (
     <aside className={styles.heroModel} aria-labelledby="services-model-title">
       <div className={styles.heroTopbar}>
-        <span className={styles.heroBrand}>Leistungsmodell</span>
-        <span className={styles.heroState}>01 — 03</span>
+        <span className={styles.heroBrand}>Projektweg</span>
+        <span className={styles.heroState}>3 Arbeitspakete</span>
       </div>
 
       <h2 className={styles.heroTitle} id="services-model-title">
-        Analyse, technische Umsetzung und Einführung.
+        Vom Ist-Ablauf bis zur geregelten Übergabe.
       </h2>
 
       <div className={styles.heroStages}>
@@ -80,7 +80,7 @@ export function ServicesHeroVisual() {
 
       <p className={styles.heroFooter}>
         <span aria-hidden="true">—</span>
-        Analyse, Technik und Einführung greifen kontrolliert ineinander.
+        Jede Phase endet mit einem prüfbaren Ergebnis.
       </p>
     </aside>
   );

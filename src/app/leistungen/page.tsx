@@ -5,48 +5,60 @@ import { createPageMetadata } from '@/lib/seo';
 
 export const metadata = createPageMetadata({
   title: 'Leistungen',
-  description: 'Prozessanalyse, Workflow-Automatisierung sowie Einführung und Befähigung für klar abgegrenzte Abläufe.',
+  description: 'Wir klären Ihren Ist-Prozess, bauen einen begrenzten Automatisierungspiloten und übergeben ihn dokumentiert an Ihr Team.',
   path: '/leistungen'
 });
 
 const serviceBlocks = [
   {
     number: '01',
-    title: 'Prozessanalyse',
-    lead: 'Bevor wir automatisieren, machen wir den bestehenden Ablauf sichtbar.',
-    description: 'Wir erfassen wiederkehrende Aufgaben, beteiligte Systeme, Rollen, Datenquellen und Freigaben. Dabei prüfen wir auch Ausnahmen, Abhängigkeiten und mögliche Risiken.',
-    outputs: ['verständliches Prozessbild', 'priorisierte Automatisierungspotenziale', 'Empfehlung für einen klaren nächsten Schritt'],
+    title: 'Prozess klären',
+    lead: 'Am Anfang steht kein Tool, sondern ein Ablauf, der Zeit kostet.',
+    description: 'In einem Arbeitsgespräch zeichnen wir den heutigen Ablauf nach: Was löst ihn aus? Wer bearbeitet welchen Schritt? Welche Systeme und Daten sind beteiligt? Wo entstehen Rückfragen, Wartezeiten oder Ausnahmen?',
+    outputs: [
+      'Ist-Ablauf mit Rollen, Systemen und Freigaben',
+      'Liste der Normal- und Ausnahmefälle',
+      'Entscheidung: vereinfachen, automatisieren oder belassen'
+    ],
     link: '/automation-check',
-    linkLabel: 'Automation Check kennenlernen',
+    linkLabel: 'Eigenen Ablauf prüfen',
     visual: 'process'
   },
   {
     number: '02',
-    title: 'Workflow-Automatisierung',
-    lead: 'Wir entwickeln einen abgegrenzten Workflow, der zu Ihrer bestehenden IT passt.',
-    description: 'Schnittstellen, Regeln, Ausnahmen und menschliche Kontrollpunkte werden nachvollziehbar umgesetzt und zunächst in einem kontrollierten Pilot geprüft.',
-    outputs: ['funktionsfähiger Pilot', 'definierte Regeln und Ausnahmen', 'klare Erfolgskriterien'],
+    title: 'Pilot bauen',
+    lead: 'Wir automatisieren zuerst einen kleinen, klar abgegrenzten Teil.',
+    description: 'Gemeinsam legen wir Eingang, Regeln, Daten, Freigabe und Zielsystem fest. Danach testen wir den Workflow mit typischen Fällen und bewusst gewählten Ausnahmen – bevor er in den Arbeitsalltag kommt.',
+    outputs: [
+      'laufender Pilot in einer abgestimmten Testumgebung',
+      'Testfälle für Normalfall, Ausnahme und Fehler',
+      'Messwerte zu Zeitaufwand, Fehlern und manuellen Eingriffen'
+    ],
     link: '/anwendungsfaelle',
-    linkLabel: 'Anwendungsfälle ansehen',
+    linkLabel: 'Beispiele für mögliche Piloten',
     visual: 'integration'
   },
   {
     number: '03',
-    title: 'Einführung und Befähigung',
-    lead: 'Eine Lösung ist erst erfolgreich, wenn das Team sie versteht und zuverlässig nutzen kann.',
-    description: 'Wir dokumentieren den Ablauf, definieren Verantwortlichkeiten, begleiten die Einführung und schulen die beteiligten Mitarbeitenden.',
-    outputs: ['verständliche Dokumentation', 'Schulung der beteiligten Personen', 'geregelte Übergabe und Verbesserungsprozess'],
+    title: 'In Betrieb übergeben',
+    lead: 'Vor dem Start muss klar sein, wer prüft, eingreift und Änderungen freigibt.',
+    description: 'Wir dokumentieren den Workflow, üben reale Fälle mit den beteiligten Personen und legen fest, wie Fehler, Änderungen und neue Ausnahmen behandelt werden. Erst dann erfolgt die Übergabe.',
+    outputs: [
+      'Betriebsdokumentation mit Prüf- und Eingriffspunkten',
+      'Schulung anhand realer Fälle',
+      'benannte Verantwortung für Betrieb und Änderungen'
+    ],
     link: '/vorgehen',
-    linkLabel: 'Unser Vorgehen ansehen',
+    linkLabel: 'Projektablauf im Detail',
     visual: 'enablement'
   }
 ] as const;
 
 const boundaries = [
-  ['Keine Automatisierung um jeden Preis', 'Wenn ein Prozess ungeeignet ist, sprechen wir das offen an.'],
-  ['Keine pauschalen Einsparversprechen', 'Nutzen und Aufwand werden erst nach Betrachtung des konkreten Ablaufs eingeordnet.'],
-  ['Keine unnötigen Systemwechsel', 'Wir prüfen zuerst, was sich mit Ihrer bestehenden IT umsetzen lässt.'],
-  ['Keine Lösung ohne Übergabe', 'Dokumentation und Befähigung gehören zur Umsetzung.']
+  ['Nicht jeder Ablauf wird automatisiert', 'Wenn Vereinfachen oder Weglassen reicht, empfehlen wir keinen technischen Aufbau.'],
+  ['Keine Zahl ohne Datengrundlage', 'Zeitgewinn und Aufwand lassen sich erst am konkreten Ablauf sinnvoll einschätzen.'],
+  ['Bestehende Systeme zuerst', 'Wir prüfen vorhandene Schnittstellen und Werkzeuge, bevor ein Systemwechsel zur Diskussion steht.'],
+  ['Betrieb gehört zum Projekt', 'Prüfung, Dokumentation und Verantwortung enden nicht mit dem technischen Pilot.']
 ] as const;
 
 function ServiceVisual({ type }: { type: (typeof serviceBlocks)[number]['visual'] }) {
@@ -62,8 +74,8 @@ export default function LeistungenPage() {
         <div className="container services-hero-grid">
           <div className="services-hero-copy">
             <p className="eyebrow">Leistungen</p>
-            <h1><span>Automatisierung, die</span>{' '}<span>zu Ihren Abläufen passt.</span></h1>
-            <p>Wir verbinden Prozessanalyse, technische Umsetzung und Einführung. Ausgangspunkt ist ein konkreter Ablauf – passend zu Ihrer bestehenden IT und den Menschen, die damit arbeiten.</p>
+            <h1><span>Vom wiederkehrenden Ablauf</span>{' '}<span>zum verlässlichen Workflow.</span></h1>
+            <p>Wir klären den Ist-Prozess, bauen einen begrenzten Piloten und übergeben ihn mit dokumentierten Prüf- und Eingriffspunkten an Ihr Team.</p>
           </div>
           <ServicesHeroVisual />
         </div>
@@ -72,8 +84,11 @@ export default function LeistungenPage() {
       <section className="services-editorial-section" aria-labelledby="service-detail-heading">
         <div className="container">
           <div className="services-section-intro">
-            <div><p className="eyebrow">Unsere Leistungen</p><h2 id="service-detail-heading">Drei Bausteine für eine tragfähige Lösung</h2></div>
-            <p>Die Gewichtung richtet sich nach Ihrem Prozess, Ihrer Systemlandschaft und dem aktuellen Reifegrad.</p>
+            <div>
+              <p className="eyebrow">Leistungsumfang</p>
+              <h2 id="service-detail-heading">Drei Arbeitspakete – einzeln oder zusammen.</h2>
+            </div>
+            <p>Ihr Prozess ist schon beschrieben? Dann können wir beim Pilot starten. Noch unklar? Dann beginnen wir mit dem heutigen Ablauf.</p>
           </div>
 
           <div className="services-rows">
@@ -85,7 +100,7 @@ export default function LeistungenPage() {
                     <p className="service-lead">{service.lead}</p>
                     <p className="service-description">{service.description}</p>
                     <div className="service-outputs">
-                      <h4>Was Sie erhalten</h4>
+                      <h4>Ergebnis dieses Arbeitspakets</h4>
                       <ul>{service.outputs.map((output) => <li key={output}>{output}</li>)}</ul>
                     </div>
                     <a className="text-link" href={service.link}>{service.linkLabel} <span aria-hidden="true">→</span></a>
@@ -100,9 +115,14 @@ export default function LeistungenPage() {
 
       <section className="services-boundaries" aria-labelledby="boundaries-heading">
         <div className="container">
-          <div className="services-boundaries-head"><p className="eyebrow">Klare Erwartungen</p><h2 id="boundaries-heading">Was wir bewusst nicht versprechen</h2></div>
+          <div className="services-boundaries-head">
+            <p className="eyebrow">Vor Projektstart</p>
+            <h2 id="boundaries-heading">Was wir nicht schönrechnen</h2>
+          </div>
           <div className="services-boundaries-grid">
-            {boundaries.map(([title, text]) => <article key={title}><span aria-hidden="true">✓</span><h3>{title}</h3><p>{text}</p></article>)}
+            {boundaries.map(([title, text]) => (
+              <article key={title}><span aria-hidden="true">✓</span><h3>{title}</h3><p>{text}</p></article>
+            ))}
           </div>
         </div>
       </section>
@@ -111,13 +131,13 @@ export default function LeistungenPage() {
         <div className="container services-final-cta-grid">
           <div>
             <p className="eyebrow eyebrow-light">Nächster Schritt</p>
-            <h2 id="services-cta-heading">Welcher Prozess kostet Ihr Team regelmäßig Zeit?</h2>
-            <p>Im kostenlosen Automation Check betrachten wir einen konkreten Ablauf und geben Ihnen eine erste Einschätzung zu Nutzen, Aufwand und Risiken.</p>
+            <h2 id="services-cta-heading">Welcher Ablauf kostet jede Woche Zeit?</h2>
+            <p>Bringen Sie ein konkretes Beispiel mit. In 30–45 Minuten skizzieren wir Eingang, Bearbeitung, Ausnahme und Ergebnis. Danach wissen Sie, ob ein nächster Schritt sinnvoll ist.</p>
           </div>
           <div className="services-final-actions">
-            <a className="button button-light" href="/automation-check">Prozess kostenlos prüfen lassen <span className="button-arrow" aria-hidden="true">→</span></a>
-            <a className="text-link text-link-light" href="/vorgehen">So läuft der Automation Check ab <span aria-hidden="true">→</span></a>
-            <p>Unverbindlich · 30–45 Minuten · konkrete erste Einschätzung</p>
+            <a className="button button-light" href="/automation-check">Ablauf gemeinsam prüfen <span className="button-arrow" aria-hidden="true">→</span></a>
+            <a className="text-link text-link-light" href="/vorgehen">Ablauf des Gesprächs ansehen <span aria-hidden="true">→</span></a>
+            <p>Kostenlos · 30–45 Minuten · ohne Projektbindung</p>
           </div>
         </div>
       </section>
