@@ -1,56 +1,47 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useRef, useState, type FormEvent } from 'react';
 
-const recipient = 'kontakt@msb-ai.de';
 type FormField = 'name' | 'company' | 'email' | 'process' | 'privacy';
 type FormErrors = Partial<Record<FormField, string>>;
+type FormStatus = { kind: 'success' | 'error'; text: string } | null;
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-function buildMailtoUrl(name: string, company: string, email: string, process: string) {
-  const subject = 'Anfrage: Kostenloser Automation Check';
-  const body = [
-    `Name: ${name}`,
-    `Unternehmen: ${company}`,
-    `Geschäftliche E-Mail: ${email}`,
-    '',
-    'Prozessbeschreibung:',
-    process
-  ].join('\n');
-
-  return `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
 
 export function ContactForm() {
   const [name, setName] = useState('');
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
   const [process, setProcess] = useState('');
+  const [website, setWebsite] = useState('');
   const [privacyAcknowledged, setPrivacyAcknowledged] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState<FormStatus>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const startedAt = useRef(Date.now());
 
   function clearFeedback(field: FormField) {
     setErrors((current) => ({ ...current, [field]: undefined }));
-    setStatus('');
+    setStatus(null);
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (isSubmitting) return;
+
+    const form = event.currentTarget;
     const nextErrors: FormErrors = {};
 
     if (!name.trim()) nextErrors.name = 'Bitte geben Sie Ihren Namen ein.';
     if (!company.trim()) nextErrors.company = 'Bitte geben Sie Ihr Unternehmen ein.';
     if (!email.trim()) nextErrors.email = 'Bitte geben Sie Ihre geschäftliche E-Mail-Adresse ein.';
     else if (!emailPattern.test(email.trim())) nextErrors.email = 'Bitte prüfen Sie das Format der E-Mail-Adresse.';
-    if (!process.trim()) nextErrors.process = 'Bitte beschreiben Sie den wiederkehrenden Prozess kurz.';
+    if (process.trim().length < 20) nextErrors.process = 'Bitte beschreiben Sie den Prozess mit mindestens 20 Zeichen.';
     if (!privacyAcknowledged) nextErrors.privacy = 'Bitte bestätigen Sie, dass Sie die Datenschutzerklärung zur Kenntnis genommen haben.';
 
     if (Object.keys(nextErrors).length) {
-      const form = event.currentTarget;
       setErrors(nextErrors);
-      setStatus('');
+      setStatus(null);
       window.requestAnimationFrame(() => {
         form.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
       });
@@ -58,12 +49,59 @@ export function ContactForm() {
     }
 
     setErrors({});
-    setStatus('Ihr E-Mail-Programm wird geöffnet. Prüfen und senden Sie die vorbereitete Nachricht dort ab.');
-    window.location.href = buildMailtoUrl(name, company, email, process);
+    setStatus(null);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name.trim(),
+          company: company.trim(),
+          email: email.trim(),
+          process: process.trim(),
+          privacy: privacyAcknowledged,
+          website,
+          startedAt: startedAt.current
+        })
+      });
+
+      const result = await response.json() as {
+        message?: string;
+        errors?: FormErrors;
+      };
+
+      if (!response.ok) {
+        if (result.errors) setErrors(result.errors);
+        throw new Error(result.message || 'Die Nachricht konnte nicht versendet werden.');
+      }
+
+      setStatus({
+        kind: 'success',
+        text: result.message || 'Vielen Dank. Ihre Anfrage wurde direkt an unser Team gesendet.'
+      });
+      setName('');
+      setCompany('');
+      setEmail('');
+      setProcess('');
+      setWebsite('');
+      setPrivacyAcknowledged(false);
+      startedAt.current = Date.now();
+    } catch (error) {
+      setStatus({
+        kind: 'error',
+        text: error instanceof Error
+          ? error.message
+          : 'Die Nachricht konnte nicht versendet werden. Bitte schreiben Sie an kontakt@msb-ai.de.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
-    <form className="contact-form" noValidate onSubmit={handleSubmit}>
+    <form className="contact-form" noValidate onSubmit={handleSubmit} aria-busy={isSubmitting}>
       <div className="form-row">
         <div className="field">
           <label htmlFor="name">Name</label>
@@ -72,6 +110,7 @@ export function ContactForm() {
             name="name"
             type="text"
             autoComplete="name"
+            maxLength={120}
             required
             aria-invalid={errors.name ? true : undefined}
             aria-describedby={errors.name ? 'name-error' : undefined}
@@ -90,6 +129,7 @@ export function ContactForm() {
             name="company"
             type="text"
             autoComplete="organization"
+            maxLength={160}
             required
             aria-invalid={errors.company ? true : undefined}
             aria-describedby={errors.company ? 'company-error' : undefined}
@@ -111,6 +151,7 @@ export function ContactForm() {
           type="email"
           inputMode="email"
           autoComplete="email"
+          maxLength={254}
           required
           aria-invalid={errors.email ? true : undefined}
           aria-describedby={errors.email ? 'email-error' : undefined}
@@ -129,6 +170,8 @@ export function ContactForm() {
           id="process"
           name="process"
           rows={5}
+          minLength={20}
+          maxLength={3000}
           required
           aria-invalid={errors.process ? true : undefined}
           aria-describedby={errors.process ? 'process-hint process-error' : 'process-hint'}
@@ -141,6 +184,19 @@ export function ContactForm() {
         />
         <small id="process-hint">Bitte keine sensiblen Personen-, Kunden- oder Bewerberdaten eintragen.</small>
         {errors.process ? <p className="form-error" id="process-error">{errors.process}</p> : null}
+      </div>
+
+      <div className="form-honeypot" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input
+          id="website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={website}
+          onChange={(event) => setWebsite(event.target.value)}
+        />
       </div>
 
       <div className="privacy-field">
@@ -164,11 +220,20 @@ export function ContactForm() {
       </div>
       <a className="privacy-link" href="/datenschutz">Datenschutzerklärung lesen</a>
 
-      <button className="button button-primary form-submit" type="submit">
-        Prozess kostenlos prüfen lassen <span className="button-arrow" aria-hidden="true">→</span>
+      <button className="button button-primary form-submit" type="submit" disabled={isSubmitting}>
+        {isSubmitting ? 'Nachricht wird gesendet …' : 'Prozess kostenlos prüfen lassen'}
+        {!isSubmitting ? <span className="button-arrow" aria-hidden="true">→</span> : null}
       </button>
-      {status ? <p className="form-status" role="status" aria-live="polite">{status}</p> : null}
-      <p className="form-note">Beim Absenden öffnet sich Ihr E-Mail-Programm mit den eingetragenen Angaben. Es wird kein externer Formulardienst verwendet.</p>
+      {status ? (
+        <p
+          className={`form-status${status.kind === 'error' ? ' form-status-error' : ''}`}
+          role={status.kind === 'error' ? 'alert' : 'status'}
+          aria-live="polite"
+        >
+          {status.text}
+        </p>
+      ) : null}
+      <p className="form-note">Ihre Angaben werden verschlüsselt übertragen und ausschließlich zur Bearbeitung Ihrer Anfrage verwendet. Antworten gehen an die angegebene E-Mail-Adresse.</p>
     </form>
   );
 }
