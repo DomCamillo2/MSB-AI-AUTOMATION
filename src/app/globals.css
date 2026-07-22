@@ -3113,7 +3113,8 @@ textarea[aria-invalid='true'] {
   }
 
   .services-section-intro,
-  .service-editorial-row {
+  .service-editorial-row,
+  .service-editorial-row.service-row-reverse {
     grid-template-columns: 1fr;
   }
 
