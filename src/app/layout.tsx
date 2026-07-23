@@ -9,7 +9,8 @@ import { defaultDescription, siteName, siteUrl } from '@/lib/seo';
 import './globals.css';
 
 const allowIndexing = process.env.VERCEL_ENV !== 'preview';
-const analyticsEnabled = process.env.VERCEL_ENV === 'production';
+const analyticsEnabled =
+  process.env.VERCEL_ENV === 'production' || process.env.NEXT_PUBLIC_SITE_ENV === 'production';
 
 const inter = Inter({
   subsets: ['latin'],

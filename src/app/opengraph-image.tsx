@@ -3,6 +3,7 @@ import { ImageResponse } from 'next/og';
 export const alt = 'MSB AI & Automation – Automatisierung mit Menschenverstand';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
+export const dynamic = 'force-static';
 
 export default function OpenGraphImage() {
   return new ImageResponse(

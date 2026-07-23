@@ -1,4 +1,5 @@
 const isPreview = process.env.VERCEL_ENV === 'preview';
+const isIonosBuild = process.env.DEPLOY_TARGET === 'ionos';
 
 const contentSecurityPolicy = [
   "default-src 'self'",
@@ -26,32 +27,40 @@ const securityHeaders = [
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
-  poweredByHeader: false,
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: securityHeaders
-      }
-    ];
+  output: isIonosBuild ? 'export' : 'standalone',
+  trailingSlash: isIonosBuild,
+  images: {
+    unoptimized: isIonosBuild
   },
-  async redirects() {
-    return [
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'msb-ai-automation.vercel.app' }],
-        destination: 'https://www.msb-ai.de/:path*',
-        permanent: true
-      },
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'msb-ai-consulting.vercel.app' }],
-        destination: 'https://www.msb-ai.de/:path*',
-        permanent: true
-      }
-    ];
-  }
+  poweredByHeader: false,
+  ...(isIonosBuild
+    ? {}
+    : {
+        async headers() {
+          return [
+            {
+              source: '/(.*)',
+              headers: securityHeaders
+            }
+          ];
+        },
+        async redirects() {
+          return [
+            {
+              source: '/:path*',
+              has: [{ type: 'host', value: 'msb-ai-automation.vercel.app' }],
+              destination: 'https://www.msb-ai.de/:path*',
+              permanent: true
+            },
+            {
+              source: '/:path*',
+              has: [{ type: 'host', value: 'msb-ai-consulting.vercel.app' }],
+              destination: 'https://www.msb-ai.de/:path*',
+              permanent: true
+            }
+          ];
+        }
+      })
 };
 
 export default nextConfig;
