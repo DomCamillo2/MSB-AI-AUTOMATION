@@ -1,6 +1,6 @@
-# MSB AI Consulting Website
+# MSB AI & Automation Website
 
-One-page, privacy-conscious B2B consulting website for MSB AI Consulting.
+Privacy-conscious B2B website for MSB AI & Automation.
 
 ## Local development
 
@@ -18,7 +18,7 @@ npm run start
 
 ## Deployment
 
-The project is configured as a standard Next.js app and can be deployed directly to Vercel. No analytics, external fonts, maps, videos, or third-party embeds are included by default.
+The production website is exported statically by GitHub Actions and uploaded over SFTP to IONOS Webhosting. The contact endpoint runs as PHP on the same IONOS webspace and delivers messages through authenticated IONOS SMTP. Google Analytics is loaded only after explicit consent; fonts are bundled locally and there are no map, video, social-media, or third-party form embeds.
 
 ## Brand
 

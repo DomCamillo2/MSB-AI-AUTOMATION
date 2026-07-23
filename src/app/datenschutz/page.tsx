@@ -14,7 +14,7 @@ export default function DatenschutzPage() {
         <header className="legal-header">
           <p className="eyebrow">Rechtliches</p>
           <h1>Datenschutz</h1>
-          <p className="legal-intro">Informationen nach Art. 13 Datenschutz-Grundverordnung (DSGVO)</p>
+          <p className="legal-intro">Informationen nach Art. 13 Datenschutz-Grundverordnung (DSGVO) für die unter www.msb-ai.de bereitgestellte Website</p>
         </header>
 
         <section aria-labelledby="controller-heading">
@@ -30,15 +30,15 @@ export default function DatenschutzPage() {
         </section>
 
         <section aria-labelledby="hosting-heading">
-          <h2 id="hosting-heading">2. Hosting und Server-Protokolle</h2>
+          <h2 id="hosting-heading">2. Hosting, Domain und Server-Protokolle</h2>
           <p>
-            Diese Website wird auf Webhosting-Systemen der IONOS SE, Elgendorfer Straße 57, 56410 Montabaur, Deutschland, bereitgestellt. Beim Aufruf verarbeitet IONOS technisch erforderliche Verbindungs- und Protokolldaten. Dazu gehören insbesondere die angeforderte Seite oder Datei, Referrer, Browsertyp und -version, Betriebssystem, Gerätetyp, Zeitpunkt des Zugriffs sowie eine anonymisierte IP-Adresse.
+            Diese Website einschließlich ihrer statischen Inhalte und des PHP-Endpunkts für das Kontaktformular wird auf Webhosting-Systemen der IONOS SE, Elgendorfer Straße 57, 56410 Montabaur, Deutschland, bereitgestellt. Auch die Domainverwaltung, das Domain Name System (DNS) und der für diese Website eingesetzte E-Mail-Dienst werden über IONOS betrieben. Beim Aufruf verarbeitet IONOS technisch erforderliche Verbindungs- und Protokolldaten. Dazu gehören insbesondere die angeforderte Seite oder Datei, Referrer, Browsertyp und -version, Betriebssystem, Gerätetyp, Zeitpunkt des Zugriffs sowie eine anonymisierte IP-Adresse.
           </p>
           <p>
             Die Verarbeitung dient der Auslieferung der Website, der Erkennung von Angriffen und Missbrauch sowie dem sicheren und stabilen technischen Betrieb. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt in der sicheren, schnellen und zuverlässigen Bereitstellung der Website. IONOS gibt für Webhosting-Besucherdaten eine Speicherdauer von acht Wochen an; nach Angaben von IONOS erfolgt hierfür kein Transfer in Drittstaaten.
           </p>
           <p>
-            Weitere Informationen finden Sie in den <a href="https://www.ionos.de/hilfe/datenschutz/datenverarbeitung-durch-ihr-ionos-produktes/datenverarbeitung-durch-webhosting-produkte/" rel="noreferrer">Informationen zur Datenverarbeitung durch IONOS Webhosting</a> und den <a href="https://www.ionos.de/terms-gtc/datenschutzerklaerung/" rel="noreferrer">Datenschutzhinweisen von IONOS</a>.
+            IONOS ist für die in unserem Auftrag erbrachten Hosting- und Kommunikationsleistungen als Auftragsverarbeiter nach Art. 28 DSGVO eingebunden. Weitere Informationen finden Sie in den <a href="https://www.ionos.de/hilfe/datenschutz/datenverarbeitung-durch-ihr-ionos-produktes/datenverarbeitung-durch-webhosting-produkte/" rel="noreferrer">Informationen zur Datenverarbeitung durch IONOS Webhosting</a>, den <a href="https://www.ionos.de/hilfe/datenschutz/allgemeine-informationen-zur-datenschutz-grundverordnung-dsgvo/vereinbarung-zur-auftragsverarbeitung-avv-mit-ionos-abschliessen/" rel="noreferrer">Informationen zur Auftragsverarbeitung</a> und den <a href="https://www.ionos.de/terms-gtc/datenschutzerklaerung/" rel="noreferrer">Datenschutzhinweisen von IONOS</a>.
           </p>
         </section>
 
@@ -46,6 +46,9 @@ export default function DatenschutzPage() {
           <h2 id="ionos-heading">3. Kontaktformular und E-Mail</h2>
           <p>
             Wenn Sie das Kontaktformular absenden, werden die von Ihnen eingetragenen Angaben verschlüsselt an unseren Webspace übertragen und über den authentifizierten SMTP-Dienst von IONOS an <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a> zugestellt. Verarbeitet werden Name, Unternehmen, E-Mail-Adresse, Nachricht beziehungsweise Prozesseinschätzung, Bestätigungsstatus, Zeitpunkt und eine zufällige Anfragekennung. IONOS verarbeitet bei der Zustellung außerdem Absender- und Empfängeradresse, technische Zustelldaten und den Nachrichteninhalt.
+          </p>
+          <p>
+            Die Formulardaten werden von der Website-Anwendung nicht in einer Datenbank oder dauerhaften Datei gespeichert. Nach erfolgreicher Übergabe befinden sie sich in unserem IONOS-E-Mail-Postfach und werden dort wie sonstige geschäftliche Korrespondenz verarbeitet. Schlägt der Versand fehl, zeigt das Formular eine neutrale Fehlermeldung an; Zugangsdaten und technische Fehlerdetails werden nicht an den Browser ausgegeben.
           </p>
           <p>
             Die Verarbeitung erfolgt zur Bearbeitung Ihrer Anfrage nach Art. 6 Abs. 1 lit. b DSGVO, soweit sie der Vertragsanbahnung oder Vertragsdurchführung dient, andernfalls auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt in einer verlässlichen geschäftlichen Kommunikation. Weitere Informationen finden Sie in den <a href="https://www.ionos.de/terms-gtc/datenschutzerklaerung/" rel="noreferrer">Datenschutzhinweisen von IONOS</a>.
@@ -144,7 +147,7 @@ export default function DatenschutzPage() {
           </p>
         </section>
 
-        <p className="legal-meta">Stand: Juli 2026</p>
+        <p className="legal-meta">Stand: 23. Juli 2026</p>
       </article>
     </main>
   );
