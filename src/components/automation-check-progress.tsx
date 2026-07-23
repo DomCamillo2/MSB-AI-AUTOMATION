@@ -29,7 +29,10 @@ export function AutomationCheckProgress({ currentPhase, stepIndex, result = fals
           );
         })}
       </div>
-      <p className={styles.mobilePhaseLabel} aria-hidden="true"><span>Aktuell</span><strong>{currentPhaseLabel}</strong></p>
+      <p className={styles.mobilePhaseLabel} role="status" aria-live="polite" aria-atomic="true">
+        <span>Aktuell</span>
+        <strong>{currentPhaseLabel}</strong>
+      </p>
       <div
         className={styles.progressTrack}
         role="progressbar"

@@ -4,8 +4,10 @@
   position: sticky;
   top: 0;
   z-index: 80;
-  height: var(--header-height);
+  height: calc(var(--header-height) + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
   color: var(--navy);
+  background: rgba(251, 250, 246, 0.96);
   transition: height 220ms var(--ease-standard);
 }
 
@@ -211,10 +213,12 @@
 }
 
 .checkHeader {
-  height: 72px;
+  --check-header-height: 72px;
+  height: calc(var(--check-header-height) + env(safe-area-inset-top));
   position: sticky;
   z-index: 80;
   top: 0;
+  padding-top: env(safe-area-inset-top);
   background: rgba(251, 250, 246, 0.97);
   border-bottom: 1px solid rgba(7, 27, 58, 0.12);
   backdrop-filter: blur(18px) saturate(130%);
@@ -286,7 +290,7 @@
 
 @media (max-width: 700px) {
   .checkHeader {
-    height: 64px;
+    --check-header-height: 64px;
   }
 
   .checkHeaderInner {
@@ -457,7 +461,7 @@
   .nav {
     position: fixed;
     z-index: 1;
-    top: var(--rail-height);
+    top: calc(var(--rail-height) + env(safe-area-inset-top));
     right: 0;
     bottom: 0;
     left: 0;
@@ -590,7 +594,7 @@
   }
 
   .nav {
-    top: var(--rail-height);
+    top: calc(var(--rail-height) + env(safe-area-inset-top));
     padding: clamp(3.5rem, 9vh, 5.5rem) max(24px, env(safe-area-inset-right)) calc(2rem + env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
   }
 }
