@@ -25,6 +25,11 @@ jobs:
       IONOS_SFTP_PASSWORD: ${{ secrets.IONOS_SFTP_PASSWORD }}
       IONOS_DEPLOY_PATH: ${{ secrets.IONOS_DEPLOY_PATH }}
       IONOS_SFTP_PORT: ${{ vars.IONOS_SFTP_PORT }}
+      IONOS_SMTP_HOST: ${{ vars.IONOS_SMTP_HOST }}
+      IONOS_SMTP_PORT: ${{ vars.IONOS_SMTP_PORT }}
+      IONOS_SMTP_USER: ${{ secrets.IONOS_SMTP_USER }}
+      IONOS_SMTP_PASSWORD: ${{ secrets.IONOS_SMTP_PASSWORD }}
+      CONTACT_RECIPIENT: ${{ vars.CONTACT_RECIPIENT }}
 
     steps:
       - name: Validate deployment configuration
@@ -32,7 +37,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          for key in IONOS_SFTP_HOST IONOS_SFTP_USER IONOS_SFTP_PASSWORD IONOS_DEPLOY_PATH IONOS_SFTP_PORT; do
+          for key in IONOS_SFTP_HOST IONOS_SFTP_USER IONOS_SFTP_PASSWORD IONOS_DEPLOY_PATH IONOS_SFTP_PORT IONOS_SMTP_HOST IONOS_SMTP_PORT IONOS_SMTP_USER IONOS_SMTP_PASSWORD CONTACT_RECIPIENT; do
             value="${!key:-}"
             if [[ -z "$value" || "$value" == "NOT_CONFIGURED" ]]; then
               echo "::error::Environment value $key is not configured."
@@ -69,11 +74,23 @@ jobs:
       - name: Run typecheck
         run: npm run typecheck
 
+      - name: Validate PHP contact endpoint
+        shell: bash
+        run: |
+          php --version
+          php -l public/contact.php
+          php -l public/contact-lib/phpmailer/Exception.php
+          php -l public/contact-lib/phpmailer/PHPMailer.php
+          php -l public/contact-lib/phpmailer/SMTP.php
+
       - name: Build static IONOS export
         run: npm run build
         env:
           DEPLOY_TARGET: ionos
           NEXT_PUBLIC_SITE_ENV: production
+
+      - name: Create private contact configuration
+        run: node scripts/create-contact-config.mjs
 
       - name: Verify export
         shell: bash
@@ -81,6 +98,9 @@ jobs:
           test -f out/index.html
           test -f out/404.html
           test -f out/.htaccess
+          test -f out/contact.php
+          test -f out/.contact-config.json
+          test -f out/contact-lib/phpmailer/PHPMailer.php
 
       - name: Install SFTP client
         shell: bash
@@ -95,7 +115,7 @@ jobs:
 
           lftp \
             -u "$IONOS_SFTP_USER","$IONOS_SFTP_PASSWORD" \
-            -e "set sftp:auto-confirm yes; set net:max-retries 3; set net:timeout 30; set cmd:fail-exit yes; mirror --reverse --no-perms --no-umask --verbose=1 out/ \"$IONOS_DEPLOY_PATH\"; cls -l \"$IONOS_DEPLOY_PATH/index.html\"; cls -l \"$IONOS_DEPLOY_PATH/404.html\"; bye" \
+            -e "set sftp:auto-confirm yes; set net:max-retries 3; set net:timeout 30; set cmd:fail-exit yes; mirror --reverse --no-perms --no-umask --verbose=1 out/ \"$IONOS_DEPLOY_PATH\"; cls -l \"$IONOS_DEPLOY_PATH/index.html\"; cls -l \"$IONOS_DEPLOY_PATH/404.html\"; cls -l \"$IONOS_DEPLOY_PATH/contact.php\"; bye" \
             "sftp://$IONOS_SFTP_HOST:$IONOS_SFTP_PORT"
 
           echo "Static website uploaded to IONOS."

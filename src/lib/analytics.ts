@@ -68,6 +68,7 @@ export function trackAnalyticsEvent(
     | 'automation_check_step'
     | 'automation_check_complete'
     | 'automation_check_contact_start'
+    | 'contact_submit'
     | 'email_click'
     | 'phone_click',
   parameters: Record<string, string>

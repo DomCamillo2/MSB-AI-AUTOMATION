@@ -1,4 +1,5 @@
 import PageIntro from '@/components/page-intro';
+import ContactPanel from '@/components/contact-panel';
 import { Reveal, RevealGroup } from '@/components/reveal';
 import { createPageMetadata } from '@/lib/seo';
 
@@ -42,7 +43,7 @@ export default function KontaktPage() {
               <p className="eyebrow">Der passende Weg</p>
               <h2 id="contact-options-heading">Worum geht es bei Ihrer Anfrage?</h2>
             </div>
-            <p>Für eine erste Prozesseinschätzung ist der Automation Check am schnellsten. Für alles andere genügt eine E-Mail.</p>
+            <p>Für eine erste Prozesseinschätzung ist das sichere Formular am schnellsten. Für alles andere können Sie uns weiterhin direkt schreiben.</p>
           </Reveal>
           <RevealGroup className="contact-options-grid" stagger="normal">
             {contactOptions.map((option, index) => (
@@ -55,6 +56,12 @@ export default function KontaktPage() {
               </article>
             ))}
           </RevealGroup>
+        </div>
+      </section>
+
+      <section className="section contact-section contact-page-section" aria-labelledby="contact-panel-heading">
+        <div className="container">
+          <ContactPanel />
         </div>
       </section>
 

@@ -32,23 +32,26 @@ export default function DatenschutzPage() {
         <section aria-labelledby="hosting-heading">
           <h2 id="hosting-heading">2. Hosting und Server-Protokolle</h2>
           <p>
-            Diese Website wird über Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA, bereitgestellt. Beim Aufruf verarbeitet Vercel technisch erforderliche Verbindungs- und Protokolldaten. Dazu können insbesondere IP-Adresse, Zeitpunkt und Dauer der Anfrage, aufgerufene Adresse, Referrer, Browser- und Geräteinformationen sowie Status- und Fehlerdaten gehören.
+            Diese Website wird auf Webhosting-Systemen der IONOS SE, Elgendorfer Straße 57, 56410 Montabaur, Deutschland, bereitgestellt. Beim Aufruf verarbeitet IONOS technisch erforderliche Verbindungs- und Protokolldaten. Dazu gehören insbesondere die angeforderte Seite oder Datei, Referrer, Browsertyp und -version, Betriebssystem, Gerätetyp, Zeitpunkt des Zugriffs sowie eine anonymisierte IP-Adresse.
           </p>
           <p>
-            Die Verarbeitung dient der Auslieferung der Website, der Erkennung von Angriffen und Missbrauch sowie dem sicheren technischen Betrieb. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt in der sicheren, schnellen und zuverlässigen Bereitstellung der Website. Vercel kann Daten in den USA und weiteren Ländern verarbeiten und nennt dafür unter anderem das EU-U.S. Data Privacy Framework und Standardvertragsklauseln als Transfermechanismen.
+            Die Verarbeitung dient der Auslieferung der Website, der Erkennung von Angriffen und Missbrauch sowie dem sicheren und stabilen technischen Betrieb. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt in der sicheren, schnellen und zuverlässigen Bereitstellung der Website. IONOS gibt für Webhosting-Besucherdaten eine Speicherdauer von acht Wochen an; nach Angaben von IONOS erfolgt hierfür kein Transfer in Drittstaaten.
           </p>
           <p>
-            Weitere Informationen: <a href="https://vercel.com/legal/privacy-notice" rel="noreferrer">Datenschutzhinweise von Vercel</a> und <a href="https://vercel.com/legal/dpa" rel="noreferrer">Data Processing Addendum von Vercel</a>.
+            Weitere Informationen finden Sie in den <a href="https://www.ionos.de/hilfe/datenschutz/datenverarbeitung-durch-ihr-ionos-produktes/datenverarbeitung-durch-webhosting-produkte/" rel="noreferrer">Informationen zur Datenverarbeitung durch IONOS Webhosting</a> und den <a href="https://www.ionos.de/terms-gtc/datenschutzerklaerung/" rel="noreferrer">Datenschutzhinweisen von IONOS</a>.
           </p>
         </section>
 
         <section aria-labelledby="ionos-heading">
-          <h2 id="ionos-heading">3. Domain und E-Mail</h2>
+          <h2 id="ionos-heading">3. Kontaktformular und E-Mail</h2>
           <p>
-            Die Domain und die E-Mail-Infrastruktur für <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a> werden durch IONOS SE, Elgendorfer Straße 57, 56410 Montabaur, bereitgestellt. Bei der Zustellung und Speicherung von E-Mails verarbeitet IONOS insbesondere Absender- und Empfängeradresse, technische Zustelldaten sowie den Nachrichteninhalt. Die Website selbst wird nicht bei IONOS gehostet.
+            Wenn Sie das Kontaktformular absenden, werden die von Ihnen eingetragenen Angaben verschlüsselt an unseren Webspace übertragen und über den authentifizierten SMTP-Dienst von IONOS an <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a> zugestellt. Verarbeitet werden Name, Unternehmen, E-Mail-Adresse, Nachricht beziehungsweise Prozesseinschätzung, Bestätigungsstatus, Zeitpunkt und eine zufällige Anfragekennung. IONOS verarbeitet bei der Zustellung außerdem Absender- und Empfängeradresse, technische Zustelldaten und den Nachrichteninhalt.
           </p>
           <p>
             Die Verarbeitung erfolgt zur Bearbeitung Ihrer Anfrage nach Art. 6 Abs. 1 lit. b DSGVO, soweit sie der Vertragsanbahnung oder Vertragsdurchführung dient, andernfalls auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt in einer verlässlichen geschäftlichen Kommunikation. Weitere Informationen finden Sie in den <a href="https://www.ionos.de/terms-gtc/datenschutzerklaerung/" rel="noreferrer">Datenschutzhinweisen von IONOS</a>.
+          </p>
+          <p>
+            Zum Schutz vor automatisiertem Missbrauch verwendet das Formular ein unsichtbares Prüffeld, eine Mindestbearbeitungszeit und eine technische Begrenzung wiederholter Anfragen. Hierfür wird aus der anfragenden IP-Adresse ein nicht rückrechenbarer Prüfwert gebildet und für höchstens 15 Minuten im temporären Speicher des Webservers vorgehalten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO; unser berechtigtes Interesse liegt im Schutz des Formulars und unseres Postfachs vor Spam und Angriffen.
           </p>
         </section>
 
@@ -58,7 +61,7 @@ export default function DatenschutzPage() {
             Die Antworten im interaktiven Automation Check werden ausschließlich in Ihrem Browser ausgewertet. Während des Checks werden der aktuelle Schritt und Ihre Antworten im Sitzungsspeicher des Browsers unter dem Schlüssel <code>msb_automation_check_v1</code> zwischengespeichert, damit ein Neuladen oder Zurücknavigieren nicht zum Verlust des Fortschritts führt. Diese Daten werden nicht an unseren Webserver übertragen. Sie werden beim Start eines neuen Checks gelöscht und vom Browser üblicherweise spätestens beim Ende der Browsersitzung entfernt.
           </p>
           <p>
-            Erst nach der angezeigten Einschätzung können Sie freiwillig einen vorausgefüllten E-Mail-Entwurf öffnen. Der Entwurf enthält die strukturierten Antworten, einen optionalen Hinweis sowie die von Ihnen dafür angegebenen Kontaktdaten. Es findet keine automatische Übermittlung statt. Die Daten erreichen uns erst, wenn Sie den Entwurf in Ihrem E-Mail-Programm prüfen und selbst absenden.
+            Erst nach der angezeigten Einschätzung können Sie freiwillig eine Übermittlung an MSB veranlassen. Nach Ihrer ausdrücklichen Bestätigung werden die strukturierten Antworten, ein optionaler Hinweis sowie die von Ihnen angegebenen Kontaktdaten über das Kontaktformular an unser IONOS-Postfach gesendet. Ohne diesen gesonderten Schritt bleiben die Antworten ausschließlich in Ihrem Browser.
           </p>
           <p>
             Bei einer Kontaktaufnahme verarbeiten wir insbesondere Name, Unternehmen, E-Mail-Adresse, Inhalt der Nachricht und weitere freiwillige Angaben, um Ihre Anfrage zu beantworten. Bezieht sich die Anfrage auf die Anbahnung oder Durchführung eines Vertrags, ist Art. 6 Abs. 1 lit. b DSGVO die Rechtsgrundlage. Bei allgemeinen geschäftlichen Anfragen erfolgt die Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Gesetzliche Aufbewahrungspflichten beruhen auf Art. 6 Abs. 1 lit. c DSGVO.
@@ -84,7 +87,7 @@ export default function DatenschutzPage() {
         <section id="google-analytics" aria-labelledby="analytics-heading">
           <h2 id="analytics-heading">6. Google Analytics 4</h2>
           <p>
-            Wenn Sie Statistik ausdrücklich erlauben, verwenden wir Google Analytics 4 mit der Mess-ID <code>G-P2P7JJ6QV2</code>. Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Google Analytics hilft uns zu verstehen, welche Seiten genutzt und welche ausgewählten Handlungen ausgeführt werden. Erfasst werden Seitenpfad ohne URL-Suchparameter, Seitentitel, technische Geräte- und Browserinformationen sowie die Ereignisse „CTA-Klick“, „Automation Check begonnen“, „Schritt aufgerufen“, „Check abgeschlossen“, „Kontaktbereich geöffnet“ und „E-Mail-Klick“. Bei Check-Ereignissen werden ausschließlich technische Bezeichner des Schritts beziehungsweise der Ergebniskategorie übertragen. Antworten, Auswahltexte, Notizen, E-Mail-Adressen und andere personenbezogene Angaben werden nicht an Google Analytics übermittelt.
+            Wenn Sie Statistik ausdrücklich erlauben, verwenden wir Google Analytics 4 mit der Mess-ID <code>G-P2P7JJ6QV2</code>. Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Google Analytics hilft uns zu verstehen, welche Seiten genutzt und welche ausgewählten Handlungen ausgeführt werden. Erfasst werden Seitenpfad ohne URL-Suchparameter, Seitentitel, technische Geräte- und Browserinformationen sowie die Ereignisse „CTA-Klick“, „Automation Check begonnen“, „Schritt aufgerufen“, „Check abgeschlossen“, „Kontaktbereich geöffnet“ und „Kontaktanfrage abgesendet“. Bei Check-Ereignissen werden ausschließlich technische Bezeichner des Schritts beziehungsweise der Ergebniskategorie übertragen. Antworten, Auswahltexte, Notizen, E-Mail-Adressen und andere personenbezogene Angaben werden nicht an Google Analytics übermittelt.
           </p>
           <p>
             Google Analytics wird im Basic Consent Mode eingesetzt: Vor Ihrer Einwilligung wird das Google-Skript nicht geladen und es werden keine Analyseanfragen gesendet. Werbe-Speicherung, Werbedaten und personalisierte Werbung bleiben deaktiviert. Google Signals und Funktionen für personalisierte Werbung sind ebenfalls abgeschaltet.
@@ -114,7 +117,7 @@ export default function DatenschutzPage() {
         <section aria-labelledby="retention-heading">
           <h2 id="retention-heading">9. Speicherdauer</h2>
           <p>
-            Kontaktanfragen werden gelöscht, sobald ihre Bearbeitung abgeschlossen ist und keine vertraglichen oder gesetzlichen Gründe für eine weitere Aufbewahrung bestehen. Entsteht eine Geschäftsbeziehung, können geschäftliche Unterlagen entsprechend den handels- und steuerrechtlichen Aufbewahrungsfristen gespeichert werden. Technische Protokolldaten werden durch Vercel entsprechend den jeweiligen Vertrags-, Sicherheits- und Aufbewahrungsvorgaben verarbeitet. Die Speicherdauer von Google-Analytics-Nutzerdaten wird in der Analytics-Property festgelegt; ereignisbezogene Daten werden dort spätestens nach der konfigurierten Aufbewahrungsfrist gelöscht. Aggregierte Berichte können länger erhalten bleiben.
+            Kontaktanfragen werden gelöscht, sobald ihre Bearbeitung abgeschlossen ist und keine vertraglichen oder gesetzlichen Gründe für eine weitere Aufbewahrung bestehen. Entsteht eine Geschäftsbeziehung, können geschäftliche Unterlagen entsprechend den handels- und steuerrechtlichen Aufbewahrungsfristen gespeichert werden. IONOS hält Webhosting-Besucherdaten nach eigener Angabe für acht Wochen vor; temporäre Missbrauchsschutzwerte des Kontaktformulars werden nach spätestens 15 Minuten verworfen. Die Speicherdauer von Google-Analytics-Nutzerdaten wird in der Analytics-Property festgelegt; ereignisbezogene Daten werden dort spätestens nach der konfigurierten Aufbewahrungsfrist gelöscht. Aggregierte Berichte können länger erhalten bleiben.
           </p>
         </section>
 
