@@ -24,7 +24,7 @@ export default function DatenschutzPage() {
             Gesellschafter:<br />
             Dominik Soballa<br />
             Erik Müller<br />
-            Luca Busché<br />
+            Luca Bouché<br />
             Haußerstraße 150<br />
             72076 Tübingen<br />
             Deutschland<br />

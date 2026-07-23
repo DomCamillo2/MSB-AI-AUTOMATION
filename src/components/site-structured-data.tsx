@@ -33,7 +33,7 @@ const structuredData = {
         },
         {
           '@type': 'Person',
-          name: 'Luca Busché'
+          name: 'Luca Bouché'
         }
       ],
       address: {

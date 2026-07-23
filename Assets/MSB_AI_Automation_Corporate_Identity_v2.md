@@ -15,7 +15,7 @@
 
 MSB AI & Automation unterstützt KMU dabei, manuelle Verwaltungs-, HR- und operative Prozesse zu analysieren, pragmatisch zu automatisieren und Mitarbeitende im sicheren KI-Einsatz zu befähigen.
 
-Erik Müller · Dominik Soballa · Luca Busché
+Erik Müller · Dominik Soballa · Luca Bouché
 
 ---
 
@@ -26,7 +26,7 @@ Erik Müller · Dominik Soballa · Luca Busché
 | Bereich | Festlegung |
 |---|---|
 | **Name** | MSB AI & Automation |
-| **Rechtlicher Kontext** | Öffentliche Marke der MSB AI & Automation GbR; Gesellschafter: Dominik Soballa, Erik Müller und Luca Busché |
+| **Rechtlicher Kontext** | Öffentliche Marke der MSB AI & Automation GbR; Gesellschafter: Dominik Soballa, Erik Müller und Luca Bouché |
 | **Standort** | Tübingen · Region Neckar-Alb |
 | **Domain / E-Mail** | msb-ai.de · kontakt@msb-ai.de |
 | **Fokus** | Prozessanalyse, Workflow-Automatisierung, AI Adoption, HR- und Verwaltungsprozesse, Schulungen |
@@ -272,6 +272,6 @@ MSB AI & Automation unterstützt KMU dabei, wiederkehrende Abläufe zu analysier
 ## Kontakt
 
 **MSB AI & Automation GbR**<br />
-Gesellschafter: Dominik Soballa · Erik Müller · Luca Busché<br />
+Gesellschafter: Dominik Soballa · Erik Müller · Luca Bouché<br />
 Tübingen  
 kontakt@msb-ai.de

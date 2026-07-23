@@ -136,7 +136,7 @@ export const team = [
   },
   {
     initials: 'LB',
-    name: 'Luca Busché',
+    name: 'Luca Bouché',
     role: 'Data & Process Automation',
     text: 'Verbindet psychologische Methoden mit Python, R, Datenanalyse und praktischer Prozessoptimierung.',
     context: 'Siemens · BMW Group',

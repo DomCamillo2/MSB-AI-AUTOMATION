@@ -444,7 +444,7 @@ export function HomePage() {
           <div>
             <strong>MSB AI &amp; Automation GbR</strong>
             <p>
-              Gesellschafter: Dominik Soballa · Erik Müller · Luca Busché<br />
+              Gesellschafter: Dominik Soballa · Erik Müller · Luca Bouché<br />
               Haußerstraße 150 · 72076 Tübingen · Deutschland · <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a>
             </p>
           </div>
