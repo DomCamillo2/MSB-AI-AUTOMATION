@@ -5772,6 +5772,79 @@ textarea[aria-invalid='true'] {
     order: -1;
   }
 
+  .use-case-preview-layout {
+    gap: 1.5rem;
+  }
+
+  .use-case-preview-layout .section-heading {
+    margin-bottom: 0;
+  }
+
+  .use-case-preview-layout .text-link {
+    min-height: 44px;
+    margin-top: 0.9rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(255, 255, 255, 0.52);
+    border: 1px solid rgba(8, 119, 123, 0.18);
+    border-radius: 999px;
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+
+  .use-case-preview-list {
+    gap: 0.65rem;
+  }
+
+  .use-case-preview-list a {
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr) 38px;
+    grid-template-rows: auto auto;
+    gap: 0.35rem 0.85rem;
+    padding: 1rem 1rem 1rem 1.15rem;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.72);
+    border-radius: 14px;
+  }
+
+  .use-case-preview-list a::before {
+    width: 3px;
+    position: absolute;
+    top: 1rem;
+    bottom: 1rem;
+    left: -1px;
+    background: linear-gradient(var(--teal), var(--teal-bright));
+    border-radius: 999px;
+    content: '';
+  }
+
+  .use-case-preview-list strong {
+    grid-column: 1;
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+
+  .use-case-preview-list a > span:not(.preview-arrow) {
+    grid-column: 1;
+    color: #566369;
+    font-size: 0.86rem;
+    line-height: 1.48;
+  }
+
+  .use-case-preview-list .preview-arrow {
+    width: 36px;
+    height: 36px;
+    position: static;
+    display: grid;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+    place-items: center;
+    color: var(--teal);
+    background: rgba(8, 119, 123, 0.075);
+    border: 1px solid rgba(8, 119, 123, 0.14);
+    border-radius: 50%;
+  }
+
   .footer-region {
     min-height: 44px;
     display: inline-flex;
@@ -5849,6 +5922,31 @@ textarea[aria-invalid='true'] {
   .section,
   .contact-section {
     padding-block: 4rem;
+  }
+
+  .use-case-section {
+    padding-block: 3.25rem;
+  }
+
+  .use-case-preview-layout {
+    gap: 1.25rem;
+  }
+
+  .use-case-preview-layout .text-link {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .use-case-preview-list a {
+    padding: 0.9rem 0.9rem 0.9rem 1.05rem;
+  }
+
+  .use-case-preview-list strong {
+    font-size: 0.96rem;
+  }
+
+  .use-case-preview-list a > span:not(.preview-arrow) {
+    font-size: 0.82rem;
   }
 
   .form-surface,
