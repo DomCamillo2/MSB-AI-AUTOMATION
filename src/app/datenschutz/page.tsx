@@ -20,8 +20,11 @@ export default function DatenschutzPage() {
         <section aria-labelledby="controller-heading">
           <h2 id="controller-heading">1. Verantwortlicher</h2>
           <address>
+            MSB AI &amp; Automation GbR<br />
+            Gesellschafter:<br />
             Dominik Soballa<br />
-            handelnd unter MSB AI &amp; Automation<br />
+            Erik Müller<br />
+            Luca Busché<br />
             Haußerstraße 150<br />
             72076 Tübingen<br />
             Deutschland<br />

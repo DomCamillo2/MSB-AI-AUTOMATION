@@ -442,9 +442,10 @@ export function HomePage() {
       <footer className="footer">
         <div className="container footer-panel">
           <div>
-            <strong>MSB AI & Automation</strong>
+            <strong>MSB AI &amp; Automation GbR</strong>
             <p>
-              Dominik Soballa · Haußerstraße 150 · 72076 Tübingen · Deutschland · <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a>
+              Gesellschafter: Dominik Soballa · Erik Müller · Luca Busché<br />
+              Haußerstraße 150 · 72076 Tübingen · Deutschland · <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a>
             </p>
           </div>
           <nav className="footer-links" aria-label="Footer Links">

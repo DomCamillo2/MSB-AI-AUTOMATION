@@ -2,7 +2,7 @@ import { createPageMetadata } from '@/lib/seo';
 
 export const metadata = createPageMetadata({
   title: 'Impressum',
-  description: 'Anbieterkennzeichnung und Kontaktangaben von MSB AI & Automation gemäß § 5 DDG.',
+  description: 'Anbieterkennzeichnung und Kontaktangaben der MSB AI & Automation GbR gemäß § 5 DDG.',
   path: '/impressum',
   index: false
 });
@@ -20,8 +20,11 @@ export default function ImpressumPage() {
         <section aria-labelledby="provider-heading">
           <h2 id="provider-heading">Diensteanbieter</h2>
           <address>
+            MSB AI &amp; Automation GbR<br />
+            Gesellschafter:<br />
             Dominik Soballa<br />
-            handelnd unter MSB AI &amp; Automation<br />
+            Erik Müller<br />
+            Luca Busché<br />
             Haußerstraße 150<br />
             72076 Tübingen<br />
             Deutschland

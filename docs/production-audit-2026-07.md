@@ -99,12 +99,12 @@ Menschlich zu bestätigen: tatsächliche GA4-Aufbewahrungsdauer, Google-Kontofre
 
 ## G — Impressum
 
-- Übernommene bestehende Angaben: Betreiber Dominik Soballa, Haußerstraße 150, 72076 Tübingen, Deutschland, `kontakt@msb-ai.de`.
+- Betreiberangaben aktualisiert auf MSB AI & Automation GbR mit den Gesellschaftern Dominik Soballa, Erik Müller und Luca Busché; bestehende Anschrift Haußerstraße 150, 72076 Tübingen, Deutschland, und `kontakt@msb-ai.de` beibehalten.
 - Öffentliche Marke einheitlich auf „MSB AI & Automation“ korrigiert; „MSB AI Consulting“ entfernt.
 - Aktuelle Bezeichnung nach § 5 DDG beibehalten; keine veraltete TMG- oder EU-ODR-Klausel ergänzt.
 - Nicht erfunden: Telefonnummer, USt-IdNr./W-IdNr., Register und Kammerangaben.
 
-Vor Veröffentlichung juristisch klären: exakte Rechts-/Geschäftsbezeichnung des Einzelunternehmens, ob eine Telefonnummer oder andere schnelle Kontaktmöglichkeit ergänzt werden muss, ob USt-IdNr./W-IdNr. vergeben wurde, ob Register-/Berufsangaben bestehen und ob VSBG-Informationen im konkreten B2B-/Vertragsmodell erforderlich sind.
+Menschlich beziehungsweise juristisch zu klären: ob eine Telefonnummer oder andere zweite direkte Kontaktmöglichkeit ergänzt werden muss; ob eine USt-IdNr. oder Wirtschafts-Identifikationsnummer vorhanden ist und nach § 5 DDG veröffentlicht werden muss; der genaue Beginn der gemeinsamen Geschäftstätigkeit; Gewerbeanmeldung und steuerliche Erfassung der GbR; ein schriftlicher GbR-Vertrag; sowie die zwischen den Gesellschaftern vereinbarten Vertretungsregeln. Die GbR ist nicht im Gesellschaftsregister eingetragen; deshalb werden keine Registerangaben veröffentlicht.
 
 ## H — Externe menschliche Aktionen
 

@@ -16,16 +16,26 @@ const structuredData = {
       '@type': ['Organization', 'ProfessionalService'],
       '@id': `${siteUrl}/#organization`,
       name: siteName,
-      legalName: 'Dominik Soballa',
+      legalName: 'MSB AI & Automation GbR',
       url: siteUrl,
       logo: `${siteUrl}/msb-logo-lockup.png`,
       email: 'kontakt@msb-ai.de',
       description: defaultDescription,
       slogan: 'Automatisierung mit Menschenverstand',
-      founder: {
-        '@type': 'Person',
-        name: 'Dominik Soballa'
-      },
+      founder: [
+        {
+          '@type': 'Person',
+          name: 'Dominik Soballa'
+        },
+        {
+          '@type': 'Person',
+          name: 'Erik Müller'
+        },
+        {
+          '@type': 'Person',
+          name: 'Luca Busché'
+        }
+      ],
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Haußerstraße 150',

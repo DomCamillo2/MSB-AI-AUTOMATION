@@ -22,7 +22,7 @@ The production website is exported statically by GitHub Actions and uploaded ove
 
 ## Brand
 
-The site uses the MSB AI Consulting color system:
+The site uses the MSB AI & Automation color system:
 
 - Primary navy: `#071B3A`
 - Secondary navy: `#0E2A4D`
