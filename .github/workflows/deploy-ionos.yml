@@ -95,7 +95,7 @@ jobs:
 
           lftp \
             -u "$IONOS_SFTP_USER","$IONOS_SFTP_PASSWORD" \
-            -e "set sftp:auto-confirm yes; set net:max-retries 2; set net:timeout 20; set cmd:fail-exit yes; mirror --reverse --parallel=4 --verbose=1 out/ \"$IONOS_DEPLOY_PATH\"; cls -1 \"$IONOS_DEPLOY_PATH\"; bye" \
+            -e "set sftp:auto-confirm yes; set net:max-retries 3; set net:timeout 30; set cmd:fail-exit yes; mirror --reverse --no-perms --no-umask --verbose=1 out/ \"$IONOS_DEPLOY_PATH\"; cls -l \"$IONOS_DEPLOY_PATH/index.html\"; cls -l \"$IONOS_DEPLOY_PATH/404.html\"; bye" \
             "sftp://$IONOS_SFTP_HOST:$IONOS_SFTP_PORT"
 
           echo "Static website uploaded to IONOS."
