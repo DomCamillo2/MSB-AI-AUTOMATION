@@ -199,9 +199,9 @@ try {
     $sourceLabel = $source === 'automation_check_result'
         ? 'Ergebnis des Automation Checks'
         : 'Kontaktformular';
-    $subject = $source === 'automation_check_result'
+    $subject = ($source === 'automation_check_result'
         ? 'Automation Check: neue Gesprächsanfrage'
-        : 'Neue Anfrage über msb-ai.de';
+        : 'Neue Anfrage über msb-ai.de') . ' · ' . substr($requestId, 0, 8);
     $receivedAt = (new DateTimeImmutable('now', new DateTimeZone('Europe/Berlin')))->format('d.m.Y, H:i T');
 
     $textBody = implode("\n", [
@@ -246,7 +246,7 @@ try {
     $mail->Timeout = 15;
     $mail->CharSet = PHPMailer::CHARSET_UTF8;
     $mail->Hostname = 'www.msb-ai.de';
-    $mail->setFrom((string) $config['smtp_user'], 'MSB Website');
+    $mail->setFrom('webformular@msb-ai.de', 'MSB Website');
     $mail->Sender = (string) $config['smtp_user'];
     $mail->addAddress((string) $config['recipient'], 'MSB AI & Automation');
     $mail->addReplyTo($email, $name !== '' ? $name : $email);
