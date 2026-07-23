@@ -3,19 +3,8 @@
 import { useRef, useState, type FormEvent } from 'react';
 import AutomationCheckProgress from '@/components/automation-check-progress';
 import { AutomationProcessDiagram } from '@/components/automation-process-preview';
-import {
-  CONSEQUENCE_OPTIONS,
-  EFFORT_OPTIONS,
-  FREQUENCY_OPTIONS,
-  HUMAN_DECISION_OPTIONS,
-  INPUT_OPTIONS,
-  PROBLEM_OPTIONS,
-  STANDARDIZATION_OPTIONS,
-  VOLUME_OPTIONS,
-  getAreaConfig,
-  optionLabel
-} from '@/lib/automation-check-config';
-import { answerSummary } from '@/lib/automation-check-scoring';
+import { getAreaConfig } from '@/lib/automation-check-config';
+import { buildAutomationCheckMessage } from '@/lib/automation-check-handoff';
 import { trackAnalyticsEvent } from '@/lib/analytics';
 import { sendContactRequest } from '@/lib/contact-api';
 import type { AutomationAssessment, CheckAnswers } from '@/lib/automation-check-types';
@@ -38,39 +27,12 @@ const msbSteps = [
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function buildAssessmentMessage(
-  answers: CheckAnswers,
-  assessment: AutomationAssessment
-) {
-  const summary = answerSummary(answers);
-  const problemOptions = answers.area ? PROBLEM_OPTIONS[answers.area] : [];
-  const body = [
-    'Guten Tag MSB-Team,',
-    '',
-    'ich möchte meine Automation-Check-Einschätzung besprechen.',
-    '',
-    'Ergebnis: ' + assessment.title,
-    'Bereich: ' + summary.area,
-    'Tätigkeiten: ' + answers.problems.map((id) => optionLabel(problemOptions, id) ?? id).join(', '),
-    'Eingänge/Systeme: ' + answers.inputs.map((id) => optionLabel(INPUT_OPTIONS, id) ?? id).join(', '),
-    answers.systemName.trim() ? 'Genanntes System: ' + answers.systemName.trim() : '',
-    'Häufigkeit: ' + (optionLabel(FREQUENCY_OPTIONS, answers.frequency) ?? 'Keine Angabe'),
-    'Vorgänge: ' + (optionLabel(VOLUME_OPTIONS, answers.volume) ?? 'Keine Angabe'),
-    'Aufwand je Vorgang: ' + (optionLabel(EFFORT_OPTIONS, answers.effort) ?? 'Keine Angabe'),
-    'Standardisierung: ' + (optionLabel(STANDARDIZATION_OPTIONS, answers.standardization) ?? 'Keine Angabe'),
-    'Menschliche Entscheidungen: ' + (optionLabel(HUMAN_DECISION_OPTIONS, answers.humanDecision) ?? 'Keine Angabe'),
-    'Fehlerfolgen: ' + (optionLabel(CONSEQUENCE_OPTIONS, answers.consequence) ?? 'Keine Angabe'),
-    answers.note.trim() ? 'Optionaler Hinweis: ' + answers.note.trim() : '',
-    '',
-    'Bitte melden Sie sich bei mir, um den Prozess kurz einzuordnen.'
-  ].filter(Boolean).join('\n');
-  return body;
-}
-
 function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assessment'>) {
   const [name, setName] = useState('');
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
+  const [additionalMessage, setAdditionalMessage] = useState('');
+  const [includeAssessment, setIncludeAssessment] = useState(true);
   const [website, setWebsite] = useState('');
   const [privacy, setPrivacy] = useState(false);
   const [emailError, setEmailError] = useState('');
@@ -110,7 +72,7 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
         name: name.trim(),
         company: company.trim(),
         email: cleanEmail,
-        message: buildAssessmentMessage(answers, assessment),
+        message: buildAutomationCheckMessage(answers, assessment, additionalMessage, includeAssessment),
         privacy: true,
         website,
         startedAt: openedAtRef.current
@@ -120,6 +82,7 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
       setName('');
       setCompany('');
       setEmail('');
+      setAdditionalMessage('');
       setWebsite('');
       setPrivacy(false);
       openedAtRef.current = Date.now();
@@ -152,11 +115,34 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
       </div>
       <div className={styles.contactFormIntro}>
         <div>
-          <p className="eyebrow">Freiwilliger nächster Schritt</p>
-          <h3>Einschätzung mit MSB besprechen</h3>
+          <p className="eyebrow">Anfrage vorbereiten</p>
+          <h3>Check-Ergebnis an MSB senden</h3>
         </div>
-        <p>Mit Ihrer Zustimmung werden die angezeigten Angaben verschlüsselt an unser IONOS-Postfach übermittelt.</p>
+        <p>Sie entscheiden, ob die Auswertung mitgesendet wird. Die Anfrage wird verschlüsselt an unser IONOS-Postfach übermittelt.</p>
       </div>
+      <label className={styles.attachmentChoice} htmlFor="check-attachment">
+        <input
+          id="check-attachment"
+          type="checkbox"
+          checked={includeAssessment}
+          onChange={(event) => setIncludeAssessment(event.target.checked)}
+        />
+        <span className={styles.attachmentIcon} aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M8.5 12.5 14.9 6a3 3 0 0 1 4.2 4.2l-8.4 8.5a5 5 0 0 1-7.1-7.1l8.2-8.2" /></svg>
+        </span>
+        <span className={styles.attachmentCopy}>
+          <strong>Automation-Check-Auswertung anhängen</strong>
+          <small>Ergebnis, Antworten, Bewertungssignale und Prozessbild werden strukturiert in die Anfrage übernommen.</small>
+        </span>
+        <span className={styles.attachmentStatus}>{includeAssessment ? 'Ausgewählt' : 'Nicht ausgewählt'}</span>
+      </label>
+      {includeAssessment && (
+        <div className={styles.attachmentPreview} aria-label="Vorschau der angehängten Auswertung">
+          <span><small>Ergebnis</small><strong>{assessment.title}</strong></span>
+          <span><small>Bereich</small><strong>{getAreaConfig(answers.area).label}</strong></span>
+          <span><small>Umfang</small><strong>{answers.problems.length} Tätigkeiten · {assessment.reasons.length} Signale</strong></span>
+        </div>
+      )}
       <div className={styles.contactFields}>
         <div className={styles.contactField}>
           <label htmlFor="check-email">Geschäftliche E-Mail <span>erforderlich</span></label>
@@ -184,6 +170,16 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
           <input id="check-company" type="text" autoComplete="organization" value={company} onChange={(event) => setCompany(event.target.value)} />
         </div>
       </div>
+      <div className={styles.contactField}>
+        <label htmlFor="check-message">Ihre Nachricht <span>optional</span></label>
+        <textarea
+          id="check-message"
+          rows={4}
+          value={additionalMessage}
+          placeholder="Zum Beispiel: Wir möchten diesen Prozess zunächst für eine Abteilung prüfen."
+          onChange={(event) => setAdditionalMessage(event.target.value)}
+        />
+      </div>
       <label className={styles.privacyChoice} htmlFor="check-privacy">
         <input
           id="check-privacy"
@@ -198,10 +194,10 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
         />
         <span>Ich habe die <a href="/datenschutz">Datenschutzhinweise</a> gelesen.</span>
       </label>
-      <p className={styles.privacyNote} id="check-privacy-note">Bitte prüfen Sie die Angaben und entfernen Sie vertrauliche Informationen, bevor Sie sie senden.</p>
+      <p className={styles.privacyNote} id="check-privacy-note">Bitte prüfen Sie Ihre Angaben und entfernen Sie vertrauliche Informationen, bevor Sie die Anfrage senden.</p>
       {privacyError && <p className={styles.fieldError} id="check-privacy-error">{privacyError}</p>}
       <button className="button button-primary" type="submit" disabled={isSubmitting}>
-        {isSubmitting ? 'Anfrage wird gesendet …' : 'Einschätzung sicher senden'}
+        {isSubmitting ? 'Anfrage wird gesendet …' : includeAssessment ? 'Anfrage mit Ergebnis senden' : 'Anfrage senden'}
         {!isSubmitting ? <span className="button-arrow" aria-hidden="true">→</span> : null}
       </button>
       {status && <p className={[styles.formStatus, statusTone === 'error' ? styles.formStatusError : ''].filter(Boolean).join(' ')} role="status" aria-live="polite">{status}</p>}
@@ -300,11 +296,11 @@ export function AutomationCheckResult({ answers, assessment, onEdit, onRestart }
           <div className={styles.actionPanel}>
             <div>
               <p className="eyebrow eyebrow-light">Das Ergebnis gehört Ihnen</p>
-              <h2 id="result-actions-heading">Speichern oder freiwillig mit MSB besprechen.</h2>
-              <p>Für die Einschätzung waren keine Kontaktdaten nötig.</p>
+              <h2 id="result-actions-heading">Ergebnis speichern oder direkt an MSB senden.</h2>
+              <p>Für den Check waren keine Kontaktdaten nötig. Erst beim Absenden entscheiden Sie, ob Ihre Auswertung mitgeht.</p>
             </div>
             <div className={styles.actionButtons}>
-              {!contactOpen && <button className="button button-light" type="button" onClick={openContact}>Einschätzung besprechen <span className="button-arrow" aria-hidden="true">→</span></button>}
+              {!contactOpen && <button className="button button-light" type="button" onClick={openContact}>Ergebnis mit Anfrage senden <span className="button-arrow" aria-hidden="true">→</span></button>}
               <button className={styles.printButton} type="button" onClick={() => window.print()}>Ergebnis drucken / als PDF</button>
               <button className={styles.editButton} type="button" onClick={onEdit}>Antworten anpassen</button>
             </div>

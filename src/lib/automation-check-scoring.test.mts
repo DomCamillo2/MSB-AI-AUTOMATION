@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { PROCESS_AREAS, PROBLEM_OPTIONS } from './automation-check-config.ts';
+import { buildAutomationCheckMessage } from './automation-check-handoff.ts';
 import { assessAutomationPotential } from './automation-check-scoring.ts';
 import type { CheckAnswers } from './automation-check-types.ts';
 
@@ -98,4 +99,44 @@ test('every configured process area has a working branch and result', () => {
     assert.ok(result.currentWorkflow.length >= 3);
     assert.ok(result.possibleWorkflow.length >= 4);
   }
+});
+
+test('builds a complete structured attachment for a contact request', () => {
+  const checkAnswers = answers({
+    systemName: 'Beispiel-CRM',
+    note: 'Freigaben bleiben beim Team.'
+  });
+  const result = assessAutomationPotential(checkAnswers);
+  const message = buildAutomationCheckMessage(
+    checkAnswers,
+    result,
+    'Bitte zunächst für eine Abteilung prüfen.',
+    true
+  );
+
+  assert.match(message, /ANGEHÄNGTE AUTOMATION-CHECK-AUSWERTUNG/);
+  assert.match(message, /Bitte zunächst für eine Abteilung prüfen/);
+  assert.match(message, /Ergebnis: Gutes Automatisierungspotenzial/);
+  assert.match(message, /Genanntes System: Beispiel-CRM/);
+  assert.match(message, /Freigaben bleiben beim Team/);
+  assert.match(message, /WICHTIGSTE BEWERTUNGSSIGNALE/);
+  assert.match(message, /HEUTIGER ABLAUF/);
+  assert.match(message, /MÖGLICHE RICHTUNG/);
+  assert.ok(message.length < 6000);
+});
+
+test('allows a contact request without transmitting check answers', () => {
+  const checkAnswers = answers({ note: 'Diese Information bleibt im Browser.' });
+  const result = assessAutomationPotential(checkAnswers);
+  const message = buildAutomationCheckMessage(
+    checkAnswers,
+    result,
+    'Ich möchte den Prozess allgemein besprechen.',
+    false
+  );
+
+  assert.match(message, /Ich möchte den Prozess allgemein besprechen/);
+  assert.doesNotMatch(message, /AUTOMATION-CHECK-AUSWERTUNG/);
+  assert.doesNotMatch(message, /Diese Information bleibt im Browser/);
+  assert.doesNotMatch(message, /Beispielhafter Ansatz/);
 });

@@ -229,7 +229,7 @@ try {
         . '<tr><th align="left">E-Mail</th><td>' . escape_html($email) . '</td></tr>'
         . '</table>'
         . '<h2 style="font-size:18px">Nachricht / Prozesseinschätzung</h2>'
-        . '<div style="padding:16px;background:#f4f7f6;border-left:4px solid #08777b">' . escape_html($message) . '</div>'
+        . '<div style="padding:16px;background:#f4f7f6;border-left:4px solid #08777b;line-height:1.6">' . nl2br(escape_html($message), false) . '</div>'
         . '<p style="color:#617078;font-size:12px">Anfrage-ID: ' . escape_html($requestId) . '</p>'
         . '</body></html>';
 
