@@ -579,8 +579,11 @@
   }
 
   .breadcrumb ol {
+    width: auto;
     min-height: 46px;
     gap: 0.05rem;
+    margin-right: max(16px, env(safe-area-inset-right));
+    margin-left: max(16px, env(safe-area-inset-left));
     padding: 0.35rem;
     font-size: 0.68rem;
   }
@@ -634,7 +637,7 @@
   }
 
   .heroMarker {
-    min-height: 220px;
+    min-height: 190px;
   }
 
   .painGrid,
@@ -651,6 +654,22 @@
   .frameworkCard span {
     margin-bottom: 2.5rem;
   }
+
+  .section,
+  .sectionTint,
+  .sectionNavy {
+    padding: 4.5rem 0;
+  }
+
+  .sectionIntro {
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .workflow,
+  .workflowSeven {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 560px) {
@@ -660,7 +679,10 @@
 
   .heroCopy h1 {
     max-width: 100%;
-    font-size: clamp(2.35rem, 11vw, 3.25rem);
+    font-size: clamp(2.05rem, 10vw, 2.75rem);
+    hyphens: auto;
+    overflow-wrap: anywhere;
+    word-break: normal;
   }
 
   .heroActions,
@@ -679,7 +701,73 @@
   }
 
   .workflow li {
-    min-height: 100px;
+    min-height: 76px;
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr);
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.9rem 1rem;
+  }
+
+  .workflow li:not(:last-child)::after {
+    width: auto;
+    display: block;
+    top: auto;
+    right: auto;
+    bottom: -0.72rem;
+    left: 50%;
+    content: '↓';
+    transform: translateX(-50%);
+  }
+
+  .workflow li strong {
+    margin-top: 0;
+    font-size: 0.86rem;
+  }
+
+  .heroMarker,
+  .painGrid article,
+  .useCaseCard {
+    min-height: 0;
+  }
+
+  .painGrid article,
+  .useCaseCard,
+  .frameworkCard,
+  .responsibilityPanel {
+    padding: 1.15rem;
+  }
+
+  .section,
+  .sectionTint,
+  .sectionNavy {
+    padding: 3.75rem 0;
+  }
+
+  .sectionIntro h2,
+  .problemCopy h2,
+  .outcome h2 {
+    font-size: clamp(1.85rem, 8.2vw, 2.25rem);
+  }
+
+  .panelHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .breadcrumb ol {
+    row-gap: 0;
+  }
+
+  .breadcrumb a,
+  .breadcrumb li[aria-current='page'] {
+    min-height: 44px;
+  }
+
+  .breadcrumb li[aria-current='page'] {
+    width: 100%;
+    margin-top: 0.15rem;
   }
 
   .painGrid,

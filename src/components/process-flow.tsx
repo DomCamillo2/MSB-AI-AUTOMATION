@@ -40,10 +40,20 @@ export function ProcessFlow({
   const flowRef = useRef<HTMLDivElement>(null);
   const inView = useInView(flowRef, { amount: 0.18, once: true });
   const [activeStep, setActiveStep] = useState(-1);
+  const [compactViewport, setCompactViewport] = useState(false);
   const stepCount = steps.length;
 
   useEffect(() => {
-    if (reducedMotion) {
+    const query = window.matchMedia('(max-width: 699px)');
+    const update = () => setCompactViewport(query.matches);
+
+    update();
+    query.addEventListener('change', update);
+    return () => query.removeEventListener('change', update);
+  }, []);
+
+  useEffect(() => {
+    if (reducedMotion || compactViewport) {
       setActiveStep(stepCount);
       return;
     }
@@ -57,9 +67,10 @@ export function ProcessFlow({
     timers.push(window.setTimeout(() => setActiveStep(stepCount), stepCount * stepInterval + settleDelay));
 
     return () => timers.forEach((timer) => window.clearTimeout(timer));
-  }, [inView, reducedMotion, stepCount]);
+  }, [compactViewport, inView, reducedMotion, stepCount]);
 
-  const progressDuration = reducedMotion ? 0 : Math.min(1.4, 0.55 + stepCount * 0.16);
+  const staticFlow = reducedMotion || compactViewport;
+  const progressDuration = staticFlow ? 0 : Math.min(1.4, 0.55 + stepCount * 0.16);
   const classes = [
     'process-flow',
     `process-flow--${layout}`,
@@ -75,7 +86,7 @@ export function ProcessFlow({
         <m.span
           className="process-flow__progress"
           initial={false}
-          animate={{ scaleY: reducedMotion || inView ? 1 : 0 }}
+          animate={{ scaleY: staticFlow || inView ? 1 : 0 }}
           transition={{ duration: progressDuration, ease: motionTokens.ease.standard }}
         />
       </span>
@@ -84,7 +95,7 @@ export function ProcessFlow({
           <m.span
             className="process-flow__progress"
             initial={false}
-            animate={{ scaleX: reducedMotion || inView ? 1 : 0 }}
+            animate={{ scaleX: staticFlow || inView ? 1 : 0 }}
             transition={{ duration: progressDuration, ease: motionTokens.ease.standard }}
           />
         </span>
@@ -92,7 +103,7 @@ export function ProcessFlow({
 
       <ol className="process-flow__list" aria-label={ariaLabel}>
         {steps.map((step, index) => {
-          const state = index < activeStep || reducedMotion ? 'complete' : index === activeStep ? 'active' : 'pending';
+          const state = index < activeStep || staticFlow ? 'complete' : index === activeStep ? 'active' : 'pending';
 
           return (
             <m.li
@@ -101,13 +112,13 @@ export function ProcessFlow({
               data-state={state}
               initial={false}
               animate={
-                reducedMotion || inView
+                staticFlow || inView
                   ? { opacity: 1, y: 0 }
                   : { opacity: 0, y: motionTokens.distance.small }
               }
               transition={{
                 duration: motionTokens.duration.normal,
-                delay: reducedMotion ? 0 : index * (stepInterval / 1000),
+                delay: staticFlow ? 0 : index * (stepInterval / 1000),
                 ease: motionTokens.ease.standard
               }}
             >

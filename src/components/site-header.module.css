@@ -290,8 +290,10 @@
   }
 
   .checkHeaderInner {
-    width: calc(100% - 32px);
+    width: auto;
     grid-template-columns: 1fr auto;
+    margin-right: max(16px, env(safe-area-inset-right));
+    margin-left: max(16px, env(safe-area-inset-left));
   }
 
   .checkHeaderInner p {
@@ -555,7 +557,9 @@
   }
 
   .inner {
-    width: calc(100% - 32px);
+    width: auto;
+    margin-right: max(16px, env(safe-area-inset-right));
+    margin-left: max(16px, env(safe-area-inset-left));
   }
 
   .brand {
@@ -587,13 +591,14 @@
 
   .nav {
     top: var(--rail-height);
-    padding: clamp(3.5rem, 9vh, 5.5rem) 24px calc(2rem + env(safe-area-inset-bottom));
+    padding: clamp(3.5rem, 9vh, 5.5rem) max(24px, env(safe-area-inset-right)) calc(2rem + env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
   }
 }
 
 @media (max-width: 380px) {
   .inner {
-    width: calc(100% - 24px);
+    margin-right: max(12px, env(safe-area-inset-right));
+    margin-left: max(12px, env(safe-area-inset-left));
   }
 
   .brand {
@@ -609,8 +614,8 @@
   }
 
   .menuToggle {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
   }
 }
 

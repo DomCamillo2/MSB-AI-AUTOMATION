@@ -11,6 +11,9 @@
   gap: 2rem;
   margin-inline: auto;
   padding: 1.35rem;
+  max-height: calc(100dvh - max(32px, env(safe-area-inset-top)) - max(16px, env(safe-area-inset-bottom)));
+  overflow-y: auto;
+  overscroll-behavior: contain;
   color: var(--white);
   background: var(--navy);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -253,8 +256,11 @@ label.category {
 
 @media (max-width: 600px) {
   .banner {
-    width: calc(100% - 24px);
+    width: auto;
+    right: max(12px, env(safe-area-inset-right));
+    left: max(12px, env(safe-area-inset-left));
     bottom: max(12px, env(safe-area-inset-bottom));
+    margin-inline: 0;
     padding: 1rem;
   }
 

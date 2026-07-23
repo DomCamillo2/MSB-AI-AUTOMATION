@@ -9,6 +9,7 @@
   --paper: #fbfaf6;
   --white: #ffffff;
   --sage: #e7eeeb;
+  --mist: #edf3f1;
   --border: #d8dedc;
   --border-dark: rgba(255, 255, 255, 0.18);
   --radius: 8px;
@@ -1840,11 +1841,18 @@ textarea:focus-visible,
     transform var(--motion-micro) var(--ease-standard);
 }
 
-.use-case-tab:hover,
 .use-case-tab:focus-visible {
   background: rgba(255, 255, 255, 0.72);
   border-color: #9eb5b0;
   transform: translateY(-2px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .use-case-tab:hover {
+    background: rgba(255, 255, 255, 0.72);
+    border-color: #9eb5b0;
+    transform: translateY(-2px);
+  }
 }
 
 .use-case-tab.is-active {
@@ -5666,5 +5674,206 @@ textarea[aria-invalid='true'] {
   .regional-points-grid article::before,
   .contact-options-grid article::before {
     transition: none;
+  }
+}
+
+/* Final mobile cascade: keep shared constraints authoritative over legacy page passes. */
+@media (max-width: 820px) {
+  :root {
+    --mobile-gutter: 24px;
+  }
+
+  body {
+    overflow-x: clip;
+  }
+
+  main {
+    overflow: visible;
+  }
+
+  .container,
+  .site-header .container {
+    width: auto;
+    max-width: none;
+    margin-right: max(var(--mobile-gutter), env(safe-area-inset-right));
+    margin-left: max(var(--mobile-gutter), env(safe-area-inset-left));
+  }
+
+  main > *,
+  main section,
+  main article,
+  main nav,
+  .section-heading,
+  .heading-split,
+  .page-intro-grid > *,
+  .editorial-split > *,
+  .contact-layout > * {
+    min-width: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    max-width: 100%;
+    hyphens: auto;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  p,
+  li,
+  dd,
+  dt,
+  address {
+    overflow-wrap: break-word;
+  }
+
+  code,
+  pre,
+  .legal-document a {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .page-intro h1 {
+    font-size: clamp(2.05rem, 8.5vw, 2.8rem);
+  }
+
+  .hero-actions .button {
+    min-height: 52px;
+    line-height: 1.3;
+    text-wrap: balance;
+    white-space: normal;
+  }
+
+  .accordion-trigger,
+  .process-flow__details .accordion-trigger {
+    min-height: 44px;
+    padding-block: 0.55rem;
+  }
+
+  .team-card-body,
+  .team-card-compact .team-card-body,
+  .contact-options-grid article {
+    min-height: 0;
+  }
+
+  .contact-option-index {
+    margin-bottom: 2rem;
+  }
+
+  .contact-layout {
+    gap: 1.25rem;
+  }
+
+  .contact-layout .form-surface {
+    order: -1;
+  }
+
+  .footer-region {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .footer-navigation {
+    column-gap: 1.25rem;
+  }
+}
+
+@media (max-width: 620px) {
+  .use-case-tabs {
+    grid-template-columns: none;
+    grid-auto-columns: minmax(220px, 82vw);
+    grid-auto-flow: column;
+    gap: 0.75rem;
+    margin-inline: calc(-1 * var(--mobile-gutter));
+    padding: 0 var(--mobile-gutter) 0.65rem;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: var(--mobile-gutter);
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+
+  .use-case-tab {
+    min-height: 144px;
+    scroll-snap-align: start;
+  }
+
+  .use-case-panel {
+    padding-block: 1.3rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 820px) {
+  .section,
+  .contact-section {
+    padding-block: 4.75rem;
+  }
+
+  .footer-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+
+  .footer-navigation {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-navigation .footer-label {
+    grid-column: 1 / -1;
+  }
+
+  .footer-meta {
+    min-height: 0;
+    align-items: flex-start;
+    flex-direction: column-reverse;
+    gap: 0.25rem;
+    margin-top: 2.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --mobile-gutter: 20px;
+  }
+
+  .contact-layout {
+    padding: 1rem;
+  }
+
+  .section,
+  .contact-section {
+    padding-block: 4rem;
+  }
+
+  .form-surface,
+  .workflow-visual,
+  .snapshot-card,
+  .engagement-step {
+    padding: 1.1rem;
+  }
+
+  .footer-cta,
+  .not-found-actions,
+  .not-found-actions .button,
+  .not-found-actions .text-link {
+    width: 100%;
+  }
+
+  .footer-cta,
+  .not-found-actions .button,
+  .not-found-actions .text-link {
+    justify-content: center;
+    white-space: normal;
+  }
+
+  .not-found-actions {
+    display: grid;
+    gap: 0.75rem;
   }
 }

@@ -10,6 +10,9 @@ type Props = {
 
 export function AutomationCheckProgress({ currentPhase, stepIndex, result = false }: Props) {
   const progress = result ? 100 : Math.round(((stepIndex + 1) / CHECK_QUESTIONS.length) * 100);
+  const currentPhaseLabel = result
+    ? 'Check abgeschlossen'
+    : PHASES.find((phase) => phase.id === currentPhase)?.label;
 
   return (
     <div className={styles.progress} aria-label="Fortschritt im Automation Check">
@@ -19,13 +22,14 @@ export function AutomationCheckProgress({ currentPhase, stepIndex, result = fals
           const phaseIndex = PHASES.findIndex((item) => item.id === phase.id);
           const state = phaseIndex < activeIndex || result ? 'complete' : phase.id === currentPhase ? 'active' : 'upcoming';
           return (
-            <div className={styles.phase} data-state={state} key={phase.id}>
+            <div className={styles.phase} data-state={state} key={phase.id} aria-current={state === 'active' ? 'step' : undefined}>
               <span>{phase.number}</span>
               <strong>{phase.label}</strong>
             </div>
           );
         })}
       </div>
+      <p className={styles.mobilePhaseLabel} aria-hidden="true"><span>Aktuell</span><strong>{currentPhaseLabel}</strong></p>
       <div
         className={styles.progressTrack}
         role="progressbar"

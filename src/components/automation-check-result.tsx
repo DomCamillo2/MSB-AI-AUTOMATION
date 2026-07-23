@@ -151,6 +151,7 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
             type="email"
             autoComplete="email"
             inputMode="email"
+            maxLength={254}
             value={email}
             aria-invalid={emailError ? true : undefined}
             aria-describedby={emailError ? 'check-email-error' : undefined}
@@ -163,11 +164,11 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
         </div>
         <div className={styles.contactField}>
           <label htmlFor="check-name">Name <span>optional</span></label>
-          <input id="check-name" type="text" autoComplete="name" value={name} onChange={(event) => setName(event.target.value)} />
+          <input id="check-name" type="text" autoComplete="name" maxLength={160} value={name} onChange={(event) => setName(event.target.value)} />
         </div>
         <div className={styles.contactField}>
           <label htmlFor="check-company">Unternehmen <span>optional</span></label>
-          <input id="check-company" type="text" autoComplete="organization" value={company} onChange={(event) => setCompany(event.target.value)} />
+          <input id="check-company" type="text" autoComplete="organization" maxLength={200} value={company} onChange={(event) => setCompany(event.target.value)} />
         </div>
       </div>
       <div className={styles.contactField}>
@@ -175,12 +176,13 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
         <textarea
           id="check-message"
           rows={4}
+          maxLength={6000}
           value={additionalMessage}
           placeholder="Zum Beispiel: Wir möchten diesen Prozess zunächst für eine Abteilung prüfen."
           onChange={(event) => setAdditionalMessage(event.target.value)}
         />
       </div>
-      <label className={styles.privacyChoice} htmlFor="check-privacy">
+      <div className={styles.privacyChoice}>
         <input
           id="check-privacy"
           type="checkbox"
@@ -192,8 +194,9 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
             setPrivacyError('');
           }}
         />
-        <span>Ich habe die <a href="/datenschutz">Datenschutzhinweise</a> gelesen.</span>
-      </label>
+        <label htmlFor="check-privacy">Ich bestätige die Kenntnisnahme.</label>
+        <a href="/datenschutz">Datenschutzhinweise öffnen</a>
+      </div>
       <p className={styles.privacyNote} id="check-privacy-note">Bitte prüfen Sie Ihre Angaben und entfernen Sie vertrauliche Informationen, bevor Sie die Anfrage senden.</p>
       {privacyError && <p className={styles.fieldError} id="check-privacy-error">{privacyError}</p>}
       <button className="button button-primary" type="submit" disabled={isSubmitting}>
@@ -216,7 +219,8 @@ export function AutomationCheckResult({ answers, assessment, onEdit, onRestart }
       page_type: 'automation_check'
     });
     window.requestAnimationFrame(() => {
-      document.getElementById('automation-check-contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.getElementById('automation-check-contact')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
     });
   }
 
@@ -234,6 +238,11 @@ export function AutomationCheckResult({ answers, assessment, onEdit, onRestart }
             <h1 id="assessment-result-heading">{assessment.title}</h1>
             <p className={styles.resultSummary}>{assessment.summary}</p>
             <p className={styles.orientationNote}>Diese Einordnung ist eine erste Orientierung, keine vollständige Prozessanalyse und kein technisches Angebot.</p>
+            {!contactOpen && (
+              <button className={['button', 'button-primary', styles.mobileResultCta].join(' ')} type="button" onClick={openContact}>
+                Ergebnis mit Anfrage senden <span className="button-arrow" aria-hidden="true">→</span>
+              </button>
+            )}
           </div>
           <aside className={styles.reasonCard} aria-labelledby="reasons-heading">
             <p className={styles.previewEyebrow}>Warum diese Einordnung?</p>

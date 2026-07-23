@@ -11,6 +11,7 @@ type Props = {
 
 export function UseCaseDetailPage({ useCase }: Props) {
   const pageUrl = `${siteUrl}/anwendungsfaelle/${useCase.slug}`;
+  const breadcrumbLabel = useCase.metaTitle.replace(/ automatisieren$/i, '');
   const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -42,7 +43,7 @@ export function UseCaseDetailPage({ useCase }: Props) {
         <ol className="container">
           <li><a href="/">Startseite</a></li>
           <li><a href="/anwendungsfaelle">Anwendungsfälle</a></li>
-          <li aria-current="page">{useCase.title}</li>
+          <li aria-current="page" title={useCase.title}>{breadcrumbLabel}</li>
         </ol>
       </nav>
 

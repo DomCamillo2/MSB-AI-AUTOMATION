@@ -185,7 +185,7 @@ export function SiteHeader() {
             aria-hidden={usesMenu && !menuOpen ? true : undefined}
           >
             {navigation.map(({ label, href }) => {
-              const active = pathname === href;
+              const active = pathname === href || pathname.startsWith(`${href}/`);
               return (
                 <a
                   key={href}

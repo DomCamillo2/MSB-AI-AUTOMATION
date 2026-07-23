@@ -119,6 +119,7 @@ export function ContactForm() {
             name="name"
             type="text"
             autoComplete="name"
+            maxLength={160}
             required
             aria-invalid={errors.name ? true : undefined}
             aria-describedby={errors.name ? 'name-error' : undefined}
@@ -137,6 +138,7 @@ export function ContactForm() {
             name="company"
             type="text"
             autoComplete="organization"
+            maxLength={200}
             required
             aria-invalid={errors.company ? true : undefined}
             aria-describedby={errors.company ? 'company-error' : undefined}
@@ -158,6 +160,7 @@ export function ContactForm() {
           type="email"
           inputMode="email"
           autoComplete="email"
+          maxLength={254}
           required
           aria-invalid={errors.email ? true : undefined}
           aria-describedby={errors.email ? 'email-error' : undefined}
@@ -176,6 +179,7 @@ export function ContactForm() {
           id="process"
           name="process"
           rows={5}
+          maxLength={6000}
           required
           aria-invalid={errors.process ? true : undefined}
           aria-describedby={errors.process ? 'process-hint process-error' : 'process-hint'}

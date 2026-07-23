@@ -264,6 +264,10 @@
   gap: 1rem;
 }
 
+.mobilePhaseLabel {
+  display: none;
+}
+
 .phase {
   min-width: 0;
   display: flex;
@@ -834,6 +838,10 @@
   line-height: 1.55;
 }
 
+.mobileResultCta {
+  display: none;
+}
+
 .reasonCard {
   padding: clamp(1.3rem, 2.8vw, 2rem);
   color: var(--white);
@@ -1274,6 +1282,7 @@
   gap: 0.7rem;
   color: #536066;
   font-size: 0.78rem;
+  flex-wrap: wrap;
 }
 
 .privacyChoice input {
@@ -1422,6 +1431,14 @@
   .attachmentPreview {
     grid-template-columns: minmax(0, 1fr);
   }
+
+  .mobileResultCta {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    margin-top: 1.4rem;
+    white-space: normal;
+  }
 }
 
 @media (max-width: 700px) {
@@ -1511,12 +1528,23 @@
   .comparisonSection,
   .msbProcessSection,
   .resultActions {
-    padding: 4.5rem 0;
+    padding: 3.75rem 0;
   }
 
   .resultHero h1 {
     max-width: 100%;
-    font-size: clamp(2.45rem, 11vw, 3.5rem);
+    font-size: clamp(2rem, 9vw, 2.75rem);
+    hyphens: auto;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .mobileResultCta {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    margin-top: 1.4rem;
+    white-space: normal;
   }
 
   .resultSectionIntro {
@@ -1564,6 +1592,21 @@
     grid-column: 3;
     justify-self: start;
   }
+
+  .contactField input,
+  .contactField textarea {
+    scroll-margin-bottom: 7rem;
+  }
+}
+
+@supports selector(.checkPage:has(input:focus)) {
+  @media (max-width: 700px) {
+    .checkPage:has(input:focus, textarea:focus) .checkNavigation {
+      position: sticky;
+      bottom: auto;
+      box-shadow: none;
+    }
+  }
 }
 
 @media (max-width: 420px) {
@@ -1607,7 +1650,25 @@
   }
 
   .phase strong {
-    font-size: 0.52rem;
+    display: none;
+  }
+
+  .mobilePhaseLabel {
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 0.7rem;
+    color: var(--navy);
+    font-size: 0.76rem;
+  }
+
+  .mobilePhaseLabel span {
+    color: var(--teal);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 
   .checkNavigation {
@@ -1621,6 +1682,37 @@
   .checkNavigation :global(.button) {
     min-width: 0;
     font-size: 0.76rem;
+  }
+
+  .secondaryActions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .startFacts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .startFacts li {
+    min-height: 48px;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: center;
+    padding: 0.7rem 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+  }
+
+  .startFacts li:first-child {
+    padding-left: 0;
+  }
+
+  .startFacts li:last-child {
+    border-bottom: 0;
+  }
+
+  .startFacts strong,
+  .startFacts span {
+    font-size: 0.75rem;
   }
 }
 

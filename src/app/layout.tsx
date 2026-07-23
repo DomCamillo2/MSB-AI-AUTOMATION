@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter, Poppins } from 'next/font/google';
 import AnalyticsInteractions from '@/components/analytics-interactions';
 import ConsentManager from '@/components/consent-manager';
@@ -53,6 +53,13 @@ export const metadata: Metadata = {
       'max-video-preview': -1
     }
   }
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: '#fbfaf6'
 };
 
 export default function RootLayout({

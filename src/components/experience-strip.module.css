@@ -279,8 +279,10 @@
   }
 
   .layout {
-    width: min(100% - 32px, 520px);
+    width: auto;
     gap: 2rem;
+    margin-right: max(16px, env(safe-area-inset-right));
+    margin-left: max(16px, env(safe-area-inset-left));
   }
 
   .title {
@@ -299,7 +301,7 @@
 
   .card,
   .card:last-child:nth-child(odd) {
-    min-height: 270px;
+    min-height: 230px;
     grid-column: auto;
     padding: 1.5rem;
   }

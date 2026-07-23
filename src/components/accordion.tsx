@@ -42,7 +42,7 @@ export function Accordion({ children, className = '', label }: AccordionProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: reducedMotion ? 0 : -motionTokens.distance.micro }}
             transition={{
-              duration: motionTokens.duration.fast,
+              duration: reducedMotion ? 0 : motionTokens.duration.fast,
               ease: motionTokens.ease.standard
             }}
           >

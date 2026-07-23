@@ -156,6 +156,7 @@ export function ConsentManager({ analyticsEnabled }: ConsentManagerProps) {
     setChoice(nextChoice);
     setDraftAnalytics(analytics);
     setSettingsOpen(false);
+    window.requestAnimationFrame(() => returnFocusRef.current?.focus());
 
     if (hadAnalytics && !analytics) {
       disableGoogleAnalytics();
@@ -202,7 +203,7 @@ export function ConsentManager({ analyticsEnabled }: ConsentManagerProps) {
             <label className={styles.category}>
               <div>
                 <strong>Statistik</strong>
-                <input type="checkbox" checked={draftAnalytics} onChange={(event) => setDraftAnalytics(event.target.checked)} />
+                <input aria-label="Statistik erlauben" type="checkbox" checked={draftAnalytics} onChange={(event) => setDraftAnalytics(event.target.checked)} />
               </div>
               <p>Google Analytics 4 mit der Mess-ID {GA_MEASUREMENT_ID}. Hilft uns, Seitenaufrufe und ausgewählte, nicht personenbezogene Interaktionen auszuwerten.</p>
             </label>

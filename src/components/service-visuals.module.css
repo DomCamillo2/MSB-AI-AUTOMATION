@@ -1156,6 +1156,19 @@
 
   .deliveryGrid > li {
     min-height: 0;
+    position: relative;
+    padding-left: 1.25rem;
+    border-left: 3px solid rgba(8, 119, 123, 0.28);
+  }
+
+  .deliveryGrid {
+    gap: 0.8rem;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .deliveryGrid::before {
+    display: none;
   }
 
   .deliveryGrid > li > div {
@@ -1285,6 +1298,17 @@
   .principleList > div {
     grid-template-columns: minmax(0, 1fr);
     gap: 0.25rem;
+  }
+
+  .heroTopbar,
+  .heroFlow small,
+  .areaTags li,
+  .cardIndex,
+  .decisionCard small,
+  .flowSteps li span,
+  .deliveryGrid small,
+  .engineeringBar span {
+    font-size: 0.75rem;
   }
 }
 
