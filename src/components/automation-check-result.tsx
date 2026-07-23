@@ -5,6 +5,7 @@ import AutomationCheckProgress from '@/components/automation-check-progress';
 import { AutomationProcessDiagram } from '@/components/automation-process-preview';
 import { getAreaConfig } from '@/lib/automation-check-config';
 import { buildAutomationCheckMessage } from '@/lib/automation-check-handoff';
+import { downloadAutomationCheckPdf } from '@/lib/automation-check-pdf';
 import { trackAnalyticsEvent } from '@/lib/analytics';
 import { sendContactRequest } from '@/lib/contact-api';
 import type { AutomationAssessment, CheckAnswers } from '@/lib/automation-check-types';
@@ -182,20 +183,22 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
           onChange={(event) => setAdditionalMessage(event.target.value)}
         />
       </div>
-      <div className={styles.privacyChoice}>
-        <input
-          id="check-privacy"
-          type="checkbox"
-          checked={privacy}
-          aria-invalid={privacyError ? true : undefined}
-          aria-describedby={privacyError ? 'check-privacy-error' : 'check-privacy-note'}
-          onChange={(event) => {
-            setPrivacy(event.target.checked);
-            setPrivacyError('');
-          }}
-        />
-        <label htmlFor="check-privacy">Ich bestätige die Kenntnisnahme.</label>
-        <a href="/datenschutz">Datenschutzhinweise öffnen</a>
+      <div className={styles.privacyRow}>
+        <label className={styles.privacyChoice} htmlFor="check-privacy">
+          <input
+            id="check-privacy"
+            type="checkbox"
+            checked={privacy}
+            aria-invalid={privacyError ? true : undefined}
+            aria-describedby={privacyError ? 'check-privacy-error check-privacy-note' : 'check-privacy-note'}
+            onChange={(event) => {
+              setPrivacy(event.target.checked);
+              setPrivacyError('');
+            }}
+          />
+          <span>Ich bestätige die Kenntnisnahme.</span>
+        </label>
+        <a className={styles.privacyLink} href="/datenschutz">Datenschutzhinweise öffnen</a>
       </div>
       <p className={styles.privacyNote} id="check-privacy-note">Bitte prüfen Sie Ihre Angaben und entfernen Sie vertrauliche Informationen, bevor Sie die Anfrage senden.</p>
       {privacyError && <p className={styles.fieldError} id="check-privacy-error">{privacyError}</p>}
@@ -210,6 +213,7 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
 
 export function AutomationCheckResult({ answers, assessment, onEdit, onRestart }: Props) {
   const [contactOpen, setContactOpen] = useState(false);
+  const [pdfState, setPdfState] = useState<'idle' | 'creating' | 'success' | 'error'>('idle');
   const area = getAreaConfig(answers.area);
 
   function openContact() {
@@ -222,6 +226,23 @@ export function AutomationCheckResult({ answers, assessment, onEdit, onRestart }
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       document.getElementById('automation-check-contact')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
     });
+  }
+
+  async function downloadPdf() {
+    if (pdfState === 'creating') return;
+    setPdfState('creating');
+
+    try {
+      await downloadAutomationCheckPdf(answers, assessment);
+      setPdfState('success');
+      trackAnalyticsEvent('automation_check_pdf_download', {
+        result_category: assessment.category,
+        page_type: 'automation_check'
+      });
+      window.setTimeout(() => setPdfState('idle'), 4500);
+    } catch {
+      setPdfState('error');
+    }
   }
 
   return (
@@ -279,9 +300,33 @@ export function AutomationCheckResult({ answers, assessment, onEdit, onRestart }
               )}
               <p className={styles.actionAssurance}><span aria-hidden="true">✓</span> Unverbindlich · direkt an kontakt@msb-ai.de</p>
               <div className={styles.secondaryActions}>
-                <button className={styles.printButton} type="button" onClick={() => window.print()}>Als PDF speichern</button>
+                <button
+                  className={styles.pdfDownloadButton}
+                  type="button"
+                  onClick={downloadPdf}
+                  disabled={pdfState === 'creating'}
+                  aria-describedby="pdf-download-note pdf-download-status"
+                >
+                  <span className={styles.pdfDownloadIcon} aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v3h14v-3" />
+                    </svg>
+                  </span>
+                  <span>
+                    <strong>{pdfState === 'creating' ? 'PDF wird erstellt …' : 'PDF-Auswertung herunterladen'}</strong>
+                    <small id="pdf-download-note">3 Seiten · lokal auf Ihrem Gerät erstellt</small>
+                  </span>
+                </button>
                 <button className={styles.editButton} type="button" onClick={onEdit}>Antworten anpassen</button>
               </div>
+              <p
+                id="pdf-download-status"
+                className={[styles.pdfStatus, pdfState === 'error' ? styles.pdfStatusError : ''].filter(Boolean).join(' ')}
+                role="status"
+                aria-live="polite"
+              >
+                {pdfState === 'success' ? 'Die PDF-Auswertung wurde heruntergeladen.' : pdfState === 'error' ? 'Die PDF konnte nicht erstellt werden. Bitte versuchen Sie es erneut.' : ''}
+              </p>
             </div>
           </div>
           {contactOpen && <div id="automation-check-contact" className={styles.contactAnchor}><ContactHandoff answers={answers} assessment={assessment} /></div>}

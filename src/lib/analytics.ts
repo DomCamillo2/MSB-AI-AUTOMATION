@@ -68,6 +68,7 @@ export function trackAnalyticsEvent(
     | 'automation_check_step'
     | 'automation_check_complete'
     | 'automation_check_contact_start'
+    | 'automation_check_pdf_download'
     | 'contact_submit'
     | 'email_click'
     | 'phone_click',

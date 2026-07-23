@@ -628,6 +628,11 @@
 }
 
 @media (max-width: 780px) {
+  .breadcrumb a,
+  .breadcrumb li[aria-current='page'] {
+    min-height: 44px;
+  }
+
   .heroGrid,
   .sectionIntro,
   .integrationGrid,

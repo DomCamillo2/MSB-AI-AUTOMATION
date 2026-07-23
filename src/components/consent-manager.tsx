@@ -173,7 +173,7 @@ export function ConsentManager({ analyticsEnabled }: ConsentManagerProps) {
           <div className={styles.bannerCopy}>
             <p className={styles.eyebrow}>Datenschutzeinstellungen</p>
             <h2 id="consent-title">Statistik nur mit Ihrer Zustimmung.</h2>
-            <p>Notwendige Funktionen laufen immer. Google Analytics wird erst geladen, wenn Sie Statistik ausdrücklich erlauben. <a href="/datenschutz#google-analytics">Details im Datenschutz</a></p>
+            <p>Notwendige Funktionen laufen immer. Google Analytics von Google Ireland Limited wird erst geladen, wenn Sie Statistik ausdrücklich erlauben. Dabei können Daten auch an Google LLC in den USA übermittelt werden. <a href="/datenschutz#google-analytics">Details im Datenschutz</a></p>
           </div>
           <div className={styles.bannerActions}>
             <button className={styles.acceptButton} type="button" onClick={() => saveChoice(true)}>Alle akzeptieren</button>
@@ -205,7 +205,7 @@ export function ConsentManager({ analyticsEnabled }: ConsentManagerProps) {
                 <strong>Statistik</strong>
                 <input aria-label="Statistik erlauben" type="checkbox" checked={draftAnalytics} onChange={(event) => setDraftAnalytics(event.target.checked)} />
               </div>
-              <p>Google Analytics 4 mit der Mess-ID {GA_MEASUREMENT_ID}. Hilft uns, Seitenaufrufe und ausgewählte, nicht personenbezogene Interaktionen auszuwerten.</p>
+              <p>Google Analytics 4 von Google Ireland Limited mit der Mess-ID {GA_MEASUREMENT_ID}. Dabei können Daten auch durch Google LLC in den USA verarbeitet werden. Wir werten Seitenaufrufe und ausgewählte Interaktionen aus.</p>
             </label>
 
             <p className={styles.privacyNote}>Keine Werbekategorie, keine vorausgewählte Statistik und keine Übermittlung von Formularinhalten. <a href="/datenschutz#google-analytics">Datenschutzerklärung lesen</a></p>

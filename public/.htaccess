@@ -21,6 +21,8 @@ ErrorDocument 404 /404.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+  RewriteRule ^team(?:/index\.html)?/?$ https://www.msb-ai.de/ueber-uns/#team-detail-heading [R=301,L,NE]
+
   RewriteRule ^contact-lib(?:/|$) - [F,L]
 
   RewriteCond %{HTTP_HOST} ^msb-ai\.de$ [NC]

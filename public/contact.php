@@ -55,7 +55,7 @@ function check_origin(array $allowedHosts): void
     if (
         !is_string($originHost)
         || !in_array(strtolower($originHost), $allowedHosts, true)
-        || !in_array($originScheme, ['http', 'https'], true)
+        || $originScheme !== 'https'
     ) {
         respond(403, ['ok' => false, 'message' => 'Diese Anfrage konnte nicht bestätigt werden.']);
     }
@@ -65,9 +65,50 @@ function enforce_rate_limit(): void
 {
     $windowSeconds = 15 * 60;
     $maximumRequests = 5;
+    $directory = rtrim(sys_get_temp_dir(), DIRECTORY_SEPARATOR);
+
+    // The rate-limit decision only uses timestamps from the last 15 minutes.
+    // Occasionally remove inactive files as well so pseudonymous rate-limit
+    // containers do not remain in the temporary directory indefinitely.
+    try {
+        $shouldCleanUp = random_int(1, 25) === 1;
+    } catch (Throwable) {
+        $shouldCleanUp = false;
+    }
+
+    if ($shouldCleanUp) {
+        $staleBefore = time() - $windowSeconds;
+        $candidates = glob($directory . DIRECTORY_SEPARATOR . 'msb-contact-*.json') ?: [];
+
+        foreach ($candidates as $candidate) {
+            $modifiedAt = @filemtime($candidate);
+            if ($modifiedAt === false || $modifiedAt >= $staleBefore) {
+                continue;
+            }
+
+            $cleanupHandle = @fopen($candidate, 'r+');
+            if ($cleanupHandle === false) {
+                continue;
+            }
+
+            if (@flock($cleanupHandle, LOCK_EX | LOCK_NB)) {
+                clearstatcache(true, $candidate);
+                $modifiedAt = @filemtime($candidate);
+
+                if ($modifiedAt !== false && $modifiedAt < $staleBefore) {
+                    @unlink($candidate);
+                }
+
+                flock($cleanupHandle, LOCK_UN);
+            }
+
+            fclose($cleanupHandle);
+        }
+    }
+
     $address = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
     $key = hash('sha256', is_string($address) ? $address : 'unknown');
-    $path = rtrim(sys_get_temp_dir(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'msb-contact-' . $key . '.json';
+    $path = $directory . DIRECTORY_SEPARATOR . 'msb-contact-' . $key . '.json';
     $handle = @fopen($path, 'c+');
 
     if ($handle === false || !flock($handle, LOCK_EX)) {

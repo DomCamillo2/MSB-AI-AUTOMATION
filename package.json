@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --test src/lib/automation-check-scoring.test.mts"
+    "test": "node --experimental-strip-types --test src/lib/*.test.mts"
   },
   "dependencies": {
     "motion": "^12.42.2",

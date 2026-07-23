@@ -14,6 +14,7 @@
   max-height: calc(100dvh - max(32px, env(safe-area-inset-top)) - max(16px, env(safe-area-inset-bottom)));
   overflow-y: auto;
   overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   color: var(--white);
   background: var(--navy);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -92,6 +93,13 @@
   background: transparent;
 }
 
+.bannerActions .acceptButton,
+.bannerActions .necessaryButton {
+  color: var(--navy);
+  background: var(--white);
+  border-color: var(--white) !important;
+}
+
 .backdrop {
   position: fixed;
   z-index: 110;
@@ -109,6 +117,8 @@
   max-height: calc(100dvh - 32px);
   padding: clamp(1.25rem, 4vw, 2rem);
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   color: var(--ink);
   background: var(--paper);
   border: 1px solid var(--border);
@@ -236,6 +246,12 @@ label.category {
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .bannerActions .acceptButton:hover,
+  .bannerActions .necessaryButton:hover {
+    background: #d9f4f3;
+    border-color: #d9f4f3 !important;
+  }
+
   .acceptButton:hover {
     background: #83dcda;
   }
@@ -261,7 +277,7 @@ label.category {
     left: max(12px, env(safe-area-inset-left));
     bottom: max(12px, env(safe-area-inset-bottom));
     margin-inline: 0;
-    padding: 1rem;
+    padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
   }
 
   .bannerActions,
@@ -273,6 +289,17 @@ label.category {
   .banner button,
   .dialogActions button {
     width: 100%;
+  }
+}
+
+@media (max-height: 520px) {
+  .backdrop {
+    place-items: start center;
+    padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  }
+
+  .dialog {
+    max-height: calc(100dvh - 24px);
   }
 }
 
