@@ -1,0 +1,101 @@
+name: Deploy website to IONOS
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ionos-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and upload static website
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: ionos-production
+    env:
+      IONOS_SFTP_HOST: ${{ secrets.IONOS_SFTP_HOST }}
+      IONOS_SFTP_USER: ${{ secrets.IONOS_SFTP_USER }}
+      IONOS_SFTP_PASSWORD: ${{ secrets.IONOS_SFTP_PASSWORD }}
+      IONOS_DEPLOY_PATH: ${{ secrets.IONOS_DEPLOY_PATH }}
+      IONOS_SFTP_PORT: ${{ vars.IONOS_SFTP_PORT }}
+
+    steps:
+      - name: Validate deployment configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          for key in IONOS_SFTP_HOST IONOS_SFTP_USER IONOS_SFTP_PASSWORD IONOS_DEPLOY_PATH IONOS_SFTP_PORT; do
+            value="${!key:-}"
+            if [[ -z "$value" || "$value" == "NOT_CONFIGURED" ]]; then
+              echo "::error::Environment value $key is not configured."
+              exit 1
+            fi
+          done
+
+          if [[ "$IONOS_DEPLOY_PATH" != /* ]]; then
+            echo "::error::IONOS_DEPLOY_PATH must start with a slash."
+            exit 1
+          fi
+
+          echo "::add-mask::$IONOS_SFTP_HOST"
+          echo "::add-mask::$IONOS_SFTP_USER"
+
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Run lint
+        run: npm run lint
+
+      - name: Run typecheck
+        run: npm run typecheck
+
+      - name: Build static IONOS export
+        run: npm run build
+        env:
+          DEPLOY_TARGET: ionos
+          NEXT_PUBLIC_SITE_ENV: production
+
+      - name: Verify export
+        shell: bash
+        run: |
+          test -f out/index.html
+          test -f out/404.html
+          test -f out/.htaccess
+
+      - name: Install SFTP client
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes lftp
+
+      - name: Upload website
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          lftp \
+            -u "$IONOS_SFTP_USER","$IONOS_SFTP_PASSWORD" \
+            -e "set sftp:auto-confirm yes; set net:max-retries 2; set net:timeout 20; set cmd:fail-exit yes; mirror --reverse --parallel=4 --verbose=1 out/ \"$IONOS_DEPLOY_PATH\"; cls -1 \"$IONOS_DEPLOY_PATH\"; bye" \
+            "sftp://$IONOS_SFTP_HOST:$IONOS_SFTP_PORT"
+
+          echo "Static website uploaded to IONOS."

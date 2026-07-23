@@ -2,6 +2,8 @@ import type { MetadataRoute } from 'next';
 import { serviceCategories, useCaseDetails } from '@/lib/service-detail-content';
 import { siteUrl } from '@/lib/seo';
 
+export const dynamic = 'force-static';
+
 const routes = [
   '/',
   '/leistungen',
