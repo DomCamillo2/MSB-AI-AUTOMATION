@@ -255,13 +255,74 @@
 
 
 .progress {
-  padding: 1.5rem 0 0;
+  margin-top: 1rem;
+  padding: 0.85rem 1rem 1rem;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(239, 247, 245, 0.88));
+  border: 1px solid rgba(7, 27, 58, 0.11);
+  border-radius: 18px;
+  box-shadow: 0 12px 34px rgba(7, 27, 58, 0.065);
+}
+
+.progressMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.65rem;
+  padding-inline: 0.2rem;
+}
+
+.progressMeta > span {
+  color: var(--teal);
+  font-family: var(--font-poppins), Poppins, sans-serif;
+  font-size: 0.61rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.progressMeta > span::before {
+  width: 6px;
+  height: 6px;
+  display: inline-block;
+  margin-right: 0.45rem;
+  background: var(--teal-bright);
+  border-radius: 50%;
+  content: '';
+  box-shadow: 0 0 0 4px rgba(105, 208, 207, 0.14);
+  vertical-align: 0.08em;
+}
+
+.progressMeta strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #657177;
+  font-size: 0.69rem;
+  font-weight: 650;
+}
+
+.progressMeta strong span {
+  min-width: 44px;
+  padding: 0.25rem 0.45rem;
+  color: var(--navy);
+  background: rgba(8, 119, 123, 0.08);
+  border: 1px solid rgba(8, 119, 123, 0.15);
+  border-radius: 999px;
+  text-align: center;
+}
+
+.phaseRail {
+  position: relative;
 }
 
 .phaseList {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .mobilePhaseLabel {
@@ -270,32 +331,43 @@
 
 .phase {
   min-width: 0;
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
+  display: grid;
+  justify-items: center;
+  gap: 0.45rem;
+  padding: 0.2rem 0.35rem 0;
   color: #8a959a;
+  text-align: center;
 }
 
 .phase > span {
-  width: 30px;
-  height: 30px;
+  width: 38px;
+  height: 38px;
   display: grid;
   place-items: center;
   flex: 0 0 auto;
+  color: #778388;
+  background: #fbfaf6;
   border: 1px solid #c7cecc;
   border-radius: 50%;
-  font-size: 0.63rem;
+  font-size: 0.67rem;
   font-weight: 700;
+  box-shadow: 0 0 0 5px rgba(251, 250, 246, 0.94);
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 220ms var(--ease-standard),
+    transform 220ms var(--ease-standard);
 }
 
 .phase strong {
-  overflow: hidden;
+  max-width: 100%;
+  padding: 0.25rem 0.55rem;
   font-family: var(--font-poppins), Poppins, sans-serif;
-  font-size: 0.69rem;
+  font-size: 0.66rem;
   letter-spacing: 0.04em;
-  text-overflow: ellipsis;
+  line-height: 1.35;
   text-transform: uppercase;
-  white-space: nowrap;
 }
 
 .phase[data-state='active'],
@@ -303,15 +375,34 @@
   color: var(--navy);
 }
 
-.phase[data-state='active'] > span,
 .phase[data-state='complete'] > span {
   color: var(--white);
   background: var(--teal);
   border-color: var(--teal);
 }
 
+.phase[data-state='active'] > span {
+  color: var(--white);
+  background: var(--navy);
+  border-color: var(--navy);
+  box-shadow:
+    0 0 0 5px rgba(105, 208, 207, 0.22),
+    0 8px 18px rgba(7, 27, 58, 0.16);
+  transform: translateY(-1px);
+}
+
+.phase[data-state='active'] strong {
+  color: var(--navy);
+  background: var(--white);
+  border: 1px solid rgba(7, 27, 58, 0.1);
+  border-radius: 999px;
+  box-shadow: 0 5px 14px rgba(7, 27, 58, 0.06);
+}
+
 .phase[data-state='complete'] > span::after {
   content: '✓';
+  font-size: 0.86rem;
+  line-height: 1;
 }
 
 .phase[data-state='complete'] > span {
@@ -320,15 +411,23 @@
 
 .progressTrack {
   height: 3px;
-  margin-top: 1.15rem;
+  position: absolute;
+  z-index: 0;
+  top: 20px;
+  right: calc(100% / 6);
+  left: calc(100% / 6);
   overflow: hidden;
-  background: #d8dedb;
+  background: #d3ddda;
+  border-radius: 999px;
 }
 
 .progressTrack span {
   height: 100%;
   display: block;
-  background: var(--teal);
+  position: relative;
+  background: linear-gradient(90deg, var(--teal), var(--teal-bright));
+  border-radius: inherit;
+  box-shadow: 0 0 12px rgba(8, 119, 123, 0.3);
   transition: width 260ms var(--ease-standard);
 }
 
@@ -1451,23 +1550,67 @@
     font-size: clamp(2.45rem, 11.2vw, 3.65rem);
   }
 
+  .progress {
+    margin-top: 0.75rem;
+    padding: 0.75rem 0.8rem 0.85rem;
+    border-radius: 16px;
+  }
+
+  .progressMeta {
+    margin-bottom: 0.8rem;
+  }
+
+  .progressMeta > span {
+    font-size: 0.56rem;
+  }
+
+  .progressMeta strong {
+    font-size: 0.64rem;
+  }
+
   .phaseList {
-    gap: 0.35rem;
+    gap: 0;
   }
 
   .phase {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.4rem;
+    gap: 0;
+    padding: 0 0.2rem;
+  }
+
+  .phase > span {
+    width: 34px;
+    height: 34px;
   }
 
   .phase strong {
-    width: 100%;
-    font-size: 0.57rem;
-    line-height: 1.25;
-    overflow: visible;
-    text-overflow: clip;
-    white-space: normal;
+    display: none;
+  }
+
+  .progressTrack {
+    top: 16px;
+  }
+
+  .mobilePhaseLabel {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    margin-top: 0.8rem;
+    padding: 0.5rem 0.7rem;
+    color: var(--navy);
+    background: rgba(8, 119, 123, 0.055);
+    border: 1px solid rgba(8, 119, 123, 0.11);
+    border-radius: 10px;
+    font-size: 0.76rem;
+  }
+
+  .mobilePhaseLabel span {
+    color: var(--teal);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
   }
 
   .checkPage {
@@ -1644,31 +1787,23 @@
     padding: 1.1rem;
   }
 
+  .progressMeta {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .progressMeta strong {
+    justify-content: space-between;
+  }
+
   .phase > span {
-    width: 27px;
-    height: 27px;
+    width: 30px;
+    height: 30px;
   }
 
-  .phase strong {
-    display: none;
-  }
-
-  .mobilePhaseLabel {
-    min-height: 38px;
-    display: flex;
-    align-items: center;
-    gap: 0.55rem;
-    margin-top: 0.7rem;
-    color: var(--navy);
-    font-size: 0.76rem;
-  }
-
-  .mobilePhaseLabel span {
-    color: var(--teal);
-    font-size: 0.64rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+  .progressTrack {
+    top: 14px;
   }
 
   .checkNavigation {
@@ -1760,6 +1895,7 @@
 
   .areaChoice,
   .choice,
+  .phase > span,
   .progressTrack span {
     transition: none;
   }
