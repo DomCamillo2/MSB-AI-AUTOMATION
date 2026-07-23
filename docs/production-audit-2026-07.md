@@ -1,15 +1,14 @@
 # Produktionsaudit: SEO, Analytics, Datenschutz
 
-Stand: 22. Juli 2026
+Stand: 23. Juli 2026
 
-Dieser Bericht beschreibt die technisch umgesetzte Konfiguration. Er ist keine Rechtsberatung und keine Zusage vollständiger Rechtskonformität. Datenschutz und Impressum müssen durch eine fachkundige Person sowie anhand der tatsächlichen Google-, IONOS- und Vercel-Kontoeinstellungen abschließend geprüft werden.
+Dieser Bericht beschreibt die technisch umgesetzte Konfiguration. Er ist keine Rechtsberatung und keine Zusage vollständiger Rechtskonformität. Datenschutz und Impressum müssen durch eine fachkundige Person sowie anhand der tatsächlichen Google- und IONOS-Kontoeinstellungen abschließend geprüft werden.
 
 ## A — Google-Auffindbarkeit
 
-- Kanonischer Ursprung: `https://www.msb-ai.de`. Der vom Auftrag bevorzugte Apex-Host `https://msb-ai.de` leitet in der bestehenden Vercel-Konfiguration bereits dauerhaft auf `www` weiter. Deshalb bleibt `www` der einheitliche Canonical, um keine Redirect-/Canonical-Kette in Gegenrichtung zu erzeugen.
+- Kanonischer Ursprung: `https://www.msb-ai.de`. Der Apex-Host `https://msb-ai.de` wird über die IONOS-Webspace-Konfiguration dauerhaft auf `www` weitergeleitet. `www` bleibt deshalb der einheitliche Canonical.
 - HTTP sowie alternative öffentliche Hostvarianten leiten auf HTTPS und den Canonical-Host weiter.
-- `msb-ai-automation.vercel.app` und `msb-ai-consulting.vercel.app` leiten dauerhaft auf den Canonical-Host weiter; Vercel-Preview-Hosts bleiben davon unberührt.
-- Produktionsseiten sind indexierbar. Preview-Builds erhalten zusätzlich `X-Robots-Tag: noindex, nofollow`, ein `noindex`-Meta-Tag, eine komplett sperrende `robots.txt` und eine leere Sitemap.
+- Produktionsseiten sind indexierbar. Nichtproduktive Builds können weiterhin über die vorhandenen Umgebungs-Gates mit `noindex` und einer leeren Sitemap erzeugt werden.
 - Canonicals werden nie aus der jeweiligen Preview-URL gebildet.
 - Die Produktions-Sitemap enthält ausschließlich die 20 indexierbaren Seiten und liegt unter `https://www.msb-ai.de/sitemap.xml`.
 - Unbekannte URLs liefern einen echten HTTP-404-Status; es gibt keinen pauschalen Homepage-Redirect.
@@ -56,13 +55,13 @@ Nach dem Deployment sollten die relevanten URLs zusätzlich mit dem Google Rich 
 ## D — Google Analytics 4
 
 - Mess-ID: `G-P2P7JJ6QV2`.
-- GA4 wird nicht im globalen HTML-Head geladen. Das Google-Skript wird ausschließlich im Vercel-Production-Deployment und erst nach einer gespeicherten ausdrücklichen Statistik-Einwilligung dynamisch ergänzt.
+- GA4 wird nicht im globalen HTML-Head geladen. Das Google-Skript wird im IONOS-Produktionsbuild erst nach einer gespeicherten ausdrücklichen Statistik-Einwilligung dynamisch ergänzt.
 - Basic Consent Mode v2: `analytics_storage` wird erst nach Einwilligung gewährt. `ad_storage`, `ad_user_data` und `ad_personalization` bleiben verweigert.
 - Google Signals und personalisierte Werbefunktionen werden im Code deaktiviert.
 - `send_page_view` ist deaktiviert. Die Anwendung sendet genau einen expliziten `page_view` pro Next.js-Pfad und schließt Suchparameter aus `page_location` aus.
-- Ereignisse: `cta_click`, `automation_check_start`, `email_click`; `phone_click` ist technisch vorbereitet und wird nur bei einem tatsächlich vorhandenen Telefonlink ausgelöst.
+- Ereignisse: `cta_click`, `automation_check_start`, `automation_check_step`, `automation_check_complete`, `automation_check_contact_start`, `contact_submit` und `email_click`; `phone_click` ist technisch vorbereitet und wird nur bei einem tatsächlich vorhandenen Telefonlink ausgelöst.
 - Übermittelte Parameter sind fest definierte Seiten-/Positionswerte. Formularfelder, Namen, E-Mail-Adressen, Unternehmen, Freitext und URL-Suchparameter werden nicht an GA4 übergeben.
-- `generate_lead` und `automation_check_success` werden nicht ausgelöst, weil das aktuelle Formular keinen serverseitig bestätigten Lead erzeugt, sondern einen E-Mail-Entwurf öffnet.
+- `contact_submit` wird erst nach einer erfolgreichen Antwort des IONOS-PHP-Endpunkts ausgelöst. Formularinhalte werden nicht als Analytics-Parameter übertragen.
 
 ### GA4-Kontocheck
 
@@ -88,16 +87,15 @@ Nach dem Deployment sollten die relevanten URLs zusätzlich mit dem Google Rich 
 
 Dokumentierte reale Dienste und Datenflüsse:
 
-- Website-Hosting und Serverprotokolle: Vercel Inc.
-- Domain/DNS und E-Mail: IONOS SE.
-- Direkte E-Mail-Kommunikation und mailto-basierter Automation Check.
+- Website-Hosting, PHP-Endpunkt, Serverprotokolle, Domain/DNS und E-Mail: IONOS SE.
+- Kontaktformular und Automation Check: verschlüsselte Übertragung an den PHP-Endpunkt, Zustellung über authentifiziertes IONOS SMTP an `kontakt@msb-ai.de`.
 - Versionierte lokale Consent-Speicherung.
 - Google Analytics 4 nur nach Statistik-Einwilligung.
 - Reine externe LinkedIn-Links; keine Social-Media-Einbettung.
 - Lokal über Next.js ausgelieferte Schriften; kein Browserabruf bei Google Fonts.
 - Keine Karten, Videos, Chat-Widgets, externen Formulare oder weiteren Tracking-Dienste im geprüften Stand.
 
-Menschlich zu bestätigen: tatsächliche GA4-Aufbewahrungsdauer, Google-Kontofreigaben/Verknüpfungen, gültige Auftragsverarbeitungsverträge mit Vercel und IONOS sowie alle individuellen Löschfristen. Anschließend juristische Schlussprüfung der veröffentlichten Erklärung.
+Menschlich zu bestätigen: tatsächliche GA4-Aufbewahrungsdauer, Google-Kontofreigaben/Verknüpfungen, Einbeziehung der IONOS-Vereinbarung zur Auftragsverarbeitung sowie alle individuellen Löschfristen. Anschließend juristische Schlussprüfung der veröffentlichten Erklärung.
 
 ## G — Impressum
 
@@ -115,7 +113,7 @@ Vor Veröffentlichung juristisch klären: exakte Rechts-/Geschäftsbezeichnung d
 3. `https://www.msb-ai.de/sitemap.xml` einreichen.
 4. Die 20 Produktions-Canonicals stichprobenweise per URL-Prüfung kontrollieren und die wichtigsten Einstiegs- und Detailseiten zur Indexierung anstoßen.
 5. Die unter D genannten GA4-Datenschutz- und Enhanced-Measurement-Einstellungen durchführen und dokumentieren.
-6. Aktuell kein Key Event markieren; erst einen echten erfolgreichen Lead-Workflow implementieren, dann `generate_lead` als Key Event einrichten.
+6. `contact_submit` nur dann als Key Event markieren, wenn dies dem tatsächlich dokumentierten Messkonzept entspricht; keine Formularinhalte oder Freitexte an Analytics übertragen.
 7. In GA4 unter Produktverknüpfungen die bestätigte Search-Console-Property mit dem Webdatenstrom verbinden.
 8. Google Business Profile nur einrichten, wenn MSB Kunden nachweislich persönlich am zulässigen Standort empfängt oder sie vor Ort besucht. Keine virtuelle/fiktive Adresse verwenden; bei Eignung Tübingen, Reutlingen und Stuttgart nur als tatsächlich bediente Gebiete angeben.
 9. Datenschutz, Impressum, AV-Verträge, Löschfristen und fehlende Betreiberangaben fachkundig prüfen lassen.
@@ -125,11 +123,11 @@ Vor Veröffentlichung juristisch klären: exakte Rechts-/Geschäftsbezeichnung d
 - ESLint: bestanden.
 - TypeScript/Next.js-Prüfung: bestanden.
 - Production-Build: bestanden; 31 statische Routen erzeugt.
-- Preview-Build: Der Preview-Schutz bleibt unverändert; nach der Erweiterung erneut über die Vercel-Preview-Checks zu bestätigen.
+- Deployment: Der IONOS-Produktionsbuild wird nach Pushes auf `main` geprüft, statisch exportiert und per SFTP in den Webspace übertragen; der PHP-Endpunkt wird im Workflow syntaktisch validiert.
 - HTML: ein H1 auf der Startseite, Canonical auf dem Production-Host, strukturierte Daten JSON-parsebar.
 - Sitemap/robots: Production freigegeben und vollständig; Preview gesperrt und Sitemap leer.
 - 404: echter HTTP-Status 404.
-- Redirects: Apex/HTTP/beide alten Vercel-Produktionshosts im Live-Audit dauerhaft auf `https://www.msb-ai.de` geführt.
+- Redirects: Apex und HTTP werden durch die IONOS-`.htaccess` dauerhaft auf `https://www.msb-ai.de` geführt.
 - Security: CSP, Referrer-Policy, `nosniff`, Frame-Schutz und Permissions-Policy per lokalem Production-HTTP-Test bestätigt; Preview zusätzlich mit `X-Robots-Tag`.
 - Initiales HTML: kein Google-Tag-Script und keine GA-Mess-ID enthalten.
 - Consent-Code: keine GA-Ladung bei fehlender oder negativer Einwilligung; Production-Gate, Widerruf und Cookie-Löschung implementiert.
