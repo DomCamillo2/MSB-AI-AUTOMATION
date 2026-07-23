@@ -1017,9 +1017,9 @@
 
 .actionPanel {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: end;
-  gap: 3rem;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 0.62fr);
+  align-items: center;
+  gap: clamp(2.5rem, 7vw, 7rem);
 }
 
 .actionPanel h2 {
@@ -1032,10 +1032,80 @@
 }
 
 .actionButtons {
-  min-width: 270px;
+  min-width: 0;
   display: grid;
   justify-items: stretch;
-  gap: 0.55rem;
+  gap: 0.75rem;
+}
+
+.handoffCta {
+  width: 100%;
+  min-height: 86px;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.15rem 1rem 1.3rem;
+  border: 1px solid rgba(105, 208, 207, 0.5);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+  text-align: left;
+}
+
+.handoffCta > span:first-child {
+  min-width: 0;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.handoffCta small {
+  color: var(--teal);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.handoffCta strong {
+  color: var(--navy);
+  font-size: clamp(0.9rem, 1.15vw, 1.05rem);
+  line-height: 1.25;
+}
+
+.handoffCta :global(.button-arrow) {
+  flex: 0 0 auto;
+  margin-left: 0;
+  font-size: 1.35rem;
+}
+
+.actionAssurance {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #b9c7cf;
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+
+.actionAssurance span {
+  width: 19px;
+  height: 19px;
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  color: var(--navy);
+  background: var(--teal-bright);
+  border-radius: 50%;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.secondaryActions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+  padding-top: 0.2rem;
+}
+
+.secondaryActions button {
+  font-size: 0.7rem;
 }
 
 .printButton,
@@ -1244,6 +1314,17 @@
   display: block;
   margin: 2rem auto 0;
   color: #c6d1d8;
+}
+
+.restartArea {
+  padding: 1rem 1rem 3rem;
+  background: var(--paper);
+  text-align: center;
+}
+
+.restartArea .restartButton {
+  margin-top: 0;
+  color: var(--navy);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1458,6 +1539,10 @@
 
   .actionButtons {
     min-width: 0;
+  }
+
+  .handoffCta {
+    min-height: 82px;
   }
 
   .contactForm {

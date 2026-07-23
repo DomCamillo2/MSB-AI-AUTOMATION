@@ -250,6 +250,35 @@ export function AutomationCheckResult({ answers, assessment, onEdit, onRestart }
         </div>
       </section>
 
+      <section className={styles.resultActions} aria-labelledby="result-actions-heading">
+        <div className="container">
+          <div className={styles.actionPanel}>
+            <div>
+              <p className="eyebrow eyebrow-light">Ihr nächster Schritt</p>
+              <h2 id="result-actions-heading">Ergebnis an MSB senden und konkret einordnen lassen.</h2>
+              <p>Ihre Auswertung wird vorausgewählt an die Anfrage angehängt. So können wir direkt auf Ihren Prozess eingehen, statt mit allgemeinen Rückfragen zu beginnen.</p>
+            </div>
+            <div className={styles.actionButtons}>
+              {!contactOpen && (
+                <button className={["button", "button-light", styles.handoffCta].join(' ')} type="button" onClick={openContact}>
+                  <span>
+                    <small>Auswertung ist enthalten</small>
+                    <strong>Ergebnis mit Anfrage senden</strong>
+                  </span>
+                  <span className="button-arrow" aria-hidden="true">→</span>
+                </button>
+              )}
+              <p className={styles.actionAssurance}><span aria-hidden="true">✓</span> Unverbindlich · direkt an kontakt@msb-ai.de</p>
+              <div className={styles.secondaryActions}>
+                <button className={styles.printButton} type="button" onClick={() => window.print()}>Als PDF speichern</button>
+                <button className={styles.editButton} type="button" onClick={onEdit}>Antworten anpassen</button>
+              </div>
+            </div>
+          </div>
+          {contactOpen && <div id="automation-check-contact" className={styles.contactAnchor}><ContactHandoff answers={answers} assessment={assessment} /></div>}
+        </div>
+      </section>
+
       <section className={styles.comparisonSection} aria-labelledby="comparison-heading">
         <div className="container">
           <div className={styles.resultSectionIntro}>
@@ -291,24 +320,9 @@ export function AutomationCheckResult({ answers, assessment, onEdit, onRestart }
         </div>
       </section>
 
-      <section className={styles.resultActions} aria-labelledby="result-actions-heading">
-        <div className="container">
-          <div className={styles.actionPanel}>
-            <div>
-              <p className="eyebrow eyebrow-light">Das Ergebnis gehört Ihnen</p>
-              <h2 id="result-actions-heading">Ergebnis speichern oder direkt an MSB senden.</h2>
-              <p>Für den Check waren keine Kontaktdaten nötig. Erst beim Absenden entscheiden Sie, ob Ihre Auswertung mitgeht.</p>
-            </div>
-            <div className={styles.actionButtons}>
-              {!contactOpen && <button className="button button-light" type="button" onClick={openContact}>Ergebnis mit Anfrage senden <span className="button-arrow" aria-hidden="true">→</span></button>}
-              <button className={styles.printButton} type="button" onClick={() => window.print()}>Ergebnis drucken / als PDF</button>
-              <button className={styles.editButton} type="button" onClick={onEdit}>Antworten anpassen</button>
-            </div>
-          </div>
-          {contactOpen && <div id="automation-check-contact" className={styles.contactAnchor}><ContactHandoff answers={answers} assessment={assessment} /></div>}
-          <button className={styles.restartButton} type="button" onClick={onRestart}>Neuen Check beginnen</button>
-        </div>
-      </section>
+      <div className={styles.restartArea}>
+        <button className={styles.restartButton} type="button" onClick={onRestart}>Neuen Check beginnen</button>
+      </div>
     </main>
   );
 }
