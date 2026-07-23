@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useRef, useState, type FormEvent } from 'react';
 import AutomationCheckProgress from '@/components/automation-check-progress';
 import { AutomationProcessDiagram } from '@/components/automation-process-preview';
 import {
@@ -17,6 +17,7 @@ import {
 } from '@/lib/automation-check-config';
 import { answerSummary } from '@/lib/automation-check-scoring';
 import { trackAnalyticsEvent } from '@/lib/analytics';
+import { sendContactRequest } from '@/lib/contact-api';
 import type { AutomationAssessment, CheckAnswers } from '@/lib/automation-check-types';
 import styles from './automation-check.module.css';
 
@@ -37,10 +38,9 @@ const msbSteps = [
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function buildAssessmentMailto(
+function buildAssessmentMessage(
   answers: CheckAnswers,
-  assessment: AutomationAssessment,
-  contact: { name: string; company: string; email: string }
+  assessment: AutomationAssessment
 ) {
   const summary = answerSummary(answers);
   const problemOptions = answers.area ? PROBLEM_OPTIONS[answers.area] : [];
@@ -62,28 +62,27 @@ function buildAssessmentMailto(
     'Fehlerfolgen: ' + (optionLabel(CONSEQUENCE_OPTIONS, answers.consequence) ?? 'Keine Angabe'),
     answers.note.trim() ? 'Optionaler Hinweis: ' + answers.note.trim() : '',
     '',
-    'Name: ' + (contact.name.trim() || 'Nicht angegeben'),
-    'Unternehmen: ' + (contact.company.trim() || 'Nicht angegeben'),
-    'Geschäftliche E-Mail: ' + contact.email.trim(),
-    '',
     'Bitte melden Sie sich bei mir, um den Prozess kurz einzuordnen.'
   ].filter(Boolean).join('\n');
-
-  const subject = 'Automation Check: ' + summary.area;
-  return 'mailto:kontakt@msb-ai.de?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  return body;
 }
 
 function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assessment'>) {
   const [name, setName] = useState('');
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
+  const [website, setWebsite] = useState('');
   const [privacy, setPrivacy] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [privacyError, setPrivacyError] = useState('');
   const [status, setStatus] = useState('');
+  const [statusTone, setStatusTone] = useState<'success' | 'error'>('success');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const openedAtRef = useRef(Date.now());
 
-  function submit(event: FormEvent<HTMLFormElement>) {
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (isSubmitting) return;
     const form = event.currentTarget;
     const cleanEmail = email.trim();
     const nextEmailError = !cleanEmail
@@ -104,22 +103,59 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
       return;
     }
 
-    setStatus('Ihr E-Mail-Programm wird geöffnet. Die Nachricht wird erst versendet, wenn Sie sie dort prüfen und absenden.');
-    trackAnalyticsEvent('email_click', {
-      cta_location: 'automation_check_result',
-      page_type: 'automation_check'
-    });
-    window.location.href = buildAssessmentMailto(answers, assessment, { name, company, email: cleanEmail });
+    setIsSubmitting(true);
+    try {
+      const result = await sendContactRequest({
+        source: 'automation_check_result',
+        name: name.trim(),
+        company: company.trim(),
+        email: cleanEmail,
+        message: buildAssessmentMessage(answers, assessment),
+        privacy: true,
+        website,
+        startedAt: openedAtRef.current
+      });
+      setStatusTone('success');
+      setStatus(result.message || 'Vielen Dank. Ihre Anfrage wurde sicher übermittelt.');
+      setName('');
+      setCompany('');
+      setEmail('');
+      setWebsite('');
+      setPrivacy(false);
+      openedAtRef.current = Date.now();
+      trackAnalyticsEvent('contact_submit', {
+        cta_location: 'automation_check_result',
+        page_type: 'automation_check'
+      });
+    } catch (error) {
+      setStatusTone('error');
+      setStatus(error instanceof Error
+        ? error.message
+        : 'Die Nachricht konnte gerade nicht versendet werden. Bitte schreiben Sie direkt an kontakt@msb-ai.de.');
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
-    <form className={styles.contactForm} noValidate onSubmit={submit}>
+    <form className={styles.contactForm} noValidate onSubmit={submit} aria-busy={isSubmitting}>
+      <div className="contact-honeypot" aria-hidden="true">
+        <label htmlFor="check-website">Website</label>
+        <input
+          id="check-website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={website}
+          onChange={(event) => setWebsite(event.target.value)}
+        />
+      </div>
       <div className={styles.contactFormIntro}>
         <div>
           <p className="eyebrow">Freiwilliger nächster Schritt</p>
           <h3>Einschätzung mit MSB besprechen</h3>
         </div>
-        <p>Die Angaben werden in einen E-Mail-Entwurf an MSB übernommen. Erst wenn Sie diesen selbst versenden, erreichen sie uns.</p>
+        <p>Mit Ihrer Zustimmung werden die angezeigten Angaben verschlüsselt an unser IONOS-Postfach übermittelt.</p>
       </div>
       <div className={styles.contactFields}>
         <div className={styles.contactField}>
@@ -162,10 +198,13 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
         />
         <span>Ich habe die <a href="/datenschutz">Datenschutzhinweise</a> gelesen.</span>
       </label>
-      <p className={styles.privacyNote} id="check-privacy-note">Bitte prüfen Sie den Entwurf und entfernen Sie vertrauliche Informationen, bevor Sie ihn senden.</p>
+      <p className={styles.privacyNote} id="check-privacy-note">Bitte prüfen Sie die Angaben und entfernen Sie vertrauliche Informationen, bevor Sie sie senden.</p>
       {privacyError && <p className={styles.fieldError} id="check-privacy-error">{privacyError}</p>}
-      <button className="button button-primary" type="submit">E-Mail-Entwurf öffnen <span className="button-arrow" aria-hidden="true">→</span></button>
-      {status && <p className={styles.formStatus} role="status" aria-live="polite">{status}</p>}
+      <button className="button button-primary" type="submit" disabled={isSubmitting}>
+        {isSubmitting ? 'Anfrage wird gesendet …' : 'Einschätzung sicher senden'}
+        {!isSubmitting ? <span className="button-arrow" aria-hidden="true">→</span> : null}
+      </button>
+      {status && <p className={[styles.formStatus, statusTone === 'error' ? styles.formStatusError : ''].filter(Boolean).join(' ')} role="status" aria-live="polite">{status}</p>}
     </form>
   );
 }

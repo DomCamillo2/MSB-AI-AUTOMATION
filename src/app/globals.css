@@ -2548,10 +2548,21 @@ textarea:focus-visible,
 }
 
 .contact-form {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
   margin-top: 1.5rem;
+}
+
+.contact-honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 .form-row {
@@ -2679,6 +2690,12 @@ textarea[aria-invalid='true'] {
   border-radius: var(--radius-control);
   font-size: 0.84rem;
   font-weight: 600;
+}
+
+.form-status.is-error {
+  color: #7f2525;
+  background: #fff6f4;
+  border-color: rgba(159, 47, 47, 0.32);
 }
 
 .site-footer {

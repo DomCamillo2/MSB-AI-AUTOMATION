@@ -2,36 +2,26 @@
 
 import { useRef, useState, type FormEvent } from 'react';
 import { trackAnalyticsEvent } from '@/lib/analytics';
+import { sendContactRequest } from '@/lib/contact-api';
 
-const recipient = 'kontakt@msb-ai.de';
 type FormField = 'name' | 'company' | 'email' | 'process' | 'privacy';
 type FormErrors = Partial<Record<FormField, string>>;
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-function buildMailtoUrl(name: string, company: string, email: string, process: string) {
-  const subject = 'Anfrage: Kostenloser Automation Check';
-  const body = [
-    `Name: ${name}`,
-    `Unternehmen: ${company}`,
-    `Geschäftliche E-Mail: ${email}`,
-    '',
-    'Prozessbeschreibung:',
-    process
-  ].join('\n');
-
-  return `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
 
 export function ContactForm() {
   const [name, setName] = useState('');
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
   const [process, setProcess] = useState('');
+  const [website, setWebsite] = useState('');
   const [privacyAcknowledged, setPrivacyAcknowledged] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState('');
+  const [statusTone, setStatusTone] = useState<'success' | 'error'>('success');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const startedRef = useRef(false);
+  const openedAtRef = useRef(Date.now());
 
   function trackStart() {
     if (startedRef.current) return;
@@ -47,8 +37,9 @@ export function ContactForm() {
     setStatus('');
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (isSubmitting) return;
     const nextErrors: FormErrors = {};
 
     if (!name.trim()) nextErrors.name = 'Bitte geben Sie Ihren Namen ein.';
@@ -69,16 +60,57 @@ export function ContactForm() {
     }
 
     setErrors({});
-    setStatus('Ihr E-Mail-Programm wird geöffnet. Prüfen und senden Sie die vorbereitete Nachricht dort ab.');
-    trackAnalyticsEvent('email_click', {
-      cta_location: 'automation_check_form',
-      page_type: 'automation_check'
-    });
-    window.location.href = buildMailtoUrl(name, company, email, process);
+    setStatus('');
+    setIsSubmitting(true);
+
+    try {
+      const result = await sendContactRequest({
+        source: 'website_contact',
+        name: name.trim(),
+        company: company.trim(),
+        email: email.trim(),
+        message: process.trim(),
+        privacy: true,
+        website,
+        startedAt: openedAtRef.current
+      });
+      setStatusTone('success');
+      setStatus(result.message || 'Vielen Dank. Ihre Anfrage wurde sicher übermittelt.');
+      setName('');
+      setCompany('');
+      setEmail('');
+      setProcess('');
+      setWebsite('');
+      setPrivacyAcknowledged(false);
+      openedAtRef.current = Date.now();
+      trackAnalyticsEvent('contact_submit', {
+        cta_location: 'automation_check_form',
+        page_type: 'automation_check'
+      });
+    } catch (error) {
+      setStatusTone('error');
+      setStatus(error instanceof Error
+        ? error.message
+        : 'Die Nachricht konnte gerade nicht versendet werden. Bitte schreiben Sie direkt an kontakt@msb-ai.de.');
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
-    <form className="contact-form" noValidate onSubmit={handleSubmit} onInputCapture={trackStart}>
+    <form className="contact-form" noValidate onSubmit={handleSubmit} onInputCapture={trackStart} aria-busy={isSubmitting}>
+      <div className="contact-honeypot" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input
+          id="website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={website}
+          onChange={(event) => setWebsite(event.target.value)}
+        />
+      </div>
       <div className="form-row">
         <div className="field">
           <label htmlFor="name">Name</label>
@@ -179,11 +211,12 @@ export function ContactForm() {
       </div>
       <a className="privacy-link" href="/datenschutz">Datenschutzerklärung lesen</a>
 
-      <button className="button button-primary form-submit" type="submit">
-        Prozess kostenlos prüfen lassen <span className="button-arrow" aria-hidden="true">→</span>
+      <button className="button button-primary form-submit" type="submit" disabled={isSubmitting}>
+        {isSubmitting ? 'Anfrage wird gesendet …' : 'Prozess kostenlos prüfen lassen'}
+        {!isSubmitting ? <span className="button-arrow" aria-hidden="true">→</span> : null}
       </button>
-      {status ? <p className="form-status" role="status" aria-live="polite">{status}</p> : null}
-      <p className="form-note">Beim Absenden öffnet sich Ihr E-Mail-Programm mit den eingetragenen Angaben. Es wird kein externer Formulardienst verwendet.</p>
+      {status ? <p className={`form-status is-${statusTone}`} role="status" aria-live="polite">{status}</p> : null}
+      <p className="form-note">Ihre Angaben werden verschlüsselt an unser IONOS-Postfach kontakt@msb-ai.de übermittelt.</p>
     </form>
   );
 }

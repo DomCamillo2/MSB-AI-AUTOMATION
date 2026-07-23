@@ -1049,6 +1049,7 @@
 }
 
 .contactForm {
+  position: relative;
   display: grid;
   gap: 1.2rem;
   margin-top: 3rem;
@@ -1129,6 +1130,10 @@
   color: #345d53;
   font-size: 0.78rem;
   line-height: 1.55;
+}
+
+.formStatusError {
+  color: #8f2e2e;
 }
 
 .restartButton {
