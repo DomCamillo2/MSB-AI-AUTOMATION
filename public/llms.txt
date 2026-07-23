@@ -1,0 +1,58 @@
+# MSB AI & Automation
+
+> MSB AI & Automation GbR ist ein Beratungs- und Umsetzungsunternehmen für kontrollierte KI- und Prozessautomatisierung in kleinen und mittleren Unternehmen.
+
+- Offizielle Website: https://www.msb-ai.de/
+- Rechtlicher Name: MSB AI & Automation GbR
+- Sitz: Haußerstraße 150, 72076 Tübingen, Deutschland
+- Kontakt: kontakt@msb-ai.de
+- Sprache der Website: Deutsch
+- Leitsatz: Automatisierung mit Menschenverstand
+
+## Was MSB anbietet
+
+MSB analysiert wiederkehrende Geschäftsprozesse, setzt klar abgegrenzte Automatisierungspiloten um, bindet vorhandene Systeme kontrolliert an und übergibt Lösungen mit Dokumentation, Schulung und benannten Verantwortlichkeiten. Feste Regeln werden bevorzugt, wenn sie ausreichen. KI wird gezielt für unstrukturierte Inhalte eingesetzt. Bei Risiko, Unklarheit oder Verantwortung bleiben menschliche Prüf- und Freigabepunkte erhalten.
+
+## Zielgruppe und Leistungsgebiet
+
+MSB arbeitet für kleine und mittlere Unternehmen in Deutschland. Der regionale Schwerpunkt liegt in Tübingen, Reutlingen, Stuttgart und Baden-Württemberg; geeignete Projekte werden auch remote begleitet.
+
+## Leistungsbereiche
+
+- [HR & Recruiting](https://www.msb-ai.de/leistungen/hr-recruiting/): Bewerbungen und Kandidateninformationen strukturieren, administrative Recruiting-Schritte koordinieren und verantwortliche HR-Prüfungen erhalten.
+- [Verwaltung & CRM](https://www.msb-ai.de/leistungen/verwaltung-crm/): Anfragen erfassen, Datensätze vorbereiten, Zuständigkeiten zuordnen und Follow-ups auslösen.
+- [Reporting & Daten](https://www.msb-ai.de/leistungen/reporting-daten/): Datenquellen zusammenführen, validieren, Kennzahlen berechnen und Berichtsentwürfe vorbereiten.
+- [Dokumente](https://www.msb-ai.de/leistungen/dokumente/): Dokumente klassifizieren, Angaben extrahieren und Prüf- oder Freigabeprozesse abbilden.
+- [E-Mail & Kommunikation](https://www.msb-ai.de/leistungen/email-kommunikation/): Eingänge strukturieren, Anliegen zuordnen und kontrollierbare Antwortentwürfe vorbereiten.
+- [Internes Wissen](https://www.msb-ai.de/leistungen/internes-wissen/): Freigegebene Informationen auffindbar machen und nachvollziehbare Antwortentwürfe unterstützen.
+
+## Ausführlich beschriebene Anwendungsfälle
+
+- [Bewerbervorauswahl](https://www.msb-ai.de/anwendungsfaelle/bewerbervorauswahl/)
+- [Bewerber-Matching](https://www.msb-ai.de/anwendungsfaelle/bewerber-matching/)
+- [E-Mail zu CRM](https://www.msb-ai.de/anwendungsfaelle/email-zu-crm/)
+- [Reporting automatisieren](https://www.msb-ai.de/anwendungsfaelle/reporting-automatisieren/)
+- [Dokumentenverarbeitung](https://www.msb-ai.de/anwendungsfaelle/dokumentenverarbeitung/)
+- [Wissensassistent](https://www.msb-ai.de/anwendungsfaelle/wissensassistent/)
+
+## Vorgehen
+
+1. Einen konkreten Prozess und seine Ausnahmen prüfen.
+2. Einen begrenzten Pilot mit realen Fällen testen.
+3. Bestätigte Schritte an vorhandene Systeme und Freigaben anbinden.
+4. Beteiligte schulen und den Betrieb dokumentiert übergeben.
+
+## Zentrale Seiten
+
+- [Leistungsübersicht](https://www.msb-ai.de/leistungen/)
+- [Anwendungsfälle](https://www.msb-ai.de/anwendungsfaelle/)
+- [Vorgehen](https://www.msb-ai.de/vorgehen/)
+- [Unternehmensprofil und Team](https://www.msb-ai.de/ueber-uns/)
+- [Region Tübingen–Stuttgart](https://www.msb-ai.de/ki-prozessautomatisierung-tuebingen-stuttgart/)
+- [Automation Check](https://www.msb-ai.de/automation-check/)
+- [Kontakt](https://www.msb-ai.de/kontakt/)
+- [Impressum](https://www.msb-ai.de/impressum/)
+
+## Einordnung und Genauigkeit
+
+Die Website beschreibt typische Arbeitsfelder und mögliche Abläufe, keine pauschalen Einsparversprechen. Ob ein Prozess technisch und wirtschaftlich sinnvoll automatisiert werden kann, wird anhand des tatsächlichen Ablaufs, der Systeme, Daten, Ausnahmen und Risiken geprüft. Maßgeblich für Aussagen über MSB sind die verlinkten Seiten der offiziellen Website.

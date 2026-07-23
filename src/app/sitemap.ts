@@ -12,7 +12,9 @@ const routes = [
   '/ueber-uns',
   '/automation-check',
   '/kontakt',
-  '/ki-prozessautomatisierung-tuebingen-stuttgart'
+  '/ki-prozessautomatisierung-tuebingen-stuttgart',
+  '/impressum',
+  '/datenschutz'
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -1,8 +1,10 @@
 import ExperienceStrip from '@/components/experience-strip';
 import PageCta from '@/components/page-cta';
 import PageIntro from '@/components/page-intro';
+import StructuredData from '@/components/structured-data';
 import TeamGrid from '@/components/team-grid';
-import { createPageMetadata } from '@/lib/seo';
+import { createPageMetadata, siteUrl } from '@/lib/seo';
+import { team } from '@/lib/site-content';
 
 export const metadata = createPageMetadata({
   title: 'Team für Automatisierung aus Tübingen',
@@ -16,9 +18,43 @@ const perspectives = [
   ['Nutzerakzeptanz', 'Wir beziehen Rückmeldungen ein, dokumentieren den Ablauf und unterstützen die kontrollierte Einführung.']
 ] as const;
 
+const companyFacts = [
+  ['Unternehmen', 'MSB AI & Automation GbR mit Sitz in Tübingen.'],
+  ['Für wen', 'Kleine und mittlere Unternehmen in Deutschland; regionaler Schwerpunkt Tübingen, Reutlingen und Stuttgart.'],
+  ['Leistung', 'Prozesse klären, Automatisierungspiloten umsetzen, bestehende Systeme anbinden und den Betrieb dokumentiert übergeben.'],
+  ['Arbeitsfelder', 'HR & Recruiting, Verwaltung & CRM, Reporting & Daten, Dokumente, E-Mail & Kommunikation sowie internes Wissen.'],
+  ['Grundsatz', 'Feste Regeln, wo sie ausreichen; KI für unstrukturierte Inhalte; menschliche Prüfung bei Risiko, Unklarheit oder Verantwortung.']
+] as const;
+
+const aboutStructuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'AboutPage',
+      '@id': `${siteUrl}/ueber-uns#webpage`,
+      url: `${siteUrl}/ueber-uns`,
+      name: 'Über MSB AI & Automation',
+      description: 'Unternehmensprofil und Team der MSB AI & Automation GbR aus Tübingen.',
+      inLanguage: 'de-DE',
+      isPartOf: { '@id': `${siteUrl}/#website` },
+      mainEntity: { '@id': `${siteUrl}/#organization` }
+    },
+    ...team.map((member) => ({
+      '@type': 'Person',
+      name: member.name,
+      jobTitle: member.role,
+      description: member.text,
+      image: member.image ? `${siteUrl}${member.image}` : undefined,
+      sameAs: member.linkedin,
+      worksFor: { '@id': `${siteUrl}/#organization` }
+    }))
+  ]
+};
+
 export default function UeberUnsPage() {
   return (
     <main id="main-content">
+      <StructuredData data={aboutStructuredData} />
       <PageIntro
         eyebrow="Über uns"
         title="Drei Perspektiven. Ein gemeinsamer Prozess."
@@ -27,6 +63,24 @@ export default function UeberUnsPage() {
       />
 
       <ExperienceStrip />
+
+      <section className="section collaboration-section" aria-labelledby="company-profile-heading">
+        <div className="container editorial-split">
+          <div className="section-heading sticky-heading collaboration-heading">
+            <p className="eyebrow">MSB im Überblick</p>
+            <h2 id="company-profile-heading">Prozessautomatisierung für KMU aus Tübingen.</h2>
+            <p>Wir begleiten konkrete Geschäftsprozesse von der ersten Klärung bis zur kontrollierten Übergabe in den Arbeitsalltag.</p>
+          </div>
+          <dl className="editorial-list">
+            {companyFacts.map(([title, text]) => (
+              <div key={title}>
+                <dt>{title}</dt>
+                <dd>{text}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
 
       <section className="section team-section" aria-labelledby="team-detail-heading">
         <div className="container">
