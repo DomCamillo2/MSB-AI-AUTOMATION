@@ -2,6 +2,12 @@ Options -Indexes
 DirectoryIndex index.html
 ErrorDocument 404 /404.html
 
+<IfModule mod_mime.c>
+  <Files "opengraph-image">
+    ForceType image/png
+  </Files>
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
