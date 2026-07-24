@@ -1,6 +1,7 @@
 import ExperienceStrip from '@/components/experience-strip';
 import PageCta from '@/components/page-cta';
 import PageIntro from '@/components/page-intro';
+import { Reveal } from '@/components/reveal';
 import StructuredData from '@/components/structured-data';
 import TeamGrid from '@/components/team-grid';
 import { createPageMetadata, siteUrl } from '@/lib/seo';
@@ -64,21 +65,26 @@ export default function UeberUnsPage() {
 
       <ExperienceStrip />
 
-      <section className="section collaboration-section" aria-labelledby="company-profile-heading">
-        <div className="container editorial-split">
-          <div className="section-heading sticky-heading collaboration-heading">
+      <section className="section company-profile-section" aria-labelledby="company-profile-heading">
+        <div className="container company-profile-layout">
+          <Reveal className="company-profile-copy">
             <p className="eyebrow">MSB im Überblick</p>
-            <h2 id="company-profile-heading">Prozessautomatisierung für KMU aus Tübingen.</h2>
-            <p>Wir begleiten konkrete Geschäftsprozesse von der ersten Klärung bis zur kontrollierten Übergabe in den Arbeitsalltag.</p>
-          </div>
-          <dl className="editorial-list">
-            {companyFacts.map(([title, text]) => (
-              <div key={title}>
-                <dt>{title}</dt>
-                <dd>{text}</dd>
-              </div>
+            <h2 id="company-profile-heading">Klare Prozesse. Sinnvolle Automatisierung.</h2>
+            <p>Von Tübingen aus begleiten wir konkrete Geschäftsprozesse von der ersten Klärung bis zur kontrollierten Übergabe in den Arbeitsalltag.</p>
+          </Reveal>
+          <Reveal className="company-profile-cards">
+            {companyFacts.map(([title, text], index) => (
+              <article className="company-profile-card" key={title}>
+                <span className="company-profile-index" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </div>
+              </article>
             ))}
-          </dl>
+          </Reveal>
         </div>
       </section>
 
