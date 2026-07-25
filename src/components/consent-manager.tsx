@@ -47,7 +47,9 @@ function loadGoogleAnalytics(pathname: string) {
       send_page_view: false,
       allow_google_signals: false,
       allow_ad_personalization_signals: false,
-      cookie_flags: 'SameSite=Lax;Secure'
+      cookie_flags: 'SameSite=Lax;Secure',
+      cookie_expires: 60 * 60 * 24 * 365,
+      cookie_update: false
     });
     trackPageView(pathname);
   }, { once: true });

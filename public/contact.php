@@ -67,43 +67,35 @@ function enforce_rate_limit(): void
     $maximumRequests = 5;
     $directory = rtrim(sys_get_temp_dir(), DIRECTORY_SEPARATOR);
 
-    // The rate-limit decision only uses timestamps from the last 15 minutes.
-    // Occasionally remove inactive files as well so pseudonymous rate-limit
-    // containers do not remain in the temporary directory indefinitely.
-    try {
-        $shouldCleanUp = random_int(1, 25) === 1;
-    } catch (Throwable) {
-        $shouldCleanUp = false;
-    }
+    // Remove every expired rate-limit container on each form request. This
+    // keeps the pseudonymous abuse-prevention data for no longer than it is
+    // technically useful once another request reaches the endpoint.
+    $staleBefore = time() - $windowSeconds;
+    $candidates = glob($directory . DIRECTORY_SEPARATOR . 'msb-contact-*.json') ?: [];
 
-    if ($shouldCleanUp) {
-        $staleBefore = time() - $windowSeconds;
-        $candidates = glob($directory . DIRECTORY_SEPARATOR . 'msb-contact-*.json') ?: [];
-
-        foreach ($candidates as $candidate) {
-            $modifiedAt = @filemtime($candidate);
-            if ($modifiedAt === false || $modifiedAt >= $staleBefore) {
-                continue;
-            }
-
-            $cleanupHandle = @fopen($candidate, 'r+');
-            if ($cleanupHandle === false) {
-                continue;
-            }
-
-            if (@flock($cleanupHandle, LOCK_EX | LOCK_NB)) {
-                clearstatcache(true, $candidate);
-                $modifiedAt = @filemtime($candidate);
-
-                if ($modifiedAt !== false && $modifiedAt < $staleBefore) {
-                    @unlink($candidate);
-                }
-
-                flock($cleanupHandle, LOCK_UN);
-            }
-
-            fclose($cleanupHandle);
+    foreach ($candidates as $candidate) {
+        $modifiedAt = @filemtime($candidate);
+        if ($modifiedAt === false || $modifiedAt >= $staleBefore) {
+            continue;
         }
+
+        $cleanupHandle = @fopen($candidate, 'r+');
+        if ($cleanupHandle === false) {
+            continue;
+        }
+
+        if (@flock($cleanupHandle, LOCK_EX | LOCK_NB)) {
+            clearstatcache(true, $candidate);
+            $modifiedAt = @filemtime($candidate);
+
+            if ($modifiedAt !== false && $modifiedAt < $staleBefore) {
+                @unlink($candidate);
+            }
+
+            flock($cleanupHandle, LOCK_UN);
+        }
+
+        fclose($cleanupHandle);
     }
 
     $address = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
