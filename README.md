@@ -2,6 +2,9 @@
 
 Privacy-conscious B2B website for MSB AI & Automation.
 
+Production hosting, domain, DNS, e-mail and the contact endpoint run on IONOS.
+The repository is proprietary; see `LICENSE` and `SECURITY.md`.
+
 ## Local development
 
 ```bash

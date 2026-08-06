@@ -29,7 +29,7 @@ Dieser Bericht beschreibt die technisch umgesetzte Konfiguration. Er ist keine R
 | `/leistungen` | Leistung und Umsetzung von Prozessautomatisierung | Prozessautomatisierung für KMU | MSB automatisiert wiederkehrende Prozesse in HR, Verwaltung, Reporting und Datenflüssen – mit bestehenden Systemen, klaren Regeln und menschlicher Kontrolle. | Wiederkehrende Prozesse automatisieren. Bestehende Systeme weiter nutzen. | `https://www.msb-ai.de/leistungen` |
 | `/anwendungsfaelle` | HR-, CRM-, Reporting- und Wissens-Workflows | Automatisierung für HR, CRM & Reporting | Konkrete Automatisierungsbeispiele für HR, Verwaltung, CRM, Reporting und internes Wissen – mit klaren menschlichen Prüfungen. | Konkrete Abläufe statt abstrakter KI-Projekte. | `https://www.msb-ai.de/anwendungsfaelle` |
 | `/vorgehen` | Projektablauf, Pilot und Einführung | Automation Check, Pilot & Einführung | So führt MSB Automatisierung ein: Prozess prüfen, begrenzten Pilot testen, Systeme kontrolliert anbinden und das Team befähigen. | Klein starten. Wirkung prüfen. Sauber übergeben. | `https://www.msb-ai.de/vorgehen` |
-| `/ueber-uns` | Anbieter-/Teamvertrauen in Tübingen | Team für Automatisierung aus Tübingen | Das MSB-Team aus Tübingen verbindet Prozessverständnis, technische Automatisierung, Datenanalyse und nutzerorientierte Einführung. | Drei Perspektiven. Ein gemeinsamer Prozess. | `https://www.msb-ai.de/ueber-uns` |
+| `/ueber-uns` | Anbieter-/Teamvertrauen in Tübingen | Team für Automatisierung aus Tübingen | Das MSB-Team aus Tübingen verbindet Prozessverständnis, technische Automatisierung, Datenanalyse und nutzerorientierte Einführung. | Ein kleines Team. Klare Zuständigkeiten. | `https://www.msb-ai.de/ueber-uns` |
 | `/automation-check` | Kostenlose Ersteinschätzung | Kostenloser Automation Check für KMU | Lohnt sich Ihr Prozess für Automatisierung? Im kostenlosen Check erhalten Sie eine erste Einschätzung zu Ablauf, Nutzen, Risiken und nächstem Schritt. | Welcher Prozess kostet Ihr Team regelmäßig Zeit? | `https://www.msb-ai.de/automation-check` |
 | `/kontakt` | Kontakt und Erstgespräch | Kontakt & Erstgespräch | Kontaktieren Sie MSB AI & Automation aus Tübingen oder beschreiben Sie einen wiederkehrenden Prozess für den kostenlosen Automation Check. | Sprechen wir über einen echten Prozess. | `https://www.msb-ai.de/kontakt` |
 | `/ki-prozessautomatisierung-tuebingen-stuttgart` | Regionale Prozessautomatisierung | Prozessautomatisierung in Tübingen & Stuttgart | MSB begleitet KMU in Tübingen, Reutlingen und Stuttgart bei Prozessanalyse, Automatisierungspiloten und kontrollierter Einführung. | Prozessautomatisierung für KMU in der Region. | `https://www.msb-ai.de/ki-prozessautomatisierung-tuebingen-stuttgart` |
@@ -99,12 +99,13 @@ Menschlich zu bestätigen: tatsächliche GA4-Aufbewahrungsdauer, Google-Kontofre
 
 ## G — Impressum
 
-- Betreiberangaben aktualisiert auf MSB AI & Automation GbR mit den Gesellschaftern Dominik Soballa, Erik Müller und Luca Bouché; bestehende Anschrift Haußerstraße 150, 72076 Tübingen, Deutschland, und `kontakt@msb-ai.de` beibehalten.
-- Öffentliche Marke einheitlich auf „MSB AI & Automation“ korrigiert; „MSB AI Consulting“ entfernt.
-- Aktuelle Bezeichnung nach § 5 DDG beibehalten; keine veraltete TMG- oder EU-ODR-Klausel ergänzt.
-- Nicht erfunden: Telefonnummer, USt-IdNr./W-IdNr., Register und Kammerangaben.
+- Betreiberangaben: MSB AI & Automation GbR mit den Gesellschaftern Dominik Soballa, Erik Müller und Luca Bouché; Anschrift Haußerstraße 150, 72076 Tübingen, Deutschland; `kontakt@msb-ai.de`; Telefon `0160 6969914`.
+- Vertretung: Die Gesellschafter vertreten die Gesellschaft gemeinsam.
+- Öffentliche Marke einheitlich „MSB AI & Automation“; Hosting und Kontaktformular laufen über IONOS.
+- Aktuelle Bezeichnung nach § 5 DDG; keine veraltete TMG- oder EU-ODR-Klausel.
+- Nicht veröffentlicht (noch nicht vorhanden bzw. später): USt-IdNr./W-IdNr., Register- und Kammerangaben. Die GbR ist nicht im Gesellschaftsregister eingetragen.
 
-Menschlich beziehungsweise juristisch zu klären: ob eine Telefonnummer oder andere zweite direkte Kontaktmöglichkeit ergänzt werden muss; ob eine USt-IdNr. oder Wirtschafts-Identifikationsnummer vorhanden ist und nach § 5 DDG veröffentlicht werden muss; der genaue Beginn der gemeinsamen Geschäftstätigkeit; Gewerbeanmeldung und steuerliche Erfassung der GbR; ein schriftlicher GbR-Vertrag; sowie die zwischen den Gesellschaftern vereinbarten Vertretungsregeln. Die GbR ist nicht im Gesellschaftsregister eingetragen; deshalb werden keine Registerangaben veröffentlicht.
+Weiter menschlich beziehungsweise juristisch zu klären: genauer Beginn der gemeinsamen Geschäftstätigkeit; Gewerbeanmeldung und steuerliche Erfassung der GbR; schriftlicher GbR-Vertrag; Veröffentlichung einer USt-IdNr. oder Wirtschafts-Identifikationsnummer, sobald vorhanden.
 
 ## H — Externe menschliche Aktionen
 

@@ -23,6 +23,13 @@ const contactOptions = [
     text: 'Für Kooperationen, Rückfragen oder eine kurze Einordnung erreichen Sie uns direkt. Bitte senden Sie keine sensiblen Kunden- oder Personaldaten.',
     href: 'mailto:kontakt@msb-ai.de',
     action: 'kontakt@msb-ai.de'
+  },
+  {
+    label: 'Telefonisch',
+    title: 'Kurz anrufen',
+    text: 'Für eine schnelle Klärung erreichen Sie uns unter der angegebenen Mobilnummer. Sensible Kundendaten bitte nicht am Telefon durchgeben.',
+    href: 'tel:+491606969914',
+    action: '0160 6969914'
   }
 ] as const;
 

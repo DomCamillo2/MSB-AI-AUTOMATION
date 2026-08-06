@@ -145,9 +145,9 @@ export default function LeistungenPage() {
               <a className="button button-secondary" href="#automatisierungsfelder">Anwendungsfelder ansehen</a>
             </div>
             <ul className={styles.heroSignals} aria-label="Grundsätze unserer Arbeit">
-              <li>Prozess vor Tool</li>
-              <li>Pilot vor Rollout</li>
-              <li>Kontrolle vor Blackbox</li>
+              <li>Bestehende Systeme zuerst</li>
+              <li>Begrenzter Pilot mit Abnahmekriterien</li>
+              <li>Menschliche Freigabe bei Risiko</li>
             </ul>
           </div>
           <ServicesHeroVisual />

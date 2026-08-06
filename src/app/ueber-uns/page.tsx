@@ -58,9 +58,9 @@ export default function UeberUnsPage() {
       <StructuredData data={aboutStructuredData} />
       <PageIntro
         eyebrow="Über uns"
-        title="Drei Perspektiven. Ein gemeinsamer Prozess."
+        title="Ein kleines Team. Klare Zuständigkeiten."
         lead="MSB verbindet psychologisches Prozessverständnis, technische Umsetzung und nutzerorientierte Einführung."
-        aside="Unser gemeinsamer Maßstab: Lösungen müssen fachlich nachvollziehbar, technisch umsetzbar und im Arbeitsalltag nutzbar sein."
+        aside="Wir sind eine junge GbR aus Tübingen. Was wir anbieten, soll im Alltag der Menschen funktionieren, die damit arbeiten – nicht nur auf Folien überzeugen."
       />
 
       <ExperienceStrip />
