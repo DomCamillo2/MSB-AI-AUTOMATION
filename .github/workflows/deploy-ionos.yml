@@ -105,6 +105,16 @@ jobs:
           test -f out/contact.php
           test -f out/.contact-config.json
           test -f out/contact-lib/phpmailer/PHPMailer.php
+          test -f out/sitemap.xml
+          test -f out/robots.txt
+          url_count="$(grep -c '<loc>' out/sitemap.xml)"
+          if [[ "$url_count" -ne 20 ]]; then
+            echo "::error::Expected 20 sitemap URLs, found $url_count."
+            exit 1
+          fi
+          grep -q 'https://www.msb-ai.de/leistungen/' out/sitemap.xml
+          ! grep -q 'impressum' out/sitemap.xml
+          grep -q 'Sitemap: https://www.msb-ai.de/sitemap.xml' out/robots.txt
 
       - name: Install SFTP client
         shell: bash
