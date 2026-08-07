@@ -9,22 +9,41 @@ import { team } from '@/lib/site-content';
 
 export const metadata = createPageMetadata({
   title: 'Team für Automatisierung aus Tübingen',
-  description: 'Das MSB-Team aus Tübingen verbindet Prozessverständnis, technische Automatisierung, Datenanalyse und nutzerorientierte Einführung.',
+  description:
+    'Das MSB-Team aus Tübingen verbindet Prozessverständnis, Power Platform, Data Science, technische Automatisierung und nutzerorientierte Einführung.',
   path: '/ueber-uns'
 });
 
 const perspectives = [
-  ['Prozessverständnis', 'Wir betrachten Aufgaben, Übergaben und Ausnahmen aus Sicht der Menschen, die täglich damit arbeiten.'],
-  ['Technische Umsetzung', 'Wir verbinden Daten, Regeln und vorhandene Systeme zu nachvollziehbaren Workflows.'],
-  ['Nutzerakzeptanz', 'Wir beziehen Rückmeldungen ein, dokumentieren den Ablauf und unterstützen die kontrollierte Einführung.']
+  [
+    'Prozessverständnis',
+    'Wir betrachten Aufgaben, Übergaben und Ausnahmen aus Sicht der Menschen, die täglich damit arbeiten.'
+  ],
+  [
+    'Technische Umsetzung',
+    'Wir verbinden Power Platform, APIs, Datenpipelines, Regeln und vorhandene Systeme zu nachvollziehbaren Workflows.'
+  ],
+  [
+    'Nutzerakzeptanz',
+    'Wir beziehen Rückmeldungen ein, dokumentieren den Ablauf und unterstützen die kontrollierte Einführung.'
+  ]
 ] as const;
 
 const companyFacts = [
   ['Unternehmen', 'MSB AI & Automation GbR mit Sitz in Tübingen.'],
   ['Für wen', 'Kleine und mittlere Unternehmen in Deutschland; regionaler Schwerpunkt Tübingen, Reutlingen und Stuttgart.'],
-  ['Leistung', 'Prozesse klären, Automatisierungspiloten umsetzen, bestehende Systeme anbinden und den Betrieb dokumentiert übergeben.'],
-  ['Arbeitsfelder', 'HR & Recruiting, Verwaltung & CRM, Reporting & Daten, Dokumente, E-Mail & Kommunikation sowie internes Wissen.'],
-  ['Grundsatz', 'Feste Regeln, wo sie ausreichen; KI für unstrukturierte Inhalte; menschliche Prüfung bei Risiko, Unklarheit oder Verantwortung.']
+  [
+    'Leistung',
+    'Prozesse klären, Automatisierungspiloten umsetzen, bestehende Systeme anbinden und den Betrieb dokumentiert übergeben.'
+  ],
+  [
+    'Arbeitsfelder',
+    'HR & Recruiting, Verwaltung & CRM, Reporting & Daten, Dokumente, E-Mail & Kommunikation, internes Wissen sowie Power Platform und Microsoft-365-Workflows.'
+  ],
+  [
+    'Grundsatz',
+    'Feste Regeln, wo sie ausreichen; KI für unstrukturierte Inhalte; menschliche Prüfung bei Risiko, Unklarheit oder Verantwortung.'
+  ]
 ] as const;
 
 const aboutStructuredData = {
@@ -59,7 +78,7 @@ export default function UeberUnsPage() {
       <PageIntro
         eyebrow="Über uns"
         title="Ein kleines Team. Klare Zuständigkeiten."
-        lead="MSB verbindet psychologisches Prozessverständnis, technische Umsetzung und nutzerorientierte Einführung."
+        lead="MSB verbindet psychologisches Prozessverständnis, Power Platform, Data Science und nutzerorientierte Einführung."
         aside="Wir sind eine junge GbR aus Tübingen. Was wir anbieten, soll im Alltag der Menschen funktionieren, die damit arbeiten – nicht nur auf Folien überzeugen."
       />
 
@@ -95,7 +114,10 @@ export default function UeberUnsPage() {
               <p className="eyebrow">Team</p>
               <h2 id="team-detail-heading">Das Team hinter MSB</h2>
             </div>
-            <p>Drei fachliche Schwerpunkte greifen ineinander: Prozessverständnis, technische Umsetzung und nutzerorientierte Einführung.</p>
+            <p>
+              Prozessverständnis, Power Platform und Data Science sowie Projektführung und nutzerorientierte
+              Einführung ergänzen sich im Team.
+            </p>
           </div>
           <TeamGrid />
         </div>
