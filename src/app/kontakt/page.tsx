@@ -1,6 +1,7 @@
 import PageIntro from '@/components/page-intro';
+import ContactOptionsGrid from '@/components/contact-options-grid';
 import ContactPanel from '@/components/contact-panel';
-import { Reveal, RevealGroup } from '@/components/reveal';
+import { Reveal } from '@/components/reveal';
 import { createPageMetadata } from '@/lib/seo';
 
 export const metadata = createPageMetadata({
@@ -8,30 +9,6 @@ export const metadata = createPageMetadata({
   description: 'Kontaktieren Sie MSB AI & Automation aus Tübingen oder beschreiben Sie einen wiederkehrenden Prozess für den kostenlosen Automation Check.',
   path: '/kontakt'
 });
-
-const contactOptions = [
-  {
-    label: 'Konkreten Prozess prüfen',
-    title: 'Kostenloser Automation Check',
-    text: 'Beschreiben Sie einen wiederkehrenden Ablauf. Wir ordnen Nutzen, Machbarkeit und Risiken in einem ersten Gespräch ein.',
-    href: '/automation-check',
-    action: 'Automation Check starten'
-  },
-  {
-    label: 'Allgemeine Anfrage',
-    title: 'Direkt per E-Mail',
-    text: 'Für Kooperationen, Rückfragen oder eine kurze Einordnung erreichen Sie uns direkt. Bitte senden Sie keine sensiblen Kunden- oder Personaldaten.',
-    href: 'mailto:kontakt@msb-ai.de',
-    action: 'kontakt@msb-ai.de'
-  },
-  {
-    label: 'Telefonisch',
-    title: 'Kurz anrufen',
-    text: 'Für eine schnelle Klärung erreichen Sie uns unter der angegebenen Mobilnummer. Sensible Kundendaten bitte nicht am Telefon durchgeben.',
-    href: 'tel:+491606969914',
-    action: '0160 6969914'
-  }
-] as const;
 
 export default function KontaktPage() {
   return (
@@ -52,17 +29,7 @@ export default function KontaktPage() {
             </div>
             <p>Für eine erste Prozesseinschätzung ist das sichere Formular am schnellsten. Für alles andere können Sie uns weiterhin direkt schreiben.</p>
           </Reveal>
-          <RevealGroup className="contact-options-grid" stagger="normal">
-            {contactOptions.map((option, index) => (
-              <article key={option.title}>
-                <div className="contact-option-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</div>
-                <p className="eyebrow">{option.label}</p>
-                <h3>{option.title}</h3>
-                <p>{option.text}</p>
-                <a className="text-link" href={option.href}>{option.action} <span aria-hidden="true">→</span></a>
-              </article>
-            ))}
-          </RevealGroup>
+          <ContactOptionsGrid />
         </div>
       </section>
 
