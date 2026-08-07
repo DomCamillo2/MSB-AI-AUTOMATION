@@ -27,7 +27,7 @@ export function SiteFooter() {
       <div className="container footer-layout">
         <div className="footer-intro">
           <strong className="footer-brand">MSB AI &amp; Automation</strong>
-          <p>Pragmatische Prozessautomatisierung für KMU – verständlich, kontrollierbar und passend zu Ihrer bestehenden IT.</p>
+          <p>Wiederkehrende Abläufe in Verwaltung, HR und Reporting automatisieren – mit festen Regeln, klaren Freigaben und Ihrer bestehenden IT.</p>
           <a className="footer-region" href="/ki-prozessautomatisierung-tuebingen-stuttgart">
             Tübingen · Reutlingen · Stuttgart
           </a>
@@ -47,6 +47,9 @@ export function SiteFooter() {
           <strong>Welcher Prozess kostet Sie regelmäßig Zeit?</strong>
           <a className="footer-email" href="mailto:kontakt@msb-ai.de">
             kontakt@msb-ai.de
+          </a>
+          <a className="footer-email" href="tel:+491606969914">
+            0160&nbsp;6969914
           </a>
           <a className="button footer-cta" href="/automation-check">
             Prozess kostenlos prüfen lassen <span aria-hidden="true">→</span>

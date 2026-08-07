@@ -31,14 +31,23 @@ export default function ImpressumPage() {
           </address>
         </section>
 
+        <section aria-labelledby="representation-heading">
+          <h2 id="representation-heading">Vertretung</h2>
+          <p>Die Gesellschafter vertreten die Gesellschaft gemeinsam.</p>
+        </section>
+
         <section aria-labelledby="contact-heading">
           <h2 id="contact-heading">Kontakt</h2>
           <p>E-Mail: <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a></p>
+          <p>
+            Telefon:{' '}
+            <a href="tel:+491606969914">0160&nbsp;6969914</a>
+          </p>
           <p>Direkte Kontaktaufnahme: <a href="/kontakt">Kontaktformular öffnen</a></p>
           <p>Website: <a href="https://www.msb-ai.de">www.msb-ai.de</a></p>
         </section>
 
-        <p className="legal-meta">Stand: 25. Juli 2026</p>
+        <p className="legal-meta">Stand: 6. August 2026</p>
       </article>
     </main>
   );

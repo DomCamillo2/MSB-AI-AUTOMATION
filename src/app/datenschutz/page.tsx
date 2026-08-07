@@ -41,7 +41,8 @@ export default function DatenschutzPage() {
             Haußerstraße 150<br />
             72076 Tübingen<br />
             Deutschland<br />
-            E-Mail: <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a>
+            E-Mail: <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a><br />
+            Telefon: <a href="tel:+491606969914">0160&nbsp;6969914</a>
           </address>
         </section>
 
@@ -169,7 +170,7 @@ export default function DatenschutzPage() {
           </p>
         </section>
 
-        <p className="legal-meta">Stand: 25. Juli 2026</p>
+        <p className="legal-meta">Stand: 6. August 2026</p>
       </article>
     </main>
   );

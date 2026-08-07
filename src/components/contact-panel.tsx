@@ -27,6 +27,8 @@ export function ContactPanel() {
 
         <p className="direct-contact">
           Direkt schreiben: <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a>
+          {' · '}
+          <a href="tel:+491606969914">0160&nbsp;6969914</a>
         </p>
       </div>
 

@@ -6,11 +6,11 @@ import MotionProvider from '@/components/motion-provider';
 import SiteFooter from '@/components/site-footer';
 import SiteHeader from '@/components/site-header';
 import { defaultDescription, siteName, siteUrl } from '@/lib/seo';
+import { isProductionSite } from '@/lib/site-env';
 import './globals.css';
 
-const allowIndexing = process.env.VERCEL_ENV !== 'preview';
-const analyticsEnabled =
-  process.env.VERCEL_ENV === 'production' || process.env.NEXT_PUBLIC_SITE_ENV === 'production';
+const allowIndexing = isProductionSite;
+const analyticsEnabled = isProductionSite;
 
 const inter = Inter({
   subsets: ['latin'],

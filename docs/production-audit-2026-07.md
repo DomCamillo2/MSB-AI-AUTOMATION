@@ -8,8 +8,8 @@ Dieser Bericht beschreibt die technisch umgesetzte Konfiguration. Er ist keine R
 
 - Kanonischer Ursprung: `https://www.msb-ai.de`. Der Apex-Host `https://msb-ai.de` wird über die IONOS-Webspace-Konfiguration dauerhaft auf `www` weitergeleitet. `www` bleibt deshalb der einheitliche Canonical.
 - HTTP sowie alternative öffentliche Hostvarianten leiten auf HTTPS und den Canonical-Host weiter.
-- Produktionsseiten sind indexierbar. Nichtproduktive Builds können weiterhin über die vorhandenen Umgebungs-Gates mit `noindex` und einer leeren Sitemap erzeugt werden.
-- Canonicals werden nie aus der jeweiligen Preview-URL gebildet.
+- Produktionsseiten sind indexierbar. Nichtproduktive Builds setzen über `NEXT_PUBLIC_SITE_ENV` `noindex` und eine leere Sitemap. Der IONOS-Preview-Host (`*.online.de`) setzt zusätzlich per `.htaccess` `X-Robots-Tag: noindex, nofollow`.
+- Canonicals werden nie aus Preview- oder Entwicklungs-URLs gebildet.
 - Die Produktions-Sitemap enthält ausschließlich die 20 indexierbaren Seiten und liegt unter `https://www.msb-ai.de/sitemap.xml`.
 - Unbekannte URLs liefern einen echten HTTP-404-Status; es gibt keinen pauschalen Homepage-Redirect.
 
@@ -29,7 +29,7 @@ Dieser Bericht beschreibt die technisch umgesetzte Konfiguration. Er ist keine R
 | `/leistungen` | Leistung und Umsetzung von Prozessautomatisierung | Prozessautomatisierung für KMU | MSB automatisiert wiederkehrende Prozesse in HR, Verwaltung, Reporting und Datenflüssen – mit bestehenden Systemen, klaren Regeln und menschlicher Kontrolle. | Wiederkehrende Prozesse automatisieren. Bestehende Systeme weiter nutzen. | `https://www.msb-ai.de/leistungen` |
 | `/anwendungsfaelle` | HR-, CRM-, Reporting- und Wissens-Workflows | Automatisierung für HR, CRM & Reporting | Konkrete Automatisierungsbeispiele für HR, Verwaltung, CRM, Reporting und internes Wissen – mit klaren menschlichen Prüfungen. | Konkrete Abläufe statt abstrakter KI-Projekte. | `https://www.msb-ai.de/anwendungsfaelle` |
 | `/vorgehen` | Projektablauf, Pilot und Einführung | Automation Check, Pilot & Einführung | So führt MSB Automatisierung ein: Prozess prüfen, begrenzten Pilot testen, Systeme kontrolliert anbinden und das Team befähigen. | Klein starten. Wirkung prüfen. Sauber übergeben. | `https://www.msb-ai.de/vorgehen` |
-| `/ueber-uns` | Anbieter-/Teamvertrauen in Tübingen | Team für Automatisierung aus Tübingen | Das MSB-Team aus Tübingen verbindet Prozessverständnis, technische Automatisierung, Datenanalyse und nutzerorientierte Einführung. | Drei Perspektiven. Ein gemeinsamer Prozess. | `https://www.msb-ai.de/ueber-uns` |
+| `/ueber-uns` | Anbieter-/Teamvertrauen in Tübingen | Team für Automatisierung aus Tübingen | Das MSB-Team aus Tübingen verbindet Prozessverständnis, technische Automatisierung, Datenanalyse und nutzerorientierte Einführung. | Ein kleines Team. Klare Zuständigkeiten. | `https://www.msb-ai.de/ueber-uns` |
 | `/automation-check` | Kostenlose Ersteinschätzung | Kostenloser Automation Check für KMU | Lohnt sich Ihr Prozess für Automatisierung? Im kostenlosen Check erhalten Sie eine erste Einschätzung zu Ablauf, Nutzen, Risiken und nächstem Schritt. | Welcher Prozess kostet Ihr Team regelmäßig Zeit? | `https://www.msb-ai.de/automation-check` |
 | `/kontakt` | Kontakt und Erstgespräch | Kontakt & Erstgespräch | Kontaktieren Sie MSB AI & Automation aus Tübingen oder beschreiben Sie einen wiederkehrenden Prozess für den kostenlosen Automation Check. | Sprechen wir über einen echten Prozess. | `https://www.msb-ai.de/kontakt` |
 | `/ki-prozessautomatisierung-tuebingen-stuttgart` | Regionale Prozessautomatisierung | Prozessautomatisierung in Tübingen & Stuttgart | MSB begleitet KMU in Tübingen, Reutlingen und Stuttgart bei Prozessanalyse, Automatisierungspiloten und kontrollierter Einführung. | Prozessautomatisierung für KMU in der Region. | `https://www.msb-ai.de/ki-prozessautomatisierung-tuebingen-stuttgart` |
@@ -48,7 +48,7 @@ Die sechs Leistungsbereiche und sechs detaillierten Anwendungsfälle besitzen je
 | `FAQPage` | `/vorgehen` | sichtbare Fragen und Antworten | JSON parsebar, Build erfolgreich |
 | `FAQPage` | `/automation-check` | sichtbare Fragen und Antworten | JSON parsebar, Build erfolgreich |
 
-Es wurden keine Bewertungen, Öffnungszeiten, Kundenreferenzen, Preise oder nicht bestätigten Profile erfunden. KPMG, Siemens, BMW Group, prognum Automotive und Callidus Energie bleiben ausschließlich als berufliche Kontexte einzelner Teammitglieder gekennzeichnet und werden nicht als MSB-Kunden strukturiert.
+Es wurden keine Bewertungen, Öffnungszeiten, Kundenreferenzen, Preise oder nicht bestätigten Profile erfunden. KPMG, Onventis, Siemens, BMW Group, prognum Automotive und Callidus Energie bleiben ausschließlich als berufliche Kontexte einzelner Teammitglieder gekennzeichnet und werden nicht als MSB-Kunden strukturiert.
 
 Nach dem Deployment sollten die relevanten URLs zusätzlich mit dem Google Rich Results Test und dem Schema.org Validator geprüft werden.
 
@@ -99,12 +99,13 @@ Menschlich zu bestätigen: tatsächliche GA4-Aufbewahrungsdauer, Google-Kontofre
 
 ## G — Impressum
 
-- Betreiberangaben aktualisiert auf MSB AI & Automation GbR mit den Gesellschaftern Dominik Soballa, Erik Müller und Luca Bouché; bestehende Anschrift Haußerstraße 150, 72076 Tübingen, Deutschland, und `kontakt@msb-ai.de` beibehalten.
-- Öffentliche Marke einheitlich auf „MSB AI & Automation“ korrigiert; „MSB AI Consulting“ entfernt.
-- Aktuelle Bezeichnung nach § 5 DDG beibehalten; keine veraltete TMG- oder EU-ODR-Klausel ergänzt.
-- Nicht erfunden: Telefonnummer, USt-IdNr./W-IdNr., Register und Kammerangaben.
+- Betreiberangaben: MSB AI & Automation GbR mit den Gesellschaftern Dominik Soballa, Erik Müller und Luca Bouché; Anschrift Haußerstraße 150, 72076 Tübingen, Deutschland; `kontakt@msb-ai.de`; Telefon `0160 6969914`.
+- Vertretung: Die Gesellschafter vertreten die Gesellschaft gemeinsam.
+- Öffentliche Marke einheitlich „MSB AI & Automation“; Hosting und Kontaktformular laufen über IONOS.
+- Aktuelle Bezeichnung nach § 5 DDG; keine veraltete TMG- oder EU-ODR-Klausel.
+- Nicht veröffentlicht (noch nicht vorhanden bzw. später): USt-IdNr./W-IdNr., Register- und Kammerangaben. Die GbR ist nicht im Gesellschaftsregister eingetragen.
 
-Menschlich beziehungsweise juristisch zu klären: ob eine Telefonnummer oder andere zweite direkte Kontaktmöglichkeit ergänzt werden muss; ob eine USt-IdNr. oder Wirtschafts-Identifikationsnummer vorhanden ist und nach § 5 DDG veröffentlicht werden muss; der genaue Beginn der gemeinsamen Geschäftstätigkeit; Gewerbeanmeldung und steuerliche Erfassung der GbR; ein schriftlicher GbR-Vertrag; sowie die zwischen den Gesellschaftern vereinbarten Vertretungsregeln. Die GbR ist nicht im Gesellschaftsregister eingetragen; deshalb werden keine Registerangaben veröffentlicht.
+Weiter menschlich beziehungsweise juristisch zu klären: genauer Beginn der gemeinsamen Geschäftstätigkeit; Gewerbeanmeldung und steuerliche Erfassung der GbR; schriftlicher GbR-Vertrag; Veröffentlichung einer USt-IdNr. oder Wirtschafts-Identifikationsnummer, sobald vorhanden.
 
 ## H — Externe menschliche Aktionen
 
@@ -125,10 +126,10 @@ Menschlich beziehungsweise juristisch zu klären: ob eine Telefonnummer oder and
 - Production-Build: bestanden; 31 statische Routen erzeugt.
 - Deployment: Der IONOS-Produktionsbuild wird nach Pushes auf `main` geprüft, statisch exportiert und per SFTP in den Webspace übertragen; der PHP-Endpunkt wird im Workflow syntaktisch validiert.
 - HTML: ein H1 auf der Startseite, Canonical auf dem Production-Host, strukturierte Daten JSON-parsebar.
-- Sitemap/robots: Production freigegeben und vollständig; Preview gesperrt und Sitemap leer.
+- Sitemap/robots: Production freigegeben und vollständig; lokale oder nichtproduktive Builds gesperrt und Sitemap leer.
 - 404: echter HTTP-Status 404.
 - Redirects: Apex und HTTP werden durch die IONOS-`.htaccess` dauerhaft auf `https://www.msb-ai.de` geführt.
-- Security: CSP, Referrer-Policy, `nosniff`, Frame-Schutz und Permissions-Policy per lokalem Production-HTTP-Test bestätigt; Preview zusätzlich mit `X-Robots-Tag`.
+- Security: CSP, Referrer-Policy, `nosniff`, Frame-Schutz und Permissions-Policy per lokalem Production-HTTP-Test bestätigt; IONOS-Preview-Host zusätzlich mit `X-Robots-Tag`.
 - Initiales HTML: kein Google-Tag-Script und keine GA-Mess-ID enthalten.
 - Consent-Code: keine GA-Ladung bei fehlender oder negativer Einwilligung; Production-Gate, Widerruf und Cookie-Löschung implementiert.
 - Accessibility-Codeprüfung: Skip-Link, semantische Banner-/Dialogtitel, Fokusfalle, Escape, Fokus-Rückgabe, Inert-Hintergrund und mindestens 44-Pixel-Aktionen vorhanden.

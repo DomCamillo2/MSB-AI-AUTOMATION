@@ -140,10 +140,10 @@ export default function HomePage() {
           <Reveal className="section-heading heading-split">
             <div>
               <p className="eyebrow">Über uns</p>
-              <h2 id="team-heading">Drei Perspektiven. Ein gemeinsamer Prozess.</h2>
+              <h2 id="team-heading">Wer hinter MSB steckt</h2>
             </div>
             <div className="section-heading-action">
-              <p>Wir verbinden Prozessverständnis, technische Umsetzung und Nutzerakzeptanz.</p>
+              <p>Drei Schwerpunkte: Prozesse verstehen, Workflows bauen, Nutzung im Team absichern.</p>
               <a className="text-link" href="/ueber-uns">Team und Erfahrung <span aria-hidden="true">→</span></a>
             </div>
           </Reveal>

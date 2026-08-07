@@ -8,9 +8,9 @@ const experienceContexts = [
     experience: 'Projektmanagement, Customer Experience und Datenanalyse'
   },
   {
-    area: 'Industrie & Automotive',
-    organizations: 'Siemens · BMW Group',
-    experience: 'Datenanalyse, Prozessoptimierung und praktische Umsetzung'
+    area: 'Industrie & Software',
+    organizations: 'Onventis · Siemens · BMW Group',
+    experience: 'Power Platform, AI-gestützte Automatisierung, Data Science und Prozessoptimierung'
   },
   {
     area: 'Automotive & Energie',

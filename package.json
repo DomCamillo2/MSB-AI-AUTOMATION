@@ -5,15 +5,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "NEXT_PUBLIC_SITE_ENV=production next build",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "node --experimental-strip-types --test src/lib/*.test.mts"
   },
   "dependencies": {
     "motion": "^12.42.2",
-    "next": "^15.5.18",
+    "next": "^15.5.23",
     "react": "18.3.1",
     "react-dom": "18.3.1"
   },
@@ -22,7 +21,7 @@
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
     "eslint": "^8.57.1",
-    "eslint-config-next": "14.2.30",
+    "eslint-config-next": "^15.5.23",
     "typescript": "^5.8.3"
   }
 }

@@ -137,9 +137,9 @@ export const team = [
   {
     initials: 'LB',
     name: 'Luca Bouché',
-    role: 'Data & Process Automation',
-    text: 'Verbindet psychologische Methoden mit Python, R, Datenanalyse und praktischer Prozessoptimierung.',
-    context: 'Siemens · BMW Group',
+    role: 'Power Platform, AI & Process Automation',
+    text: 'Verbindet Cognitive Science (M.Sc., Universität Tübingen) mit Power Platform, Data Science, Machine Learning und praxisnaher Prozessautomatisierung.',
+    context: 'Onventis · Siemens · BMW Group',
     linkedin: 'https://www.linkedin.com/in/luca-bouche-215a1225a/',
     image: null,
     imageAlt: ''

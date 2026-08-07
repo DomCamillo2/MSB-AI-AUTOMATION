@@ -1,10 +1,11 @@
 import type { MetadataRoute } from 'next';
 import { siteUrl } from '@/lib/seo';
+import { isProductionSite } from '@/lib/site-env';
 
 export const dynamic = 'force-static';
 
 export default function robots(): MetadataRoute.Robots {
-  if (process.env.VERCEL_ENV === 'preview') {
+  if (!isProductionSite) {
     return {
       rules: {
         userAgent: '*',

@@ -23,12 +23,14 @@ const structuredData = {
       alternateName: ['MSB AI', 'MSB AI & Automation'],
       logo: `${siteUrl}/msb-logo-lockup.png`,
       email: 'kontakt@msb-ai.de',
+      telephone: '+491606969914',
       description: defaultDescription,
       slogan: 'Automatisierung mit Menschenverstand',
       contactPoint: {
         '@type': 'ContactPoint',
         contactType: 'Beratung und Projektanfragen',
         email: 'kontakt@msb-ai.de',
+        telephone: '+491606969914',
         availableLanguage: ['de', 'en'],
         areaServed: 'DE'
       },

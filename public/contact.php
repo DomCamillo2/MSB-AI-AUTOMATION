@@ -160,7 +160,7 @@ function load_config(): array
 
 function escape_html(string $value): string
 {
-    return nl2br(htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'));
+    return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
