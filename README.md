@@ -28,6 +28,8 @@ GitHub Actions builds the static site and uploads it to IONOS Webhosting. The co
 
 For Google indexing, see [docs/google-search-console.md](docs/google-search-console.md). Production sitemap: `https://www.msb-ai.de/sitemap.xml`.
 
+Pull requests run the CI workflow (tests, lint, typecheck, PHP syntax, production build). Deployment to IONOS runs only after merge to `main`.
+
 ## Brand
 
 The site uses the MSB AI & Automation color system:
