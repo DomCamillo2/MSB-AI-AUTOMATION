@@ -4,15 +4,17 @@ type PageCtaProps = {
   title?: string;
   text?: string;
   buttonLabel?: string;
+  compact?: boolean;
 };
 
 export function PageCta({
   title = 'Welcher Prozess kostet Ihr Team regelmäßig Zeit?',
   text = 'Im Automation Check betrachten wir einen konkreten Ablauf und ordnen Nutzen, Aufwand und Risiken ein.',
-  buttonLabel = 'Prozess kostenlos prüfen lassen'
+  buttonLabel = 'Prozess kostenlos prüfen lassen',
+  compact = false
 }: PageCtaProps) {
   return (
-    <section className="page-cta-band" aria-labelledby="page-cta-heading">
+    <section className={`page-cta-band${compact ? ' page-cta-band--compact' : ''}`} aria-labelledby="page-cta-heading">
       <Reveal className="container page-cta-layout">
         <div>
           <p className="eyebrow eyebrow-light">Nächster Schritt</p>
