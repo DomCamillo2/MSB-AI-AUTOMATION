@@ -48,7 +48,7 @@ Die sechs Leistungsbereiche und sechs detaillierten Anwendungsfälle besitzen je
 | `FAQPage` | `/vorgehen` | sichtbare Fragen und Antworten | JSON parsebar, Build erfolgreich |
 | `FAQPage` | `/automation-check` | sichtbare Fragen und Antworten | JSON parsebar, Build erfolgreich |
 
-Es wurden keine Bewertungen, Öffnungszeiten, Kundenreferenzen, Preise oder nicht bestätigten Profile erfunden. KPMG, Siemens, BMW Group, prognum Automotive und Callidus Energie bleiben ausschließlich als berufliche Kontexte einzelner Teammitglieder gekennzeichnet und werden nicht als MSB-Kunden strukturiert.
+Es wurden keine Bewertungen, Öffnungszeiten, Kundenreferenzen, Preise oder nicht bestätigten Profile erfunden. KPMG, Onventis, Siemens, BMW Group, prognum Automotive und Callidus Energie bleiben ausschließlich als berufliche Kontexte einzelner Teammitglieder gekennzeichnet und werden nicht als MSB-Kunden strukturiert.
 
 Nach dem Deployment sollten die relevanten URLs zusätzlich mit dem Google Rich Results Test und dem Schema.org Validator geprüft werden.
 
