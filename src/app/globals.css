@@ -1149,7 +1149,7 @@ textarea:focus-visible,
 .page-intro h1 {
   max-width: 17ch;
   font-size: clamp(2.8rem, 4.5vw, 3.9rem);
-  line-height: 1.04;
+  line-height: 1.12;
   text-wrap: wrap;
 }
 
