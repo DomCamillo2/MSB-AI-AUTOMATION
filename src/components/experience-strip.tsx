@@ -29,7 +29,8 @@ export function ExperienceStrip() {
             Erfahrung aus realen Unternehmens&shy;kontexten
           </h2>
           <p className={styles.introText}>
-            Unser Team bringt praktische Erfahrung aus Automotive, Industrie, Energie und Professional Services mit.
+            Unser Team bringt praktische Erfahrung aus Software, Automotive, Industrie, Energie und Professional
+            Services mit.
           </p>
         </div>
 

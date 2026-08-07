@@ -29,6 +29,7 @@ export function TeamGrid({ compact = false }: TeamGridProps) {
           <div className="team-card-body">
             <h3>{member.name}</h3>
             <p className="team-role">{member.role}</p>
+            {'detail' in member && member.detail ? <p className="team-detail">{member.detail}</p> : null}
             <p>{member.text}</p>
             <p className="team-context">{member.context}</p>
             <a

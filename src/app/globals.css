@@ -2356,7 +2356,7 @@ textarea:focus-visible,
   padding: 1.6rem;
 }
 
-.team-card-body > p:not(.team-role, .team-context) {
+.team-card-body > p:not(.team-role, .team-detail, .team-context) {
   margin-top: 1.05rem;
   color: #3e4a50;
 }
@@ -2425,6 +2425,14 @@ textarea:focus-visible,
   color: var(--teal);
   font-size: 0.82rem;
   font-weight: 700;
+}
+
+.team-detail {
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 .team-card > p:not(.team-context) {
