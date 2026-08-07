@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
+import { isProductionSite } from '@/lib/site-env';
 
 export const siteName = 'MSB AI & Automation';
 export const siteUrl = 'https://www.msb-ai.de';
 export const defaultDescription =
   'Kontrollierte KI- und Prozessautomatisierung für KMU in der Region Tübingen–Stuttgart – passend zu bestehenden Systemen und Arbeitsabläufen.';
 
-const allowIndexing = process.env.VERCEL_ENV !== 'preview';
+const allowIndexing = isProductionSite;
 
 type PageMetadataOptions = {
   title: string;

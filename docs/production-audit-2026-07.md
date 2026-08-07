@@ -8,8 +8,8 @@ Dieser Bericht beschreibt die technisch umgesetzte Konfiguration. Er ist keine R
 
 - Kanonischer Ursprung: `https://www.msb-ai.de`. Der Apex-Host `https://msb-ai.de` wird über die IONOS-Webspace-Konfiguration dauerhaft auf `www` weitergeleitet. `www` bleibt deshalb der einheitliche Canonical.
 - HTTP sowie alternative öffentliche Hostvarianten leiten auf HTTPS und den Canonical-Host weiter.
-- Produktionsseiten sind indexierbar. Nichtproduktive Builds können weiterhin über die vorhandenen Umgebungs-Gates mit `noindex` und einer leeren Sitemap erzeugt werden.
-- Canonicals werden nie aus der jeweiligen Preview-URL gebildet.
+- Produktionsseiten sind indexierbar. Nichtproduktive Builds setzen über `NEXT_PUBLIC_SITE_ENV` `noindex` und eine leere Sitemap. Der IONOS-Preview-Host (`*.online.de`) setzt zusätzlich per `.htaccess` `X-Robots-Tag: noindex, nofollow`.
+- Canonicals werden nie aus Preview- oder Entwicklungs-URLs gebildet.
 - Die Produktions-Sitemap enthält ausschließlich die 20 indexierbaren Seiten und liegt unter `https://www.msb-ai.de/sitemap.xml`.
 - Unbekannte URLs liefern einen echten HTTP-404-Status; es gibt keinen pauschalen Homepage-Redirect.
 
@@ -126,10 +126,10 @@ Weiter menschlich beziehungsweise juristisch zu klären: genauer Beginn der geme
 - Production-Build: bestanden; 31 statische Routen erzeugt.
 - Deployment: Der IONOS-Produktionsbuild wird nach Pushes auf `main` geprüft, statisch exportiert und per SFTP in den Webspace übertragen; der PHP-Endpunkt wird im Workflow syntaktisch validiert.
 - HTML: ein H1 auf der Startseite, Canonical auf dem Production-Host, strukturierte Daten JSON-parsebar.
-- Sitemap/robots: Production freigegeben und vollständig; Preview gesperrt und Sitemap leer.
+- Sitemap/robots: Production freigegeben und vollständig; lokale oder nichtproduktive Builds gesperrt und Sitemap leer.
 - 404: echter HTTP-Status 404.
 - Redirects: Apex und HTTP werden durch die IONOS-`.htaccess` dauerhaft auf `https://www.msb-ai.de` geführt.
-- Security: CSP, Referrer-Policy, `nosniff`, Frame-Schutz und Permissions-Policy per lokalem Production-HTTP-Test bestätigt; Preview zusätzlich mit `X-Robots-Tag`.
+- Security: CSP, Referrer-Policy, `nosniff`, Frame-Schutz und Permissions-Policy per lokalem Production-HTTP-Test bestätigt; IONOS-Preview-Host zusätzlich mit `X-Robots-Tag`.
 - Initiales HTML: kein Google-Tag-Script und keine GA-Mess-ID enthalten.
 - Consent-Code: keine GA-Ladung bei fehlender oder negativer Einwilligung; Production-Gate, Widerruf und Cookie-Löschung implementiert.
 - Accessibility-Codeprüfung: Skip-Link, semantische Banner-/Dialogtitel, Fokusfalle, Escape, Fokus-Rückgabe, Inert-Hintergrund und mindestens 44-Pixel-Aktionen vorhanden.

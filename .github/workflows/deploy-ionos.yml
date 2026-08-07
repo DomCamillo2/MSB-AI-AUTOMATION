@@ -92,9 +92,6 @@ jobs:
 
       - name: Build static IONOS export
         run: npm run build
-        env:
-          DEPLOY_TARGET: ionos
-          NEXT_PUBLIC_SITE_ENV: production
 
       - name: Create private contact configuration
         run: node scripts/create-contact-config.mjs
