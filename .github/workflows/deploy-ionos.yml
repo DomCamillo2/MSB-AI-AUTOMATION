@@ -68,8 +68,7 @@ jobs:
       - name: Audit production dependencies
         continue-on-error: true
         run: |
-          # Remaining highs are tied to Next.js 15 transitive postcss/sharp;
-          # a full clean needs Next 16 and is out of scope for this change.
+          # Known transitive highs: see docs/dependency-audit-exceptions.md
           npm audit --omit=dev --audit-level=high
 
       - name: Run tests
