@@ -115,6 +115,14 @@
   font-weight: 800;
 }
 
+.startMethodNote {
+  max-width: 52ch;
+  margin: 0;
+  color: #647177;
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
 .startFacts {
   max-width: 560px;
   display: grid;
