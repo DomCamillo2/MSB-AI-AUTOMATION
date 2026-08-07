@@ -2788,10 +2788,11 @@ textarea[aria-invalid='true'] {
 }
 
 .footer-navigation a,
-.footer-email {
+.footer-contact-link {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
+  gap: 0.55rem;
   color: #d9e1e6;
   font-size: 0.88rem;
   transition: color var(--motion-micro) ease;
@@ -2799,9 +2800,14 @@ textarea[aria-invalid='true'] {
 
 .footer-navigation a:hover,
 .footer-navigation a:focus-visible,
-.footer-email:hover,
-.footer-email:focus-visible {
+.footer-contact-link:hover,
+.footer-contact-link:focus-visible {
   color: var(--white);
+}
+
+.footer-contact-link svg {
+  flex: 0 0 16px;
+  color: var(--teal);
 }
 
 .footer-contact {
@@ -2818,27 +2824,25 @@ textarea[aria-invalid='true'] {
   line-height: 1.4;
 }
 
-.footer-email {
-  margin-top: 0.35rem;
+.footer-contact-note {
+  max-width: 24rem;
+  margin-top: 0.55rem;
+  color: #b8c5cc;
+  font-size: 0.88rem;
+  line-height: 1.55;
 }
 
-.footer-cta {
-  width: fit-content;
-  margin-top: 1rem;
-  color: var(--navy);
-  background: var(--white);
-  border-color: var(--white);
+.footer-contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-.footer-cta:hover,
-.footer-cta:focus-visible {
-  color: var(--navy);
-  background: #e8f2f1;
-  border-color: #e8f2f1;
-}
-
-.footer-cta span {
-  margin-left: 0.45rem;
+.footer-contact-form {
+  margin-top: 0.85rem;
 }
 
 .footer-meta {
