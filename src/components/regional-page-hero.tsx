@@ -13,7 +13,10 @@ export function RegionalPageHero({ lead, aside }: RegionalPageHeroProps) {
       <div className={`container ${styles.grid}`}>
         <div className={styles.main}>
           <p className="eyebrow">Tübingen · Reutlingen · Stuttgart</p>
-          <h1 id="regional-page-heading">Prozess&shy;automatisierung für KMU in der Region.</h1>
+          <h1 id="regional-page-heading">
+            <span className={styles.titleLine}>Prozess&shy;automatisierung</span>
+            <span className={styles.titleLine}>für KMU in der Region.</span>
+          </h1>
           <ul className={styles.cities} aria-label="Regionale Schwerpunkte">
             {cities.map((city) => (
               <li key={city}>{city}</li>
