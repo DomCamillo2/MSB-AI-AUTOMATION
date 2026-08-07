@@ -1,5 +1,5 @@
-import PageCta from '@/components/page-cta';
 import RegionalCollaborationGrid from '@/components/regional-collaboration-grid';
+import RegionalPageClosing from '@/components/regional-page-closing';
 import RegionalPageHero from '@/components/regional-page-hero';
 import RegionalUseCasesPanel from '@/components/regional-use-cases-panel';
 import { Reveal } from '@/components/reveal';
@@ -44,23 +44,7 @@ export default function RegionalPage() {
         </div>
       </section>
 
-      <section className="regional-scope-band" aria-labelledby="regional-scope-heading">
-        <Reveal className="container regional-scope-layout">
-          <div>
-            <p className="eyebrow eyebrow-light">Leistungsgebiet</p>
-            <h2 id="regional-scope-heading">Regional verankert, bei Bedarf remote umsetzbar.</h2>
-          </div>
-          <div>
-            <p>Unser Sitz ist in Tübingen. Der regionale Schwerpunkt umfasst Tübingen, Reutlingen und Stuttgart; geeignete Projekte lassen sich darüber hinaus remote begleiten.</p>
-            <a className="text-link text-link-light" href="/leistungen">Leistungen ansehen <span aria-hidden="true">→</span></a>
-          </div>
-        </Reveal>
-      </section>
-
-      <PageCta
-        title="Welcher Ablauf soll in Ihrem Unternehmen verlässlicher werden?"
-        text="Im kostenlosen Automation Check betrachten wir einen konkreten Prozess – ohne Toolvorgabe und ohne Projektbindung."
-      />
+      <RegionalPageClosing />
     </main>
   );
 }
