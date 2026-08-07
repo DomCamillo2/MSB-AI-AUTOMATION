@@ -10,6 +10,7 @@ import {
   storeConsent,
   trackPageView
 } from '@/lib/analytics';
+import ConsentToggle from '@/components/consent-toggle';
 import styles from './consent-manager.module.css';
 
 const deniedConsent = {
@@ -198,17 +199,24 @@ export function ConsentManager({ analyticsEnabled }: ConsentManagerProps) {
             <p className={styles.dialogIntro}>Sie können Statistik erlauben oder ablehnen. Die Website bleibt in beiden Fällen vollständig nutzbar.</p>
 
             <div className={styles.category}>
-              <div><strong>Notwendig</strong><span>Immer aktiv</span></div>
+              <div className={styles.categoryHead}>
+                <strong>Notwendig</strong>
+                <span>Immer aktiv</span>
+              </div>
               <p>Speichert ausschließlich Ihre versionierte Einwilligungsentscheidung im Browser.</p>
             </div>
 
-            <label className={styles.category}>
-              <div>
+            <div className={styles.category}>
+              <div className={styles.categoryHead}>
                 <strong>Statistik</strong>
-                <input aria-label="Statistik erlauben" type="checkbox" checked={draftAnalytics} onChange={(event) => setDraftAnalytics(event.target.checked)} />
+                <ConsentToggle
+                  checked={draftAnalytics}
+                  label="Statistik erlauben"
+                  onChange={setDraftAnalytics}
+                />
               </div>
               <p>Google Analytics 4 von Google Ireland Limited mit der Mess-ID {GA_MEASUREMENT_ID}. Dabei können Daten auch durch Google LLC in den USA verarbeitet werden. Wir werten Seitenaufrufe und ausgewählte Interaktionen aus.</p>
-            </label>
+            </div>
 
             <p className={styles.privacyNote}>Keine Werbekategorie, keine vorausgewählte Statistik und keine Übermittlung von Formularinhalten. <a href="/datenschutz#google-analytics">Datenschutzerklärung lesen</a></p>
             <div className={styles.dialogActions}>
