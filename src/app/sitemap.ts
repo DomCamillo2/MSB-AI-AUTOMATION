@@ -1,22 +1,10 @@
 import type { MetadataRoute } from 'next';
 import { serviceCategories, useCaseDetails } from '@/lib/service-detail-content';
+import { indexableRoutes, sitemapPriority, toCanonicalSitemapUrl } from '@/lib/sitemap-routes';
 import { siteUrl } from '@/lib/seo';
 import { isProductionSite } from '@/lib/site-env';
 
 export const dynamic = 'force-static';
-
-const routes = [
-  '/',
-  '/leistungen',
-  '/anwendungsfaelle',
-  '/vorgehen',
-  '/ueber-uns',
-  '/automation-check',
-  '/kontakt',
-  '/ki-prozessautomatisierung-tuebingen-stuttgart',
-  '/impressum',
-  '/datenschutz'
-] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   if (!isProductionSite) return [];
@@ -26,5 +14,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...useCaseDetails.map(({ slug }) => `/anwendungsfaelle/${slug}`)
   ];
 
-  return [...routes, ...detailRoutes].map((path) => ({ url: `${siteUrl}${path}` }));
+  const lastModified = new Date();
+
+  return [...indexableRoutes, ...detailRoutes].map((path) => ({
+    url: toCanonicalSitemapUrl(siteUrl, path),
+    lastModified,
+    changeFrequency: 'monthly' as const,
+    priority: sitemapPriority(path)
+  }));
 }

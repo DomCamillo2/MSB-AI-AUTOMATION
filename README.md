@@ -26,6 +26,8 @@ The build output is written to `out/`. In CI, that folder is uploaded over SFTP 
 
 GitHub Actions builds the static site and uploads it to IONOS Webhosting. The contact endpoint runs as PHP on the same IONOS webspace and delivers messages through authenticated IONOS SMTP. Google Analytics is loaded only after explicit consent; fonts are bundled locally and there are no map, video, social-media, or third-party form embeds.
 
+For Google indexing, see [docs/google-search-console.md](docs/google-search-console.md). Production sitemap: `https://www.msb-ai.de/sitemap.xml`.
+
 ## Brand
 
 The site uses the MSB AI & Automation color system:
