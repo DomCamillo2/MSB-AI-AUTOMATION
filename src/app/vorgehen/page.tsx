@@ -8,7 +8,7 @@ import { engagementSteps, faqs, principles } from '@/lib/site-content';
 
 export const metadata = createPageMetadata({
   title: 'Automation Check, Pilot & Einführung',
-  description: 'So führt MSB Automatisierung ein: Prozess prüfen, begrenzten Pilot testen, Systeme kontrolliert anbinden und das Team befähigen.',
+  description: 'So führt MSB Automatisierung ein: Prozess prüfen, begrenzten Pilot testen, Systeme schrittweise anbinden und das Team befähigen.',
   path: '/vorgehen'
 });
 
@@ -30,7 +30,7 @@ export default function VorgehenPage() {
       <PageIntro
         eyebrow="Vorgehen"
         title="Klein starten. Wirkung prüfen. Sauber übergeben."
-        lead="Wir strukturieren das Vorhaben in überschaubare Schritte und machen Annahmen, Risiken und Ergebnisse nachvollziehbar."
+        lead="Wir strukturieren das Vorhaben in überschaubare Schritte und halten Annahmen, Risiken und Ergebnisse offen fest."
         aside="Ein Pilot ist kein Selbstzweck: Er soll zeigen, ob ein Workflow im konkreten Arbeitsalltag sinnvoll funktioniert."
       />
 
