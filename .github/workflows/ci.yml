@@ -74,8 +74,8 @@ jobs:
           test -f out/sitemap.xml
           test -f out/robots.txt
           url_count="$(grep -c '<loc>' out/sitemap.xml)"
-          if [[ "$url_count" -ne 20 ]]; then
-            echo "::error::Expected 20 sitemap URLs, found $url_count."
+          if [[ "$url_count" -ne 21 ]]; then
+            echo "::error::Expected 21 sitemap URLs, found $url_count."
             exit 1
           fi
           grep -q 'https://www.msb-ai.de/leistungen/' out/sitemap.xml
