@@ -17,17 +17,18 @@ type PageMetadataOptions = {
 
 export function createPageMetadata({ title, description, path, index = true }: PageMetadataOptions): Metadata {
   const socialTitle = `${title} | ${siteName}`;
+  const normalizedPath = path === '/' ? '/' : `${path}/`;
 
   return {
     title: path === '/' ? { absolute: socialTitle } : title,
     description,
     alternates: {
-      canonical: path
+      canonical: normalizedPath
     },
     openGraph: {
       type: 'website',
       locale: 'de_DE',
-      url: path,
+      url: normalizedPath,
       siteName,
       title: socialTitle,
       description,

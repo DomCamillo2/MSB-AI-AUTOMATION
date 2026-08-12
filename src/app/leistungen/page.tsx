@@ -36,7 +36,7 @@ const serviceStructuredData = {
         '@type': 'Service',
         name: category.name,
         description: category.cardTeaser,
-        url: `${siteUrl}/leistungen/${category.slug}`
+        url: `${siteUrl}/leistungen/${category.slug}/`
       }
     }))
   }
@@ -148,7 +148,7 @@ export default function LeistungenPage() {
             <h1 id="services-page-heading">Wiederkehrende Prozesse automatisieren. Bestehende Systeme weiter nutzen.</h1>
             <p className={styles.heroLead}>MSB verbindet E-Mail, Excel, CRM, Dokumente und weitere Systeme zu nachvollziehbaren Workflows – mit festen Regeln, KI dort, wo sie hilft, und menschlicher Freigabe dort, wo sie nötig ist.</p>
             <div className={styles.heroActions}>
-              <a className="button button-primary" href="/automation-check">Prozess kostenlos prüfen lassen <span className="button-arrow" aria-hidden="true">→</span></a>
+              <a className="button button-primary" href="/automation-check/">Prozess kostenlos prüfen lassen <span className="button-arrow" aria-hidden="true">→</span></a>
               <a className="button button-secondary" href="#automatisierungsfelder">Anwendungsfelder ansehen</a>
             </div>
             <ul className={styles.heroSignals} aria-label="Grundsätze unserer Arbeit">
@@ -176,7 +176,7 @@ export default function LeistungenPage() {
           <div className={styles.areaGrid}>
             {serviceCategories.map((area) => (
               <Reveal key={area.slug}>
-                <a className={styles.areaCard} href={`/leistungen/${area.slug}`} aria-label={`${area.name}: Möglichkeiten ansehen`}>
+                <a className={styles.areaCard} href={`/leistungen/${area.slug}/`} aria-label={`${area.name}: Möglichkeiten ansehen`}>
                   <div className={styles.areaCardHead}>
                     <span className={styles.iconBox}><ServiceIcon className={styles.serviceIcon} name={area.icon} /></span>
                     <span className={styles.cardIndex}>{area.number}</span>
@@ -191,7 +191,7 @@ export default function LeistungenPage() {
               </Reveal>
             ))}
           </div>
-          <p className={styles.contextLink}><a className="text-link" href="/anwendungsfaelle">Weitere Anwendungsfälle für HR, Verwaltung und Reporting ansehen <span aria-hidden="true">→</span></a></p>
+          <p className={styles.contextLink}><a className="text-link" href="/anwendungsfaelle/">Weitere Anwendungsfälle für HR, Verwaltung und Reporting ansehen <span aria-hidden="true">→</span></a></p>
         </div>
       </section>
 
@@ -257,7 +257,7 @@ export default function LeistungenPage() {
           </div>
           <div className={styles.inlineCta}>
             <p><strong>Einen ähnlichen Ablauf im Unternehmen?</strong> Ein konkreter Prozess reicht als Ausgangspunkt.</p>
-            <a className="text-link" href="/automation-check">Mit einem Prozess starten <span aria-hidden="true">→</span></a>
+            <a className="text-link" href="/automation-check/">Mit einem Prozess starten <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </section>
@@ -345,7 +345,7 @@ export default function LeistungenPage() {
               <li>benötigte Systeme und Daten</li>
               <li>Risiken und nächste Empfehlung</li>
             </ul>
-            <a className="button button-light" href="/automation-check">Prozess kostenlos prüfen lassen <span className="button-arrow" aria-hidden="true">→</span></a>
+            <a className="button button-light" href="/automation-check/">Prozess kostenlos prüfen lassen <span className="button-arrow" aria-hidden="true">→</span></a>
             <small>Unverbindlich · konkret · ohne pauschale Automatisierungsversprechen</small>
           </div>
         </div>

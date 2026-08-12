@@ -1,8 +1,8 @@
 export const navigation = [
-  { label: 'Leistungen', href: '/leistungen' },
-  { label: 'Anwendungsfälle', href: '/anwendungsfaelle' },
-  { label: 'Vorgehen', href: '/vorgehen' },
-  { label: 'Über uns', href: '/ueber-uns' }
+  { label: 'Leistungen', href: '/leistungen/' },
+  { label: 'Anwendungsfälle', href: '/anwendungsfaelle/' },
+  { label: 'Vorgehen', href: '/vorgehen/' },
+  { label: 'Über uns', href: '/ueber-uns/' }
 ] as const;
 
 export const problems = [

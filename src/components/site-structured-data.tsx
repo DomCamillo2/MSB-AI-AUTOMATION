@@ -74,10 +74,10 @@ const structuredData = {
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
-            '@id': `${siteUrl}/leistungen/${category.slug}#service`,
+            '@id': `${siteUrl}/leistungen/${category.slug}/#service`,
             name: category.name,
             description: category.cardTeaser,
-            url: `${siteUrl}/leistungen/${category.slug}`,
+            url: `${siteUrl}/leistungen/${category.slug}/`,
             serviceType: category.name,
             audience: {
               '@type': 'BusinessAudience',

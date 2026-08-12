@@ -31,7 +31,7 @@ export default function SicherheitPage() {
           <p>
             Bitte melden Sie Schwachstellen vertraulich per E-Mail an{' '}
             <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a>. Alternativ können Sie das{' '}
-            <a href="/kontakt">Kontaktformular</a> verwenden und im Betreff deutlich auf einen Sicherheitshinweis verweisen.
+            <a href="/kontakt/">Kontaktformular</a> verwenden und im Betreff deutlich auf einen Sicherheitshinweis verweisen.
           </p>
           <p>Hilfreich sind insbesondere:</p>
           <ul>

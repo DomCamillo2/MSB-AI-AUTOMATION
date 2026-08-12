@@ -198,7 +198,7 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
           />
           <span>Ich bestätige die Kenntnisnahme.</span>
         </label>
-        <a className={styles.privacyLink} href="/datenschutz">Datenschutzhinweise öffnen</a>
+        <a className={styles.privacyLink} href="/datenschutz/">Datenschutzhinweise öffnen</a>
       </div>
       <p className={styles.privacyNote} id="check-privacy-note">Bitte prüfen Sie Ihre Angaben und entfernen Sie vertrauliche Informationen, bevor Sie die Anfrage senden.</p>
       {privacyError && <p className={styles.fieldError} id="check-privacy-error">{privacyError}</p>}

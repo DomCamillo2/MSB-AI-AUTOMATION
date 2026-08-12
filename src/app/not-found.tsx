@@ -16,7 +16,7 @@ export default function NotFound() {
           <p>Vielleicht wurde die Adresse geändert. Über die Startseite finden Sie Leistungen, Anwendungsfälle und den Automation Check.</p>
           <div className="not-found-actions">
             <a className="button button-primary" href="/">Zur Startseite <span className="button-arrow" aria-hidden="true">→</span></a>
-            <a className="text-link" href="/automation-check">Prozess prüfen lassen <span aria-hidden="true">→</span></a>
+            <a className="text-link" href="/automation-check/">Prozess prüfen lassen <span aria-hidden="true">→</span></a>
           </div>
         </Reveal>
       </section>

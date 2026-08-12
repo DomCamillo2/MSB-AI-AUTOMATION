@@ -50,7 +50,7 @@ export default function ImpressumPage() {
             Telefon:{' '}
             <a href="tel:+491606969914">0160&nbsp;6969914</a>
           </p>
-          <p>Direkte Kontaktaufnahme: <a href="/kontakt">Kontaktformular öffnen</a></p>
+          <p>Direkte Kontaktaufnahme: <a href="/kontakt/">Kontaktformular öffnen</a></p>
           <p>Website: <a href="https://www.msb-ai.de">www.msb-ai.de</a></p>
         </section>
 

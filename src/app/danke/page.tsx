@@ -34,7 +34,7 @@ export default function DankePage() {
             <a className="button button-primary" href="/">
               Zur Startseite <span className="button-arrow" aria-hidden="true">→</span>
             </a>
-            <a className="text-link" href="/vorgehen">
+            <a className="text-link" href="/vorgehen/">
               So arbeiten wir <span aria-hidden="true">→</span>
             </a>
           </div>

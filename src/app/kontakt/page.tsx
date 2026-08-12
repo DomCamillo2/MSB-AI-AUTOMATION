@@ -15,7 +15,7 @@ const contactOptions = [
     label: 'Konkreten Prozess prüfen',
     title: 'Kostenloser Automation Check',
     text: 'Beschreiben Sie einen wiederkehrenden Ablauf. Wir ordnen Nutzen, Machbarkeit und Risiken in einem ersten Gespräch ein.',
-    href: '/automation-check',
+    href: '/automation-check/',
     action: 'Automation Check starten'
   },
   {
@@ -87,7 +87,7 @@ export default function KontaktPage() {
           </div>
           <div>
             <p>Wie regionale Zusammenarbeit und kontrollierte Automatisierung bei MSB zusammenpassen, erläutern wir auf einer einzigen, gebündelten Regionalseite.</p>
-            <a className="text-link text-link-light" href="/ki-prozessautomatisierung-tuebingen-stuttgart">
+            <a className="text-link text-link-light" href="/ki-prozessautomatisierung-tuebingen-stuttgart/">
               Regionale Zusammenarbeit ansehen <span aria-hidden="true">→</span>
             </a>
           </div>

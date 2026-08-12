@@ -208,7 +208,7 @@ export function ContactForm() {
         </label>
         {errors.privacy ? <p className="form-error" id="privacy-error">{errors.privacy}</p> : null}
       </div>
-      <a className="privacy-link" href="/datenschutz">Datenschutzerklärung lesen</a>
+      <a className="privacy-link" href="/datenschutz/">Datenschutzerklärung lesen</a>
 
       <button className="button button-primary form-submit" type="submit" disabled={isSubmitting}>
         {isSubmitting ? 'Anfrage wird gesendet …' : 'Prozess kostenlos prüfen lassen'}

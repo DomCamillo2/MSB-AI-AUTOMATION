@@ -21,7 +21,7 @@ export function PageCta({
           <h2 id="page-cta-heading">{title}</h2>
           <p>{text}</p>
         </div>
-        <a className="button button-light" href="/automation-check">
+        <a className="button button-light" href="/automation-check/">
           {buttonLabel} <span className="button-arrow" aria-hidden="true">→</span>
         </a>
       </Reveal>

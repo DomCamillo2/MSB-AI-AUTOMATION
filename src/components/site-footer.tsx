@@ -24,14 +24,16 @@ function PhoneIcon() {
 export function SiteFooter() {
   const pathname = usePathname();
 
-  if (pathname === '/automation-check') {
+  const normalizedPathname = pathname !== '/' && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+
+  if (normalizedPathname === '/automation-check') {
     return (
       <footer className="site-footer automation-check-footer">
         <div className="container footer-meta">
           <p>MSB AI &amp; Automation · Erste Orientierung, keine vollständige Prozessanalyse</p>
           <nav className="footer-links" aria-label="Rechtliches">
-            <a href="/impressum">Impressum</a>
-            <a href="/datenschutz">Datenschutz</a>
+            <a href="/impressum/">Impressum</a>
+            <a href="/datenschutz/">Datenschutz</a>
             <ConsentSettingsButton />
           </nav>
         </div>
@@ -45,7 +47,7 @@ export function SiteFooter() {
         <div className="footer-intro">
           <strong className="footer-brand">MSB AI &amp; Automation</strong>
           <p>Wiederkehrende Abläufe in Verwaltung, HR und Reporting automatisieren – mit festen Regeln, klaren Freigaben und Ihrer bestehenden IT.</p>
-          <a className="footer-region" href="/ki-prozessautomatisierung-tuebingen-stuttgart">
+          <a className="footer-region" href="/ki-prozessautomatisierung-tuebingen-stuttgart/">
             Tübingen · Reutlingen · Stuttgart
           </a>
         </div>
@@ -79,7 +81,7 @@ export function SiteFooter() {
               </a>
             </li>
           </ul>
-          <a className="text-link text-link-light footer-contact-form" href="/kontakt">
+          <a className="text-link text-link-light footer-contact-form" href="/kontakt/">
             Zum Kontaktformular <span aria-hidden="true">→</span>
           </a>
         </div>
@@ -88,10 +90,10 @@ export function SiteFooter() {
       <div className="container footer-meta">
         <p>MSB AI &amp; Automation</p>
         <nav className="footer-links" aria-label="Rechtliches">
-          <a href="/kontakt">Kontakt</a>
-          <a href="/impressum">Impressum</a>
-          <a href="/datenschutz">Datenschutz</a>
-          <a href="/sicherheit">Sicherheit</a>
+          <a href="/kontakt/">Kontakt</a>
+          <a href="/impressum/">Impressum</a>
+          <a href="/datenschutz/">Datenschutz</a>
+          <a href="/sicherheit/">Sicherheit</a>
           <ConsentSettingsButton />
         </nav>
       </div>
