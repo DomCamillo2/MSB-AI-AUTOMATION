@@ -104,20 +104,20 @@ const projectSteps = [
     number: '03',
     title: 'Integration',
     text: 'Wir verbinden freigegebene Systeme, richten Berechtigungen, Protokollierung und definierte Eingriffspunkte ein.',
-    result: 'Kontrollierte Integration mit dokumentierten Datenflüssen'
+    result: 'Abgestimmte Integration mit dokumentierten Datenflüssen'
   },
   {
     number: '04',
     title: 'Übergabe & Betrieb',
     text: 'Wir schulen Beteiligte, dokumentieren den Ablauf und regeln Verantwortung für Prüfung, Fehler und spätere Änderungen.',
-    result: 'Nachvollziehbare Übergabe; Betreuung nach Vereinbarung'
+    result: 'Dokumentierte Übergabe; Betreuung nach Vereinbarung'
   }
 ] as const;
 
 const expectations = [
   'Ein klares Bild des heutigen Ablaufs',
   'Eine begründete Automatisierungsentscheidung',
-  'Nachvollziehbare Architektur statt Blackbox',
+  'Verständliche Architektur statt Blackbox',
   'Definierte Test- und Erfolgskriterien',
   'Dokumentierte Rollen, Datenflüsse und Ausnahmen',
   'Einbindung der Personen, die später damit arbeiten'
@@ -146,7 +146,7 @@ export default function LeistungenPage() {
           <div className={styles.heroCopy}>
             <p className="eyebrow">Leistungen · Prozessautomatisierung für KMU</p>
             <h1 id="services-page-heading">Wiederkehrende Prozesse automatisieren. Bestehende Systeme weiter nutzen.</h1>
-            <p className={styles.heroLead}>MSB verbindet E-Mail, Excel, CRM, Dokumente und weitere Systeme zu nachvollziehbaren Workflows – mit festen Regeln, KI dort, wo sie hilft, und menschlicher Freigabe dort, wo sie nötig ist.</p>
+            <p className={styles.heroLead}>MSB verbindet E-Mail, Excel, CRM, Dokumente und weitere Systeme zu klaren Workflows – mit festen Regeln, KI dort, wo sie hilft, und menschlicher Freigabe dort, wo sie nötig ist.</p>
             <div className={styles.heroActions}>
               <a className="button button-primary" href="/automation-check/">Prozess kostenlos prüfen lassen <span className="button-arrow" aria-hidden="true">→</span></a>
               <a className="button button-secondary" href="#automatisierungsfelder">Anwendungsfelder ansehen</a>
@@ -292,7 +292,7 @@ export default function LeistungenPage() {
           <Reveal>
             <div className={styles.trustTitle}>
               <p className="eyebrow">Realistische Erwartungen</p>
-              <h2 id="trust-heading">Pragmatisch im Aufbau. Transparent in den Grenzen.</h2>
+              <h2 id="trust-heading">Realistisch im Aufbau. Transparent in den Grenzen.</h2>
             </div>
           </Reveal>
           <div className={styles.trustGrid}>
@@ -325,7 +325,7 @@ export default function LeistungenPage() {
             <div><dt>Zugriff</dt><dd>Berechtigungen und Verantwortlichkeiten werden pro Workflow festgelegt.</dd></div>
             <div><dt>Daten</dt><dd>Es werden nur die Informationen verarbeitet, die der Ablauf benötigt.</dd></div>
             <div><dt>Betrieb</dt><dd>Fehlerwege, Protokollierung und Eingriffspunkte werden mitgeplant.</dd></div>
-            <div><dt>Dokumentation</dt><dd>Datenflüsse, Systeme und Freigaben bleiben nachvollziehbar.</dd></div>
+            <div><dt>Dokumentation</dt><dd>Datenflüsse, Systeme und Freigaben werden verständlich festgehalten.</dd></div>
           </dl>
         </div>
       </section>

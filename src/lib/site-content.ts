@@ -29,11 +29,11 @@ export const services = [
   {
     title: 'Workflow-Automatisierung',
     text: 'Abgegrenzte Automatisierungen entwickeln, die zur vorhandenen IT und den Arbeitsabläufen passen.',
-    detail: 'Schnittstellen, Regeln und Ausnahmen werden nachvollziehbar umgesetzt und in einem Pilot geprüft.'
+    detail: 'Schnittstellen, Regeln und Ausnahmen werden schrittweise umgesetzt und in einem Pilot geprüft.'
   },
   {
     title: 'Einführung und Befähigung',
-    text: 'Mitarbeitende einbeziehen, Abläufe dokumentieren und Lösungen kontrolliert in den Alltag übergeben.',
+    text: 'Mitarbeitende einbeziehen, Abläufe dokumentieren und Lösungen schrittweise in den Alltag übergeben.',
     detail: 'Schulung, Feedback und klare Verantwortlichkeiten schaffen die Grundlage für eine verlässliche Nutzung.'
   }
 ] as const;
@@ -56,7 +56,7 @@ export const useCases = [
       ['Ausgangslage', 'Anfragen und Stammdaten werden manuell aus Postfächern oder Formularen übertragen.'],
       ['Möglicher Workflow', 'Ein definierter Eingang legt Datensätze und Aufgaben an und prüft Pflichtangaben.'],
       ['Menschliche Kontrolle', 'Verantwortliche bearbeiten Ausnahmen und bestätigen sensible Änderungen.'],
-      ['Betrieblicher Nutzen', 'Medienbrüche sinken und der Bearbeitungsstand bleibt nachvollziehbar.']
+      ['Betrieblicher Nutzen', 'Medienbrüche sinken und der Bearbeitungsstand ist jederzeit sichtbar.']
     ]
   },
   {
@@ -71,7 +71,7 @@ export const useCases = [
   },
   {
     category: 'Internes Wissen',
-    summary: 'Freigegebene Informationen schneller finden und nachvollziehbare Antwortentwürfe vorbereiten.',
+    summary: 'Freigegebene Informationen schneller finden und fundierte Antwortentwürfe vorbereiten.',
     details: [
       ['Ausgangslage', 'Wissen liegt verteilt in Köpfen, Ordnern und Chats.'],
       ['Möglicher Workflow', 'Freigegebene Dokumente werden auffindbar gemacht und für Antwortentwürfe genutzt.'],
@@ -92,11 +92,11 @@ export const engagementSteps = [
     title: 'Pilot umsetzen',
     text: 'Wir entwickeln einen abgegrenzten Workflow und testen ihn gemeinsam mit den späteren Nutzenden.',
     deliverable: 'Funktionsfähiger Pilot mit klaren Erfolgskriterien',
-    details: ['Pilotumfang und Erfolgskriterien abstimmen', 'Ausnahmen und Rückmeldungen nachvollziehbar erfassen']
+    details: ['Pilotumfang und Erfolgskriterien abstimmen', 'Ausnahmen und Rückmeldungen systematisch erfassen']
   },
   {
     title: 'In Systeme integrieren',
-    text: 'Nach einem erfolgreichen Test binden wir den Workflow kontrolliert an die abgestimmten Systeme und Freigaben an.',
+    text: 'Nach einem erfolgreichen Test binden wir den Workflow schrittweise an die abgestimmten Systeme und Freigaben an.',
     deliverable: 'Abgestimmte Integration mit dokumentierten Datenflüssen',
     details: ['Schnittstellen, Rollen und Freigaben dokumentieren', 'Ausnahmen und Verantwortlichkeiten für den Betrieb festlegen']
   },
@@ -112,7 +112,7 @@ export const principles = [
   ['Transparenz', 'Sie wissen, welche Systeme und externen Dienste eingesetzt werden.'],
   ['Datenminimierung', 'Der Workflow verarbeitet nur die erforderlichen Informationen.'],
   ['Menschliche Freigabe', 'Sensible Kommunikation und Entscheidungen bleiben kontrollierbar.'],
-  ['Dokumentation', 'Abläufe, Rollen und Abhängigkeiten werden nachvollziehbar festgehalten.']
+  ['Dokumentation', 'Abläufe, Rollen und Abhängigkeiten werden verständlich festgehalten.']
 ] as const;
 
 export const faqs = [

@@ -10,7 +10,7 @@ import { problems, services, useCases } from '@/lib/site-content';
 
 export const metadata = createPageMetadata({
   title: 'KI- & Prozessautomatisierung für KMU',
-  description: 'MSB automatisiert wiederkehrende Abläufe in Verwaltung, HR und Reporting – pragmatisch, kontrolliert und passend zur bestehenden IT.',
+  description: 'MSB automatisiert wiederkehrende Abläufe in Verwaltung, HR und Reporting – mit bestehender IT, klaren Regeln und menschlicher Freigabe.',
   path: '/'
 });
 

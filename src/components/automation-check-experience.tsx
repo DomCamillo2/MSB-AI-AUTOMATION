@@ -481,7 +481,7 @@ export function AutomationCheckExperience() {
             <div>
               <p className="eyebrow">Automation Check</p>
               <h1 id="automation-check-heading">Wie viel Automatisierungs&shy;potenzial steckt in Ihrem Prozess?</h1>
-              <p className={styles.startLead}>Beantworten Sie einige kurze Fragen zu einem wiederkehrenden Ablauf und erhalten Sie direkt eine erste, nachvollziehbare Einschätzung.</p>
+              <p className={styles.startLead}>Beantworten Sie einige kurze Fragen zu einem wiederkehrenden Ablauf und erhalten Sie direkt eine erste Einschätzung.</p>
               <div className={styles.startActions}>
                 <button className={styles.startButton} type="button" onClick={startCheck}>
                   <span className={styles.startButtonCopy}>
@@ -491,6 +491,7 @@ export function AutomationCheckExperience() {
                   <span className={styles.startButtonArrow} aria-hidden="true">→</span>
                 </button>
                 <p className={styles.startAssurance}><span aria-hidden="true">✓</span> Keine technischen Vorkenntnisse erforderlich.</p>
+                <p className={styles.startMethodNote}>Die Auswertung basiert auf festen Regeln und MSB-Erfahrungswerten – nicht auf einem KI-Modell. Sie dient der ersten Orientierung, nicht als verbindliche Beratung.</p>
               </div>
               <ul className={styles.startFacts} aria-label="Rahmen des Automation Checks">
                 <li><strong>ca. 90 Sek.</strong><span>Kurz und fokussiert</span></li>
