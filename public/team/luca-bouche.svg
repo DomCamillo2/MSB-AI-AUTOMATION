@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1254 1254" role="img" aria-labelledby="title desc">
+  <title id="title">Porträt von Luca Bouché</title>
+  <desc id="desc">Platzhalterporträt mit Initialen LB auf hellem Hintergrund.</desc>
+  <rect width="1254" height="1254" fill="#e7eeeb"/>
+  <circle cx="627" cy="540" r="220" fill="#dfe8e4" stroke="#a8c5c3" stroke-width="4"/>
+  <text
+    x="627"
+    y="580"
+    text-anchor="middle"
+    fill="#071b3a"
+    font-family="Poppins, Arial, sans-serif"
+    font-size="160"
+    font-weight="700"
+  >LB</text>
+</svg>

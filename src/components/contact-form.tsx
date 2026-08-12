@@ -28,9 +28,9 @@ export function ContactForm() {
   function trackStart() {
     if (startedRef.current) return;
     startedRef.current = true;
-    trackAnalyticsEvent('automation_check_start', {
-      cta_location: 'automation_check_form',
-      page_type: 'automation_check'
+    trackAnalyticsEvent('contact_form_start', {
+      cta_location: 'contact_form',
+      page_type: 'contact'
     });
   }
 
@@ -77,8 +77,8 @@ export function ContactForm() {
         startedAt: openedAtRef.current
       });
       trackAnalyticsEvent('contact_submit', {
-        cta_location: 'automation_check_form',
-        page_type: 'automation_check'
+        cta_location: 'contact_form',
+        page_type: 'contact'
       });
       router.push('/danke');
       return;

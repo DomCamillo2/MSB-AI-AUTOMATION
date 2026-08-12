@@ -24,23 +24,27 @@ export const services = [
   {
     title: 'Prozessanalyse',
     text: 'Wiederkehrende Abläufe, beteiligte Systeme, Daten und Freigaben strukturiert erfassen.',
-    detail: 'Das Ergebnis ist ein klares Prozessbild mit sinnvollen Ansatzpunkten, Abhängigkeiten und offenen Risiken.'
+    detail: 'Das Ergebnis ist ein klares Prozessbild mit sinnvollen Ansatzpunkten, Abhängigkeiten und offenen Risiken.',
+    href: '/automation-check/'
   },
   {
     title: 'Workflow-Automatisierung',
     text: 'Abgegrenzte Automatisierungen entwickeln, die zur vorhandenen IT und den Arbeitsabläufen passen.',
-    detail: 'Schnittstellen, Regeln und Ausnahmen werden nachvollziehbar umgesetzt und in einem Pilot geprüft.'
+    detail: 'Schnittstellen, Regeln und Ausnahmen werden nachvollziehbar umgesetzt und in einem Pilot geprüft.',
+    href: '/leistungen/'
   },
   {
     title: 'Einführung und Befähigung',
     text: 'Mitarbeitende einbeziehen, Abläufe dokumentieren und Lösungen kontrolliert in den Alltag übergeben.',
-    detail: 'Schulung, Feedback und klare Verantwortlichkeiten schaffen die Grundlage für eine verlässliche Nutzung.'
+    detail: 'Schulung, Feedback und klare Verantwortlichkeiten schaffen die Grundlage für eine verlässliche Nutzung.',
+    href: '/vorgehen/'
   }
 ] as const;
 
 export const useCases = [
   {
     category: 'HR und Recruiting',
+    href: '/anwendungsfaelle/bewerbervorauswahl/',
     summary: 'Informationen strukturieren, CRM-Daten vorbereiten und administrative Schritte koordinieren.',
     details: [
       ['Ausgangslage', 'Bewerberinformationen liegen in E-Mail, Kalender und Recruiting-System.'],
@@ -51,6 +55,7 @@ export const useCases = [
   },
   {
     category: 'Verwaltung und CRM',
+    href: '/anwendungsfaelle/email-zu-crm/',
     summary: 'Anfragen erfassen, Datensätze aktualisieren und Aufgaben automatisch zuordnen.',
     details: [
       ['Ausgangslage', 'Anfragen und Stammdaten werden manuell aus Postfächern oder Formularen übertragen.'],
@@ -61,6 +66,7 @@ export const useCases = [
   },
   {
     category: 'Reporting und Daten',
+    href: '/anwendungsfaelle/reporting-automatisieren/',
     summary: 'Daten zusammenführen, prüfen und wiederkehrende Berichtsentwürfe erstellen.',
     details: [
       ['Ausgangslage', 'Regelmäßige Berichte erfordern dieselben Exporte, Prüfungen und Formatierungen.'],
@@ -71,6 +77,7 @@ export const useCases = [
   },
   {
     category: 'Internes Wissen',
+    href: '/anwendungsfaelle/wissensassistent/',
     summary: 'Freigegebene Informationen schneller finden und nachvollziehbare Antwortentwürfe vorbereiten.',
     details: [
       ['Ausgangslage', 'Wissen liegt verteilt in Köpfen, Ordnern und Chats.'],
@@ -123,7 +130,18 @@ export const faqs = [
   ['Was passiert nach dem Pilotprojekt?', 'Nach dem Test bewerten wir die vereinbarten Kriterien und legen gemeinsam fest, ob der Ablauf angepasst, integriert oder beendet wird.']
 ] as const;
 
-export const team = [
+export type TeamMember = {
+  initials: string;
+  name: string;
+  role: string;
+  text: string;
+  context: string;
+  linkedin: string;
+  image: string | null;
+  imageAlt: string;
+};
+
+export const team: TeamMember[] = [
   {
     initials: 'DS',
     name: 'Dominik Soballa',
@@ -141,8 +159,8 @@ export const team = [
     text: 'Setzt Power Platform, Data Science und Machine Learning in praxisnahen Automatisierungsprojekten um – strukturiert, präzise und im Team.',
     context: 'Onventis · Siemens · BMW Group',
     linkedin: 'https://www.linkedin.com/in/luca-bouche-215a1225a/',
-    image: null,
-    imageAlt: ''
+    image: '/team/luca-bouche.svg',
+    imageAlt: 'Porträt von Luca Bouché'
   },
   {
     initials: 'EM',
@@ -154,4 +172,4 @@ export const team = [
     image: '/team/erik-mueller.png',
     imageAlt: 'Porträt von Erik Müller'
   }
-] as const;
+];
