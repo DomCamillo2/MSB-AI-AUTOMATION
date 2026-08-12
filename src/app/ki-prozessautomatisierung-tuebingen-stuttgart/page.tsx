@@ -45,7 +45,7 @@ export default function RegionalPage() {
             <p className="eyebrow">Typische Ausgangspunkte</p>
             <h2 id="regional-use-cases-heading">Nicht die Branche entscheidet, sondern der Ablauf.</h2>
             <p>Besonders prüfenswert sind wiederkehrende Informations- und Verwaltungsprozesse mit klaren Eingängen, Ergebnissen und Verantwortlichen.</p>
-            <a className="text-link" href="/anwendungsfaelle">Anwendungsfälle vergleichen <span aria-hidden="true">→</span></a>
+            <a className="text-link" href="/anwendungsfaelle/">Anwendungsfälle vergleichen <span aria-hidden="true">→</span></a>
           </Reveal>
           <RegionalUseCasesPanel />
         </div>
@@ -59,7 +59,7 @@ export default function RegionalPage() {
           </div>
           <div>
             <p>Unser Sitz ist in Tübingen. Der regionale Schwerpunkt umfasst Tübingen, Reutlingen und Stuttgart; geeignete Projekte lassen sich darüber hinaus remote begleiten.</p>
-            <a className="text-link" href="/leistungen">Leistungen ansehen <span aria-hidden="true">→</span></a>
+            <a className="text-link" href="/leistungen/">Leistungen ansehen <span aria-hidden="true">→</span></a>
           </div>
         </Reveal>
       </section>

@@ -9,8 +9,19 @@ type Props = {
   useCase: UseCaseDetail;
 };
 
+function normalizeInternalHref(href: string) {
+  if (href.startsWith('mailto:') || href.startsWith('tel:')) return href;
+  if (!href.startsWith('/')) return href;
+
+  const [path, hash] = href.split('#');
+  const normalizedPath =
+    path === '/' ? '/' : path.endsWith('/') ? path : `${path}/`;
+
+  return hash ? `${normalizedPath}#${hash}` : normalizedPath;
+}
+
 export function UseCaseDetailPage({ useCase }: Props) {
-  const pageUrl = `${siteUrl}/anwendungsfaelle/${useCase.slug}`;
+  const pageUrl = `${siteUrl}/anwendungsfaelle/${useCase.slug}/`;
   const breadcrumbLabel = useCase.metaTitle.replace(/ automatisieren$/i, '');
   const structuredData = {
     '@context': 'https://schema.org',
@@ -29,7 +40,7 @@ export function UseCaseDetailPage({ useCase }: Props) {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Startseite', item: siteUrl },
-          { '@type': 'ListItem', position: 2, name: 'Anwendungsfälle', item: `${siteUrl}/anwendungsfaelle` },
+          { '@type': 'ListItem', position: 2, name: 'Anwendungsfälle', item: `${siteUrl}/anwendungsfaelle/` },
           { '@type': 'ListItem', position: 3, name: useCase.title, item: pageUrl }
         ]
       }
@@ -42,7 +53,7 @@ export function UseCaseDetailPage({ useCase }: Props) {
       <nav className={styles.breadcrumb} aria-label="Brotkrümelnavigation">
         <ol className="container">
           <li><a href="/">Startseite</a></li>
-          <li><a href="/anwendungsfaelle">Anwendungsfälle</a></li>
+          <li><a href="/anwendungsfaelle/">Anwendungsfälle</a></li>
           <li aria-current="page" title={useCase.title}>{breadcrumbLabel}</li>
         </ol>
       </nav>
@@ -54,8 +65,8 @@ export function UseCaseDetailPage({ useCase }: Props) {
             <h1 id="use-case-heading">{useCase.title}</h1>
             <p className={styles.heroLead}>{useCase.lead}</p>
             <div className={styles.heroActions}>
-              <a className="button button-primary" href="/automation-check">{useCase.ctaLabel} <span className="button-arrow" aria-hidden="true">→</span></a>
-              <a className="button button-secondary" href={`/leistungen/${useCase.categorySlug}`}>{useCase.categoryName} ansehen</a>
+              <a className="button button-primary" href="/automation-check/">{useCase.ctaLabel} <span className="button-arrow" aria-hidden="true">→</span></a>
+              <a className="button button-secondary" href={`/leistungen/${useCase.categorySlug}/`}>{useCase.categoryName} ansehen</a>
             </div>
           </div>
           <aside className={styles.heroMarker} aria-label="Grundprinzip des Anwendungsfalls">
@@ -128,7 +139,15 @@ export function UseCaseDetailPage({ useCase }: Props) {
             <p>{useCase.outcome}</p>
           </div>
           <nav className={styles.related} aria-label="Verwandte Inhalte">
-            {useCase.related.map((item) => <a className={styles.relatedLink} href={item.href} key={item.href}>{item.label}<span aria-hidden="true">→</span></a>)}
+            {useCase.related.map((item) => (
+              <a
+                className={styles.relatedLink}
+                href={normalizeInternalHref(item.href)}
+                key={item.href}
+              >
+                {item.label}<span aria-hidden="true">→</span>
+              </a>
+            ))}
           </nav>
         </div>
       </section>

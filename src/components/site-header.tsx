@@ -120,11 +120,14 @@ export function SiteHeader() {
     if (!usesMenu && menuOpen) setMenuOpen(false);
   }, [menuOpen, usesMenu]);
 
+  const normalizePathname = (value: string) => (value !== '/' && value.endsWith('/') ? value.slice(0, -1) : value);
+  const normalizedPathname = normalizePathname(pathname);
+
   function closeMenu() {
     setMenuOpen(false);
   }
 
-  if (pathname === '/automation-check') return <AutomationCheckHeader />;
+  if (normalizedPathname === '/automation-check') return <AutomationCheckHeader />;
 
   return (
     <header
@@ -185,7 +188,7 @@ export function SiteHeader() {
             aria-hidden={usesMenu && !menuOpen ? true : undefined}
           >
             {navigation.map(({ label, href }) => {
-              const active = pathname === href || pathname.startsWith(`${href}/`);
+              const active = normalizedPathname === href.replace(/\/$/, '') || normalizedPathname.startsWith(`${href.replace(/\/$/, '')}/`);
               return (
                 <a
                   key={href}
@@ -201,7 +204,7 @@ export function SiteHeader() {
             })}
             <a
               className={styles.menuContact}
-              href="/kontakt"
+              href="/kontakt/"
               tabIndex={usesMenu && !menuOpen ? -1 : undefined}
               onClick={closeMenu}
             >
@@ -209,7 +212,7 @@ export function SiteHeader() {
             </a>
             <a
               className={styles.menuCta}
-              href="/automation-check"
+              href="/automation-check/"
               tabIndex={usesMenu && !menuOpen ? -1 : undefined}
               onClick={closeMenu}
             >
@@ -218,13 +221,17 @@ export function SiteHeader() {
           </nav>
 
           <div className={styles.actions}>
-            <a className={styles.contactLink} href="/kontakt" aria-current={pathname === '/kontakt' ? 'page' : undefined}>
+            <a
+              className={styles.contactLink}
+              href="/kontakt/"
+              aria-current={normalizedPathname === '/kontakt' ? 'page' : undefined}
+            >
               Kontakt
             </a>
             <a
               className={styles.cta}
-              href="/automation-check"
-              aria-current={pathname === '/automation-check' ? 'page' : undefined}
+              href="/automation-check/"
+              aria-current={normalizedPathname === '/automation-check' ? 'page' : undefined}
             >
               Automation Check
               <ArrowIcon />

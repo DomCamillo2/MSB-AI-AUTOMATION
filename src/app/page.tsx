@@ -76,7 +76,7 @@ export default function HomePage() {
             </div>
             <div className="section-heading-action">
               <p>Pragmatische Unterstützung für klar abgegrenzte Abläufe in Ihrer bestehenden Umgebung.</p>
-              <a className="text-link" href="/leistungen">Leistungen im Detail <span aria-hidden="true">→</span></a>
+              <a className="text-link" href="/leistungen/">Leistungen im Detail <span aria-hidden="true">→</span></a>
             </div>
           </Reveal>
           <RevealGroup className="service-preview-list" stagger="normal">
@@ -85,7 +85,7 @@ export default function HomePage() {
                 <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
                 <h3>{service.title}</h3>
                 <p>{service.text}</p>
-                <a className="service-preview-link" href="/leistungen" aria-label={`${service.title} im Leistungsüberblick ansehen`}>
+                <a className="service-preview-link" href="/leistungen/" aria-label={`${service.title} im Leistungsüberblick ansehen`}>
                   Mehr erfahren <span aria-hidden="true">→</span>
                 </a>
               </article>
@@ -100,11 +100,11 @@ export default function HomePage() {
             <p className="eyebrow">Anwendungsfälle</p>
             <h2 id="use-cases-heading">Typische Prozesse, mit denen wir starten</h2>
             <p>Keine Standardsoftware, sondern klar abgegrenzte Abläufe mit menschlicher Kontrolle.</p>
-            <a className="text-link" href="/anwendungsfaelle">Alle Anwendungsfälle ansehen <span aria-hidden="true">→</span></a>
+            <a className="text-link" href="/anwendungsfaelle/">Alle Anwendungsfälle ansehen <span aria-hidden="true">→</span></a>
           </Reveal>
           <RevealGroup className="use-case-preview-list" stagger="normal">
             {useCases.map((useCase) => (
-              <a key={useCase.category} href="/anwendungsfaelle">
+              <a key={useCase.category} href="/anwendungsfaelle/">
                 <strong>{useCase.category}</strong>
                 <span>{useCase.summary}</span>
                 <span className="preview-arrow" aria-hidden="true">→</span>
@@ -123,7 +123,7 @@ export default function HomePage() {
             </div>
             <div className="section-heading-action">
               <p>Wir beginnen mit einem konkreten Ablauf. Erst wenn der Pilot im Alltag funktioniert, binden wir Systeme an und bereiten die Übergabe vor.</p>
-              <a className="text-link" href="/vorgehen">Vorgehen im Detail <span aria-hidden="true">→</span></a>
+              <a className="text-link" href="/vorgehen/">Vorgehen im Detail <span aria-hidden="true">→</span></a>
             </div>
           </Reveal>
           <ProcessFlow
@@ -144,7 +144,7 @@ export default function HomePage() {
             </div>
             <div className="section-heading-action">
               <p>Drei Schwerpunkte: Prozesse verstehen, Workflows bauen, Nutzung im Team absichern.</p>
-              <a className="text-link" href="/ueber-uns">Team und Erfahrung <span aria-hidden="true">→</span></a>
+              <a className="text-link" href="/ueber-uns/">Team und Erfahrung <span aria-hidden="true">→</span></a>
             </div>
           </Reveal>
           <TeamGrid compact />

@@ -10,6 +10,12 @@ type PageBreadcrumbProps = {
   items: BreadcrumbItem[];
 };
 
+function normalizeHref(href: string) {
+  if (href === '/') return '/';
+  if (href.endsWith('/')) return href;
+  return `${href}/`;
+}
+
 export function PageBreadcrumb({ items }: PageBreadcrumbProps) {
   const structuredData = {
     '@context': 'https://schema.org',
@@ -18,7 +24,11 @@ export function PageBreadcrumb({ items }: PageBreadcrumbProps) {
       '@type': 'ListItem',
       position: index + 1,
       name: item.label,
-      ...(item.href ? { item: `${siteUrl}${item.href === '/' ? '' : item.href}` } : {})
+      ...(item.href
+        ? {
+            item: `${siteUrl}${normalizeHref(item.href)}`
+          }
+        : {})
     }))
   };
 
@@ -40,9 +50,10 @@ export function PageBreadcrumb({ items }: PageBreadcrumbProps) {
               );
             }
 
+            const href = normalizeHref(item.href);
             return (
               <li key={item.label}>
-                <a href={item.href}>{item.label}</a>
+                <a href={href}>{item.label}</a>
               </li>
             );
           })}

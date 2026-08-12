@@ -10,8 +10,19 @@ type Props = {
   category: ServiceCategory;
 };
 
+function normalizeInternalHref(href: string) {
+  if (href.startsWith('mailto:') || href.startsWith('tel:')) return href;
+  if (!href.startsWith('/')) return href;
+
+  const [path, hash] = href.split('#');
+  const normalizedPath =
+    path === '/' ? '/' : path.endsWith('/') ? path : `${path}/`;
+
+  return hash ? `${normalizedPath}#${hash}` : normalizedPath;
+}
+
 export function ServiceCategoryPage({ category }: Props) {
-  const pageUrl = `${siteUrl}/leistungen/${category.slug}`;
+  const pageUrl = `${siteUrl}/leistungen/${category.slug}/`;
   const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -29,7 +40,7 @@ export function ServiceCategoryPage({ category }: Props) {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Startseite', item: siteUrl },
-          { '@type': 'ListItem', position: 2, name: 'Leistungen', item: `${siteUrl}/leistungen` },
+          { '@type': 'ListItem', position: 2, name: 'Leistungen', item: `${siteUrl}/leistungen/` },
           { '@type': 'ListItem', position: 3, name: category.name, item: pageUrl }
         ]
       }
@@ -42,7 +53,7 @@ export function ServiceCategoryPage({ category }: Props) {
       <nav className={styles.breadcrumb} aria-label="Brotkrümelnavigation">
         <ol className="container">
           <li><a href="/">Startseite</a></li>
-          <li><a href="/leistungen">Leistungen</a></li>
+          <li><a href="/leistungen/">Leistungen</a></li>
           <li aria-current="page">{category.name}</li>
         </ol>
       </nav>
@@ -54,7 +65,7 @@ export function ServiceCategoryPage({ category }: Props) {
             <h1 id="category-heading">{category.heroTitle}</h1>
             <p className={styles.heroLead}>{category.heroLead}</p>
             <div className={styles.heroActions}>
-              <a className="button button-primary" href="/automation-check">{category.ctaLabel} <span className="button-arrow" aria-hidden="true">→</span></a>
+              <a className="button button-primary" href="/automation-check/">{category.ctaLabel} <span className="button-arrow" aria-hidden="true">→</span></a>
               <a className="button button-secondary" href="#beispiele">Beispiele ansehen</a>
             </div>
           </div>
@@ -107,7 +118,15 @@ export function ServiceCategoryPage({ category }: Props) {
                 </>
               );
               return item.href
-                ? <a className={styles.useCaseCard} href={item.href} key={item.title}>{content}</a>
+                ? (
+                  <a
+                    className={styles.useCaseCard}
+                    href={normalizeInternalHref(item.href)}
+                    key={item.title}
+                  >
+                    {content}
+                  </a>
+                )
                 : <article className={styles.useCaseCard} key={item.title}>{content}</article>;
             })}
           </div>
