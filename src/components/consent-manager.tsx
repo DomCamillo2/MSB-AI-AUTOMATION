@@ -8,62 +8,11 @@ import {
   readConsent,
   removeAnalyticsCookies,
   storeConsent,
-  trackPageView
+  trackPageView,
+  updateGoogleConsent
 } from '@/lib/analytics';
 import ConsentToggle from '@/components/consent-toggle';
 import styles from './consent-manager.module.css';
-
-const deniedConsent = {
-  analytics_storage: 'denied',
-  ad_storage: 'denied',
-  ad_user_data: 'denied',
-  ad_personalization: 'denied'
-} as const;
-
-function loadGoogleAnalytics(pathname: string) {
-  if (document.getElementById('msb-google-analytics')) {
-    trackPageView(pathname);
-    return;
-  }
-
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = window.gtag || function gtag() {
-    window.dataLayer?.push(arguments);
-  };
-
-  window.gtag('consent', 'default', deniedConsent);
-  window.gtag('consent', 'update', {
-    ...deniedConsent,
-    analytics_storage: 'granted'
-  });
-  window.gtag('set', 'ads_data_redaction', true);
-
-  const script = document.createElement('script');
-  script.id = 'msb-google-analytics';
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-  script.addEventListener('load', () => {
-    window.gtag?.('js', new Date());
-    window.gtag?.('config', GA_MEASUREMENT_ID, {
-      send_page_view: false,
-      allow_google_signals: false,
-      allow_ad_personalization_signals: false,
-      cookie_flags: 'SameSite=Lax;Secure',
-      cookie_expires: 60 * 60 * 24 * 365,
-      cookie_update: false
-    });
-    trackPageView(pathname);
-  }, { once: true });
-  document.head.appendChild(script);
-}
-
-function disableGoogleAnalytics() {
-  document.getElementById('msb-google-analytics')?.remove();
-  removeAnalyticsCookies();
-  window.gtag = undefined;
-  window.dataLayer = undefined;
-  window.msbLastTrackedPath = undefined;
-}
 
 type ConsentManagerProps = {
   analyticsEnabled: boolean;
@@ -86,7 +35,9 @@ export function ConsentManager({ analyticsEnabled }: ConsentManagerProps) {
   }, []);
 
   useEffect(() => {
-    if (choice?.analytics && analyticsEnabled) loadGoogleAnalytics(pathname);
+    if (!analyticsEnabled || typeof window.gtag !== 'function') return;
+    updateGoogleConsent(choice?.analytics === true);
+    if (choice?.analytics === true) trackPageView(pathname);
   }, [analyticsEnabled, choice, pathname]);
 
   const openSettings = useCallback(() => {
@@ -162,8 +113,8 @@ export function ConsentManager({ analyticsEnabled }: ConsentManagerProps) {
     window.requestAnimationFrame(() => returnFocusRef.current?.focus());
 
     if (hadAnalytics && !analytics) {
-      disableGoogleAnalytics();
-      window.location.reload();
+      removeAnalyticsCookies();
+      window.msbLastTrackedPath = undefined;
     }
   }
 
@@ -176,7 +127,7 @@ export function ConsentManager({ analyticsEnabled }: ConsentManagerProps) {
           <div className={styles.bannerCopy}>
             <p className={styles.eyebrow}>Datenschutzeinstellungen</p>
             <h2 id="consent-title">Statistik nur mit Ihrer Zustimmung.</h2>
-            <p>Notwendige Funktionen laufen immer. Google Analytics von Google Ireland Limited wird erst geladen, wenn Sie Statistik ausdrücklich erlauben. Dabei können Daten auch an Google LLC in den USA übermittelt werden. <a href="/datenschutz#google-analytics">Details im Datenschutz</a></p>
+            <p>Notwendige Funktionen laufen immer. Google Analytics von Google Ireland Limited wird in einer datenschutzfreundlichen Grundeinstellung eingebunden und erst nach Ihrer ausdrücklichen Freigabe für Statistik-Messung genutzt. Dabei können Daten auch an Google LLC in den USA übermittelt werden. <a href="/datenschutz#google-analytics">Details im Datenschutz</a></p>
           </div>
           <div className={styles.bannerActions}>
             <button className={styles.acceptButton} type="button" onClick={() => saveChoice(true)}>Alle akzeptieren</button>
