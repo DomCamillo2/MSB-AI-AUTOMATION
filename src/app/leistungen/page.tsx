@@ -1,3 +1,4 @@
+import PageBreadcrumb from '@/components/page-breadcrumb';
 import { Reveal } from '@/components/reveal';
 import ServiceIcon from '@/components/service-icon';
 import ServicesHeroVisual from '@/components/services-hero-visual';
@@ -133,6 +134,12 @@ export default function LeistungenPage() {
   return (
     <main id="main-content">
       <StructuredData data={serviceStructuredData} />
+      <PageBreadcrumb
+        items={[
+          { label: 'Startseite', href: '/' },
+          { label: 'Leistungen' }
+        ]}
+      />
 
       <section className={styles.pageHero} aria-labelledby="services-page-heading">
         <div className={`container ${styles.heroGrid}`}>

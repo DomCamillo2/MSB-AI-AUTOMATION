@@ -14,7 +14,7 @@ export function ContactPanel() {
         <p className="eyebrow eyebrow-light">So geht es weiter</p>
         <h2 id="contact-panel-heading" tabIndex={-1}>In drei Schritten zur ersten Einschätzung</h2>
         <p className="contact-lead">
-          Sie beschreiben den Ablauf – wir ordnen Nutzen, Aufwand und Risiken ehrlich ein.
+          Sie beschreiben den Ablauf – wir ordnen Nutzen, Aufwand und Risiken ehrlich ein. In der Regel melden wir uns innerhalb von <strong>1–2 Werktagen</strong>.
         </p>
 
         <ProcessFlow

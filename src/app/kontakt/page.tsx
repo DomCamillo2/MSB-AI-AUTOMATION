@@ -1,3 +1,4 @@
+import PageBreadcrumb from '@/components/page-breadcrumb';
 import PageIntro from '@/components/page-intro';
 import ContactPanel from '@/components/contact-panel';
 import { Reveal, RevealGroup } from '@/components/reveal';
@@ -36,11 +37,17 @@ const contactOptions = [
 export default function KontaktPage() {
   return (
     <main id="main-content">
+      <PageBreadcrumb
+        items={[
+          { label: 'Startseite', href: '/' },
+          { label: 'Kontakt' }
+        ]}
+      />
       <PageIntro
         eyebrow="Kontakt"
         title="Sprechen wir über einen echten Prozess."
         lead="Am hilfreichsten ist ein wiederkehrender Ablauf, bei dem heute Informationen gesucht, übertragen, geprüft oder aufbereitet werden."
-        aside="MSB sitzt in Tübingen und begleitet Unternehmen in der Region Tübingen–Reutlingen–Stuttgart sowie remote."
+        aside="MSB sitzt in Tübingen und begleitet Unternehmen in der Region Tübingen–Reutlingen–Stuttgart sowie remote. Wir melden uns in der Regel innerhalb von 1–2 Werktagen."
       />
 
       <section className="section contact-route-section" aria-labelledby="contact-options-heading">
