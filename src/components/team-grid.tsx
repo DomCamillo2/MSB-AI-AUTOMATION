@@ -13,6 +13,20 @@ function TeamPortraitImage({
   const base = image.replace(/\.[^.]+$/, '');
   const avifSrc = `${base}.avif`;
   const webpSrc = `${base}.webp`;
+  const isRaster = /\.(jpe?g|png)$/i.test(image);
+
+  if (!isRaster) {
+    return (
+      <img
+        className={`team-portrait-image team-portrait-image-${initials.toLowerCase()}`}
+        src={image}
+        alt={imageAlt}
+        width={1254}
+        height={1254}
+        loading="lazy"
+      />
+    );
+  }
 
   return (
     <picture>

@@ -85,7 +85,7 @@ export default function HomePage() {
                 <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
                 <h3>{service.title}</h3>
                 <p>{service.text}</p>
-                <a className="service-preview-link" href="/leistungen/" aria-label={`${service.title} im Leistungsüberblick ansehen`}>
+                <a className="service-preview-link" href={service.href} aria-label={`${service.title} im Detail ansehen`}>
                   Mehr erfahren <span aria-hidden="true">→</span>
                 </a>
               </article>
@@ -104,7 +104,7 @@ export default function HomePage() {
           </Reveal>
           <RevealGroup className="use-case-preview-list" stagger="normal">
             {useCases.map((useCase) => (
-              <a key={useCase.category} href="/anwendungsfaelle/">
+              <a key={useCase.category} href={useCase.href}>
                 <strong>{useCase.category}</strong>
                 <span>{useCase.summary}</span>
                 <span className="preview-arrow" aria-hidden="true">→</span>
