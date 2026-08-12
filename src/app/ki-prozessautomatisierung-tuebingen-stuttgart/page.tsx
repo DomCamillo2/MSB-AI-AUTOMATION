@@ -1,3 +1,4 @@
+import PageBreadcrumb from '@/components/page-breadcrumb';
 import PageCta from '@/components/page-cta';
 import RegionalCollaborationGrid from '@/components/regional-collaboration-grid';
 import RegionalPageHero from '@/components/regional-page-hero';
@@ -14,6 +15,12 @@ export const metadata = createPageMetadata({
 export default function RegionalPage() {
   return (
     <main id="main-content">
+      <PageBreadcrumb
+        items={[
+          { label: 'Startseite', href: '/' },
+          { label: 'Prozessautomatisierung Region' }
+        ]}
+      />
       <RegionalPageHero
         lead="MSB sitzt in Tübingen und unterstützt Unternehmen dabei, wiederkehrende Abläufe zu klären, schrittweise zu automatisieren und sauber in den Arbeitsalltag zu übergeben."
         aside="Wir arbeiten mit bestehenden Systemen. KI kommt nur dort zum Einsatz, wo sie gegenüber einer festen Regel einen klaren Vorteil hat."

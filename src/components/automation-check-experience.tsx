@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import AutomationCheckIcon from '@/components/automation-check-icon';
+import PageBreadcrumb from '@/components/page-breadcrumb';
 import AutomationCheckProgress from '@/components/automation-check-progress';
 import AutomationCheckResult from '@/components/automation-check-result';
 import AutomationProcessPreview from '@/components/automation-process-preview';
@@ -469,6 +470,12 @@ export function AutomationCheckExperience() {
   if (view === 'start') {
     return (
       <main id="main-content" className={styles.startPage}>
+        <PageBreadcrumb
+          items={[
+            { label: 'Startseite', href: '/' },
+            { label: 'Automation Check' }
+          ]}
+        />
         <section className={styles.startHero} aria-labelledby="automation-check-heading">
           <div className={`container ${styles.startGrid}`}>
             <div>
