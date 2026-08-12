@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { navigation } from '@/lib/site-content';
@@ -23,15 +22,18 @@ function AutomationCheckHeader() {
     <header className={styles.checkHeader}>
       <div className={styles.checkHeaderInner}>
         <a className={styles.checkBrand} href="/" aria-label="MSB AI & Automation Startseite">
-          <Image
-            className={styles.checkLogo}
-            src="/msb-wordmark.png"
-            alt="MSB"
-            width={1813}
-            height={545}
-            priority
-            sizes="100px"
-          />
+          <picture>
+            <source srcSet="/msb-wordmark.avif" type="image/avif" />
+            <source srcSet="/msb-wordmark.webp" type="image/webp" />
+            <img
+              className={styles.checkLogo}
+              src="/msb-wordmark.png"
+              alt="MSB"
+              width={1813}
+              height={545}
+              loading="eager"
+            />
+          </picture>
         </a>
         <p><span aria-hidden="true">●</span> Interaktive Prozesseinschätzung</p>
         <a className={styles.checkExit} href="/">Zur Website <span aria-hidden="true">×</span></a>
@@ -161,16 +163,19 @@ export function SiteHeader() {
           </button>
 
           <a className={styles.brand} href="/" aria-label="MSB AI & Automation Startseite" onClick={closeMenu}>
-            <Image
-              className={styles.logo}
-              src="/msb-wordmark.png"
-              alt=""
-              width={1813}
-              height={545}
-              priority
-              sizes="(max-width: 767px) 100px, (max-width: 1279px) 106px, 118px"
-              aria-hidden="true"
-            />
+            <picture>
+              <source srcSet="/msb-wordmark.avif" type="image/avif" />
+              <source srcSet="/msb-wordmark.webp" type="image/webp" />
+              <img
+                className={styles.logo}
+                src="/msb-wordmark.png"
+                alt=""
+                width={1813}
+                height={545}
+                aria-hidden="true"
+                loading="eager"
+              />
+            </picture>
             <span className={styles.brandText} aria-hidden="true">
               <strong>AI &amp; Automation</strong>
               <small>mit Menschenverstand</small>
