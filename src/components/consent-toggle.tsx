@@ -50,7 +50,7 @@ export function ConsentToggle({ checked, onChange, label }: ConsentToggleProps) 
           aria-hidden="true"
           initial={false}
           animate={{
-            x: checked ? 22 : 0,
+            x: checked ? 21 : 0,
             scale: reducedMotion ? 1 : checked ? [1, 1.14, 1] : [1, 0.92, 1]
           }}
           transition={reducedMotion ? { duration: 0.12 } : spring}
