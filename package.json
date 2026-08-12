@@ -8,7 +8,8 @@
     "build": "NEXT_PUBLIC_SITE_ENV=production next build",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --test src/lib/*.test.mts"
+    "test": "node --experimental-strip-types --test src/lib/*.test.mts",
+    "verify:urls": "node --experimental-strip-types scripts/verify-url-consistency.mts"
   },
   "dependencies": {
     "motion": "^12.42.2",

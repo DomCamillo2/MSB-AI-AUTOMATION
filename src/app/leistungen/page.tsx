@@ -36,7 +36,7 @@ const serviceStructuredData = {
         '@type': 'Service',
         name: category.name,
         description: category.cardTeaser,
-        url: `${siteUrl}/leistungen/${category.slug}`
+        url: `${siteUrl}/leistungen/${category.slug}/`
       }
     }))
   }

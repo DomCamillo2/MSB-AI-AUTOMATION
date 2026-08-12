@@ -39,7 +39,7 @@ export function UseCaseDetailPage({ useCase }: Props) {
       {
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Startseite', item: siteUrl },
+          { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${siteUrl}/` },
           { '@type': 'ListItem', position: 2, name: 'Anwendungsfälle', item: `${siteUrl}/anwendungsfaelle/` },
           { '@type': 'ListItem', position: 3, name: useCase.title, item: pageUrl }
         ]

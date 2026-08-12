@@ -39,7 +39,7 @@ export function ServiceCategoryPage({ category }: Props) {
       {
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Startseite', item: siteUrl },
+          { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${siteUrl}/` },
           { '@type': 'ListItem', position: 2, name: 'Leistungen', item: `${siteUrl}/leistungen/` },
           { '@type': 'ListItem', position: 3, name: category.name, item: pageUrl }
         ]

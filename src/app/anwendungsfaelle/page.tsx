@@ -68,7 +68,7 @@ export default function AnwendungsfaellePage() {
           </div>
           <div className={styles.directory}>
             {useCaseDetails.map((useCase, index) => (
-              <a className={styles.useCaseCard} href={`/anwendungsfaelle/${useCase.slug}`} key={useCase.slug}>
+              <a className={styles.useCaseCard} href={`/anwendungsfaelle/${useCase.slug}/`} key={useCase.slug}>
                 <small>{String(index + 1).padStart(2, '0')} · {useCase.categoryName}</small>
                 <h3>{useCase.metaTitle}</h3>
                 <p>{useCase.metaDescription}</p>
