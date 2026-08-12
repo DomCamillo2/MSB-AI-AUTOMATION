@@ -16,6 +16,9 @@ ErrorDocument 404 /404.html
   <Files "opengraph-image">
     ForceType image/png
   </Files>
+
+  AddType image/avif .avif
+  AddType image/webp .webp
 </IfModule>
 
 <IfModule mod_rewrite.c>

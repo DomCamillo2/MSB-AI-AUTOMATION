@@ -1,6 +1,34 @@
-import Image from 'next/image';
 import { RevealGroup } from '@/components/reveal';
 import { team } from '@/lib/site-content';
+
+function TeamPortraitImage({
+  image,
+  imageAlt,
+  initials
+}: {
+  image: string;
+  imageAlt: string;
+  initials: string;
+}) {
+  const base = image.replace(/\.[^.]+$/, '');
+  const avifSrc = `${base}.avif`;
+  const webpSrc = `${base}.webp`;
+
+  return (
+    <picture>
+      <source srcSet={avifSrc} type="image/avif" />
+      <source srcSet={webpSrc} type="image/webp" />
+      <img
+        className={`team-portrait-image team-portrait-image-${initials.toLowerCase()}`}
+        src={image}
+        alt={imageAlt}
+        width={1254}
+        height={1254}
+        loading="lazy"
+      />
+    </picture>
+  );
+}
 
 type TeamGridProps = {
   compact?: boolean;
@@ -13,12 +41,10 @@ export function TeamGrid({ compact = false }: TeamGridProps) {
         <article key={member.name} className={`team-card${compact ? ' team-card-compact' : ' team-card-profile'}`}>
           <div className="team-portrait">
             {member.image ? (
-              <Image
-                className={`team-portrait-image team-portrait-image-${member.initials.toLowerCase()}`}
-                src={member.image}
-                alt={member.imageAlt}
-                fill
-                sizes="(max-width: 760px) calc(100vw - 32px), (max-width: 980px) 50vw, 33vw"
+              <TeamPortraitImage
+                image={member.image}
+                imageAlt={member.imageAlt}
+                initials={member.initials}
               />
             ) : (
               <div className="team-portrait-fallback" aria-hidden="true">
