@@ -22,6 +22,8 @@ function TeamPortraitImage({
         className={`team-portrait-image team-portrait-image-${initials.toLowerCase()}`}
         src={image}
         alt={imageAlt}
+        width={1254}
+        height={1254}
         loading="lazy"
       />
     </picture>
