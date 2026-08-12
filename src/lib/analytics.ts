@@ -9,6 +9,13 @@ export type ConsentChoice = {
   decidedAt: string;
 };
 
+export const deniedConsent = {
+  analytics_storage: 'denied',
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied'
+} as const;
+
 declare global {
   interface Window {
     dataLayer?: unknown[];
@@ -106,5 +113,14 @@ export function removeAnalyticsCookies() {
       const domainPart = domain ? `; domain=${domain}` : '';
       document.cookie = `${name}=; Max-Age=0; path=/${domainPart}; SameSite=Lax; Secure`;
     });
+  });
+}
+
+export function updateGoogleConsent(analytics: boolean) {
+  if (typeof window.gtag !== 'function') return;
+
+  window.gtag('consent', 'update', {
+    ...deniedConsent,
+    analytics_storage: analytics ? 'granted' : 'denied'
   });
 }
