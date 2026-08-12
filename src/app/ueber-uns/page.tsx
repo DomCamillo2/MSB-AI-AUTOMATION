@@ -1,4 +1,5 @@
 import ExperienceStrip from '@/components/experience-strip';
+import PageBreadcrumb from '@/components/page-breadcrumb';
 import PageCta from '@/components/page-cta';
 import PageIntro from '@/components/page-intro';
 import { Reveal } from '@/components/reveal';
@@ -75,6 +76,12 @@ export default function UeberUnsPage() {
   return (
     <main id="main-content">
       <StructuredData data={aboutStructuredData} />
+      <PageBreadcrumb
+        items={[
+          { label: 'Startseite', href: '/' },
+          { label: 'Über uns' }
+        ]}
+      />
       <PageIntro
         eyebrow="Über uns"
         title="Ein kleines Team. Klare Zuständigkeiten."

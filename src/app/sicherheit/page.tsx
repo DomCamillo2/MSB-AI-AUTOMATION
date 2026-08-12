@@ -1,3 +1,4 @@
+import PageBreadcrumb from '@/components/page-breadcrumb';
 import { createPageMetadata } from '@/lib/seo';
 
 export const metadata = createPageMetadata({
@@ -9,6 +10,12 @@ export const metadata = createPageMetadata({
 export default function SicherheitPage() {
   return (
     <main id="main-content" className="page-shell">
+      <PageBreadcrumb
+        items={[
+          { label: 'Startseite', href: '/' },
+          { label: 'Sicherheit' }
+        ]}
+      />
       <article className="container prose-panel legal-document">
         <header className="legal-header">
           <p className="eyebrow">Sicherheit</p>
