@@ -1,5 +1,6 @@
 import PageCta from '@/components/page-cta';
 import PageIntro from '@/components/page-intro';
+import PageBreadcrumb from '@/components/page-breadcrumb';
 import UseCaseExplorer from '@/components/use-case-explorer';
 import { useCaseDetails } from '@/lib/service-detail-content';
 import { createPageMetadata } from '@/lib/seo';
@@ -20,6 +21,12 @@ const fitSignals = [
 export default function AnwendungsfaellePage() {
   return (
     <main id="main-content">
+      <PageBreadcrumb
+        items={[
+          { label: 'Startseite', href: '/' },
+          { label: 'Anwendungsfälle' }
+        ]}
+      />
       <PageIntro
         eyebrow="Anwendungsfälle"
         title="Konkrete Abläufe statt abstrakter KI-Projekte."
