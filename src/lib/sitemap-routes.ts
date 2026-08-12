@@ -7,7 +7,8 @@ export const indexableRoutes = [
   '/ueber-uns',
   '/automation-check',
   '/kontakt',
-  '/ki-prozessautomatisierung-tuebingen-stuttgart'
+  '/ki-prozessautomatisierung-tuebingen-stuttgart',
+  '/sicherheit'
 ] as const;
 
 export function toCanonicalSitemapUrl(siteUrl: string, path: string): string {

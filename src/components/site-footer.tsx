@@ -91,6 +91,7 @@ export function SiteFooter() {
           <a href="/kontakt">Kontakt</a>
           <a href="/impressum">Impressum</a>
           <a href="/datenschutz">Datenschutz</a>
+          <a href="/sicherheit">Sicherheit</a>
           <ConsentSettingsButton />
         </nav>
       </div>

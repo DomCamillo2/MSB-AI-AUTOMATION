@@ -1,0 +1,7 @@
+Contact: mailto:kontakt@msb-ai.de
+Contact: https://www.msb-ai.de/kontakt/
+Expires: 2027-08-12T00:00:00.000Z
+Preferred-Languages: de, en
+Canonical: https://www.msb-ai.de/.well-known/security.txt
+Policy: https://www.msb-ai.de/sicherheit/
+Hiring: https://www.msb-ai.de/ueber-uns/
