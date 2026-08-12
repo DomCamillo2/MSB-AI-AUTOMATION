@@ -1,3 +1,4 @@
+import PageBreadcrumb from '@/components/page-breadcrumb';
 import Accordion from '@/components/accordion';
 import PageCta from '@/components/page-cta';
 import PageIntro from '@/components/page-intro';
@@ -27,6 +28,12 @@ export default function VorgehenPage() {
   return (
     <main id="main-content">
       <StructuredData data={faqStructuredData} />
+      <PageBreadcrumb
+        items={[
+          { label: 'Startseite', href: '/' },
+          { label: 'Vorgehen' }
+        ]}
+      />
       <PageIntro
         eyebrow="Vorgehen"
         title="Klein starten. Wirkung prüfen. Sauber übergeben."

@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useRef, useState, type FormEvent } from 'react';
 import { trackAnalyticsEvent } from '@/lib/analytics';
 import { sendContactRequest } from '@/lib/contact-api';
@@ -10,6 +11,7 @@ type FormErrors = Partial<Record<FormField, string>>;
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function ContactForm() {
+  const router = useRouter();
   const [name, setName] = useState('');
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
@@ -74,19 +76,12 @@ export function ContactForm() {
         website,
         startedAt: openedAtRef.current
       });
-      setStatusTone('success');
-      setStatus(result.message || 'Vielen Dank. Ihre Anfrage wurde sicher übermittelt.');
-      setName('');
-      setCompany('');
-      setEmail('');
-      setProcess('');
-      setWebsite('');
-      setPrivacyAcknowledged(false);
-      openedAtRef.current = Date.now();
       trackAnalyticsEvent('contact_submit', {
         cta_location: 'automation_check_form',
         page_type: 'automation_check'
       });
+      router.push('/danke');
+      return;
     } catch (error) {
       setStatusTone('error');
       setStatus(error instanceof Error
