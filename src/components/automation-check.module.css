@@ -508,6 +508,7 @@
   display: grid;
   grid-template-columns: 40px minmax(0, 1fr) 28px;
   align-content: start;
+  align-items: start;
   gap: 0.4rem 0.7rem;
   padding: 1.15rem 1.1rem;
 }
@@ -536,6 +537,7 @@
   height: 40px;
   grid-column: 1;
   grid-row: 1;
+  align-self: center;
   display: grid;
   place-items: center;
   color: var(--teal);
@@ -546,8 +548,11 @@
 
 .areaIcon svg,
 .processIcon svg {
+  display: block;
   width: 20px;
   height: 20px;
+  margin: 0;
+  overflow: visible;
   stroke: currentColor;
   stroke-width: 1.65;
   stroke-linecap: round;
@@ -562,12 +567,13 @@
   display: grid;
   place-items: center;
   justify-self: end;
-  align-self: start;
+  align-self: center;
   color: var(--white);
   background: transparent;
   border: 1px solid #c8d0ce;
   border-radius: 50%;
   font-size: 0.7rem;
+  line-height: 1;
 }
 
 .areaChoice[data-selected='true'],
@@ -631,6 +637,7 @@
   border: 1px solid #aeb8b6;
   border-radius: 50%;
   font-size: 0.67rem;
+  line-height: 1;
 }
 
 .choice[data-selected='true'] .choiceIndicator {
@@ -840,6 +847,7 @@
   height: 38px;
   display: grid;
   place-items: center;
+  flex-shrink: 0;
   color: var(--teal);
   background: rgba(8, 119, 123, 0.06);
   border: 1px solid rgba(8, 119, 123, 0.2);
