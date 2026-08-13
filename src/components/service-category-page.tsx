@@ -136,8 +136,9 @@ export function ServiceCategoryPage({ category }: Props) {
       <section className={styles.sectionNavy} aria-labelledby="workflow-heading">
         <div className="container">
           <Reveal>
-            <div className={styles.sectionIntro}>
-              <div><p className="eyebrow eyebrow-light">Beispielhafter Workflow</p><h2 id="workflow-heading">Ein klarer Weg vom Eingang bis zur Übergabe</h2></div>
+            <div className={styles.workflowIntro}>
+              <p className="eyebrow eyebrow-light">Beispielhafter Workflow</p>
+              <h2 id="workflow-heading">Ein klarer Weg vom Eingang bis zur Übergabe</h2>
               <p>Die genaue Logik entsteht aus Ihrem Prozess. Jeder Schritt hat einen definierten Eingang, ein prüfbares Ergebnis und einen benannten Ausnahmeweg.</p>
             </div>
           </Reveal>
