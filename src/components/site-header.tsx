@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { navigation } from '@/lib/site-content';
+import { navigation, primaryCtaLabel } from '@/lib/site-content';
 import styles from './site-header.module.css';
 
 function joinClasses(...classes: Array<string | false | undefined>) {
@@ -221,7 +221,7 @@ export function SiteHeader() {
               tabIndex={usesMenu && !menuOpen ? -1 : undefined}
               onClick={closeMenu}
             >
-              Prozess kostenlos prüfen lassen
+              {primaryCtaLabel}
             </a>
           </nav>
 
@@ -238,7 +238,7 @@ export function SiteHeader() {
               href="/automation-check/"
               aria-current={normalizedPathname === '/automation-check' ? 'page' : undefined}
             >
-              Automation Check
+              {primaryCtaLabel}
               <ArrowIcon />
             </a>
           </div>

@@ -1,4 +1,5 @@
 import { Reveal } from '@/components/reveal';
+import { primaryCtaFullLabel } from '@/lib/site-content';
 
 type PageCtaProps = {
   title?: string;
@@ -9,8 +10,8 @@ type PageCtaProps = {
 
 export function PageCta({
   title = 'Welcher Prozess kostet Ihr Team regelmäßig Zeit?',
-  text = 'Im Automation Check betrachten wir einen konkreten Ablauf und ordnen Nutzen, Aufwand und Risiken ein.',
-  buttonLabel = 'Prozess kostenlos prüfen lassen',
+  text = 'Im kostenlosen Check betrachten wir einen konkreten Ablauf und ordnen Nutzen, Aufwand und Risiken ein.',
+  buttonLabel = primaryCtaFullLabel,
   compact = false
 }: PageCtaProps) {
   return (

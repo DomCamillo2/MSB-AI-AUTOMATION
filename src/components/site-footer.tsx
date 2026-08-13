@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { navigation } from '@/lib/site-content';
+import { navigation, footerSecondaryLinks } from '@/lib/site-content';
 import ConsentSettingsButton from '@/components/consent-settings-button';
 
 function MailIcon() {
@@ -55,6 +55,11 @@ export function SiteFooter() {
         <nav className="footer-navigation" aria-label="Seitennavigation im Footer">
           <span className="footer-label">Navigation</span>
           {navigation.map(({ label, href }) => (
+            <a key={href} href={href}>
+              {label}
+            </a>
+          ))}
+          {footerSecondaryLinks.map(({ label, href }) => (
             <a key={href} href={href}>
               {label}
             </a>

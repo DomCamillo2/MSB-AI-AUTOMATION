@@ -1,9 +1,19 @@
 export const navigation = [
-  { label: 'Leistungen', href: '/leistungen/' },
-  { label: 'Anwendungsfälle', href: '/anwendungsfaelle/' },
+  { label: 'Themen', href: '/leistungen/' },
   { label: 'Vorgehen', href: '/vorgehen/' },
   { label: 'Über uns', href: '/ueber-uns/' }
 ] as const;
+
+export const footerSecondaryLinks = [
+  { label: 'Beispiele', href: '/anwendungsfaelle/' },
+  { label: 'Kontakt', href: '/kontakt/' }
+] as const;
+
+/** Primary CTA label used in header and compact actions */
+export const primaryCtaLabel = 'Prozess prüfen';
+
+/** Full CTA label used on page buttons and forms */
+export const primaryCtaFullLabel = 'Prozess kostenlos prüfen lassen';
 
 export const problems = [
   {

@@ -6,13 +6,20 @@ import SiteStructuredData from '@/components/site-structured-data';
 import TeamGrid from '@/components/team-grid';
 import { Reveal, RevealGroup } from '@/components/reveal';
 import { createPageMetadata } from '@/lib/seo';
-import { problems, services, useCases } from '@/lib/site-content';
+import { serviceCategories } from '@/lib/service-detail-content';
+import { problems, useCases } from '@/lib/site-content';
 
 export const metadata = createPageMetadata({
   title: 'KI- & Prozessautomatisierung für KMU',
   description: 'MSB automatisiert wiederkehrende Abläufe in Verwaltung, HR und Reporting – pragmatisch, kontrolliert und passend zur bestehenden IT.',
   path: '/'
 });
+
+const homeThemes = serviceCategories.map((category) => ({
+  name: category.name,
+  teaser: category.cardTeaser,
+  href: `/leistungen/${category.slug}/`
+}));
 
 const homeWorkplan = [
   {
@@ -67,40 +74,37 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section services-preview-section" aria-labelledby="services-preview-heading">
+      <section className="section services-preview-section" aria-labelledby="themes-preview-heading">
         <div className="container">
           <Reveal className="section-heading heading-split">
             <div>
-              <p className="eyebrow">Leistungen</p>
-              <h2 id="services-preview-heading">Von der Prozessklärung bis zur Übergabe</h2>
+              <p className="eyebrow">Themen</p>
+              <h2 id="themes-preview-heading">Bereiche, in denen wir Prozesse automatisieren</h2>
             </div>
             <div className="section-heading-action">
-              <p>Pragmatische Unterstützung für klar abgegrenzte Abläufe in Ihrer bestehenden Umgebung.</p>
-              <a className="text-link" href="/leistungen/">Leistungen im Detail <span aria-hidden="true">→</span></a>
+              <p>Von Recruiting bis Reporting: klar abgegrenzte Abläufe in Ihrer bestehenden IT.</p>
+              <a className="text-link" href="/leistungen/">Alle Themen ansehen <span aria-hidden="true">→</span></a>
             </div>
           </Reveal>
-          <RevealGroup className="service-preview-list" stagger="normal">
-            {services.map((service, index) => (
-              <article key={service.title}>
-                <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                <h3>{service.title}</h3>
-                <p>{service.text}</p>
-                <a className="service-preview-link" href={service.href} aria-label={`${service.title} im Detail ansehen`}>
-                  Mehr erfahren <span aria-hidden="true">→</span>
-                </a>
-              </article>
+          <RevealGroup className="theme-preview-list" stagger="normal">
+            {homeThemes.map((theme) => (
+              <a key={theme.href} href={theme.href}>
+                <strong>{theme.name}</strong>
+                <span>{theme.teaser}</span>
+                <span className="preview-arrow" aria-hidden="true">→</span>
+              </a>
             ))}
           </RevealGroup>
         </div>
       </section>
 
-      <section className="section use-case-section" aria-labelledby="use-cases-heading">
+      <section className="section use-case-section" aria-labelledby="examples-heading">
         <div className="container use-case-preview-layout">
           <Reveal className="section-heading">
-            <p className="eyebrow">Anwendungsfälle</p>
-            <h2 id="use-cases-heading">Typische Prozesse, mit denen wir starten</h2>
+            <p className="eyebrow">Beispiele</p>
+            <h2 id="examples-heading">Typische Prozesse, mit denen wir starten</h2>
             <p>Keine Standardsoftware, sondern klar abgegrenzte Abläufe mit menschlicher Kontrolle.</p>
-            <a className="text-link" href="/anwendungsfaelle/">Alle Anwendungsfälle ansehen <span aria-hidden="true">→</span></a>
+            <a className="text-link" href="/anwendungsfaelle/">Alle Beispiele ansehen <span aria-hidden="true">→</span></a>
           </Reveal>
           <RevealGroup className="use-case-preview-list" stagger="normal">
             {useCases.map((useCase) => (
