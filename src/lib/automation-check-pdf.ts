@@ -771,19 +771,41 @@ async function loadBrandImage(): Promise<EmbeddedJpeg | null> {
   });
 }
 
-export async function downloadAutomationCheckPdf(answers: CheckAnswers, assessment: AutomationAssessment) {
+export async function buildAutomationCheckPdf(answers: CheckAnswers, assessment: AutomationAssessment) {
   const createdAt = new Date();
   const brandImage = await loadBrandImage();
   const bytes = createAutomationCheckPdf(answers, assessment, { createdAt, brandImage });
+  const filename = `MSB-Automation-Check-Auswertung-${createdAt.toISOString().slice(0, 10)}.pdf`;
+  return { bytes: new Uint8Array(bytes), filename, createdAt };
+}
+
+export async function downloadAutomationCheckPdf(answers: CheckAnswers, assessment: AutomationAssessment) {
+  const { bytes, filename } = await buildAutomationCheckPdf(answers, assessment);
   const safeBuffer = new Uint8Array(bytes).buffer;
   const blob = new Blob([safeBuffer], { type: 'application/pdf' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = `MSB-Automation-Check-Auswertung-${createdAt.toISOString().slice(0, 10)}.pdf`;
+  link.download = filename;
   link.rel = 'noopener';
   document.body.appendChild(link);
   link.click();
   link.remove();
   window.setTimeout(() => URL.revokeObjectURL(url), 1500);
+  return filename;
+}
+
+function bytesToBase64(bytes: Uint8Array) {
+  let binary = '';
+  const chunkSize = 0x8000;
+  for (let index = 0; index < bytes.length; index += chunkSize) {
+    const chunk = bytes.subarray(index, index + chunkSize);
+    binary += String.fromCharCode(...chunk);
+  }
+  return window.btoa(binary);
+}
+
+export async function buildAutomationCheckPdfBase64(answers: CheckAnswers, assessment: AutomationAssessment) {
+  const { bytes, filename } = await buildAutomationCheckPdf(answers, assessment);
+  return { pdfBase64: bytesToBase64(bytes), pdfFilename: filename };
 }

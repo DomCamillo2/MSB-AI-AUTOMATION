@@ -1,11 +1,14 @@
 'use client';
 
-import { useRef, useState, type FormEvent } from 'react';
+import { useEffect, useId, useRef, useState, type FormEvent } from 'react';
 import AutomationCheckProgress from '@/components/automation-check-progress';
 import { AutomationProcessDiagram } from '@/components/automation-process-preview';
 import { getAreaConfig } from '@/lib/automation-check-config';
 import { buildAutomationCheckMessage } from '@/lib/automation-check-handoff';
-import { downloadAutomationCheckPdf } from '@/lib/automation-check-pdf';
+import {
+  buildAutomationCheckPdfBase64,
+  downloadAutomationCheckPdf
+} from '@/lib/automation-check-pdf';
 import { trackAnalyticsEvent } from '@/lib/analytics';
 import { sendContactRequest } from '@/lib/contact-api';
 import type { AutomationAssessment, CheckAnswers } from '@/lib/automation-check-types';
@@ -28,12 +31,17 @@ const msbSteps = [
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assessment'>) {
+type ContactHandoffProps = Pick<Props, 'answers' | 'assessment'> & {
+  preferPdfAttachment?: boolean;
+};
+
+function ContactHandoff({ answers, assessment, preferPdfAttachment = true }: ContactHandoffProps) {
   const [name, setName] = useState('');
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
   const [additionalMessage, setAdditionalMessage] = useState('');
   const [includeAssessment, setIncludeAssessment] = useState(true);
+  const [attachPdf, setAttachPdf] = useState(preferPdfAttachment);
   const [website, setWebsite] = useState('');
   const [privacy, setPrivacy] = useState(false);
   const [emailError, setEmailError] = useState('');
@@ -42,6 +50,10 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
   const [statusTone, setStatusTone] = useState<'success' | 'error'>('success');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const openedAtRef = useRef(Date.now());
+
+  useEffect(() => {
+    setAttachPdf(preferPdfAttachment);
+  }, [preferPdfAttachment]);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -68,6 +80,10 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
 
     setIsSubmitting(true);
     try {
+      const pdfPayload = attachPdf
+        ? await buildAutomationCheckPdfBase64(answers, assessment)
+        : null;
+
       const result = await sendContactRequest({
         source: 'automation_check_result',
         name: name.trim(),
@@ -76,7 +92,8 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
         message: buildAutomationCheckMessage(answers, assessment, additionalMessage, includeAssessment),
         privacy: true,
         website,
-        startedAt: openedAtRef.current
+        startedAt: openedAtRef.current,
+        ...(pdfPayload ?? {})
       });
       setStatusTone('success');
       setStatus(result.message || 'Vielen Dank. Ihre Anfrage wurde sicher übermittelt.');
@@ -89,7 +106,8 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
       openedAtRef.current = Date.now();
       trackAnalyticsEvent('contact_submit', {
         cta_location: 'automation_check_result',
-        page_type: 'automation_check'
+        page_type: 'automation_check',
+        pdf_attached: attachPdf ? 'true' : 'false'
       });
     } catch (error) {
       setStatusTone('error');
@@ -119,7 +137,7 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
           <p className="eyebrow">Anfrage vorbereiten</p>
           <h3>Check-Ergebnis an MSB senden</h3>
         </div>
-        <p>Sie entscheiden, ob die Auswertung mitgesendet wird. Die Anfrage wird verschlüsselt an unser IONOS-Postfach übermittelt.</p>
+        <p>Sie entscheiden, ob Textauswertung und PDF mitgesendet werden. Die Anfrage wird verschlüsselt an unser IONOS-Postfach übermittelt.</p>
       </div>
       <label className={styles.attachmentChoice} htmlFor="check-attachment">
         <input
@@ -132,16 +150,33 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
           <svg viewBox="0 0 24 24" fill="none"><path d="M8.5 12.5 14.9 6a3 3 0 0 1 4.2 4.2l-8.4 8.5a5 5 0 0 1-7.1-7.1l8.2-8.2" /></svg>
         </span>
         <span className={styles.attachmentCopy}>
-          <strong>Automation-Check-Auswertung anhängen</strong>
+          <strong>Textauswertung in die Nachricht übernehmen</strong>
           <small>Ergebnis, Antworten, Bewertungssignale und Prozessbild werden strukturiert in die Anfrage übernommen.</small>
         </span>
         <span className={styles.attachmentStatus}>{includeAssessment ? 'Ausgewählt' : 'Nicht ausgewählt'}</span>
       </label>
-      {includeAssessment && (
+      <label className={styles.attachmentChoice} htmlFor="check-pdf-attachment">
+        <input
+          id="check-pdf-attachment"
+          type="checkbox"
+          checked={attachPdf}
+          onChange={(event) => setAttachPdf(event.target.checked)}
+        />
+        <span className={styles.attachmentIcon} aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Zm0 0v5h5M9 13h6M9 17h4" /></svg>
+        </span>
+        <span className={styles.attachmentCopy}>
+          <strong>PDF-Auswertung anhängen</strong>
+          <small>Die 3-seitige PDF wird lokal erstellt und nur bei Absenden mit der Anfrage übermittelt.</small>
+        </span>
+        <span className={styles.attachmentStatus}>{attachPdf ? 'Ausgewählt' : 'Nicht ausgewählt'}</span>
+      </label>
+      {(includeAssessment || attachPdf) && (
         <div className={styles.attachmentPreview} aria-label="Vorschau der angehängten Auswertung">
           <span><small>Ergebnis</small><strong>{assessment.title}</strong></span>
           <span><small>Bereich</small><strong>{getAreaConfig(answers.area).label}</strong></span>
           <span><small>Umfang</small><strong>{answers.problems.length} Tätigkeiten · {assessment.reasons.length} Signale</strong></span>
+          {attachPdf ? <span><small>PDF</small><strong>Wird beim Absenden erzeugt</strong></span> : null}
         </div>
       )}
       <div className={styles.contactFields}>
@@ -159,9 +194,10 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
             onChange={(event) => {
               setEmail(event.target.value);
               setEmailError('');
+              setStatus('');
             }}
           />
-          {emailError && <p className={styles.fieldError} id="check-email-error">{emailError}</p>}
+          {emailError ? <p className={styles.fieldError} id="check-email-error">{emailError}</p> : null}
         </div>
         <div className={styles.contactField}>
           <label htmlFor="check-name">Name <span>optional</span></label>
@@ -198,29 +234,170 @@ function ContactHandoff({ answers, assessment }: Pick<Props, 'answers' | 'assess
           />
           <span>Ich bestätige die Kenntnisnahme.</span>
         </label>
-        <a className={styles.privacyLink} href="/datenschutz/">Datenschutzhinweise öffnen</a>
+        <a className={styles.privacyLink} href="/datenschutz/#automation-check">Datenschutzhinweise öffnen</a>
       </div>
       <p className={styles.privacyNote} id="check-privacy-note">Bitte prüfen Sie Ihre Angaben und entfernen Sie vertrauliche Informationen, bevor Sie die Anfrage senden.</p>
-      {privacyError && <p className={styles.fieldError} id="check-privacy-error">{privacyError}</p>}
+      {privacyError ? <p className={styles.fieldError} id="check-privacy-error">{privacyError}</p> : null}
       <button className="button button-primary" type="submit" disabled={isSubmitting}>
-        {isSubmitting ? 'Anfrage wird gesendet …' : includeAssessment ? 'Anfrage mit Ergebnis senden' : 'Anfrage senden'}
+        {isSubmitting
+          ? (attachPdf ? 'PDF und Anfrage werden gesendet …' : 'Anfrage wird gesendet …')
+          : (attachPdf ? 'Anfrage mit PDF senden' : includeAssessment ? 'Anfrage mit Ergebnis senden' : 'Anfrage senden')}
         {!isSubmitting ? <span className="button-arrow" aria-hidden="true">→</span> : null}
       </button>
-      {status && <p className={[styles.formStatus, statusTone === 'error' ? styles.formStatusError : ''].filter(Boolean).join(' ')} role="status" aria-live="polite">{status}</p>}
+      {status ? (
+        <p
+          className={[styles.formStatus, statusTone === 'error' ? styles.formStatusError : ''].filter(Boolean).join(' ')}
+          role="status"
+          aria-live="polite"
+        >
+          {status}
+        </p>
+      ) : null}
     </form>
+  );
+}
+
+type NextStepDialogProps = {
+  open: boolean;
+  assessmentTitle: string;
+  pdfState: 'idle' | 'creating' | 'success' | 'error';
+  onDownloadPdf: () => void;
+  onAttachToContact: () => void;
+  onDismiss: () => void;
+};
+
+function ResultNextStepDialog({
+  open,
+  assessmentTitle,
+  pdfState,
+  onDownloadPdf,
+  onAttachToContact,
+  onDismiss
+}: NextStepDialogProps) {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const titleId = useId();
+  const descriptionId = useId();
+
+  useEffect(() => {
+    if (!open) return;
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    dialog.querySelector<HTMLElement>('button')?.focus();
+
+    const pageRegions = [...document.querySelectorAll<HTMLElement>('header, main, footer')];
+    const previousOverflow = document.body.style.overflow;
+    pageRegions.forEach((region) => {
+      region.inert = true;
+    });
+    document.body.style.overflow = 'hidden';
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        onDismiss();
+        return;
+      }
+
+      if (event.key !== 'Tab' || !dialog) return;
+      const focusable = [...dialog.querySelectorAll<HTMLButtonElement>('button')]
+        .filter((element) => element.getClientRects().length > 0 && !element.disabled);
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (!first || !last) return;
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      pageRegions.forEach((region) => {
+        region.inert = false;
+      });
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open, onDismiss]);
+
+  if (!open) return null;
+
+  return (
+    <div className={styles.nextStepOverlay} role="presentation">
+      <div
+        ref={dialogRef}
+        className={styles.nextStepDialog}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        aria-describedby={descriptionId}
+      >
+        <div className={styles.nextStepHead}>
+          <div>
+            <p className="eyebrow">Nächster Schritt</p>
+            <h2 id={titleId}>Ergebnis sichern</h2>
+          </div>
+          <button className={styles.nextStepClose} type="button" onClick={onDismiss} aria-label="Dialog schließen">
+            ×
+          </button>
+        </div>
+        <p id={descriptionId} className={styles.nextStepIntro}>
+          Ihre Einschätzung „{assessmentTitle}“ ist fertig. Laden Sie die PDF herunter oder hängen Sie sie an eine unverbindliche Kontaktanfrage an.
+        </p>
+        <div className={styles.nextStepActions}>
+          <button
+            className={styles.nextStepPrimary}
+            type="button"
+            onClick={onDownloadPdf}
+            disabled={pdfState === 'creating'}
+          >
+            <strong>{pdfState === 'creating' ? 'PDF wird erstellt …' : 'PDF herunterladen'}</strong>
+            <small>3 Seiten · lokal auf Ihrem Gerät</small>
+          </button>
+          <button className={styles.nextStepSecondary} type="button" onClick={onAttachToContact}>
+            <strong>PDF an Anfrage anhängen</strong>
+            <small>Kontaktformular mit vorausgewähltem Anhang öffnen</small>
+          </button>
+        </div>
+        <p
+          className={[styles.nextStepStatus, pdfState === 'error' ? styles.pdfStatusError : ''].filter(Boolean).join(' ')}
+          role="status"
+          aria-live="polite"
+        >
+          {pdfState === 'success'
+            ? 'Die PDF-Auswertung wurde heruntergeladen.'
+            : pdfState === 'error'
+              ? 'Die PDF konnte nicht erstellt werden. Bitte versuchen Sie es erneut.'
+              : ''}
+        </p>
+        <button className={styles.nextStepDismiss} type="button" onClick={onDismiss}>
+          Zuerst Ergebnis weiterlesen
+        </button>
+      </div>
+    </div>
   );
 }
 
 export function AutomationCheckResult({ answers, assessment, onEdit, onRestart }: Props) {
   const [contactOpen, setContactOpen] = useState(false);
+  const [preferPdfAttachment, setPreferPdfAttachment] = useState(true);
+  const [nextStepOpen, setNextStepOpen] = useState(true);
   const [pdfState, setPdfState] = useState<'idle' | 'creating' | 'success' | 'error'>('idle');
   const area = getAreaConfig(answers.area);
 
-  function openContact() {
+  function openContact(options?: { attachPdf?: boolean; fromDialog?: boolean }) {
+    setPreferPdfAttachment(options?.attachPdf ?? true);
     setContactOpen(true);
+    setNextStepOpen(false);
     trackAnalyticsEvent('automation_check_contact_start', {
       result_category: assessment.category,
-      page_type: 'automation_check'
+      page_type: 'automation_check',
+      from_dialog: options?.fromDialog ? 'true' : 'false'
     });
     window.requestAnimationFrame(() => {
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -228,7 +405,16 @@ export function AutomationCheckResult({ answers, assessment, onEdit, onRestart }
     });
   }
 
-  async function downloadPdf() {
+  function dismissNextStep() {
+    setNextStepOpen(false);
+    trackAnalyticsEvent('automation_check_next_step', {
+      action: 'dismiss',
+      result_category: assessment.category,
+      page_type: 'automation_check'
+    });
+  }
+
+  async function downloadPdf(fromDialog = false) {
     if (pdfState === 'creating') return;
     setPdfState('creating');
 
@@ -237,8 +423,16 @@ export function AutomationCheckResult({ answers, assessment, onEdit, onRestart }
       setPdfState('success');
       trackAnalyticsEvent('automation_check_pdf_download', {
         result_category: assessment.category,
-        page_type: 'automation_check'
+        page_type: 'automation_check',
+        from_dialog: fromDialog ? 'true' : 'false'
       });
+      if (fromDialog) {
+        trackAnalyticsEvent('automation_check_next_step', {
+          action: 'download_pdf',
+          result_category: assessment.category,
+          page_type: 'automation_check'
+        });
+      }
       window.setTimeout(() => setPdfState('idle'), 4500);
     } catch {
       setPdfState('error');
@@ -247,6 +441,24 @@ export function AutomationCheckResult({ answers, assessment, onEdit, onRestart }
 
   return (
     <main id="main-content" className={styles.resultPage}>
+      <ResultNextStepDialog
+        open={nextStepOpen}
+        assessmentTitle={assessment.title}
+        pdfState={pdfState}
+        onDownloadPdf={() => {
+          void downloadPdf(true);
+        }}
+        onAttachToContact={() => {
+          trackAnalyticsEvent('automation_check_next_step', {
+            action: 'attach_pdf',
+            result_category: assessment.category,
+            page_type: 'automation_check'
+          });
+          openContact({ attachPdf: true, fromDialog: true });
+        }}
+        onDismiss={dismissNextStep}
+      />
+
       <div className="container">
         <AutomationCheckProgress currentPhase="assessment" stepIndex={8} result />
       </div>
@@ -260,7 +472,7 @@ export function AutomationCheckResult({ answers, assessment, onEdit, onRestart }
             <p className={styles.resultSummary}>{assessment.summary}</p>
             <p className={styles.orientationNote}>Diese Einordnung ist eine erste Orientierung, keine vollständige Prozessanalyse und kein technisches Angebot.</p>
             {!contactOpen && (
-              <button className={['button', 'button-primary', styles.mobileResultCta].join(' ')} type="button" onClick={openContact}>
+              <button className={['button', 'button-primary', styles.mobileResultCta].join(' ')} type="button" onClick={() => openContact()}>
                 Ergebnis mit Anfrage senden <span className="button-arrow" aria-hidden="true">→</span>
               </button>
             )}
@@ -286,13 +498,13 @@ export function AutomationCheckResult({ answers, assessment, onEdit, onRestart }
             <div>
               <p className="eyebrow eyebrow-light">Ihr nächster Schritt</p>
               <h2 id="result-actions-heading">Ergebnis an MSB senden und konkret einordnen lassen.</h2>
-              <p>Ihre Auswertung wird vorausgewählt an die Anfrage angehängt. So können wir direkt auf Ihren Prozess eingehen, statt mit allgemeinen Rückfragen zu beginnen.</p>
+              <p>Sie können die PDF herunterladen oder die Auswertung inklusive PDF an eine unverbindliche Anfrage anhängen.</p>
             </div>
             <div className={styles.actionButtons}>
               {!contactOpen && (
-                <button className={["button", "button-light", styles.handoffCta].join(' ')} type="button" onClick={openContact}>
+                <button className={['button', 'button-light', styles.handoffCta].join(' ')} type="button" onClick={() => openContact()}>
                   <span>
-                    <small>Auswertung ist enthalten</small>
+                    <small>PDF-Anhang vorausgewählt</small>
                     <strong>Ergebnis mit Anfrage senden</strong>
                   </span>
                   <span className="button-arrow" aria-hidden="true">→</span>
@@ -303,7 +515,9 @@ export function AutomationCheckResult({ answers, assessment, onEdit, onRestart }
                 <button
                   className={styles.pdfDownloadButton}
                   type="button"
-                  onClick={downloadPdf}
+                  onClick={() => {
+                    void downloadPdf(false);
+                  }}
                   disabled={pdfState === 'creating'}
                   aria-describedby="pdf-download-note pdf-download-status"
                 >
@@ -329,7 +543,15 @@ export function AutomationCheckResult({ answers, assessment, onEdit, onRestart }
               </p>
             </div>
           </div>
-          {contactOpen && <div id="automation-check-contact" className={styles.contactAnchor}><ContactHandoff answers={answers} assessment={assessment} /></div>}
+          {contactOpen && (
+            <div id="automation-check-contact" className={styles.contactAnchor}>
+              <ContactHandoff
+                answers={answers}
+                assessment={assessment}
+                preferPdfAttachment={preferPdfAttachment}
+              />
+            </div>
+          )}
         </div>
       </section>
 
