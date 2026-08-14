@@ -7,9 +7,9 @@ const nextSteps = [
   ['Konkreter nächster Schritt', 'Sie erhalten eine erste Einschätzung zu Nutzen, Aufwand und Risiken.']
 ];
 
-export function ContactPanel() {
+export function ContactPanel({ formFirst = false }: { formFirst?: boolean }) {
   return (
-    <div className="contact-layout">
+    <div className={['contact-layout', formFirst ? 'contact-layout--form-first' : ''].filter(Boolean).join(' ')}>
       <div className="contact-copy">
         <p className="eyebrow eyebrow-light">So geht es weiter</p>
         <h2 id="contact-panel-heading" tabIndex={-1}>In drei Schritten zur ersten Einschätzung</h2>

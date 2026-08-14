@@ -43,21 +43,29 @@ export default function KontaktPage() {
           { label: 'Kontakt' }
         ]}
       />
+
       <PageIntro
+        compact
+        flush
         eyebrow="Kontakt"
         title="Sprechen wir über einen echten Prozess."
-        lead="Am hilfreichsten ist ein wiederkehrender Ablauf, bei dem heute Informationen gesucht, übertragen, geprüft oder aufbereitet werden."
-        aside="MSB sitzt in Tübingen und begleitet Unternehmen in der Region Tübingen–Reutlingen–Stuttgart sowie remote. Wir melden uns in der Regel innerhalb von 1–2 Werktagen."
+        lead="Beschreiben Sie einen wiederkehrenden Ablauf – wir melden uns in der Regel innerhalb von 1–2 Werktagen."
       />
 
-      <section className="section contact-route-section" aria-labelledby="contact-options-heading">
+      <section className="section contact-section contact-page-section contact-page-form-section" aria-labelledby="contact-panel-heading">
+        <div className="container">
+          <ContactPanel formFirst />
+        </div>
+      </section>
+
+      <section className="section contact-route-section contact-route-section--secondary" aria-labelledby="contact-options-heading">
         <div className="container">
           <Reveal className="section-heading heading-split">
             <div>
-              <p className="eyebrow">Der passende Weg</p>
-              <h2 id="contact-options-heading">Worum geht es bei Ihrer Anfrage?</h2>
+              <p className="eyebrow">Alternativen</p>
+              <h2 id="contact-options-heading">Weitere Kontaktwege</h2>
             </div>
-            <p>Für eine erste Prozesseinschätzung ist das sichere Formular am schnellsten. Für alles andere können Sie uns weiterhin direkt schreiben.</p>
+            <p>Für eine erste Prozesseinschätzung ist das Formular am schnellsten. Für alles andere erreichen Sie uns auch direkt.</p>
           </Reveal>
           <RevealGroup className="contact-options-grid" stagger="normal">
             {contactOptions.map((option, index) => (
@@ -70,12 +78,6 @@ export default function KontaktPage() {
               </article>
             ))}
           </RevealGroup>
-        </div>
-      </section>
-
-      <section className="section contact-section contact-page-section" aria-labelledby="contact-panel-heading">
-        <div className="container">
-          <ContactPanel />
         </div>
       </section>
 
