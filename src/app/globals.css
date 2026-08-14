@@ -2570,7 +2570,7 @@ textarea:focus-visible,
 
 @media (min-width: 821px) {
   .contact-layout--form-first {
-    grid-template-columns: minmax(0, 1.38fr) minmax(240px, 0.72fr);
+    grid-template-columns: minmax(0, 1.58fr) minmax(200px, 0.46fr);
   }
 
   .contact-layout--form-first .form-surface {
@@ -2579,20 +2579,30 @@ textarea:focus-visible,
 
   .contact-layout--form-first .contact-copy {
     order: 1;
-    max-width: 34ch;
+    max-width: 28ch;
   }
 }
 
 @media (min-width: 1100px) {
   .contact-layout--form-first {
-    grid-template-columns: minmax(520px, 1.62fr) minmax(260px, 0.62fr);
-    gap: clamp(2rem, 3vw, 2.5rem);
+    grid-template-columns: minmax(560px, 2.05fr) minmax(220px, 0.42fr);
+    gap: clamp(1.75rem, 2.5vw, 2.25rem);
   }
 }
 
+.contact-layout--form-first .contact-copy h2 {
+  font-size: clamp(1.3rem, 1.9vw, 1.5rem);
+  line-height: 1.22;
+}
+
+.contact-layout--form-first .check-process {
+  margin-top: 1.15rem;
+}
+
 .contact-layout--form-first .contact-lead {
-  font-size: 0.94rem;
-  line-height: 1.6;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  margin-top: 0.85rem;
 }
 
 .contact-layout--form-first .direct-contact {
