@@ -30,7 +30,9 @@ type ContactResponse = {
 
 export async function sendContactRequest(payload: ContactRequest) {
   const controller = new AbortController();
-  const timeout = window.setTimeout(() => controller.abort(), 20000);
+  const hasPdfAttachment = Boolean(payload.pdfBase64);
+  const timeoutMs = hasPdfAttachment ? 45000 : 20000;
+  const timeout = window.setTimeout(() => controller.abort(), timeoutMs);
 
   try {
     const response = await fetch('/contact.php', {
