@@ -57,6 +57,7 @@ jobs:
         shell: bash
         run: |
           php -l public/contact.php
+          php -l public/contact-lib/confirmation-email.php
           php -l public/contact-lib/phpmailer/Exception.php
           php -l public/contact-lib/phpmailer/PHPMailer.php
           php -l public/contact-lib/phpmailer/SMTP.php
