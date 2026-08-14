@@ -12,9 +12,9 @@ export function ContactPanel({ formFirst = false }: { formFirst?: boolean }) {
     <div className={['contact-layout', formFirst ? 'contact-layout--form-first' : ''].filter(Boolean).join(' ')}>
       <div className="contact-copy">
         <p className="eyebrow eyebrow-light">So geht es weiter</p>
-        <h2 id="contact-panel-heading" tabIndex={-1}>In drei Schritten zur ersten Einschätzung</h2>
+        <h2 id="contact-panel-heading" tabIndex={-1}>Drei Schritte zur Einschätzung</h2>
         <p className="contact-lead">
-          Sie beschreiben den Ablauf – wir ordnen Nutzen, Aufwand und Risiken ehrlich ein. In der Regel melden wir uns innerhalb von <strong>1–2 Werktagen</strong>.
+          Sie beschreiben den Ablauf – wir ordnen Nutzen, Aufwand und Risiken ehrlich ein.
         </p>
 
         <ProcessFlow
