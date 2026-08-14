@@ -1,28 +1,41 @@
 type PageIntroProps = {
   eyebrow: string;
   title: string;
-  lead: string;
+  lead?: string;
   aside?: string;
   compact?: boolean;
   flush?: boolean;
+  stacked?: boolean;
 };
 
-export function PageIntro({ eyebrow, title, lead, aside, compact = false, flush = false }: PageIntroProps) {
+export function PageIntro({
+  eyebrow,
+  title,
+  lead,
+  aside,
+  compact = false,
+  flush = false,
+  stacked = false
+}: PageIntroProps) {
   return (
     <section className={[
       'page-intro',
       compact ? 'page-intro--compact' : '',
-      flush ? 'page-intro--flush' : ''
+      flush ? 'page-intro--flush' : '',
+      stacked ? 'page-intro--stacked' : ''
     ].filter(Boolean).join(' ')}>
       <div className="container page-intro-grid">
         <div>
           <p className="eyebrow">{eyebrow}</p>
           <h1>{title}</h1>
+          {stacked && lead ? <p className="page-intro-lead">{lead}</p> : null}
         </div>
-        <div className="page-intro-copy">
-          <p>{lead}</p>
-          {aside ? <p className="page-intro-aside">{aside}</p> : null}
-        </div>
+        {!stacked ? (
+          <div className="page-intro-copy">
+            {lead ? <p>{lead}</p> : null}
+            {aside ? <p className="page-intro-aside">{aside}</p> : null}
+          </div>
+        ) : null}
       </div>
     </section>
   );

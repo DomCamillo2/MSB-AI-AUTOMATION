@@ -5112,6 +5112,19 @@ textarea[aria-invalid='true'] {
   padding-top: clamp(2rem, 3.5vw, 2.75rem);
 }
 
+.page-intro--stacked .page-intro-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+.page-intro-lead {
+  max-width: 52ch;
+  margin: 1rem 0 0;
+  color: #3d494f;
+  font-size: clamp(1rem, 1.4vw, 1.08rem);
+  line-height: 1.55;
+}
+
 @keyframes hero-accent-draw {
   from {
     transform: scaleX(0);
