@@ -4,9 +4,10 @@ import { useRouter } from 'next/navigation';
 import { useRef, useState, type FormEvent } from 'react';
 import { trackAnalyticsEvent } from '@/lib/analytics';
 import { sendContactRequest } from '@/lib/contact-api';
+import { validateOptionalPhone } from '@/lib/contact-phone';
 import { primaryCtaFullLabel } from '@/lib/site-content';
 
-type FormField = 'name' | 'company' | 'email' | 'process' | 'privacy';
+type FormField = 'name' | 'company' | 'email' | 'phone' | 'process' | 'privacy';
 type FormErrors = Partial<Record<FormField, string>>;
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -16,6 +17,7 @@ export function ContactForm() {
   const [name, setName] = useState('');
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [process, setProcess] = useState('');
   const [website, setWebsite] = useState('');
   const [privacyAcknowledged, setPrivacyAcknowledged] = useState(false);
@@ -49,6 +51,8 @@ export function ContactForm() {
     if (!company.trim()) nextErrors.company = 'Bitte geben Sie Ihr Unternehmen ein.';
     if (!email.trim()) nextErrors.email = 'Bitte geben Sie Ihre geschäftliche E-Mail-Adresse ein.';
     else if (!emailPattern.test(email.trim())) nextErrors.email = 'Bitte prüfen Sie das Format der E-Mail-Adresse.';
+    const phoneError = validateOptionalPhone(phone);
+    if (phoneError) nextErrors.phone = phoneError;
     if (!process.trim()) nextErrors.process = 'Bitte beschreiben Sie den wiederkehrenden Prozess kurz.';
     if (!privacyAcknowledged) nextErrors.privacy = 'Bitte bestätigen Sie, dass Sie die Datenschutzerklärung zur Kenntnis genommen haben.';
 
@@ -72,6 +76,7 @@ export function ContactForm() {
         name: name.trim(),
         company: company.trim(),
         email: email.trim(),
+        ...(phone.trim() ? { phone: phone.trim() } : {}),
         message: process.trim(),
         privacy: true,
         website,
@@ -148,25 +153,48 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="field">
-        <label htmlFor="email">Geschäftliche E-Mail</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          inputMode="email"
-          autoComplete="email"
-          maxLength={254}
-          required
-          aria-invalid={errors.email ? true : undefined}
-          aria-describedby={errors.email ? 'email-error' : undefined}
-          value={email}
-          onChange={(event) => {
-            setEmail(event.target.value);
-            clearFeedback('email');
-          }}
-        />
-        {errors.email ? <p className="form-error" id="email-error">{errors.email}</p> : null}
+      <div className="form-row">
+        <div className="field">
+          <label htmlFor="email">Geschäftliche E-Mail</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            maxLength={254}
+            required
+            aria-invalid={errors.email ? true : undefined}
+            aria-describedby={errors.email ? 'email-error' : undefined}
+            value={email}
+            onChange={(event) => {
+              setEmail(event.target.value);
+              clearFeedback('email');
+            }}
+          />
+          {errors.email ? <p className="form-error" id="email-error">{errors.email}</p> : null}
+        </div>
+        <div className="field">
+          <label htmlFor="phone">Telefon <span className="field-optional">optional</span></label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            inputMode="tel"
+            autoComplete="tel"
+            maxLength={40}
+            placeholder="z. B. 0160 1234567"
+            aria-invalid={errors.phone ? true : undefined}
+            aria-describedby={errors.phone ? 'phone-hint phone-error' : 'phone-hint'}
+            value={phone}
+            onChange={(event) => {
+              setPhone(event.target.value);
+              clearFeedback('phone');
+            }}
+          />
+          <small id="phone-hint">Für eine schnelle Rückfrage per Telefon</small>
+          {errors.phone ? <p className="form-error" id="phone-error">{errors.phone}</p> : null}
+        </div>
       </div>
 
       <div className="field">

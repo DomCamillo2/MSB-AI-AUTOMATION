@@ -12,6 +12,7 @@ import {
 } from '@/lib/automation-check-pdf';
 import { trackAnalyticsEvent } from '@/lib/analytics';
 import { sendContactRequest } from '@/lib/contact-api';
+import { validateOptionalPhone } from '@/lib/contact-phone';
 import type { AutomationAssessment, CheckAnswers } from '@/lib/automation-check-types';
 import styles from './automation-check.module.css';
 
@@ -40,12 +41,14 @@ function ContactHandoff({ answers, assessment, preferPdfAttachment = true }: Con
   const [name, setName] = useState('');
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [additionalMessage, setAdditionalMessage] = useState('');
   const [includeAssessment, setIncludeAssessment] = useState(true);
   const [attachPdf, setAttachPdf] = useState(preferPdfAttachment);
   const [website, setWebsite] = useState('');
   const [privacy, setPrivacy] = useState(false);
   const [emailError, setEmailError] = useState('');
+  const [phoneError, setPhoneError] = useState('');
   const [privacyError, setPrivacyError] = useState('');
   const [status, setStatus] = useState('');
   const [statusTone, setStatusTone] = useState<'success' | 'error'>('success');
@@ -66,13 +69,15 @@ function ContactHandoff({ answers, assessment, preferPdfAttachment = true }: Con
       : !emailPattern.test(cleanEmail)
         ? 'Bitte prüfen Sie das Format der E-Mail-Adresse.'
         : '';
+    const nextPhoneError = validateOptionalPhone(phone);
     const nextPrivacyError = privacy ? '' : 'Bitte bestätigen Sie, dass Sie die Datenschutzhinweise gelesen haben.';
 
     setEmailError(nextEmailError);
+    setPhoneError(nextPhoneError);
     setPrivacyError(nextPrivacyError);
     setStatus('');
 
-    if (nextEmailError || nextPrivacyError) {
+    if (nextEmailError || nextPhoneError || nextPrivacyError) {
       window.requestAnimationFrame(() => {
         form.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
       });
@@ -90,6 +95,7 @@ function ContactHandoff({ answers, assessment, preferPdfAttachment = true }: Con
         name: name.trim(),
         company: company.trim(),
         email: cleanEmail,
+        ...(phone.trim() ? { phone: phone.trim() } : {}),
         message: buildAutomationCheckMessage(answers, assessment, additionalMessage, includeAssessment),
         privacy: true,
         website,
@@ -101,6 +107,7 @@ function ContactHandoff({ answers, assessment, preferPdfAttachment = true }: Con
       setName('');
       setCompany('');
       setEmail('');
+      setPhone('');
       setAdditionalMessage('');
       setWebsite('');
       setPrivacy(false);
@@ -199,6 +206,27 @@ function ContactHandoff({ answers, assessment, preferPdfAttachment = true }: Con
             }}
           />
           {emailError ? <p className={styles.fieldError} id="check-email-error">{emailError}</p> : null}
+        </div>
+        <div className={styles.contactField}>
+          <label htmlFor="check-phone">Telefon <span>optional</span></label>
+          <input
+            id="check-phone"
+            type="tel"
+            autoComplete="tel"
+            inputMode="tel"
+            maxLength={40}
+            placeholder="z. B. 0160 1234567"
+            value={phone}
+            aria-invalid={phoneError ? true : undefined}
+            aria-describedby={phoneError ? 'check-phone-error check-phone-hint' : 'check-phone-hint'}
+            onChange={(event) => {
+              setPhone(event.target.value);
+              setPhoneError('');
+              setStatus('');
+            }}
+          />
+          <small id="check-phone-hint" className={styles.contactFieldHint}>Für eine schnelle Rückfrage per Telefon</small>
+          {phoneError ? <p className={styles.fieldError} id="check-phone-error">{phoneError}</p> : null}
         </div>
         <div className={styles.contactField}>
           <label htmlFor="check-name">Name <span>optional</span></label>
