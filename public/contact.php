@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 use PHPMailer\PHPMailer\PHPMailer;
 
+const MAX_PDF_BASE64_BYTES = 1_200_000;
+const MAX_REQUEST_BYTES = 2_097_152;
+
 require_once __DIR__ . '/contact-lib/phpmailer/Exception.php';
 require_once __DIR__ . '/contact-lib/phpmailer/PHPMailer.php';
 require_once __DIR__ . '/contact-lib/phpmailer/SMTP.php';
@@ -75,7 +78,7 @@ function decode_pdf_attachment(mixed $base64, mixed $filename, string $source): 
         throw new InvalidArgumentException('Der PDF-Anhang ist ungültig.');
     }
 
-    if (strlen($base64) > 1_200_000) {
+    if (strlen($base64) > MAX_PDF_BASE64_BYTES) {
         throw new InvalidArgumentException('Der PDF-Anhang ist zu groß.');
     }
 
@@ -236,8 +239,8 @@ if (!str_starts_with($contentType, 'application/json')) {
 }
 
 $contentLength = (int) ($_SERVER['CONTENT_LENGTH'] ?? 0);
-if ($contentLength > 24 * 1024) {
-    respond(413, ['ok' => false, 'message' => 'Die Anfrage ist zu groß.']);
+if ($contentLength > MAX_REQUEST_BYTES) {
+    respond(413, ['ok' => false, 'message' => 'Die Anfrage ist zu groß. Bitte senden Sie die Anfrage ohne PDF oder schreiben Sie direkt an kontakt@msb-ai.de.']);
 }
 
 $requestId = bin2hex(random_bytes(8));
@@ -252,6 +255,10 @@ try {
     $rawBody = file_get_contents('php://input');
     if (!is_string($rawBody) || $rawBody === '') {
         throw new InvalidArgumentException('Die Anfrage enthält keine Daten.');
+    }
+
+    if (strlen($rawBody) > MAX_REQUEST_BYTES) {
+        respond(413, ['ok' => false, 'message' => 'Die Anfrage ist zu groß. Bitte senden Sie die Anfrage ohne PDF oder schreiben Sie direkt an kontakt@msb-ai.de.']);
     }
 
     $data = json_decode($rawBody, true, 32, JSON_THROW_ON_ERROR);
