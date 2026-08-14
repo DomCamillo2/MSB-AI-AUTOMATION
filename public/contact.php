@@ -46,6 +46,25 @@ function clean_text(mixed $value, int $maxLength, bool $required = false): strin
     return $value;
 }
 
+function clean_phone(mixed $value): string
+{
+    $phone = clean_text($value, 40);
+    if ($phone === '') {
+        return '';
+    }
+
+    if (!preg_match('/^[\d\s+().\/-]+$/', $phone)) {
+        throw new InvalidArgumentException('Bitte prüfen Sie die Telefonnummer.');
+    }
+
+    $digits = preg_replace('/\D+/', '', $phone) ?? '';
+    if (strlen($digits) < 6 || strlen($digits) > 20) {
+        throw new InvalidArgumentException('Bitte prüfen Sie die Telefonnummer.');
+    }
+
+    return $phone;
+}
+
 /**
  * @return array{data: string, filename: string}|null
  */
@@ -261,6 +280,7 @@ try {
     $name = clean_text($data['name'] ?? '', 160, $source === 'website_contact');
     $company = clean_text($data['company'] ?? '', 200, $source === 'website_contact');
     $email = clean_text($data['email'] ?? '', 254, true);
+    $phone = clean_phone($data['phone'] ?? '');
     $message = clean_text($data['message'] ?? '', 6000, true);
     $pdfAttachment = decode_pdf_attachment($data['pdfBase64'] ?? null, $data['pdfFilename'] ?? null, $source);
 
@@ -287,6 +307,7 @@ try {
         'Name: ' . ($name !== '' ? $name : 'Nicht angegeben'),
         'Unternehmen: ' . ($company !== '' ? $company : 'Nicht angegeben'),
         'E-Mail: ' . $email,
+        'Telefon: ' . ($phone !== '' ? $phone : 'Nicht angegeben'),
         '',
         'Nachricht / Prozesseinschätzung:',
         $message,
@@ -304,6 +325,7 @@ try {
         . '<tr><th align="left">Name</th><td>' . escape_html($name !== '' ? $name : 'Nicht angegeben') . '</td></tr>'
         . '<tr><th align="left">Unternehmen</th><td>' . escape_html($company !== '' ? $company : 'Nicht angegeben') . '</td></tr>'
         . '<tr><th align="left">E-Mail</th><td>' . escape_html($email) . '</td></tr>'
+        . '<tr><th align="left">Telefon</th><td>' . escape_html($phone !== '' ? $phone : 'Nicht angegeben') . '</td></tr>'
         . '<tr><th align="left">PDF-Anhang</th><td>' . escape_html($pdfAttachment ? $pdfAttachment['filename'] : 'Nein') . '</td></tr>'
         . '</table>'
         . '<h2 style="font-size:18px">Nachricht / Prozesseinschätzung</h2>'
