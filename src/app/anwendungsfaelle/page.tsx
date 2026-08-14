@@ -24,13 +24,13 @@ export default function AnwendungsfaellePage() {
       <PageBreadcrumb
         items={[
           { label: 'Startseite', href: '/' },
-          { label: 'Anwendungsfälle' }
+          { label: 'Beispiele' }
         ]}
       />
       <PageIntro
-        eyebrow="Anwendungsfälle"
+        eyebrow="Beispiele"
         title="Konkrete Abläufe statt abstrakter KI-Projekte."
-        lead="Geeignete Anwendungsfälle entstehen dort, wo Informationen wiederholt erfasst, geprüft, übertragen oder aufbereitet werden."
+        lead="Geeignete Beispiele entstehen dort, wo Informationen wiederholt erfasst, geprüft, übertragen oder aufbereitet werden."
         aside="Die konkrete Lösung hängt von Systemen, Daten, Ausnahmen und den gewünschten menschlichen Freigaben ab."
       />
 

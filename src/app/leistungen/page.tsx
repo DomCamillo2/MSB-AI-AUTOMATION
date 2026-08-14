@@ -137,19 +137,19 @@ export default function LeistungenPage() {
       <PageBreadcrumb
         items={[
           { label: 'Startseite', href: '/' },
-          { label: 'Leistungen' }
+          { label: 'Themen' }
         ]}
       />
 
       <section className={styles.pageHero} aria-labelledby="services-page-heading">
         <div className={`container ${styles.heroGrid}`}>
           <div className={styles.heroCopy}>
-            <p className="eyebrow">Leistungen · Prozessautomatisierung für KMU</p>
+            <p className="eyebrow">Themen · Prozessautomatisierung für KMU</p>
             <h1 id="services-page-heading">Wiederkehrende Prozesse automatisieren. Bestehende Systeme weiter nutzen.</h1>
             <p className={styles.heroLead}>MSB verbindet E-Mail, Excel, CRM, Dokumente und weitere Systeme zu nachvollziehbaren Workflows – mit festen Regeln, KI dort, wo sie hilft, und menschlicher Freigabe dort, wo sie nötig ist.</p>
             <div className={styles.heroActions}>
               <a className="button button-primary" href="/automation-check/">Prozess kostenlos prüfen lassen <span className="button-arrow" aria-hidden="true">→</span></a>
-              <a className="button button-secondary" href="#automatisierungsfelder">Anwendungsfelder ansehen</a>
+              <a className="button button-secondary" href="#automatisierungsfelder">Themen ansehen</a>
             </div>
             <ul className={styles.heroSignals} aria-label="Grundsätze unserer Arbeit">
               <li>Bestehende Systeme zuerst</li>
@@ -191,7 +191,7 @@ export default function LeistungenPage() {
               </Reveal>
             ))}
           </div>
-          <p className={styles.contextLink}><a className="text-link" href="/anwendungsfaelle/">Weitere Anwendungsfälle für HR, Verwaltung und Reporting ansehen <span aria-hidden="true">→</span></a></p>
+          <p className={styles.contextLink}><a className="text-link" href="/anwendungsfaelle/">Konkrete Beispiele für HR, Verwaltung und Reporting ansehen <span aria-hidden="true">→</span></a></p>
         </div>
       </section>
 

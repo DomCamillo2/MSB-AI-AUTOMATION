@@ -40,7 +40,7 @@ export function UseCaseDetailPage({ useCase }: Props) {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${siteUrl}/` },
-          { '@type': 'ListItem', position: 2, name: 'Anwendungsfälle', item: `${siteUrl}/anwendungsfaelle/` },
+          { '@type': 'ListItem', position: 2, name: 'Beispiele', item: `${siteUrl}/anwendungsfaelle/` },
           { '@type': 'ListItem', position: 3, name: useCase.title, item: pageUrl }
         ]
       }
@@ -53,7 +53,7 @@ export function UseCaseDetailPage({ useCase }: Props) {
       <nav className={styles.breadcrumb} aria-label="Brotkrümelnavigation">
         <ol className="container">
           <li><a href="/">Startseite</a></li>
-          <li><a href="/anwendungsfaelle/">Anwendungsfälle</a></li>
+          <li><a href="/anwendungsfaelle/">Beispiele</a></li>
           <li aria-current="page" title={useCase.title}>{breadcrumbLabel}</li>
         </ol>
       </nav>

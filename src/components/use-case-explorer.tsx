@@ -35,7 +35,7 @@ export function UseCaseExplorer() {
 
   return (
     <div className="use-case-explorer">
-      <div className="use-case-tabs" role="tablist" aria-label="Anwendungsfälle">
+      <div className="use-case-tabs" role="tablist" aria-label="Beispiele">
         {useCases.map((useCase, index) => (
           <button
             key={useCase.category}

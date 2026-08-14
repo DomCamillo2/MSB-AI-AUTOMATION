@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useRef, useState, type FormEvent } from 'react';
 import { trackAnalyticsEvent } from '@/lib/analytics';
 import { sendContactRequest } from '@/lib/contact-api';
+import { primaryCtaFullLabel } from '@/lib/site-content';
 
 type FormField = 'name' | 'company' | 'email' | 'process' | 'privacy';
 type FormErrors = Partial<Record<FormField, string>>;
@@ -211,7 +212,7 @@ export function ContactForm() {
       <a className="privacy-link" href="/datenschutz/">Datenschutzerklärung lesen</a>
 
       <button className="button button-primary form-submit" type="submit" disabled={isSubmitting}>
-        {isSubmitting ? 'Anfrage wird gesendet …' : 'Prozess kostenlos prüfen lassen'}
+        {isSubmitting ? 'Anfrage wird gesendet …' : primaryCtaFullLabel}
         {!isSubmitting ? <span className="button-arrow" aria-hidden="true">→</span> : null}
       </button>
       {status ? <p className={`form-status is-${statusTone}`} role="status" aria-live="polite">{status}</p> : null}

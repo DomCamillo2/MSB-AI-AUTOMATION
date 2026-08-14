@@ -2,6 +2,7 @@
 
 import { useReducedMotion } from 'motion/react';
 import * as m from 'motion/react-m';
+import { primaryCtaFullLabel } from '@/lib/site-content';
 import WorkflowAnimation from '@/components/workflow-animation';
 import { motionTokens } from '@/lib/motion';
 
@@ -51,10 +52,10 @@ export function AnimatedHero() {
             </m.p>
             <m.div className="hero-actions" variants={heroItem}>
               <a className="button button-primary" href="/automation-check/">
-                Prozess kostenlos prüfen lassen <span className="button-arrow" aria-hidden="true">→</span>
+                {primaryCtaFullLabel} <span className="button-arrow" aria-hidden="true">→</span>
               </a>
-              <a className="button button-secondary" href="/anwendungsfaelle/">
-                Anwendungsfälle ansehen <span className="button-arrow" aria-hidden="true">→</span>
+              <a className="button button-secondary" href="/leistungen/">
+                Themen ansehen <span className="button-arrow" aria-hidden="true">→</span>
               </a>
             </m.div>
             <m.div className="hero-meta" variants={heroItem}>

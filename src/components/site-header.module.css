@@ -156,16 +156,29 @@
   min-height: 44px;
   display: inline-flex;
   align-items: center;
-  padding: 0 0.35rem;
-  color: #526068;
+  padding: 0 0.75rem;
+  color: var(--navy);
+  border: 1px solid rgba(7, 27, 58, 0.14);
+  border-radius: 12px;
   font-size: 0.86rem;
   font-weight: 650;
-  transition: color 180ms ease;
+  background: rgba(255, 255, 255, 0.72);
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
 }
 
 .contactLink:hover,
 .contactLink:focus-visible {
-  color: var(--teal);
+  color: var(--navy);
+  background: rgba(8, 119, 123, 0.085);
+  border-color: rgba(8, 119, 123, 0.28);
+}
+
+.contactLink[aria-current='page'] {
+  background: rgba(8, 119, 123, 0.1);
+  border-color: rgba(8, 119, 123, 0.35);
 }
 
 .cta {
@@ -527,25 +540,29 @@
     display: inline-flex;
   }
 
-  .menuContact {
-    min-height: 52px;
-    align-items: center;
-    padding: 0 1rem;
-    color: var(--teal);
-    font-weight: 700;
-  }
-
   .menuCta {
+    order: -2;
     min-height: 54px;
     align-items: center;
     justify-content: center;
-    margin-top: 1rem;
+    margin-bottom: 0.35rem;
     padding-inline: 1rem;
     color: white;
     background: var(--navy);
     border-radius: 12px;
     font-family: var(--font-poppins), Poppins, sans-serif;
     font-weight: 650;
+  }
+
+  .menuContact {
+    order: -1;
+    min-height: 52px;
+    align-items: center;
+    margin-bottom: 0.85rem;
+    padding: 0 1rem;
+    color: var(--teal);
+    font-weight: 700;
+    border-bottom: 1px solid rgba(7, 27, 58, 0.1);
   }
 }
 

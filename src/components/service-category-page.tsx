@@ -40,7 +40,7 @@ export function ServiceCategoryPage({ category }: Props) {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${siteUrl}/` },
-          { '@type': 'ListItem', position: 2, name: 'Leistungen', item: `${siteUrl}/leistungen/` },
+          { '@type': 'ListItem', position: 2, name: 'Themen', item: `${siteUrl}/leistungen/` },
           { '@type': 'ListItem', position: 3, name: category.name, item: pageUrl }
         ]
       }
@@ -53,7 +53,7 @@ export function ServiceCategoryPage({ category }: Props) {
       <nav className={styles.breadcrumb} aria-label="Brotkrümelnavigation">
         <ol className="container">
           <li><a href="/">Startseite</a></li>
-          <li><a href="/leistungen/">Leistungen</a></li>
+          <li><a href="/leistungen/">Themen</a></li>
           <li aria-current="page">{category.name}</li>
         </ol>
       </nav>
@@ -103,7 +103,7 @@ export function ServiceCategoryPage({ category }: Props) {
         <div className="container">
           <Reveal>
             <div className={styles.sectionIntro}>
-              <div><p className="eyebrow">Konkrete Abläufe</p><h2 id="use-cases-heading">Typische Anwendungsfälle</h2></div>
+              <div><p className="eyebrow">Beispiele</p><h2 id="use-cases-heading">Typische Prozesse in diesem Thema</h2></div>
               <p>Die Beispiele zeigen sinnvolle Einstiegspunkte. Verlinkte Vertiefungen beschreiben den Ablauf, die technische Vorbereitung und die menschliche Verantwortung im Detail.</p>
             </div>
           </Reveal>

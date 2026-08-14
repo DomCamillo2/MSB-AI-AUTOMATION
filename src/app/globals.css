@@ -1043,6 +1043,68 @@ textarea:focus-visible,
   background: var(--paper);
 }
 
+.theme-preview-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.theme-preview-list > .reveal-item {
+  min-width: 0;
+  height: 100%;
+}
+
+.theme-preview-list a {
+  min-height: 100%;
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+  padding: 1.55rem 1.45rem 1.4rem;
+  color: inherit;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  text-decoration: none;
+  transition:
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-standard) var(--ease-standard),
+    transform var(--motion-standard) var(--ease-standard);
+}
+
+.theme-preview-list a:hover,
+.theme-preview-list a:focus-visible {
+  border-color: rgba(8, 119, 123, 0.35);
+  box-shadow: var(--shadow-card-hover, 0 14px 28px rgba(7, 27, 58, 0.08));
+  transform: translateY(-2px);
+}
+
+.theme-preview-list strong {
+  color: var(--navy);
+  font-family: var(--font-poppins), Poppins, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.theme-preview-list a > span:not(.preview-arrow) {
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.theme-preview-list .preview-arrow {
+  margin-top: auto;
+  color: var(--teal);
+  font-weight: 700;
+  transition: transform var(--motion-fast) ease;
+}
+
+.theme-preview-list a:hover .preview-arrow,
+.theme-preview-list a:focus-visible .preview-arrow {
+  transform: translateX(3px);
+}
+
 .service-preview-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -3665,6 +3727,10 @@ textarea[aria-invalid='true'] {
     grid-template-columns: 1fr;
   }
 
+  .theme-preview-list {
+    grid-template-columns: 1fr;
+  }
+
   .service-preview-list article {
     padding: 1.5rem 0;
   }
@@ -5635,6 +5701,10 @@ textarea[aria-invalid='true'] {
 }
 
 @media (max-width: 980px) {
+  .theme-preview-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .check-details-grid {
     grid-template-columns: 1fr;
   }
