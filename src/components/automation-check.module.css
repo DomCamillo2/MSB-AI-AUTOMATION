@@ -2102,3 +2102,167 @@
     break-inside: avoid;
   }
 }
+
+.nextStepOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  overflow-y: auto;
+  background: rgba(7, 27, 58, 0.62);
+  backdrop-filter: blur(5px);
+}
+
+.nextStepDialog {
+  width: min(560px, 100%);
+  max-height: calc(100dvh - 32px);
+  padding: clamp(1.25rem, 4vw, 1.85rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 24px 70px rgba(7, 27, 58, 0.3);
+  animation: result-enter 360ms var(--ease-standard) both;
+}
+
+.nextStepHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nextStepHead h2 {
+  margin-top: 0.35rem;
+  color: var(--navy);
+  font-size: clamp(1.45rem, 3vw, 1.85rem);
+  line-height: 1.15;
+}
+
+.nextStepClose {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: grid;
+  place-items: center;
+  color: var(--navy);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
+.nextStepIntro {
+  margin-top: 0.85rem;
+  color: #48565c;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.nextStepActions {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.35rem;
+}
+
+.nextStepPrimary,
+.nextStepSecondary {
+  min-height: 76px;
+  display: grid;
+  gap: 0.25rem;
+  align-content: center;
+  padding: 0.95rem 1.1rem;
+  text-align: left;
+  border-radius: 10px;
+  transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+
+.nextStepPrimary {
+  color: var(--white);
+  background: var(--navy);
+  border: 1px solid var(--navy);
+}
+
+.nextStepSecondary {
+  color: var(--navy);
+  background: var(--white);
+  border: 1px solid rgba(7, 27, 58, 0.16);
+}
+
+.nextStepPrimary strong,
+.nextStepSecondary strong {
+  font-family: var(--font-poppins), Poppins, sans-serif;
+  font-size: 1rem;
+}
+
+.nextStepPrimary small,
+.nextStepSecondary small {
+  color: inherit;
+  opacity: 0.78;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.nextStepPrimary:disabled {
+  cursor: wait;
+  opacity: 0.75;
+}
+
+.nextStepPrimary:not(:disabled):hover,
+.nextStepSecondary:hover,
+.nextStepPrimary:not(:disabled):focus-visible,
+.nextStepSecondary:focus-visible {
+  transform: translateY(-1px);
+}
+
+.nextStepSecondary:hover,
+.nextStepSecondary:focus-visible {
+  border-color: rgba(8, 119, 123, 0.4);
+  background: rgba(8, 119, 123, 0.06);
+}
+
+.nextStepStatus {
+  min-height: 1.2em;
+  margin-top: 0.85rem;
+  color: var(--teal);
+  font-size: 0.82rem;
+}
+
+.nextStepDismiss {
+  width: 100%;
+  min-height: 44px;
+  margin-top: 0.85rem;
+  color: #526068;
+  background: transparent;
+  border: 0;
+  font-size: 0.88rem;
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+@media (max-width: 640px) {
+  .nextStepDialog {
+    width: 100%;
+    max-height: calc(100dvh - 16px);
+    padding: 1.15rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nextStepDialog {
+    animation: none;
+  }
+
+  .nextStepPrimary:not(:disabled):hover,
+  .nextStepSecondary:hover,
+  .nextStepPrimary:not(:disabled):focus-visible,
+  .nextStepSecondary:focus-visible {
+    transform: none;
+  }
+}

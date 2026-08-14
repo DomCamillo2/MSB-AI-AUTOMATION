@@ -9,6 +9,8 @@ type ContactRequest = {
   privacy: true;
   website: string;
   startedAt: number;
+  pdfBase64?: string;
+  pdfFilename?: string;
 };
 
 type ContactResponse = {

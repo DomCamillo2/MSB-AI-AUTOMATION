@@ -76,6 +76,7 @@ export function trackAnalyticsEvent(
     | 'automation_check_complete'
     | 'automation_check_contact_start'
     | 'automation_check_pdf_download'
+    | 'automation_check_next_step'
     | 'contact_form_start'
     | 'contact_submit'
     | 'email_click'

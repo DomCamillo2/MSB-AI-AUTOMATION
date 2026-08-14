@@ -46,6 +46,47 @@ function clean_text(mixed $value, int $maxLength, bool $required = false): strin
     return $value;
 }
 
+/**
+ * @return array{data: string, filename: string}|null
+ */
+function decode_pdf_attachment(mixed $base64, mixed $filename, string $source): ?array
+{
+    if ($base64 === null || $base64 === '') {
+        return null;
+    }
+
+    if ($source !== 'automation_check_result') {
+        throw new InvalidArgumentException('PDF-Anhänge sind nur für den Automation Check erlaubt.');
+    }
+
+    if (!is_string($base64) || !preg_match('/^[A-Za-z0-9+\/]+=*$/', $base64)) {
+        throw new InvalidArgumentException('Der PDF-Anhang ist ungültig.');
+    }
+
+    if (strlen($base64) > 1_200_000) {
+        throw new InvalidArgumentException('Der PDF-Anhang ist zu groß.');
+    }
+
+    $decoded = base64_decode($base64, true);
+    if ($decoded === false || $decoded === '' || strlen($decoded) > 850_000) {
+        throw new InvalidArgumentException('Der PDF-Anhang konnte nicht gelesen werden.');
+    }
+
+    if (!str_starts_with($decoded, '%PDF-')) {
+        throw new InvalidArgumentException('Der Anhang ist keine gültige PDF-Datei.');
+    }
+
+    $safeName = is_string($filename) ? basename(str_replace(["\0", "\r", "\n"], '', $filename)) : '';
+    if ($safeName === '' || !preg_match('/^[A-Za-z0-9._-]{8,120}\.pdf$/', $safeName)) {
+        $safeName = 'MSB-Automation-Check-Auswertung.pdf';
+    }
+
+    return [
+        'data' => $decoded,
+        'filename' => $safeName
+    ];
+}
+
 function check_origin(array $allowedHosts): void
 {
     $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
@@ -221,6 +262,7 @@ try {
     $company = clean_text($data['company'] ?? '', 200, $source === 'website_contact');
     $email = clean_text($data['email'] ?? '', 254, true);
     $message = clean_text($data['message'] ?? '', 6000, true);
+    $pdfAttachment = decode_pdf_attachment($data['pdfBase64'] ?? null, $data['pdfFilename'] ?? null, $source);
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         throw new InvalidArgumentException('Bitte prüfen Sie das Format der E-Mail-Adresse.');
@@ -249,6 +291,8 @@ try {
         'Nachricht / Prozesseinschätzung:',
         $message,
         '',
+        'PDF-Anhang: ' . ($pdfAttachment ? $pdfAttachment['filename'] : 'Nein'),
+        '',
         'Anfrage-ID: ' . $requestId
     ]);
 
@@ -260,6 +304,7 @@ try {
         . '<tr><th align="left">Name</th><td>' . escape_html($name !== '' ? $name : 'Nicht angegeben') . '</td></tr>'
         . '<tr><th align="left">Unternehmen</th><td>' . escape_html($company !== '' ? $company : 'Nicht angegeben') . '</td></tr>'
         . '<tr><th align="left">E-Mail</th><td>' . escape_html($email) . '</td></tr>'
+        . '<tr><th align="left">PDF-Anhang</th><td>' . escape_html($pdfAttachment ? $pdfAttachment['filename'] : 'Nein') . '</td></tr>'
         . '</table>'
         . '<h2 style="font-size:18px">Nachricht / Prozesseinschätzung</h2>'
         . '<div style="padding:16px;background:#f4f7f6;border-left:4px solid #08777b;line-height:1.6">' . nl2br(escape_html($message), false) . '</div>'
@@ -287,6 +332,14 @@ try {
     $mail->isHTML(true);
     $mail->Body = $htmlBody;
     $mail->AltBody = $textBody;
+    if ($pdfAttachment !== null) {
+        $mail->addStringAttachment(
+            $pdfAttachment['data'],
+            $pdfAttachment['filename'],
+            PHPMailer::ENCODING_BASE64,
+            'application/pdf'
+        );
+    }
     $mail->addCustomHeader('X-MSB-Form-Source', $source);
     $mail->addCustomHeader('X-MSB-Request-ID', $requestId);
     $mail->send();
