@@ -33,7 +33,10 @@ export function ContactPanel({ formFirst = false }: { formFirst?: boolean }) {
       </div>
 
       <div className="form-surface">
-        <h3>Prozess beschreiben</h3>
+        <div className="form-surface-head">
+          <h3>Prozess beschreiben</h3>
+          <p>Unverbindlich – wir melden uns in der Regel innerhalb von 1–2 Werktagen.</p>
+        </div>
         <ContactForm />
       </div>
     </div>
