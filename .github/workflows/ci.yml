@@ -72,6 +72,7 @@ jobs:
           test -f out/404.html
           test -f out/.htaccess
           test -f out/contact.php
+          test -f out/contact-lib/confirmation-email.php
           test -f out/sitemap.xml
           test -f out/robots.txt
           url_count="$(grep -c '<loc>' out/sitemap.xml)"
