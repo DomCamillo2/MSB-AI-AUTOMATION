@@ -504,30 +504,40 @@
 }
 
 .areaChoice {
-  min-height: 132px;
+  min-height: 156px;
   display: grid;
-  grid-template-columns: 38px minmax(0, 1fr);
+  grid-template-columns: 40px minmax(0, 1fr) 28px;
   align-content: start;
-  gap: 0.35rem 0.75rem;
-  padding: 1rem;
+  align-items: start;
+  gap: 0.4rem 0.7rem;
+  padding: 1.15rem 1.1rem;
 }
 
 .areaChoice strong {
+  grid-column: 2;
+  grid-row: 1;
   align-self: center;
-  font-size: 0.9rem;
+  min-width: 0;
+  padding-right: 0.15rem;
+  font-size: 0.92rem;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
 }
 
 .areaChoice small {
   grid-column: 1 / -1;
-  margin-top: 0.65rem;
+  margin-top: 0.45rem;
   color: #657177;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   line-height: 1.5;
 }
 
 .areaIcon {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
   display: grid;
   place-items: center;
   color: var(--teal);
@@ -538,8 +548,11 @@
 
 .areaIcon svg,
 .processIcon svg {
+  display: block;
   width: 20px;
   height: 20px;
+  margin: 0;
+  overflow: visible;
   stroke: currentColor;
   stroke-width: 1.65;
   stroke-linecap: round;
@@ -547,18 +560,20 @@
 }
 
 .areaCheck {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
+  grid-column: 3;
+  grid-row: 1;
   display: grid;
   place-items: center;
-  position: absolute;
-  top: 0.8rem;
-  right: 0.8rem;
+  justify-self: end;
+  align-self: center;
   color: var(--white);
   background: transparent;
   border: 1px solid #c8d0ce;
   border-radius: 50%;
   font-size: 0.7rem;
+  line-height: 1;
 }
 
 .areaChoice[data-selected='true'],
@@ -622,6 +637,7 @@
   border: 1px solid #aeb8b6;
   border-radius: 50%;
   font-size: 0.67rem;
+  line-height: 1;
 }
 
 .choice[data-selected='true'] .choiceIndicator {
@@ -831,6 +847,7 @@
   height: 38px;
   display: grid;
   place-items: center;
+  flex-shrink: 0;
   color: var(--teal);
   background: rgba(8, 119, 123, 0.06);
   border: 1px solid rgba(8, 119, 123, 0.2);
@@ -1595,7 +1612,7 @@
   }
 
   .areaChoice {
-    min-height: 142px;
+    min-height: 164px;
   }
 }
 
@@ -1772,7 +1789,7 @@
   }
 
   .areaChoice {
-    min-height: 126px;
+    min-height: 140px;
   }
 
   .choice {
