@@ -23,14 +23,14 @@ function AutomationCheckHeader() {
       <div className={styles.checkHeaderInner}>
         <a className={styles.checkBrand} href="/" aria-label="MSB AI & Automation Startseite">
           <picture>
-            <source srcSet="/msb-wordmark.avif" type="image/avif" />
-            <source srcSet="/msb-wordmark.webp" type="image/webp" />
+            <source srcSet="/msb-wordmark-header.avif" type="image/avif" />
+            <source srcSet="/msb-wordmark-header.webp" type="image/webp" />
             <img
               className={styles.checkLogo}
-              src="/msb-wordmark.png"
+              src="/msb-wordmark-header.png"
               alt="MSB"
-              width={1813}
-              height={545}
+              width={240}
+              height={72}
               loading="eager"
             />
           </picture>
@@ -167,14 +167,14 @@ export function SiteHeader() {
 
           <a className={styles.brand} href="/" aria-label="MSB AI & Automation Startseite" onClick={closeMenu}>
             <picture>
-              <source srcSet="/msb-wordmark.avif" type="image/avif" />
-              <source srcSet="/msb-wordmark.webp" type="image/webp" />
+              <source srcSet="/msb-wordmark-header.avif" type="image/avif" />
+              <source srcSet="/msb-wordmark-header.webp" type="image/webp" />
               <img
                 className={styles.logo}
-                src="/msb-wordmark.png"
+                src="/msb-wordmark-header.png"
                 alt=""
-                width={1813}
-                height={545}
+                width={240}
+                height={72}
                 aria-hidden="true"
                 loading="eager"
               />
