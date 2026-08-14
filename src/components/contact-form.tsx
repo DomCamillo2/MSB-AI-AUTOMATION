@@ -165,14 +165,20 @@ export function ContactForm() {
             maxLength={254}
             required
             aria-invalid={errors.email ? true : undefined}
-            aria-describedby={errors.email ? 'email-error' : undefined}
+            aria-describedby={errors.email ? 'email-error' : 'email-hint'}
             value={email}
             onChange={(event) => {
               setEmail(event.target.value);
               clearFeedback('email');
             }}
           />
-          {errors.email ? <p className="form-error" id="email-error">{errors.email}</p> : null}
+          <div className="field-meta">
+            {errors.email ? (
+              <p className="form-error" id="email-error">{errors.email}</p>
+            ) : (
+              <small id="email-hint" className="field-hint">Für Ihre Bestätigung und unsere Rückmeldung</small>
+            )}
+          </div>
         </div>
         <div className="field">
           <label htmlFor="phone">Telefon <span className="field-optional">optional</span></label>
@@ -185,15 +191,20 @@ export function ContactForm() {
             maxLength={40}
             placeholder="z. B. 0160 1234567"
             aria-invalid={errors.phone ? true : undefined}
-            aria-describedby={errors.phone ? 'phone-hint phone-error' : 'phone-hint'}
+            aria-describedby={errors.phone ? 'phone-error phone-hint' : 'phone-hint'}
             value={phone}
             onChange={(event) => {
               setPhone(event.target.value);
               clearFeedback('phone');
             }}
           />
-          <small id="phone-hint">Für eine schnelle Rückfrage per Telefon</small>
-          {errors.phone ? <p className="form-error" id="phone-error">{errors.phone}</p> : null}
+          <div className="field-meta">
+            {errors.phone ? (
+              <p className="form-error" id="phone-error">{errors.phone}</p>
+            ) : (
+              <small id="phone-hint" className="field-hint">Für eine schnelle Rückfrage per Telefon</small>
+            )}
+          </div>
         </div>
       </div>
 
@@ -214,37 +225,47 @@ export function ContactForm() {
             clearFeedback('process');
           }}
         />
-        <small id="process-hint">Bitte keine sensiblen Personen-, Kunden- oder Bewerberdaten eintragen.</small>
-        {errors.process ? <p className="form-error" id="process-error">{errors.process}</p> : null}
+        <div className="field-meta">
+          {errors.process ? (
+            <p className="form-error" id="process-error">{errors.process}</p>
+          ) : (
+            <small id="process-hint" className="field-hint">Bitte keine sensiblen Personen-, Kunden- oder Bewerberdaten eintragen.</small>
+          )}
+        </div>
       </div>
 
-      <div className="privacy-field">
-        <label className="checkbox" htmlFor="privacy">
-          <input
-            id="privacy"
-            name="privacy"
-            type="checkbox"
-            checked={privacyAcknowledged}
-            onChange={(event) => {
-              setPrivacyAcknowledged(event.target.checked);
-              clearFeedback('privacy');
-            }}
-            required
-            aria-invalid={errors.privacy ? true : undefined}
-            aria-describedby={errors.privacy ? 'privacy-error' : undefined}
-          />
-          <span>Ich habe die Datenschutzerklärung zur Kenntnis genommen.</span>
-        </label>
-        {errors.privacy ? <p className="form-error" id="privacy-error">{errors.privacy}</p> : null}
-      </div>
-      <a className="privacy-link" href="/datenschutz/">Datenschutzerklärung lesen</a>
+      <div className="form-footer">
+        <div className="form-legal">
+          <label className="checkbox" htmlFor="privacy">
+            <input
+              id="privacy"
+              name="privacy"
+              type="checkbox"
+              checked={privacyAcknowledged}
+              onChange={(event) => {
+                setPrivacyAcknowledged(event.target.checked);
+                clearFeedback('privacy');
+              }}
+              required
+              aria-invalid={errors.privacy ? true : undefined}
+              aria-describedby={errors.privacy ? 'privacy-error' : undefined}
+            />
+            <span>
+              Ich habe die{' '}
+              <a className="privacy-inline-link" href="/datenschutz/">Datenschutzerklärung</a>
+              {' '}zur Kenntnis genommen.
+            </span>
+          </label>
+          {errors.privacy ? <p className="form-error" id="privacy-error">{errors.privacy}</p> : null}
+        </div>
 
-      <button className="button button-primary form-submit" type="submit" disabled={isSubmitting}>
-        {isSubmitting ? 'Anfrage wird gesendet …' : primaryCtaFullLabel}
-        {!isSubmitting ? <span className="button-arrow" aria-hidden="true">→</span> : null}
-      </button>
-      {status ? <p className={`form-status is-${statusTone}`} role="status" aria-live="polite">{status}</p> : null}
-      <p className="form-note">Ihre Angaben werden verschlüsselt an unser IONOS-Postfach kontakt@msb-ai.de übermittelt.</p>
+        <button className="button button-primary form-submit" type="submit" disabled={isSubmitting}>
+          {isSubmitting ? 'Anfrage wird gesendet …' : primaryCtaFullLabel}
+          {!isSubmitting ? <span className="button-arrow" aria-hidden="true">→</span> : null}
+        </button>
+        {status ? <p className={`form-status is-${statusTone}`} role="status" aria-live="polite">{status}</p> : null}
+        <p className="form-note">Ihre Angaben werden verschlüsselt an unser IONOS-Postfach kontakt@msb-ai.de übermittelt.</p>
+      </div>
     </form>
   );
 }
