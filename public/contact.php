@@ -8,13 +8,6 @@ require_once __DIR__ . '/contact-lib/phpmailer/Exception.php';
 require_once __DIR__ . '/contact-lib/phpmailer/PHPMailer.php';
 require_once __DIR__ . '/contact-lib/phpmailer/SMTP.php';
 
-header('Content-Type: application/json; charset=utf-8');
-header('Cache-Control: no-store, max-age=0');
-header('Pragma: no-cache');
-header('X-Content-Type-Options: nosniff');
-header('X-Robots-Tag: noindex, nofollow');
-header("Content-Security-Policy: default-src 'none'; frame-ancestors 'none'");
-
 function respond(int $status, array $payload): void
 {
     http_response_code($status);
@@ -223,6 +216,15 @@ function escape_html(string $value): string
     return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
+require_once __DIR__ . '/contact-lib/confirmation-email.php';
+
+header('Content-Type: application/json; charset=utf-8');
+header('Cache-Control: no-store, max-age=0');
+header('Pragma: no-cache');
+header('X-Content-Type-Options: nosniff');
+header('X-Robots-Tag: noindex, nofollow');
+header("Content-Security-Policy: default-src 'none'; frame-ancestors 'none'");
+
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     header('Allow: POST');
     respond(405, ['ok' => false, 'message' => 'Nur POST-Anfragen sind erlaubt.']);
@@ -283,6 +285,7 @@ try {
     $phone = clean_phone($data['phone'] ?? '');
     $message = clean_text($data['message'] ?? '', 6000, true);
     $pdfAttachment = decode_pdf_attachment($data['pdfBase64'] ?? null, $data['pdfFilename'] ?? null, $source);
+    $assessmentSummary = clean_confirmation_summary($data['confirmationSummary'] ?? null, $source);
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         throw new InvalidArgumentException('Bitte prüfen Sie das Format der E-Mail-Adresse.');
@@ -290,7 +293,6 @@ try {
 
     enforce_rate_limit();
     $config = load_config();
-    $smtpPort = (int) $config['smtp_port'];
     $sourceLabel = $source === 'automation_check_result'
         ? 'Ergebnis des Automation Checks'
         : 'Kontaktformular';
@@ -334,20 +336,8 @@ try {
         . '</body></html>';
 
     $mail = new PHPMailer(true);
-    $mail->isSMTP();
-    $mail->Host = (string) $config['smtp_host'];
-    $mail->Port = $smtpPort;
-    $mail->SMTPAuth = true;
-    $mail->Username = (string) $config['smtp_user'];
-    $mail->Password = (string) $config['smtp_password'];
-    $mail->SMTPSecure = $smtpPort === 465
-        ? PHPMailer::ENCRYPTION_SMTPS
-        : PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Timeout = 15;
-    $mail->CharSet = PHPMailer::CHARSET_UTF8;
-    $mail->Hostname = 'www.msb-ai.de';
+    configure_smtp_mailer($mail, $config);
     $mail->setFrom('webformular@msb-ai.de', 'MSB Website');
-    $mail->Sender = (string) $config['smtp_user'];
     $mail->addAddress((string) $config['recipient'], 'MSB AI & Automation');
     $mail->addReplyTo($email, $name !== '' ? $name : $email);
     $mail->Subject = $subject;
@@ -366,9 +356,25 @@ try {
     $mail->addCustomHeader('X-MSB-Request-ID', $requestId);
     $mail->send();
 
+    try {
+        send_confirmation_email(
+            $config,
+            $email,
+            $name,
+            $source,
+            $requestId,
+            $name,
+            $company,
+            $message,
+            $assessmentSummary
+        );
+    } catch (Throwable $confirmationError) {
+        error_log('[MSB contact confirmation ' . $requestId . '] ' . $confirmationError->getMessage());
+    }
+
     respond(200, [
         'ok' => true,
-        'message' => 'Vielen Dank. Ihre Anfrage wurde sicher an kontakt@msb-ai.de übermittelt.',
+        'message' => 'Vielen Dank. Ihre Anfrage wurde sicher an kontakt@msb-ai.de übermittelt. Sie erhalten in Kürze eine Bestätigung per E-Mail.',
         'requestId' => $requestId
     ]);
 } catch (InvalidArgumentException | JsonException $error) {

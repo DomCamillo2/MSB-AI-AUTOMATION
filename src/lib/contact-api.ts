@@ -1,5 +1,12 @@
 export type ContactSource = 'website_contact' | 'automation_check_result';
 
+export type ContactConfirmationSummary = {
+  resultTitle: string;
+  resultSummary: string;
+  areaLabel: string;
+  recommendation?: string;
+};
+
 type ContactRequest = {
   source: ContactSource;
   name: string;
@@ -12,6 +19,7 @@ type ContactRequest = {
   startedAt: number;
   pdfBase64?: string;
   pdfFilename?: string;
+  confirmationSummary?: ContactConfirmationSummary;
 };
 
 type ContactResponse = {

@@ -26,6 +26,7 @@ export default function DankePage() {
           <h1>Vielen Dank. Ihre Nachricht ist bei uns angekommen.</h1>
           <p>
             Wir prüfen Ihre Anfrage und melden uns in der Regel innerhalb von <strong>1–2 Werktagen</strong> mit einer ersten Rückmeldung.
+            Eine Bestätigung mit Kurzüberblick haben wir an Ihre E-Mail-Adresse gesendet.
             Für dringende Rückfragen erreichen Sie uns direkt unter{' '}
             <a href="mailto:kontakt@msb-ai.de">kontakt@msb-ai.de</a> oder{' '}
             <a href="tel:+491606969914">0160&nbsp;6969914</a>.

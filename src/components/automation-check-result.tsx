@@ -97,13 +97,23 @@ function ContactHandoff({ answers, assessment, preferPdfAttachment = true }: Con
         email: cleanEmail,
         ...(phone.trim() ? { phone: phone.trim() } : {}),
         message: buildAutomationCheckMessage(answers, assessment, additionalMessage, includeAssessment),
+        ...(includeAssessment
+          ? {
+              confirmationSummary: {
+                resultTitle: assessment.title,
+                resultSummary: assessment.summary,
+                areaLabel: getAreaConfig(answers.area).label,
+                recommendation: assessment.recommendation
+              }
+            }
+          : {}),
         privacy: true,
         website,
         startedAt: openedAtRef.current,
         ...(pdfPayload ?? {})
       });
       setStatusTone('success');
-      setStatus(result.message || 'Vielen Dank. Ihre E-Mail wurde sicher an kontakt@msb-ai.de übermittelt.');
+      setStatus(result.message || 'Vielen Dank. Ihre E-Mail wurde sicher übermittelt. Sie erhalten in Kürze eine Bestätigung mit Kurzüberblick.');
       setName('');
       setCompany('');
       setEmail('');
