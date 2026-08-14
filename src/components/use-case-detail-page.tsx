@@ -89,8 +89,9 @@ export function UseCaseDetailPage({ useCase }: Props) {
       <section className={styles.sectionNavy} aria-labelledby="detail-workflow-heading">
         <div className="container">
           <Reveal>
-            <div className={styles.sectionIntro}>
-              <div><p className="eyebrow eyebrow-light">Ablauf</p><h2 id="detail-workflow-heading">So kann der kontrollierte Workflow aussehen</h2></div>
+            <div className={styles.workflowIntro}>
+              <p className="eyebrow eyebrow-light">Ablauf</p>
+              <h2 id="detail-workflow-heading">So kann der kontrollierte Workflow aussehen</h2>
               <p>Die Darstellung ist ein fachliches Prozessbild. Systeme, Regeln und Freigabepunkte werden erst nach Prüfung des tatsächlichen Ablaufs festgelegt.</p>
             </div>
           </Reveal>
