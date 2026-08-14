@@ -47,9 +47,10 @@ export default function KontaktPage() {
       <PageIntro
         compact
         flush
+        stacked
         eyebrow="Kontakt"
         title="Sprechen wir über einen echten Prozess."
-        lead="Beschreiben Sie einen wiederkehrenden Ablauf – wir melden uns in der Regel innerhalb von 1–2 Werktagen."
+        lead="Beschreiben Sie einen wiederkehrenden Ablauf – unverbindlich und ohne Verkaufsdruck."
       />
 
       <section className="section contact-section contact-page-section contact-page-form-section" aria-labelledby="contact-panel-heading">
