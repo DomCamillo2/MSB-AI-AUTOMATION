@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useId, useRef, useState, type FormEvent } from 'react';
+import { createPortal } from 'react-dom';
 import AutomationCheckProgress from '@/components/automation-check-progress';
 import { AutomationProcessDiagram } from '@/components/automation-process-preview';
 import { getAreaConfig } from '@/lib/automation-check-config';
@@ -96,7 +97,7 @@ function ContactHandoff({ answers, assessment, preferPdfAttachment = true }: Con
         ...(pdfPayload ?? {})
       });
       setStatusTone('success');
-      setStatus(result.message || 'Vielen Dank. Ihre Anfrage wurde sicher übermittelt.');
+      setStatus(result.message || 'Vielen Dank. Ihre E-Mail wurde sicher an kontakt@msb-ai.de übermittelt.');
       setName('');
       setCompany('');
       setEmail('');
@@ -134,10 +135,10 @@ function ContactHandoff({ answers, assessment, preferPdfAttachment = true }: Con
       </div>
       <div className={styles.contactFormIntro}>
         <div>
-          <p className="eyebrow">Anfrage vorbereiten</p>
-          <h3>Check-Ergebnis an MSB senden</h3>
+          <p className="eyebrow">E-Mail vorbereiten</p>
+          <h3>Check-Ergebnis per E-Mail an MSB senden</h3>
         </div>
-        <p>Sie entscheiden, ob Textauswertung und PDF mitgesendet werden. Die Anfrage wird verschlüsselt an unser IONOS-Postfach übermittelt.</p>
+        <p>Sie entscheiden, ob Textauswertung und PDF mitgesendet werden. Die Nachricht geht verschlüsselt an kontakt@msb-ai.de.</p>
       </div>
       <label className={styles.attachmentChoice} htmlFor="check-attachment">
         <input
@@ -240,8 +241,8 @@ function ContactHandoff({ answers, assessment, preferPdfAttachment = true }: Con
       {privacyError ? <p className={styles.fieldError} id="check-privacy-error">{privacyError}</p> : null}
       <button className="button button-primary" type="submit" disabled={isSubmitting}>
         {isSubmitting
-          ? (attachPdf ? 'PDF und Anfrage werden gesendet …' : 'Anfrage wird gesendet …')
-          : (attachPdf ? 'Anfrage mit PDF senden' : includeAssessment ? 'Anfrage mit Ergebnis senden' : 'Anfrage senden')}
+          ? (attachPdf ? 'PDF und E-Mail werden gesendet …' : 'E-Mail wird gesendet …')
+          : (attachPdf ? 'E-Mail mit PDF senden' : includeAssessment ? 'E-Mail mit Ergebnis senden' : 'E-Mail senden')}
         {!isSubmitting ? <span className="button-arrow" aria-hidden="true">→</span> : null}
       </button>
       {status ? (
@@ -325,9 +326,9 @@ function ResultNextStepDialog({
     };
   }, [open, onDismiss]);
 
-  if (!open) return null;
+  if (!open || typeof document === 'undefined') return null;
 
-  return (
+  return createPortal(
     <div className={styles.nextStepOverlay} role="presentation">
       <div
         ref={dialogRef}
@@ -347,7 +348,7 @@ function ResultNextStepDialog({
           </button>
         </div>
         <p id={descriptionId} className={styles.nextStepIntro}>
-          Ihre Einschätzung „{assessmentTitle}“ ist fertig. Laden Sie die PDF herunter oder hängen Sie sie an eine unverbindliche Kontaktanfrage an.
+          Ihre Einschätzung „{assessmentTitle}“ ist fertig. Laden Sie die PDF herunter oder senden Sie sie per E-Mail an kontakt@msb-ai.de.
         </p>
         <div className={styles.nextStepActions}>
           <button
@@ -360,8 +361,8 @@ function ResultNextStepDialog({
             <small>3 Seiten · lokal auf Ihrem Gerät</small>
           </button>
           <button className={styles.nextStepSecondary} type="button" onClick={onAttachToContact}>
-            <strong>PDF an Anfrage anhängen</strong>
-            <small>Kontaktformular mit vorausgewähltem Anhang öffnen</small>
+            <strong>PDF per E-Mail senden</strong>
+            <small>An kontakt@msb-ai.de · PDF wird angehängt</small>
           </button>
         </div>
         <p
@@ -379,7 +380,8 @@ function ResultNextStepDialog({
           Zuerst Ergebnis weiterlesen
         </button>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
@@ -473,7 +475,7 @@ export function AutomationCheckResult({ answers, assessment, onEdit, onRestart }
             <p className={styles.orientationNote}>Diese Einordnung ist eine erste Orientierung, keine vollständige Prozessanalyse und kein technisches Angebot.</p>
             {!contactOpen && (
               <button className={['button', 'button-primary', styles.mobileResultCta].join(' ')} type="button" onClick={() => openContact()}>
-                Ergebnis mit Anfrage senden <span className="button-arrow" aria-hidden="true">→</span>
+                Ergebnis per E-Mail senden <span className="button-arrow" aria-hidden="true">→</span>
               </button>
             )}
           </div>
@@ -497,15 +499,15 @@ export function AutomationCheckResult({ answers, assessment, onEdit, onRestart }
           <div className={styles.actionPanel}>
             <div>
               <p className="eyebrow eyebrow-light">Ihr nächster Schritt</p>
-              <h2 id="result-actions-heading">Ergebnis an MSB senden und konkret einordnen lassen.</h2>
-              <p>Sie können die PDF herunterladen oder die Auswertung inklusive PDF an eine unverbindliche Anfrage anhängen.</p>
+              <h2 id="result-actions-heading">Ergebnis per E-Mail an MSB senden und konkret einordnen lassen.</h2>
+              <p>Sie können die PDF herunterladen oder die Auswertung inklusive PDF per E-Mail an kontakt@msb-ai.de senden.</p>
             </div>
             <div className={styles.actionButtons}>
               {!contactOpen && (
                 <button className={['button', 'button-light', styles.handoffCta].join(' ')} type="button" onClick={() => openContact()}>
                   <span>
                     <small>PDF-Anhang vorausgewählt</small>
-                    <strong>Ergebnis mit Anfrage senden</strong>
+                    <strong>Ergebnis per E-Mail senden</strong>
                   </span>
                   <span className="button-arrow" aria-hidden="true">→</span>
                 </button>

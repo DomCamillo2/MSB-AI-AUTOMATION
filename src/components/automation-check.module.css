@@ -2172,6 +2172,7 @@
   border-radius: 10px;
   font-size: 1.45rem;
   line-height: 1;
+  cursor: pointer;
 }
 
 .nextStepIntro {
@@ -2196,6 +2197,7 @@
   padding: 0.95rem 1.1rem;
   text-align: left;
   border-radius: 10px;
+  cursor: pointer;
   transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
 }
 
@@ -2261,6 +2263,7 @@
   font-weight: 650;
   text-decoration: underline;
   text-underline-offset: 0.18em;
+  cursor: pointer;
 }
 
 @media (max-width: 640px) {
